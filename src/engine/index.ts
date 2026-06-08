@@ -8,9 +8,15 @@
  */
 export type { Pattern } from './types';
 export type { OnsetTime } from './phase';
-export type { Track, TrackPattern, VoiceId } from './track';
+export type { Track, TrackPattern, VoiceId, VelocityPattern } from './track';
 
-export { trackPattern, audibleTracks, defaultTracks } from './track';
+export {
+  trackPattern,
+  audibleTracks,
+  defaultTracks,
+  computeVelocities,
+  VELOCITY_PRESETS,
+} from './track';
 
 export { pulse } from './pulse';
 export { euclid } from './euclidean';

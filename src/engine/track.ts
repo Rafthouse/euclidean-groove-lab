@@ -3,11 +3,27 @@ import { euclid } from './euclidean';
 import { rotate } from './rotate';
 
 /**
- * One of four fixed voice slots. The slot identity is locked from Commit 1
- * even though all four currently map to the same kick synth -- this keeps
- * Commit 2 (real voices) a swap, not a re-plumb of the audio graph.
+ * One of four fixed voice slots.
  */
 export type VoiceId = 'kick' | 'snare' | 'hat' | 'bass';
+
+/**
+ * A cyclic velocity pattern applied per onset index.
+ * Values: 0–100 (percent), cycles over the track's onsets.
+ */
+export type VelocityPattern = number[];
+
+/**
+ * Standard velocity ramp patterns (0–100 scale).
+ * Indexed by mode number (1-based).
+ */
+export const VELOCITY_PRESETS: Record<number, VelocityPattern> = {
+  1: [100],
+  2: [100, 80],
+  3: [80, 90, 100],
+  4: [80, 86, 94, 100],
+  5: [80, 85, 90, 95, 100],
+};
 
 /**
  * A track's identity and rhythmic configuration. The pattern itself is
@@ -27,12 +43,13 @@ export interface Track {
   solo: boolean;
 
   voiceId: VoiceId;
+
+  /** Optional cyclic velocity sequence indexed by onset order (not step index). */
+  velocityPattern?: VelocityPattern;
 }
 
 /**
- * The per-track carrier that grows over time. Today it holds only `pulses`;
- * accents / velocities / microtiming attach to the same object in later
- * commits without changing the surrounding API.
+ * The per-track carrier that grows over time.
  */
 export interface TrackPattern {
   pulses: Pattern;
@@ -42,12 +59,35 @@ export interface TrackPattern {
 }
 
 /**
- * Derive a track's playable pattern. This is the ONLY place where rhythm
- * gets composed for a track -- UI and audio always consume the result, never
- * compute their own.
+ * Derive a track's playable pattern.
  */
 export function trackPattern(track: Track): TrackPattern {
-  return { pulses: rotate(euclid(track.hits, track.steps), track.rotation) };
+  const pulses = rotate(euclid(track.hits, track.steps), track.rotation);
+  const velocities = track.velocityPattern
+    ? computeVelocities(pulses, track.velocityPattern)
+    : undefined;
+  return { pulses, velocities };
+}
+
+/**
+ * Compute per-onset velocity values from a cyclic pattern.
+ *
+ * Walks the pulse array by onset index (not step index): each `true` in
+ * `pulses` consumes one entry from `pattern` cyclically; `false` entries
+ * get velocity 0 (silent).
+ */
+export function computeVelocities(
+  pulses: boolean[],
+  pattern: number[],
+): number[] {
+  if (pattern.length === 0) return pulses.map(() => 0);
+  let onsetIndex = 0;
+  return pulses.map((on) => {
+    if (!on) return 0;
+    const v = pattern[onsetIndex % pattern.length];
+    onsetIndex++;
+    return v;
+  });
 }
 
 /**
@@ -63,12 +103,14 @@ export function audibleTracks(tracks: readonly Track[]): Track[] {
 }
 
 /**
- * Seed state for Commit 1: a four-track kit with the four voice slots wired
- * up but all silent except Kick. Defaults chosen so that hitting Play yields
- * something musical immediately, not a clinical metronome.
+ * Seed state for the four-track kit. Defaults chosen so that hitting Play
+ * yields something musical immediately, not a clinical metronome.
  *
  * These are *defaults*, not a preset. A `Preset` is a named multi-track
  * snapshot (Commit 3). Defaults are the bootstrap state of an empty session.
+ *
+ * Hat starts with a velocity ramp (mode 1 = flat 100) to demonstrate the
+ * layer; users can clear it or switch modes via the accent UI later.
  */
 export function defaultTracks(): Track[] {
   return [
@@ -104,6 +146,7 @@ export function defaultTracks(): Track[] {
       mute: false,
       solo: false,
       voiceId: 'hat',
+      velocityPattern: [100], // flat velocity; ready for accent ramp
     },
     {
       id: 'bass',

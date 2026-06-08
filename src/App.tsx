@@ -99,10 +99,11 @@ export default function App() {
       </section>
 
       <p className="note">
-              Four independent voices: kick (membrane), snare (noise-filtered), hat (short noise),
-              bass (triangle-wave synth). Adjust the Euclidean parameters to discover how
-              rhythms interlock.
-            </p>
+                    Four independent voices: kick (membrane), snare (noise),
+                    hat (metal synth), bass (pick-bass / MonoSynth).
+                    Hat supports velocity ramps — try switching accent modes
+                    in the engine via <code>velocityPattern</code>.
+                  </p>
     </main>
   );
 }
