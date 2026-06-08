@@ -71,8 +71,9 @@ interface TrackPattern {                // per-track carrier; grows over time
   microtiming?: number[];
 }
 
-// Voice slot is fixed from Commit 1 even though all four voices initially map
-// to the same kick synth -- this makes Commit 2 a swap, not a rewrite.
+// Voice slot is fixed from Commit 1; each slot now has its own synthesized
+// instrument (Commit 2): kick (membrane), snare (noise-filtered),
+// hat (short noise), bass (triangle-wave synth).
 type VoiceId = 'kick' | 'snare' | 'hat' | 'bass';
 
 interface Track {                       // config / identity
@@ -106,49 +107,45 @@ multi-track snapshot, never a single rhythm config — that decision is locked
 because Bossa / Techno / Reggae are kits, not single patterns; folding them
 into a single-rhythm model would force a rewrite in Commit 3.
 
-## Current state (Commit 0 — done, deployed)
+## Current state
 
-- Pure engine in `src/engine/`: `pulse`, `euclid` (true Bjorklund), `rotate`,
-  `phase`, `metrics`. 48 vitest tests; `Sequencer.tsx` consumes the engine
-  (single source of truth).
-- **Not yet engine-driven:** `audio.ts` plays a hardcoded pattern — you *see*
-  one thing and *hear* another until Commit 2.
+- **Commit 1 (done).** Multi-track engine with `Track`, `TrackPattern`,
+  `trackPattern()`, mute/solo semantics, 2×2 grid UI. Four voice slots
+  defined (`VoiceId`), all initially mapped to the same kick synth.
+- **Commit 2 (done).** Real synthesized voices: kick (`MembraneSynth`),
+  snare/rimshot (`NoiseSynth` + bandpass), closed hat (`NoiseSynth` + highpass),
+  bass (`Synth` / triangle). Audio layer is engine-driven: `audio.ts` reads
+  `currentTracks` by reference and computes `trackPattern()` each tick.
+  Transport, BPM, mute/solo live audibly. No hardcoded patterns remain.
 - **Metrics already shipped:** `density`, `syncopation` (LHL), `balance`
-  (Toussaint), `isMaximallyEven`, `metricWeights`, `interOnsetIntervals`. The
-  "groove metrics foundation" mostly exists already; Commit 1.5 only adds
-  symmetry.
+  (Toussaint), `isMaximallyEven`, `metricWeights`, `interOnsetIntervals`.
 
 ## Roadmap
 
-### Commit 1 — `feat: multi-track engine`
-- `Track`, `TrackPattern`, `trackPattern()`, tests
-- 4 independent tracks; defaults: Kick / Snare / Hat / Bass (voiceId set)
-- mute + solo (semantics in Data model above)
-- 2×2 grid of small rings — one ring per track, per-track controls panel,
-  per-track playhead. (Concentric-rings view is a later optional mode;
-  grid is the default because it stays readable when `steps` differs
-  across tracks.)
-- Audio: each track has its own voice slot from day one. All four slots
-  currently invoke the kick synth — that's intentional, so Commit 2 swaps
-  voices without re-plumbing the audio graph.
+### Next: Pitch UI Design (design doc only, no code)
+- 2–3 UI layout variants for a pitch layer that is:
+  - orthogonal to the rhythm pipeline (pitch cycles independently)
+  - bound to onset index (not step index)
+  - universal across all Track types (not just Bass)
+  - optional: drum tracks work without pitch layer
+  - compatible with MIDI Export as a first-class citizen
+- Deliverable: short design doc with pros/cons per variant.
+- See `docs/DESIGN-PITCH-UI.md` once created.
 
-### Commit 1.5 — `feat: symmetry metrics`
-- rotational symmetry
-- mirror symmetry
-- `perception.ts` scaffold
+### Commit 3 (after Pitch UI approval) — `feat: harmonic layer`
+- PitchSpec union on Track (pitch sequence or scale-based)
+- Pitch is per-onset (indexed by onset order, not absolute step)
+- No pitch layer on drum tracks (voiceId = snare/hat)
+- Default Bass has no pitch sequence; user adds it explicitly
 
-### Commit 2 — `feat: audio layer`
-- kick / rimshot / shaker / bass (synthesized, not soundfonts)
-- transport, BPM, swing, mute/solo
-
-### Commit 3 — `feat: presets`
+### Commit 4 — `feat: presets`
 - Preset model = `Track[]` (multi-track snapshot), not a single-rhythm config.
 - Single-track presets: Tresillo (E(3,8)), Son Clave (E(5,16) at a specific rotation).
 - Full-kit presets: Bossa, Techno, Reggae One Drop.
 - (Dub dropped as a preset — it's a production aesthetic, not a defined groove.
   Replace with Reggae One Drop which has a crisp, teachable kit.)
 
-### Commit 4 — `feat: pedagogy (compare + microscope)`
+### Commit 5 — `feat: pedagogy (compare + microscope)`
 - Compare Two Grooves: two patterns side by side, diff their metric axes,
   A/B audition. Nearly free given the pure pipeline.
 - Groove Microscope: LHL syncopation visualised over a **fixed** meter while
@@ -160,7 +157,7 @@ into a single-rhythm model would force a rewrite in Commit 3.
 - Toussaint presets, Clave family, West African timelines, Balkan meters,
   Arabic iqaat. Builds on the locked Preset = Track[] model.
 
-Later, only once 4 tracks actually play: probability, accents, swing,
+Later, only once the core is solid: probability, accents, swing,
 polyrhythm mode, MIDI export, MIDI clock.
 
 ## Guiding constraint

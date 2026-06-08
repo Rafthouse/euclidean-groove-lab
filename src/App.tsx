@@ -99,10 +99,10 @@ export default function App() {
       </section>
 
       <p className="note">
-        All four voices currently use the same kick synth — this is intentional.
-        Commit 2 brings real snare, hat, and bass voices without changing the
-        wiring you see here.
-      </p>
+              Four independent voices: kick (membrane), snare (noise-filtered), hat (short noise),
+              bass (triangle-wave synth). Adjust the Euclidean parameters to discover how
+              rhythms interlock.
+            </p>
     </main>
   );
 }
