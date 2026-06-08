@@ -1,3 +1,5 @@
+import { euclid, rotate } from '../engine';
+
 interface SequencerProps {
   steps: number;
   hits: number;
@@ -9,7 +11,9 @@ const centerX = radius;
 const centerY = radius;
 
 const Sequencer = ({ steps, hits, rotation }: SequencerProps) => {
-  const sequence = generateEuclidean(steps, hits, rotation);
+  // Single source of truth: the pure engine. UI never reimplements the
+  // generator. Note euclid takes (hits, steps); rotation is applied on top.
+  const sequence = rotate(euclid(hits, steps), rotation);
 
   return (
     <svg
@@ -35,34 +39,6 @@ const Sequencer = ({ steps, hits, rotation }: SequencerProps) => {
       })}
     </svg>
   );
-};
-
-const generateEuclidean = (
-  steps: number,
-  hits: number,
-  rotation: number
-): number[] => {
-  const pattern = new Array(steps).fill(0);
-  let remainder = hits;
-  let ptr = 0;
-
-  while (remainder >= 0) {
-    const spacing = Math.floor(steps / remainder);
-
-    ptr += spacing;
-    ptr %= steps;
-    pattern[ptr] = 1;
-    remainder -= 1;
-    steps -= 1;
-  }
-
-  return rotateArray(pattern, rotation);
-};
-
-const rotateArray = (array: number[], offset: number): number[] => {
-  const len = array.length;
-  offset = offset % len;
-  return array.slice(offset).concat(array.slice(0, offset));
 };
 
 export default Sequencer;

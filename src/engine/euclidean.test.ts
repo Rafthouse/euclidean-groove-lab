@@ -57,3 +57,21 @@ describe('euclid (Bjorklund)', () => {
     expect(() => euclid(3, 8.5)).toThrow();
   });
 });
+
+describe('euclid (named edge cases)', () => {
+  it('steps=1, hits=1 -> a single onset', () => {
+    expect(show(euclid(1, 1))).toBe('x');
+  });
+  it('steps=1, hits=0 -> a single rest', () => {
+    expect(show(euclid(0, 1))).toBe('.');
+  });
+  it('steps=16, hits=16 -> every step is an onset', () => {
+    expect(show(euclid(16, 16))).toBe('x'.repeat(16));
+  });
+  it('steps=16, hits=0 -> every step is silent', () => {
+    expect(show(euclid(0, 16))).toBe('.'.repeat(16));
+  });
+  it('hits > steps clamps to all onsets', () => {
+    expect(show(euclid(20, 16))).toBe('x'.repeat(16));
+  });
+});
