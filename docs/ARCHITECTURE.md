@@ -71,14 +71,29 @@ interface TrackPattern {                // per-track carrier; grows over time
   microtiming?: number[];
 }
 
+// Voice slot is fixed from Commit 1 even though all four voices initially map
+// to the same kick synth -- this makes Commit 2 a swap, not a rewrite.
+type VoiceId = 'kick' | 'snare' | 'hat' | 'bass';
+
 interface Track {                       // config / identity
   id: string;
   name: string;
+  color: string;
+
   steps: number;
   hits: number;
   rotation: number;
+
   mute: boolean;
-  color: string;
+  solo: boolean;                        // if ANY track has solo=true,
+                                        // only solo tracks sound (mute ignored within the solo set)
+  voiceId: VoiceId;
+}
+
+interface Preset {                      // multi-track snapshot
+  name: string;
+  tracks: Track[];                      // 1..4 tracks: "Tresillo" = 1, "Bossa" = 4
+  tradition?: string;                   // pedagogical note for World Rhythm Explorer
 }
 
 // trackPattern(track): TrackPattern
@@ -86,7 +101,10 @@ interface Track {                       // config / identity
 ```
 
 Engine functions operate on `boolean[]`; `TrackPattern` is the richer carrier
-that accents / velocity / microtiming attach to later.
+that accents / velocity / microtiming attach to later. A `Preset` is a
+multi-track snapshot, never a single rhythm config — that decision is locked
+because Bossa / Techno / Reggae are kits, not single patterns; folding them
+into a single-rhythm model would force a rewrite in Commit 3.
 
 ## Current state (Commit 0 — done, deployed)
 
@@ -103,11 +121,16 @@ that accents / velocity / microtiming attach to later.
 ## Roadmap
 
 ### Commit 1 — `feat: multi-track engine`
-- `Track`
-- `TrackPattern`
-- `trackPattern()`
-- 4 independent tracks
-- tests
+- `Track`, `TrackPattern`, `trackPattern()`, tests
+- 4 independent tracks; defaults: Kick / Snare / Hat / Bass (voiceId set)
+- mute + solo (semantics in Data model above)
+- 2×2 grid of small rings — one ring per track, per-track controls panel,
+  per-track playhead. (Concentric-rings view is a later optional mode;
+  grid is the default because it stays readable when `steps` differs
+  across tracks.)
+- Audio: each track has its own voice slot from day one. All four slots
+  currently invoke the kick synth — that's intentional, so Commit 2 swaps
+  voices without re-plumbing the audio graph.
 
 ### Commit 1.5 — `feat: symmetry metrics`
 - rotational symmetry
@@ -124,12 +147,24 @@ that accents / velocity / microtiming attach to later.
 - tension map
 - release map
 
-### Commit 4 — `feat: world rhythm explorer`
-- Toussaint presets
-- Clave family
-- West African timelines
-- Balkan meters
-- Arabic iqaat
+### Commit 3 — `feat: presets`
+- Preset model = `Track[]` (multi-track snapshot), not a single-rhythm config.
+- Single-track presets: Tresillo (E(3,8)), Son Clave (E(5,16) at a specific rotation).
+- Full-kit presets: Bossa, Techno, Reggae One Drop.
+- (Dub dropped as a preset — it's a production aesthetic, not a defined groove.
+  Replace with Reggae One Drop which has a crisp, teachable kit.)
+
+### Commit 4 — `feat: pedagogy (compare + microscope)`
+- Compare Two Grooves: two patterns side by side, diff their metric axes,
+  A/B audition. Nearly free given the pure pipeline.
+- Groove Microscope: LHL syncopation visualised over a **fixed** meter while
+  the pattern rotates over it. Anchor / tension / release coloured per onset.
+- Metric explanations as hover tooltips on each axis (one sentence each),
+  not a modal — the explanation lives where the student is already looking.
+
+### Later — `feat: world rhythm explorer`
+- Toussaint presets, Clave family, West African timelines, Balkan meters,
+  Arabic iqaat. Builds on the locked Preset = Track[] model.
 
 Later, only once 4 tracks actually play: probability, accents, swing,
 polyrhythm mode, MIDI export, MIDI clock.
