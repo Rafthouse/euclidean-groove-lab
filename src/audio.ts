@@ -14,11 +14,15 @@ const kick = new Tone.MembraneSynth({
   envelope: { attack: 0.001, decay: 0.2, sustain: 0, release: 0.1 },
 }).toDestination();
 
-// Snare: white noise with snappy amplitude envelope — crisp, body-focused
+// Snare: pink noise through bandpass filter with snappy envelope —
+// the filter gives mid-frequency focus for a snare-drum character
+// without relying on samples.
 const snare = new Tone.NoiseSynth({
-  noise: { type: 'white' },
+  noise: { type: 'pink' },
   envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.04 },
-}).toDestination();
+});
+const snareFilter = new Tone.Filter(2000, 'bandpass').toDestination();
+snare.connect(snareFilter);
 
 // Hat: FM-based metal synth with very short envelope — closed hi-hat character
 const hat = new Tone.MetalSynth({
