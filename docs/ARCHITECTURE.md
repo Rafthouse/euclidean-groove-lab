@@ -141,12 +141,6 @@ into a single-rhythm model would force a rewrite in Commit 3.
 - kick / rimshot / shaker / bass (synthesized, not soundfonts)
 - transport, BPM, swing, mute/solo
 
-### Commit 3 — `feat: groove microscope`
-- LHL syncopation visualization
-- anchor detection
-- tension map
-- release map
-
 ### Commit 3 — `feat: presets`
 - Preset model = `Track[]` (multi-track snapshot), not a single-rhythm config.
 - Single-track presets: Tresillo (E(3,8)), Son Clave (E(5,16) at a specific rotation).

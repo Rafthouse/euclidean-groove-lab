@@ -1,6 +1,7 @@
 :root {
   --bg: #0f1014;
   --panel: #181a21;
+  --panel-hi: #1f2129;
   --text: #c7c9d1;
   --text-dim: #7b7f8c;
   --text-hi: #f3f4f6;
@@ -8,7 +9,9 @@
   --accent-dim: rgba(192, 132, 252, 0.22);
   --rest: #3a3d48;
   --current: #ffffff;
-  --radius: 12px;
+  --danger: #f87171;
+  --warn: #fbbf24;
+  --radius: 14px;
   --mono: ui-monospace, Consolas, monospace;
 
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -25,34 +28,117 @@ body {
   color: var(--text);
 }
 
+/* ---------- layout ---------- */
+
 .app {
-  max-width: 560px;
+  max-width: 880px;
   margin: 0 auto;
-  padding: 32px 20px 64px;
+  padding: 28px 20px 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
+}
+
+header {
   text-align: center;
 }
-
 header h1 {
   margin: 0;
-  font-size: 34px;
+  font-size: 28px;
   font-weight: 600;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.4px;
   color: var(--text-hi);
 }
-
 .tagline {
-  margin: 6px 0 0;
+  margin: 4px 0 0;
   color: var(--text-dim);
-  font-size: 15px;
+  font-size: 14px;
 }
 
-/* --- sequencer --- */
+/* ---------- 2x2 grid of tracks ---------- */
+
+.tracks {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 640px) {
+  .tracks {
+    grid-template-columns: 1fr;
+  }
+}
+
+.track-card {
+  /* Each card sets its own accent via the --track-color custom property.
+     SVG strokes/fills and slider thumbs read that variable, so re-coloring
+     a track is a single style assignment, not a prop drilling exercise. */
+  background: var(--panel);
+  border: 1px solid var(--rest);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.track-card.is-muted {
+  opacity: 0.5;
+}
+.track-card.is-solo {
+  border-color: var(--track-color);
+  box-shadow: 0 0 0 1px var(--track-color);
+}
+
+.track-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.track-name {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--track-color);
+}
+.track-toggles {
+  display: flex;
+  gap: 6px;
+}
+.toggle {
+  font: 600 11px/1 var(--mono);
+  letter-spacing: 1px;
+  padding: 5px 9px;
+  border-radius: 6px;
+  border: 1px solid var(--rest);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+.toggle:hover {
+  color: var(--text-hi);
+  border-color: var(--text-dim);
+}
+.toggle.is-on[data-kind='mute'] {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: var(--bg);
+}
+.toggle.is-on[data-kind='solo'] {
+  background: var(--warn);
+  border-color: var(--warn);
+  color: var(--bg);
+}
+
+/* ---------- sequencer ring ---------- */
+
 .sequencer {
-  width: min(360px, 86vw);
+  /* Same SVG as before; size is CSS-driven so cards control it. */
+  width: 100%;
   height: auto;
   display: block;
 }
@@ -63,8 +149,8 @@ header h1 {
   opacity: 0.5;
 }
 .sequencer .shape {
-  fill: var(--accent-dim);
-  stroke: var(--accent);
+  fill: color-mix(in srgb, var(--track-color) 22%, transparent);
+  stroke: var(--track-color);
   stroke-width: 1.5;
   stroke-linejoin: round;
 }
@@ -80,20 +166,83 @@ header h1 {
   fill: var(--rest);
 }
 .sequencer .step.onset {
-  fill: var(--accent);
+  fill: var(--track-color);
 }
 .sequencer .step.current {
   fill: var(--current);
 }
 
-/* --- play button --- */
+/* ---------- controls (sliders) ---------- */
+
+.controls {
+  display: grid;
+  gap: 8px;
+}
+.control {
+  display: grid;
+  gap: 4px;
+}
+.control-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+.control-label b {
+  color: var(--text-hi);
+  font-family: var(--mono);
+  font-weight: 500;
+}
+.control input[type='range'] {
+  width: 100%;
+  accent-color: var(--track-color, var(--accent));
+}
+
+/* ---------- mini metrics on each card ---------- */
+
+.mini-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.mini-axis {
+  background: var(--panel-hi);
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+.mini-axis b {
+  display: block;
+  font: 500 16px var(--mono);
+  color: var(--track-color);
+}
+.mini-axis span {
+  display: block;
+  margin-top: 2px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* ---------- global transport row ---------- */
+
+.transport {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .play {
-  font: 600 18px/1 var(--mono);
+  font: 600 16px/1 var(--mono);
   color: var(--bg);
   background: var(--accent);
   border: none;
   border-radius: 999px;
-  padding: 14px 36px;
+  padding: 12px 28px;
   cursor: pointer;
   transition: transform 0.1s ease, filter 0.1s ease;
 }
@@ -109,64 +258,26 @@ header h1 {
   box-shadow: inset 0 0 0 1px var(--accent);
 }
 
-/* --- controls --- */
-.controls {
-  width: 100%;
-  display: grid;
-  gap: 16px;
-}
-.control {
+.bpm {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.control-label {
-  display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
   font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
   color: var(--text-dim);
 }
-.control-label b {
-  color: var(--text-hi);
-  font-family: var(--mono);
-}
-.control input[type='range'] {
-  width: 100%;
+.bpm input {
+  width: 140px;
   accent-color: var(--accent);
 }
-
-/* --- metrics: independent axes, never a single score --- */
-.metrics {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-.axis {
-  background: var(--panel);
-  border: 1px solid var(--rest);
-  border-radius: var(--radius);
-  padding: 16px 8px;
-}
-.axis-value {
-  display: block;
-  font: 600 22px var(--mono);
-  color: var(--accent);
-}
-.axis-name {
-  display: block;
-  margin-top: 4px;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--text-dim);
+.bpm b {
+  color: var(--text-hi);
+  font-family: var(--mono);
 }
 
 .note {
   color: var(--text-dim);
-  font-size: 13px;
-  max-width: 44ch;
+  font-size: 12px;
+  max-width: 56ch;
   line-height: 1.5;
+  text-align: center;
 }
