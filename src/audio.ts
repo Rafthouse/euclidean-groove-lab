@@ -59,7 +59,7 @@ const voices: Record<VoiceId, (time: number) => void> = {
     hatNoise.stop(time + 0.06);
     hatEnv.triggerAttackRelease('32n', time);
   },
-  bass: (time) => bass.triggerAttackRelease('E1', '8n', time),
+  bass: (time) => bass.triggerAttackRelease('E2', '8n', time),
 };
 
 let currentTracks: Track[] = [];
