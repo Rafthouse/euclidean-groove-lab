@@ -168,6 +168,12 @@ specs resolve against — built later with the Variant C inspector.
   The pitch layer is offered ONLY for pitched voices (`isPitchedVoice`, today
   just bass); drum voices stay purely rhythmic and never call `resolveOnset`,
   so a sequence's rests can't become an accidental gate on a drum.
+- **MIDI export (done).** Pure `engine/midi.ts`: `renderMidi(tracks, bars, bpm)`
+  → `MidiProject`, then `serializeMidi(project)` → `Uint8Array` (Standard MIDI
+  File, Format 1). Track 0 = tempo/meta conductor; one MTrk per Groove Lab track;
+  drums → GM channel 10, pitched → melodic channels; mirrors the audio scheduler
+  via `resolveOnset`. Deterministic, no external deps, no DOM (download lives in
+  `src/download.ts`). "⤓ MIDI" button in the transport exports 4 bars.
 - **Metrics already shipped:** `density`, `syncopation` (LHL), `balance`
   (Toussaint), `isMaximallyEven`, `metricWeights`, `interOnsetIntervals`.
 
@@ -189,9 +195,11 @@ specs resolve against — built later with the Variant C inspector.
   voice property, not the model). User adds a sequence explicitly.
 - `degree` / `HarmonicContext` / `ChordProgression` types declared but inert.
 
-### Next — `feat: MIDI export`
-- Serialize the resolved onset stream to a Standard MIDI File; storage is already
-  `MidiNote`, so export needs no parsing. Drum tracks → GM channel 10 map.
+### MIDI export (done) — `feat: MIDI export`
+- `renderMidi()` + `serializeMidi()` in `engine/midi.ts`; Format 1, tempo
+  conductor + per-track MTrk, GM drums, deterministic, unit-tested by bytes.
+- Export length is a fixed 4 bars (`EXPORT_BARS`); a chosen/loop-aware length
+  is a later refinement.
 
 ### Next: drag editing for the pitch lane
 - Draggable contour bars, on top of the now-stable text-driven Pitch Layer.

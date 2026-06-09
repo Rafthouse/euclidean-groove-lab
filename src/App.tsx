@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
-import { defaultTracks } from './engine';
+import { defaultTracks, renderMidi, serializeMidi } from './engine';
 import type { Track } from './engine';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading } from './audio';
+import { downloadBytes } from './download';
 import type { DrumKitId } from './drumKits';
+
+/** How many 4/4 bars the MIDI export renders. */
+const EXPORT_BARS = 4;
 
 export default function App() {
   const [tracks, setTracksState] = useState<Track[]>(() => defaultTracks());
@@ -66,6 +70,13 @@ export default function App() {
     setKitId(id);
   }, []);
 
+  // Export the current groove as a Standard MIDI File (Format 1). Pure engine
+  // produces the bytes; downloadBytes is the only DOM/Blob touch.
+  const handleExportMidi = () => {
+    const bytes = serializeMidi(renderMidi(tracks, EXPORT_BARS, bpm));
+    downloadBytes(bytes, 'groove.mid', 'audio/midi');
+  };
+
   return (
     <main className="app">
       <header>
@@ -118,12 +129,20 @@ export default function App() {
           <b>{swing}%</b>
         </label>
         <DrumKitSelect value={kitId} loading={kitLoading} onChange={handleKitChange} />
+        <button
+          type="button"
+          className="export"
+          onClick={handleExportMidi}
+          title={`Export ${EXPORT_BARS} bars as a Standard MIDI File`}
+        >
+          ⤓ MIDI
+        </button>
       </section>
 
       <p className="note">
         Sample-based drums (CR-78, Kit-8, KPR-77) with a sawtooth pick-bass
         synth. Swing shuffles the off-beat 8ths. Switch kits live — Transport
-        keeps running.
+        keeps running. Export {EXPORT_BARS} bars as MIDI (Format 1) for your DAW.
       </p>
     </main>
   );

@@ -41,6 +41,9 @@ export {
   PITCHED_VOICES,
 } from './pitch';
 
+export type { MidiNoteEvent, MidiTrackData, MidiProject } from './midi';
+export { renderMidi, serializeMidi, GM_DRUM_MAP } from './midi';
+
 export { pulse } from './pulse';
 export { euclid } from './euclidean';
 export { rotate } from './rotate';
