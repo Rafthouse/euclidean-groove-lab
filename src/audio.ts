@@ -8,10 +8,13 @@ import type { DrumKitId } from './drumKits';
 // it only plays whatever tracks the app feeds it.
 
 // --- Bass instrument (synthesized, not sampled) ---
-// Clean triangle-wave synth — no filter envelope, no sweep per note.
-const bass = new Tone.Synth({
-  oscillator: { type: 'triangle' },
-  envelope: { attack: 0.02, decay: 0.2, sustain: 0.15, release: 0.3 },
+// Sawtooth MonoSynth with static lowpass filter — pick-bass character
+// with rich harmonics, no filter envelope sweep.
+const BASS_FILTER_FREQ = 800;
+const bass = new Tone.MonoSynth({
+  oscillator: { type: 'sawtooth' },
+  envelope: { attack: 0.008, decay: 0.25, sustain: 0.2, release: 0.3 },
+  filter: { type: 'lowpass', Q: 0.7, frequency: BASS_FILTER_FREQ, rolloff: -12 },
 }).toDestination();
 
 // --- Drum kit (sample-based, swappable) ---

@@ -3,7 +3,8 @@ import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
 import { defaultTracks } from './engine';
 import type { Track } from './engine';
-import { start, stop, setTracks, setBpm, onStep, switchDrumKit, onKitLoading } from './audio';
+import { start, stop, setTracks, setBpm, onStep, switchDrumKit,
+  onKitLoading } from './audio';
 import type { DrumKitId } from './drumKits';
 
 export default function App() {

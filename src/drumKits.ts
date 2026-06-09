@@ -26,18 +26,18 @@ export const DRUM_KITS = {
   kit8: {
     id: 'kit8',
     name: 'Kit-8',
-    description: 'Clean electronic kit — Chromium demo samples',
+    description: 'Clean electronic kit — 4OP-FM hi-hat, Chromium kick/snare',
     kick: 'kit8/kick.wav',
     snare: 'kit8/snare.wav',
-    hat: 'kit8/hihat.wav',
+    hat: '4op-fm/hihat.wav',
   },
   kpr77: {
     id: 'kpr77',
     name: 'KPR-77',
-    description: 'Korg KPR-77 — analog rhythm machine',
+    description: 'Korg KPR-77 — analog rhythm machine, Kit3 hi-hat',
     kick: 'kpr77/kick.wav',
     snare: 'kpr77/snare.wav',
-    hat: 'kpr77/hihat.wav',
+    hat: 'kit3/hihat.wav',
   },
 } as const;
 
