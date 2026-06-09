@@ -93,28 +93,38 @@ function linearToDb(normalized: number): number {
   return 20 * Math.log10(normalized);
 }
 
-// Voices take an optional `midi`. Drum voices ignore it (they play a sample);
-// the bass voice plays the resolved pitch, falling back to its intrinsic E2
-// when the track has no pitch layer (per docs reconciliation D8).
+// Voices take `velocity` (per-hit dynamics, 0–1) and `volume` (per-track mixer
+// level, 0–1). Both feed the same `volume.value` control via linearToDb, so the
+// mixer is applied without adding any nodes to the audio graph: the effective
+// level is volume × velocity (a sum in dB). At volume = 1 the behaviour is
+// identical to before. `midi` is used only by the (pitched) bass voice.
 const voices: Record<
   VoiceId,
-  (time: number, velocity?: number, midi?: MidiNote) => void
+  (time: number, velocity?: number, volume?: number, midi?: MidiNote) => void
 > = {
-  kick: (time) => currentPlayers?.kick.start(time),
-  snare: (time, velocity = 1) => {
+  kick: (time, velocity = 1, volume = 1) => {
+    const p = currentPlayers?.kick;
+    if (!p) return;
+    p.volume.value = linearToDb(volume * velocity);
+    p.start(time);
+  },
+  snare: (time, velocity = 1, volume = 1) => {
     const p = currentPlayers?.snare;
     if (!p) return;
-    if (velocity < 1) p.volume.value = linearToDb(velocity);
+    p.volume.value = linearToDb(volume * velocity);
     p.start(time);
   },
-  hat: (time, velocity = 1) => {
+  hat: (time, velocity = 1, volume = 1) => {
     const p = currentPlayers?.hat;
     if (!p) return;
-    p.volume.value = linearToDb(velocity);
+    p.volume.value = linearToDb(volume * velocity);
     p.start(time);
   },
-  bass: (time, velocity = 1, midi) => {
+  bass: (time, velocity = 1, volume = 1, midi) => {
     const note = midi !== undefined ? Tone.Frequency(midi, 'midi').toNote() : 'E2';
+    // Bass velocity is carried by the envelope (triggerAttackRelease); the mixer
+    // level rides on the synth's output volume.
+    bass.volume.value = linearToDb(volume);
     bass.triggerAttackRelease(note, '8n', time, velocity);
   },
 };
@@ -237,12 +247,13 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
       const localStep = step % track.steps;
       if (!tp.pulses[localStep]) continue;
 
+      const volume = (track.volume ?? 100) / 100;
       if (isPitchedVoice(track.voiceId)) {
         const onset = resolveOnset(track, tp, step);
-        if (onset) voices[track.voiceId](time, onset.velocity / 100, onset.midi);
+        if (onset) voices[track.voiceId](time, onset.velocity / 100, volume, onset.midi);
       } else {
         const velocity = tp.velocities ? (tp.velocities[localStep] ?? 100) / 100 : 1;
-        voices[track.voiceId](time, velocity);
+        voices[track.voiceId](time, velocity, volume);
       }
     }
     Tone.getDraw().schedule(() => stepCallback?.(step), time);

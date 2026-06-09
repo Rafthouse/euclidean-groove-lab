@@ -83,6 +83,13 @@ export default function TrackCard({
           max={Math.max(0, track.steps - 1)}
           onChange={(v) => onChange({ rotation: v })}
         />
+        <Slider
+          label="Volume"
+          value={track.volume ?? 100}
+          min={0}
+          max={100}
+          onChange={(v) => onChange({ volume: v })}
+        />
       </div>
 
       <div className="mini-metrics">

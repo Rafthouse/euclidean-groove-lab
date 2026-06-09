@@ -45,6 +45,9 @@ export interface Track {
 
   voiceId: VoiceId;
 
+  /** Per-track mixer level, 0–100 (default 100). Audio-only; not exported to MIDI. */
+  volume?: number;
+
   /** Optional cyclic velocity sequence indexed by onset order (not step index). */
   velocityPattern?: VelocityPattern;
 
@@ -131,6 +134,7 @@ export function defaultTracks(): Track[] {
       mute: false,
       solo: false,
       voiceId: 'kick',
+      volume: 100,
     },
     {
       id: 'snare',
@@ -142,6 +146,7 @@ export function defaultTracks(): Track[] {
       mute: false,
       solo: false,
       voiceId: 'snare',
+      volume: 100,
     },
     {
       id: 'hat',
@@ -153,6 +158,7 @@ export function defaultTracks(): Track[] {
       mute: false,
       solo: false,
       voiceId: 'hat',
+      volume: 100,
       velocityPattern: [100], // flat velocity; ready for accent ramp
     },
     {
@@ -165,6 +171,7 @@ export function defaultTracks(): Track[] {
       mute: false,
       solo: false,
       voiceId: 'bass',
+      volume: 100,
     },
   ];
 }
