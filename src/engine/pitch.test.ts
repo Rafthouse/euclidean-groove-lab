@@ -7,6 +7,7 @@ import {
   parseNoteSequence,
   midiToNoteName,
   pitchSequenceToText,
+  isPitchedVoice,
 } from './pitch';
 import type { PitchSequence, HarmonicContext } from './pitch';
 import { trackPattern } from './track';
@@ -253,5 +254,17 @@ describe('midiToNoteName / round-trip', () => {
       slots: [{ pitch: { kind: 'absolute', midi: 48 } }, null, { pitch: { kind: 'absolute', midi: 55 } }],
     };
     expect(pitchSequenceToText(s)).toBe('C3 - G3');
+  });
+});
+
+describe('isPitchedVoice', () => {
+  it('treats bass as pitched', () => {
+    expect(isPitchedVoice('bass')).toBe(true);
+  });
+
+  it('treats drum voices as not pitched', () => {
+    expect(isPitchedVoice('kick')).toBe(false);
+    expect(isPitchedVoice('snare')).toBe(false);
+    expect(isPitchedVoice('hat')).toBe(false);
   });
 });

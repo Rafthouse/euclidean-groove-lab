@@ -1,5 +1,5 @@
 import * as Tone from 'tone';
-import { audibleTracks, trackPattern, resolveOnset } from './engine';
+import { audibleTracks, trackPattern, resolveOnset, isPitchedVoice } from './engine';
 import type { Track, VoiceId, MidiNote } from './engine';
 import { DRUM_KITS } from './drumKits';
 import type { DrumKitId } from './drumKits';
@@ -222,18 +222,27 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
   const transport = Tone.getTransport();
   transport.bpm.value = bpm;
 
-  // One global step counter. resolveOnset() folds three things into one call:
-  // the rhythmic onset test, the onset-indexed pitch lookup (isorhythm), and
-  // the velocity precedence (event > step accent > default). It returns null
-  // when nothing should sound — no onset here, or a rest slot in the pitch
-  // sequence — so a single guard covers both silences.
+  // One global step counter. The two voice families take different paths so
+  // that each layer keeps a single responsibility:
+  //  - Pitched voices (bass, future melodic) go through resolveOnset(), which
+  //    folds the onset test, the onset-indexed pitch lookup (isorhythm), the
+  //    rest slots, and the velocity precedence into one call.
+  //  - Drum voices stay PURELY rhythmic: a plain pulse test plus the step
+  //    accent. resolveOnset is never called for them, so a pitch sequence's
+  //    rests can never become an accidental gate on a drum.
   let step = 0;
   transport.scheduleRepeat((time) => {
     for (const track of audibleTracks(currentTracks)) {
       const tp = trackPattern(track);
-      const onset = resolveOnset(track, tp, step);
-      if (onset) {
-        voices[track.voiceId](time, onset.velocity / 100, onset.midi);
+      const localStep = step % track.steps;
+      if (!tp.pulses[localStep]) continue;
+
+      if (isPitchedVoice(track.voiceId)) {
+        const onset = resolveOnset(track, tp, step);
+        if (onset) voices[track.voiceId](time, onset.velocity / 100, onset.midi);
+      } else {
+        const velocity = tp.velocities ? (tp.velocities[localStep] ?? 100) / 100 : 1;
+        voices[track.voiceId](time, velocity);
       }
     }
     Tone.getDraw().schedule(() => stepCallback?.(step), time);

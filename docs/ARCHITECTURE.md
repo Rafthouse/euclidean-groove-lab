@@ -165,6 +165,9 @@ specs resolve against — built later with the Variant C inspector.
   parser/formatter). `absolute` path live; `degree`/`HarmonicContext` declared
   but inert. Per-track text-input lane + bar-contour visualization. Velocity
   precedence: `PitchEvent.velocity` > `TrackPattern.velocities[step]` > default.
+  The pitch layer is offered ONLY for pitched voices (`isPitchedVoice`, today
+  just bass); drum voices stay purely rhythmic and never call `resolveOnset`,
+  so a sequence's rests can't become an accidental gate on a drum.
 - **Metrics already shipped:** `density`, `syncopation` (LHL), `balance`
   (Toussaint), `isMaximallyEven`, `metricWeights`, `interOnsetIntervals`.
 

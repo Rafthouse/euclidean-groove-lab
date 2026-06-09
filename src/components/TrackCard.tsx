@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react';
 import Sequencer from './Sequencer';
 import PitchLane from './PitchLane';
-import { trackPattern, onsetCount, density } from '../engine';
+import { trackPattern, onsetCount, density, isPitchedVoice } from '../engine';
 import type { Track } from '../engine';
 
 interface TrackCardProps {
@@ -57,7 +57,9 @@ export default function TrackCard({
 
       <Sequencer pattern={pattern} currentStep={currentStep} />
 
-      <PitchLane track={track} onChange={onChange} />
+      {isPitchedVoice(track.voiceId) && (
+        <PitchLane track={track} onChange={onChange} />
+      )}
 
       <div className="controls">
         <Slider

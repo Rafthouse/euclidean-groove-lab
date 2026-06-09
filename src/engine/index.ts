@@ -37,6 +37,8 @@ export {
   parseNoteSequence,
   midiToNoteName,
   pitchSequenceToText,
+  isPitchedVoice,
+  PITCHED_VOICES,
 } from './pitch';
 
 export { pulse } from './pulse';

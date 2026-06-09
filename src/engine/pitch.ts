@@ -7,7 +7,7 @@
  * Pure module: no Tone.js, no React. Audio and UI are downstream consumers.
  * The full, locked model lives in docs/PITCH-DATA-MODEL-RECONCILIATION.md.
  */
-import type { Track, TrackPattern } from './track';
+import type { Track, TrackPattern, VoiceId } from './track';
 
 /** MIDI note number, 0–127. C4 = 60, E2 = 40. Canonical for storage + export. */
 export type MidiNote = number;
@@ -44,6 +44,18 @@ export interface PitchSequence {
   id: string;
   name?: string;
   slots: PitchSlot[];
+}
+
+/**
+ * Voices that carry pitch. The pitch layer is offered ONLY for these — drum
+ * voices stay purely rhythmic, so a pitch sequence's rests never become an
+ * accidental gate on a drum (one layer, one responsibility). Today only the
+ * bass is pitched; melodic voices added later join this set.
+ */
+export const PITCHED_VOICES: ReadonlySet<VoiceId> = new Set<VoiceId>(['bass']);
+
+export function isPitchedVoice(voiceId: VoiceId): boolean {
+  return PITCHED_VOICES.has(voiceId);
 }
 
 // ── Harmony (declared now, inert until the Harmonic Layer / Variant C) ─────────
