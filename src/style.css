@@ -14,8 +14,71 @@
   --radius: 14px;
   --mono: ui-monospace, Consolas, monospace;
 
+  /* Per-voice track colours (themeable). Dark Neon = the original values. */
+  --color-kick: #c084fc;
+  --color-snare: #f472b6;
+  --color-hat: #60a5fa;
+  --color-bass: #34d399;
+
+  /* Card elevation: none in dark (flat neon), soft ink-on-paper in light. */
+  --card-shadow: none;
+
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
   color-scheme: dark;
+}
+
+/* ---------- Vintage Paper theme (light) ---------- */
+/* Warm, tactile, analog — a composer's notebook. Only CSS variables change;
+   the DOM, components and layout are identical to Dark Neon. */
+:root[data-theme='paper'] {
+  --bg: #f4eedf;
+  --panel: #fbf7ee;
+  --panel-hi: #f2eadb;
+  --text: #746b5f;
+  --text-dim: #9a9287;
+  --text-hi: #3b352d;
+  --accent: #8c6bae;
+  --accent-dim: rgba(140, 107, 174, 0.2);
+  --rest: #d8cdb8;
+  --current: #3b352d; /* playhead is ink, not white */
+  --danger: #b5675f;
+  --warn: #c2944e;
+
+  /* Desaturated, paper-reinterpreted track identities. */
+  --color-kick: #8c6bae; /* dusty plum */
+  --color-snare: #c97b9f; /* muted rose */
+  --color-hat: #6d8fb5; /* vintage blue */
+  --color-bass: #6fa17a; /* sage green */
+
+  --card-shadow: 0 1px 2px rgba(60, 50, 30, 0.06), 0 4px 12px rgba(60, 50, 30, 0.05);
+
+  color-scheme: light; /* native controls (sliders, selects) render light */
+}
+
+/* Track colour follows the active theme, by voice (no inline data colour). */
+.track-card[data-voice='kick'] {
+  --track-color: var(--color-kick);
+}
+.track-card[data-voice='snare'] {
+  --track-color: var(--color-snare);
+}
+.track-card[data-voice='hat'] {
+  --track-color: var(--color-hat);
+}
+.track-card[data-voice='bass'] {
+  --track-color: var(--color-bass);
+}
+
+/* Paper buttons: warm, slightly inset; no neon, no glow. */
+:root[data-theme='paper'] .toggle,
+:root[data-theme='paper'] .export,
+:root[data-theme='paper'] .kit-select select,
+:root[data-theme='paper'] .theme-select select {
+  background: #e8dfcf;
+}
+:root[data-theme='paper'] .toggle:hover,
+:root[data-theme='paper'] .export:hover {
+  background: #ddd1bc;
 }
 
 * {
@@ -92,6 +155,7 @@ header h1 {
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
+  box-shadow: var(--card-shadow);
 }
 
 .track-card.is-muted {
@@ -397,14 +461,16 @@ header h1 {
 
 /* ---------- drum kit selector ---------- */
 
-.kit-select {
+.kit-select,
+.theme-select {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 13px;
   color: var(--text-dim);
 }
-.kit-select select {
+.kit-select select,
+.theme-select select {
   background: var(--panel);
   color: var(--text-hi);
   border: 1px solid var(--rest);

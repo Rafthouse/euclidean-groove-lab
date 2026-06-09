@@ -11,6 +11,17 @@ import type { DrumKitId } from './drumKits';
 /** How many 4/4 bars the MIDI export renders. */
 const EXPORT_BARS = 4;
 
+type ThemeId = 'dark' | 'paper';
+const THEME_KEY = 'groove-theme';
+
+function initialTheme(): ThemeId {
+  try {
+    return localStorage.getItem(THEME_KEY) === 'paper' ? 'paper' : 'dark';
+  } catch {
+    return 'dark';
+  }
+}
+
 export default function App() {
   const [tracks, setTracksState] = useState<Track[]>(() => defaultTracks());
   const [bpm, setTempo] = useState(120);
@@ -19,6 +30,7 @@ export default function App() {
   const [currentStep, setCurrentStep] = useState(-1);
   const [kitId, setKitId] = useState<DrumKitId>('cr78');
   const [kitLoading, setKitLoading] = useState(false);
+  const [theme, setTheme] = useState<ThemeId>(initialTheme);
 
   // Engine -> audio sync.
   useEffect(() => setTracks(tracks), [tracks]);
@@ -26,6 +38,16 @@ export default function App() {
   useEffect(() => setSwing(swing / 100), [swing]);
   useEffect(() => onStep(setCurrentStep), []);
   useEffect(() => onKitLoading(setKitLoading), []);
+
+  // Theme: reflect on <html data-theme> (CSS variables do the rest) + persist.
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem(THEME_KEY, theme);
+    } catch {
+      // ignore persistence failures
+    }
+  }, [theme]);
 
   // Keep hits/rotation valid as steps shrinks.
   const updateTrack = useCallback((id: string, patch: Partial<Track>) => {
@@ -146,6 +168,17 @@ export default function App() {
         >
           ⤓ MIDI
         </button>
+        <label className="theme-select">
+          Theme
+          <select
+            value={theme}
+            onChange={(e) => setTheme(e.target.value as ThemeId)}
+            aria-label="Visual theme"
+          >
+            <option value="dark">Dark Neon</option>
+            <option value="paper">Vintage Paper</option>
+          </select>
+        </label>
       </section>
 
       <p className="note">

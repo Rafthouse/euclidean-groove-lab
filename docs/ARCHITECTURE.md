@@ -206,6 +206,11 @@ specs resolve against — built later with the Variant C inspector.
   scheduler and MIDI export, but never touches the Euclidean generator,
   rotation, density, or pitch onset-indexing — the generated pattern stays
   authoritative; click a ring onset to mute/restore it.
+- **Themes** (CSS variables only): Dark Neon (default) + Vintage Paper. A
+  `data-theme` on `<html>` swaps the variable set; persisted in localStorage,
+  applied pre-paint in `main.tsx` (no flash). Track colours are sourced from
+  CSS per voice (`.track-card[data-voice]`), so they re-skin with the theme;
+  same DOM, same components, dark visually unchanged.
 - **Metrics already shipped:** `density`, `syncopation` (LHL), `balance`
   (Toussaint), `isMaximallyEven`, `metricWeights`, `interOnsetIntervals`.
 

@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react';
 import Sequencer from './Sequencer';
 import PitchLane from './PitchLane';
 import { trackPattern, onsetCount, density, isPitchedVoice } from '../engine';
@@ -20,7 +19,8 @@ export default function TrackCard({
   onToggleSolo,
 }: TrackCardProps) {
   const pattern = trackPattern(track).pulses;
-  const style = { ['--track-color' as string]: track.color } as CSSProperties;
+  // --track-color is sourced from CSS by voice (`[data-voice]`), so it follows
+  // the active theme (dark neon vs vintage paper) instead of a fixed data color.
 
   // Toggle the manual mute overlay for a single generated onset. The mask is
   // step-indexed and kept the same length as the pattern; an all-false mask
@@ -40,7 +40,7 @@ export default function TrackCard({
     (track.solo ? ' is-solo' : '');
 
   return (
-    <div className={cardClass} style={style}>
+    <div className={cardClass} data-voice={track.voiceId}>
       <div className="track-head">
         <span className="track-name">{track.name}</span>
         <div className="track-toggles">
