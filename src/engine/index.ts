@@ -9,6 +9,17 @@
 export type { Pattern } from './types';
 export type { OnsetTime } from './phase';
 export type { Track, TrackPattern, VoiceId, VelocityPattern } from './track';
+export type {
+  MidiNote,
+  PitchSpec,
+  PitchEvent,
+  PitchSlot,
+  PitchSequence,
+  ScaleType,
+  ChordSymbol,
+  HarmonicContext,
+  ResolvedOnset,
+} from './pitch';
 
 export {
   trackPattern,
@@ -17,6 +28,16 @@ export {
   computeVelocities,
   VELOCITY_PRESETS,
 } from './track';
+
+export {
+  resolvePitchSpec,
+  onsetIndexAt,
+  resolveOnset,
+  parseNoteToken,
+  parseNoteSequence,
+  midiToNoteName,
+  pitchSequenceToText,
+} from './pitch';
 
 export { pulse } from './pulse';
 export { euclid } from './euclidean';

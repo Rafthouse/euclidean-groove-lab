@@ -1,6 +1,6 @@
 import * as Tone from 'tone';
-import { audibleTracks, trackPattern } from './engine';
-import type { Track, VoiceId } from './engine';
+import { audibleTracks, trackPattern, resolveOnset } from './engine';
+import type { Track, VoiceId, MidiNote } from './engine';
 import { DRUM_KITS } from './drumKits';
 import type { DrumKitId } from './drumKits';
 
@@ -93,7 +93,13 @@ function linearToDb(normalized: number): number {
   return 20 * Math.log10(normalized);
 }
 
-const voices: Record<VoiceId, (time: number, velocity?: number) => void> = {
+// Voices take an optional `midi`. Drum voices ignore it (they play a sample);
+// the bass voice plays the resolved pitch, falling back to its intrinsic E2
+// when the track has no pitch layer (per docs reconciliation D8).
+const voices: Record<
+  VoiceId,
+  (time: number, velocity?: number, midi?: MidiNote) => void
+> = {
   kick: (time) => currentPlayers?.kick.start(time),
   snare: (time, velocity = 1) => {
     const p = currentPlayers?.snare;
@@ -107,7 +113,10 @@ const voices: Record<VoiceId, (time: number, velocity?: number) => void> = {
     p.volume.value = linearToDb(velocity);
     p.start(time);
   },
-  bass: (time) => bass.triggerAttackRelease('E2', '8n', time),
+  bass: (time, velocity = 1, midi) => {
+    const note = midi !== undefined ? Tone.Frequency(midi, 'midi').toNote() : 'E2';
+    bass.triggerAttackRelease(note, '8n', time, velocity);
+  },
 };
 
 let currentTracks: Track[] = [];
@@ -213,16 +222,18 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
   const transport = Tone.getTransport();
   transport.bpm.value = bpm;
 
-  // One global step counter.
+  // One global step counter. resolveOnset() folds three things into one call:
+  // the rhythmic onset test, the onset-indexed pitch lookup (isorhythm), and
+  // the velocity precedence (event > step accent > default). It returns null
+  // when nothing should sound — no onset here, or a rest slot in the pitch
+  // sequence — so a single guard covers both silences.
   let step = 0;
   transport.scheduleRepeat((time) => {
     for (const track of audibleTracks(currentTracks)) {
       const tp = trackPattern(track);
-      if (tp.pulses[step % track.steps]) {
-        const velocity = tp.velocities
-          ? (tp.velocities[step % track.steps] ?? 100) / 100
-          : 1;
-        voices[track.voiceId](time, velocity);
+      const onset = resolveOnset(track, tp, step);
+      if (onset) {
+        voices[track.voiceId](time, onset.velocity / 100, onset.midi);
       }
     }
     Tone.getDraw().schedule(() => stepCallback?.(step), time);

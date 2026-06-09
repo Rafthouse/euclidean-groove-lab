@@ -1,4 +1,5 @@
 import type { Pattern } from './types';
+import type { PitchSequence } from './pitch';
 import { euclid } from './euclidean';
 import { rotate } from './rotate';
 
@@ -46,6 +47,12 @@ export interface Track {
 
   /** Optional cyclic velocity sequence indexed by onset order (not step index). */
   velocityPattern?: VelocityPattern;
+
+  /**
+   * Optional pitch layer — an independent, onset-indexed cycle (isorhythm).
+   * Absent => drum-style (no pitch). See docs/PITCH-DATA-MODEL-RECONCILIATION.md.
+   */
+  pitches?: PitchSequence;
 }
 
 /**

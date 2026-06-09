@@ -200,6 +200,81 @@ header h1 {
   accent-color: var(--track-color, var(--accent));
 }
 
+/* ---------- pitch lane (Variant B) ---------- */
+
+.pitch-lane {
+  display: grid;
+  gap: 8px;
+}
+.pitch-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toggle.is-on[data-kind='pitch'] {
+  background: var(--track-color);
+  border-color: var(--track-color);
+  color: var(--bg);
+}
+.pitch-count {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Bar contour: read-only melodic shape; bars align to the bottom and their
+   height encodes pitch within the sequence's own range. */
+.pitch-contour {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 40px;
+  padding: 4px;
+  background: var(--panel-hi);
+  border-radius: 8px;
+}
+.pitch-bar {
+  flex: 1 1 0;
+  min-width: 2px;
+  background: var(--track-color);
+  border-radius: 2px 2px 0 0;
+  opacity: 0.85;
+}
+.pitch-bar.is-rest {
+  align-self: stretch;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--rest),
+    var(--rest) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  opacity: 0.5;
+  border-radius: 2px;
+}
+
+.pitch-input {
+  width: 100%;
+  font: 500 12px var(--mono);
+  color: var(--text-hi);
+  background: var(--panel-hi);
+  border: 1px solid var(--rest);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.pitch-input::placeholder {
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+.pitch-input:focus {
+  outline: none;
+  border-color: var(--track-color);
+}
+.pitch-input.has-error {
+  border-color: var(--danger);
+}
+
 /* ---------- mini metrics on each card ---------- */
 
 .mini-metrics {

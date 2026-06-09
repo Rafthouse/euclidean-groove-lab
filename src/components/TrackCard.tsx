@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import Sequencer from './Sequencer';
+import PitchLane from './PitchLane';
 import { trackPattern, onsetCount, density } from '../engine';
 import type { Track } from '../engine';
 
@@ -55,6 +56,8 @@ export default function TrackCard({
       </div>
 
       <Sequencer pattern={pattern} currentStep={currentStep} />
+
+      <PitchLane track={track} onChange={onChange} />
 
       <div className="controls">
         <Slider

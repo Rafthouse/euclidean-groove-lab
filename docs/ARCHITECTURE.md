@@ -155,11 +155,16 @@ specs resolve against — built later with the Variant C inspector.
 - **Commit 1 (done).** Multi-track engine with `Track`, `TrackPattern`,
   `trackPattern()`, mute/solo semantics, 2×2 grid UI. Four voice slots
   defined (`VoiceId`), all initially mapped to the same kick synth.
-- **Commit 2 (done).** Real synthesized voices: kick (`MembraneSynth`),
-  snare/rimshot (`NoiseSynth` + bandpass), closed hat (`NoiseSynth` + highpass),
-  bass (`Synth` / triangle). Audio layer is engine-driven: `audio.ts` reads
-  `currentTracks` by reference and computes `trackPattern()` each tick.
-  Transport, BPM, mute/solo live audibly. No hardcoded patterns remain.
+- **Commit 2 (done).** Real voices: sample-based drum kits (CR-78 / Kit-8 /
+  KPR-77, live-swappable) + sawtooth pick-bass synth. Engine-driven: `audio.ts`
+  reads `currentTracks` by reference and computes `trackPattern()` each tick.
+  Transport, BPM, swing (8th-note shuffle), mute/solo live audibly.
+- **Commit 3 (done).** Pitch Layer (Variant B): `pitches?: PitchSequence` on
+  Track — onset-indexed, length-independent of rhythm (isorhythm). Pure
+  `engine/pitch.ts` (`resolveOnset`, `onsetIndexAt`, `resolvePitchSpec`, note
+  parser/formatter). `absolute` path live; `degree`/`HarmonicContext` declared
+  but inert. Per-track text-input lane + bar-contour visualization. Velocity
+  precedence: `PitchEvent.velocity` > `TrackPattern.velocities[step]` > default.
 - **Metrics already shipped:** `density`, `syncopation` (LHL), `balance`
   (Toussaint), `isMaximallyEven`, `metricWeights`, `interOnsetIntervals`.
 
@@ -173,13 +178,20 @@ specs resolve against — built later with the Variant C inspector.
 - `docs/PITCH-DATA-MODEL-RECONCILIATION.md` — single locked data model
   (reconciles this contract, the UI doc, and the approved model).
 
-### Commit 3 (next) — `feat: Pitch Layer (Variant B)`
+### Commit 3 (done) — `feat: Pitch Layer (Variant B)`
 - `pitches?: PitchSequence` on Track (onset-indexed, length-independent of rhythm).
-- Implement only the `absolute` path: per-track lane, draggable bars → MidiNote storage.
+- `absolute` path only: per-track **text-input** lane + bar-contour viz (drag
+  editing deferred to a later commit). Storage is `MidiNote`.
 - No pitch layer on drum tracks; default Bass has no pitch sequence (intrinsic E2 is a
   voice property, not the model). User adds a sequence explicitly.
 - `degree` / `HarmonicContext` / `ChordProgression` types declared but inert.
-- MIDI export stays first-class: storage is already MidiNote, so export needs no parsing.
+
+### Next — `feat: MIDI export`
+- Serialize the resolved onset stream to a Standard MIDI File; storage is already
+  `MidiNote`, so export needs no parsing. Drum tracks → GM channel 10 map.
+
+### Next: drag editing for the pitch lane
+- Draggable contour bars, on top of the now-stable text-driven Pitch Layer.
 
 ### Later — `feat: Harmonic Layer (Variant C)`
 - Global `HarmonicContext` (root + scale + optional chord); `degree` resolution goes live.
