@@ -4,6 +4,30 @@ This document is a **contract**. It outlives any single session or contributor.
 Read it before adding features; if a change violates it, change the document
 deliberately — don't quietly work around it.
 
+## Release status — TEST RELEASE / FEATURE FREEZE (2026-06-09)
+
+The current version (commit `a914c87`) is a **test release** for live use and
+feedback gathering. Active feature development is **paused** to stabilize.
+
+**Frozen — do NOT start without an explicit new decision from the user:**
+
+- Harmonic Layer; Variant C / Pitch Inspector
+- Any new large feature
+- Changes to the Pitch Layer data model
+- Changes to the MIDI export architecture
+- Speculative "just in case" refactoring
+
+**Allowed during the freeze:**
+
+1. Critical bug fixes
+2. Regressions
+3. Performance problems
+4. Browser-compatibility problems
+5. Small UX fixes that block real use
+
+Any new large feature is first a DESIGN doc or a `docs/BACKLOG.md` entry — never
+straight to code. Goal: stabilize this version before the next development phase.
+
 ## Core Product Thesis
 
 **Euclidean Groove Lab is not a sequencer.** It is an educational laboratory for
