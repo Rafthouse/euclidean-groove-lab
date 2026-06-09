@@ -1,18 +1,17 @@
-import { useState } from 'react';
+import { useReducer } from 'react';
 import type { Track } from '../engine';
-import { parseNoteSequence, pitchSequenceToText, resolvePitchSpec, midiToNoteName } from '../engine';
+import { resolvePitchSpec, midiToNoteName, pitchSequenceToText, parseNoteSequence } from '../engine';
+import { laneReducer, initLaneState, pitchesFromText, PITCH_STARTER } from './pitchLaneState';
 
 /**
  * Variant B Pitch Lane. First version: TEXT INPUT for editing, with a bar
  * contour as read-only visualization of the melodic shape. Drag editing is a
  * deliberate later commit (see docs/DESIGN-PITCH-UI.md).
  *
- * The lane is universal — available on any track. Pitch is onset-indexed and
- * independent in length from the rhythm, so a sequence shorter or longer than
- * the onset count drifts (isorhythm) and you hear it on Play.
+ * Open/closed is a UI state (LaneState.open) controlled ONLY by the ♪ toggle.
+ * Clearing the text makes `track.pitches` undefined but keeps the lane open, so
+ * "select-all → delete → retype" works without the field disappearing.
  */
-
-const STARTER = 'C3 D3 G3 Bb3';
 
 interface PitchLaneProps {
   track: Track;
@@ -20,28 +19,21 @@ interface PitchLaneProps {
 }
 
 export default function PitchLane({ track, onChange }: PitchLaneProps) {
-  const enabled = !!track.pitches;
-  const [text, setText] = useState(() =>
-    track.pitches ? pitchSequenceToText(track.pitches) : '',
+  const [state, dispatch] = useReducer(laneReducer, undefined, () =>
+    initLaneState(track.pitches ? pitchSequenceToText(track.pitches) : '', !!track.pitches),
   );
 
-  // Parse on every change; the model stores MidiNote, the text box keeps the
-  // raw string so partial/invalid input is never clobbered mid-typing.
-  const commit = (value: string) => {
-    setText(value);
-    const { slots } = parseNoteSequence(value);
-    onChange({
-      pitches: slots.length === 0 ? undefined : { id: `${track.id}-pitch`, slots },
-    });
+  // Text edits update local text + the data patch, but never the open state.
+  const setText = (text: string) => {
+    dispatch({ type: 'setText', text });
+    onChange({ pitches: pitchesFromText(track.id, text) });
   };
 
+  // The toggle is the ONLY control over open/closed.
   const toggle = () => {
-    if (enabled) {
-      setText('');
-      onChange({ pitches: undefined });
-    } else {
-      commit(STARTER);
-    }
+    const opening = !state.open;
+    dispatch({ type: 'toggle' });
+    onChange({ pitches: opening ? pitchesFromText(track.id, PITCH_STARTER) : undefined });
   };
 
   // Contour: one bar per slot, height normalized to the sequence's own range so
@@ -54,29 +46,29 @@ export default function PitchLane({ track, onChange }: PitchLaneProps) {
   const hi = present.length ? Math.max(...present) : 1;
   const span = Math.max(1, hi - lo);
 
-  const { errors } = parseNoteSequence(text);
+  const { errors } = parseNoteSequence(state.text);
 
   return (
-    <div className={'pitch-lane' + (enabled ? ' is-on' : '')}>
+    <div className={'pitch-lane' + (state.open ? ' is-on' : '')}>
       <div className="pitch-head">
         <button
           type="button"
-          className={'toggle' + (enabled ? ' is-on' : '')}
+          className={'toggle' + (state.open ? ' is-on' : '')}
           data-kind="pitch"
           onClick={toggle}
-          aria-pressed={enabled}
+          aria-pressed={state.open}
           aria-label={`Toggle pitch layer for ${track.name}`}
         >
           ♪ Pitch
         </button>
-        {enabled && (
+        {state.open && (
           <span className="pitch-count">
             {midis.length} {midis.length === 1 ? 'note' : 'notes'}
           </span>
         )}
       </div>
 
-      {enabled && (
+      {state.open && (
         <>
           <div className="pitch-contour" aria-hidden="true">
             {midis.map((m, i) => (
@@ -91,10 +83,10 @@ export default function PitchLane({ track, onChange }: PitchLaneProps) {
           <input
             className={'pitch-input' + (errors.length ? ' has-error' : '')}
             type="text"
-            value={text}
+            value={state.text}
             spellCheck={false}
             placeholder="C3 D3 G3 Bb3  ·  60 62 67 70  ·  - = rest"
-            onChange={(e) => commit(e.target.value)}
+            onChange={(e) => setText(e.target.value)}
             aria-label={`Pitch sequence for ${track.name}`}
           />
         </>
