@@ -125,6 +125,21 @@ export function setBpm(bpm: number): void {
   Tone.getTransport().bpm.value = bpm;
 }
 
+/**
+ * Apply swing to the groove. `amount` ranges 0 (straight) to 1 (maximum
+ * shuffle). The subdivision is fixed to 8th notes because that is where
+ * swing is musically expected and audible for our patterns: it delays the
+ * off-beat 8ths (the "and" of each beat — steps 2, 6, 10, 14 on a 16-step
+ * bar), which is exactly where the default hi-hat and other 8th-note voices
+ * land. A 16th-note subdivision would only shift the odd 16th steps, which
+ * the default 8th-note patterns never occupy, making the effect inaudible.
+ */
+export function setSwing(amount: number): void {
+  const transport = Tone.getTransport();
+  transport.swing = amount;
+  transport.swingSubdivision = '8n';
+}
+
 /** Subscribe to the global step counter (drawn on the visual frame). */
 export function onStep(callback: (step: number) => void): void {
   stepCallback = callback;

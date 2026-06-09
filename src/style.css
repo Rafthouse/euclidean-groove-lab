@@ -258,18 +258,21 @@ header h1 {
   box-shadow: inset 0 0 0 1px var(--accent);
 }
 
-.bpm {
+.bpm,
+.swing {
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 13px;
   color: var(--text-dim);
 }
-.bpm input {
+.bpm input,
+.swing input {
   width: 140px;
   accent-color: var(--accent);
 }
-.bpm b {
+.bpm b,
+.swing b {
   color: var(--text-hi);
   font-family: var(--mono);
 }

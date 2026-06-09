@@ -3,13 +3,14 @@ import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
 import { defaultTracks } from './engine';
 import type { Track } from './engine';
-import { start, stop, setTracks, setBpm, onStep, switchDrumKit,
+import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading } from './audio';
 import type { DrumKitId } from './drumKits';
 
 export default function App() {
   const [tracks, setTracksState] = useState<Track[]>(() => defaultTracks());
   const [bpm, setTempo] = useState(120);
+  const [swing, setSwingState] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(-1);
   const [kitId, setKitId] = useState<DrumKitId>('cr78');
@@ -18,6 +19,7 @@ export default function App() {
   // Engine -> audio sync.
   useEffect(() => setTracks(tracks), [tracks]);
   useEffect(() => setBpm(bpm), [bpm]);
+  useEffect(() => setSwing(swing / 100), [swing]);
   useEffect(() => onStep(setCurrentStep), []);
   useEffect(() => onKitLoading(setKitLoading), []);
 
@@ -104,12 +106,24 @@ export default function App() {
           />
           <b>{bpm} BPM</b>
         </label>
+        <label className="swing">
+          Swing
+          <input
+            type="range"
+            min={0}
+            max={100}
+            value={swing}
+            onChange={(e) => setSwingState(Number(e.target.value))}
+          />
+          <b>{swing}%</b>
+        </label>
         <DrumKitSelect value={kitId} loading={kitLoading} onChange={handleKitChange} />
       </section>
 
       <p className="note">
-        Sample-based drums (CR-78, Kit-8, KPR-77) with triangle-wave synth bass.
-        Switch kits live — Transport keeps running.
+        Sample-based drums (CR-78, Kit-8, KPR-77) with a sawtooth pick-bass
+        synth. Swing shuffles the off-beat 8ths. Switch kits live — Transport
+        keeps running.
       </p>
     </main>
   );
