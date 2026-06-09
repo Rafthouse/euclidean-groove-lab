@@ -1,24 +1,26 @@
 import { useCallback, useEffect, useState } from 'react';
 import TrackCard from './components/TrackCard';
+import DrumKitSelect from './components/DrumKitSelect';
 import { defaultTracks } from './engine';
 import type { Track } from './engine';
-import { start, stop, setTracks, setBpm, onStep } from './audio';
+import { start, stop, setTracks, setBpm, onStep, switchDrumKit, onKitLoading } from './audio';
+import type { DrumKitId } from './drumKits';
 
 export default function App() {
   const [tracks, setTracksState] = useState<Track[]>(() => defaultTracks());
   const [bpm, setTempo] = useState(120);
   const [playing, setPlaying] = useState(false);
   const [currentStep, setCurrentStep] = useState(-1);
+  const [kitId, setKitId] = useState<DrumKitId>('cr78');
+  const [kitLoading, setKitLoading] = useState(false);
 
-  // Engine -> audio sync. The audio layer never holds derived rhythm, only
-  // the current track set; trackPattern() is computed by the scheduler.
+  // Engine -> audio sync.
   useEffect(() => setTracks(tracks), [tracks]);
   useEffect(() => setBpm(bpm), [bpm]);
   useEffect(() => onStep(setCurrentStep), []);
+  useEffect(() => onKitLoading(setKitLoading), []);
 
-  // Keep hits/rotation valid as steps shrinks. This lives here (not in the
-  // card) because changing steps may interact with the rest of the track's
-  // shape — clamping at the source of truth avoids transient invalid states.
+  // Keep hits/rotation valid as steps shrinks.
   const updateTrack = useCallback((id: string, patch: Partial<Track>) => {
     setTracksState((prev) =>
       prev.map((t) => {
@@ -55,6 +57,11 @@ export default function App() {
       setPlaying(true);
     }
   };
+
+  const handleKitChange = useCallback(async (id: DrumKitId) => {
+    await switchDrumKit(id);
+    setKitId(id);
+  }, []);
 
   return (
     <main className="app">
@@ -96,14 +103,13 @@ export default function App() {
           />
           <b>{bpm} BPM</b>
         </label>
+        <DrumKitSelect value={kitId} loading={kitLoading} onChange={handleKitChange} />
       </section>
 
       <p className="note">
-                    Four independent voices: kick (membrane), snare (noise),
-                    hat (metal synth), bass (pick-bass / MonoSynth).
-                    Hat supports velocity ramps — try switching accent modes
-                    in the engine via <code>velocityPattern</code>.
-                  </p>
+        Sample-based drums (CR-78, Kit-8, KPR-77) with triangle-wave synth bass.
+        Switch kits live — Transport keeps running.
+      </p>
     </main>
   );
 }

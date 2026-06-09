@@ -1,58 +1,109 @@
 import * as Tone from 'tone';
 import { audibleTracks, trackPattern } from './engine';
 import type { Track, VoiceId } from './engine';
+import { DRUM_KITS } from './drumKits';
+import type { DrumKitId } from './drumKits';
 
 // The audio layer is a *consumer* of the engine: it never generates rhythm,
 // it only plays whatever tracks the app feeds it.
 
-// --- Voice instruments ---
-
-// Kick: deep low-end thump via tuned membrane synth
-const kick = new Tone.MembraneSynth({
-  pitchDecay: 0.05,
-  octaves: 5,
-  envelope: { attack: 0.001, decay: 0.2, sustain: 0, release: 0.1 },
-}).toDestination();
-
-// Snare: pink noise through bandpass filter with snappy envelope —
-// the filter gives mid-frequency focus for a snare-drum character
-// without relying on samples.
-const snare = new Tone.NoiseSynth({
-  noise: { type: 'pink' },
-  envelope: { attack: 0.001, decay: 0.1, sustain: 0, release: 0.04 },
-});
-const snareFilter = new Tone.Filter(2000, 'bandpass').toDestination();
-snare.connect(snareFilter);
-
-// Hat: FM-based metal synth with very short envelope — closed hi-hat character
-const hat = new Tone.MetalSynth({
-  harmonicity: 5.1,
-  modulationIndex: 32,
-  octaves: 1.5,
-  resonance: 4000,
-  envelope: { attack: 0.001, decay: 0.06, sustain: 0, release: 0.02 },
-}).toDestination();
-
-// Bass: triangle-wave MonoSynth with filter envelope — warm pick-bass character
-const bass = new Tone.MonoSynth({
+// --- Bass instrument (synthesized, not sampled) ---
+// Clean triangle-wave synth — no filter envelope, no sweep per note.
+const bass = new Tone.Synth({
   oscillator: { type: 'triangle' },
-  envelope: { attack: 0.005, decay: 0.3, sustain: 0.2, release: 0.4 },
-  filter: { type: 'lowpass', Q: 1, frequency: 800, rolloff: -12 },
-  filterEnvelope: {
-    attack: 0.005,
-    decay: 0.15,
-    sustain: 0.2,
-    release: 0.4,
-    baseFrequency: 300,
-    octaves: 3,
-    exponent: 2,
-  },
+  envelope: { attack: 0.02, decay: 0.2, sustain: 0.15, release: 0.3 },
 }).toDestination();
+
+// --- Drum kit (sample-based, swappable) ---
+const SAMPLE_BASE = '/euclidean-groove-lab/samples/';
+
+let currentPlayers: {
+  kick: Tone.Player;
+  snare: Tone.Player;
+  hat: Tone.Player;
+} | null = null;
+
+let currentKitId: DrumKitId = 'cr78';
+
+/** Callback fired during kit loading: `true` = loading, `false` = done/error. */
+let loadingCallback: ((busy: boolean) => void) | null = null;
+
+export function onKitLoading(callback: (busy: boolean) => void): void {
+  loadingCallback = callback;
+}
+
+/**
+ * Load a drum kit: dispose previous Players, create new ones, fetch audio.
+ * Graceful fallback: if a sample fails to load, the kit is still usable
+ * (silent on that voice) and the app never crashes.
+ */
+async function loadDrumKit(id: DrumKitId): Promise<void> {
+  loadingCallback?.(true);
+
+  // 1. Dispose old players
+  if (currentPlayers) {
+    try {
+      currentPlayers.kick.dispose();
+      currentPlayers.snare.dispose();
+      currentPlayers.hat.dispose();
+    } catch {
+      // dispose may throw if already disposed; safe to ignore
+    }
+    currentPlayers = null;
+  }
+
+  // 2. Build paths
+  const kit = DRUM_KITS[id];
+  const makeUrl = (p: string) => `${SAMPLE_BASE}${p}`;
+
+  // 3. Create new Players (no URL yet — load manually for promise control)
+    const kick = new Tone.Player().toDestination();
+    const snare = new Tone.Player().toDestination();
+    const hat = new Tone.Player().toDestination();
+
+    // 4. Load in parallel — each failure caught individually
+    await Promise.allSettled([
+      kick.load(makeUrl(kit.kick)).catch(() => {}),
+      snare.load(makeUrl(kit.snare)).catch(() => {}),
+      hat.load(makeUrl(kit.hat)).catch(() => {}),
+    ]);
+
+  currentPlayers = { kick, snare, hat };
+  currentKitId = id;
+  loadingCallback?.(false);
+}
+
+/** Public API: switch the active drum kit without restarting Transport. */
+export async function switchDrumKit(id: DrumKitId): Promise<void> {
+  await loadDrumKit(id);
+}
+
+export function getCurrentKitId(): DrumKitId {
+  return currentKitId;
+}
+
+// --- Voice dispatch ---
+
+/** Normalize 0–100 → dB gain (0 = -∞, 100 = 0 dB). */
+function linearToDb(normalized: number): number {
+  if (normalized <= 0) return -Infinity;
+  return 20 * Math.log10(normalized);
+}
 
 const voices: Record<VoiceId, (time: number, velocity?: number) => void> = {
-  kick: (time) => kick.triggerAttackRelease('C2', '8n', time),
-  snare: (time) => snare.triggerAttackRelease('16n', time),
-  hat: (time, velocity = 1) => hat.triggerAttackRelease('C4', '16n', time, velocity),
+  kick: (time) => currentPlayers?.kick.start(time),
+  snare: (time, velocity = 1) => {
+    const p = currentPlayers?.snare;
+    if (!p) return;
+    if (velocity < 1) p.volume.value = linearToDb(velocity);
+    p.start(time);
+  },
+  hat: (time, velocity = 1) => {
+    const p = currentPlayers?.hat;
+    if (!p) return;
+    p.volume.value = linearToDb(velocity);
+    p.start(time);
+  },
   bass: (time) => bass.triggerAttackRelease('E2', '8n', time),
 };
 
@@ -78,17 +129,8 @@ export function onStep(callback: (step: number) => void): void {
 
 /**
  * Prime the iOS audio session for playback.
- *
- * On iOS, Web Audio runs under AVAudioSessionCategoryAmbient by default,
- * which is muted by the hardware ring/silent switch. In WKWebView (Telegram
- * in-app browser) this means total silence. We flip it to "playback" so
- * sound is audible regardless of the mute switch.
- *
- * On iOS 17+ we use navigator.audioSession. On older iOS we prime with a
- * silent WAV via an <audio> element, which forces the session to playback.
  */
 function primeAudioSession(): void {
-  // iOS 17+ native API
   try {
     if (
       typeof navigator !== 'undefined' &&
@@ -98,18 +140,16 @@ function primeAudioSession(): void {
       return;
     }
   } catch {
-    // API exists but may throw in some contexts; fall through
+    // fall through
   }
 
-  // Fallback: silent WAV priming (44-byte header + silence samples)
+  // Silent WAV fallback
   try {
     const sampleRate = 8000;
-    const numSamples = sampleRate * 0.05; // 50 ms of silence
-    const dataLen = numSamples * 2; // 16-bit mono
+    const numSamples = sampleRate * 0.05;
+    const dataLen = numSamples * 2;
     const wavBuffer = new ArrayBuffer(44 + dataLen);
     const view = new DataView(wavBuffer);
-
-    // RIFF header
     const writeStr = (offset: number, str: string) => {
       for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
     };
@@ -117,16 +157,15 @@ function primeAudioSession(): void {
     view.setUint32(4, 36 + dataLen, true);
     writeStr(8, 'WAVE');
     writeStr(12, 'fmt ');
-    view.setUint32(16, 16, true);        // chunk size
-    view.setUint16(20, 1, true);         // PCM
-    view.setUint16(22, 1, true);         // mono
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, 1, true);
     view.setUint32(24, sampleRate, true);
-    view.setUint32(28, sampleRate * 2, true); // byte rate
-    view.setUint16(32, 2, true);         // block align
-    view.setUint16(34, 16, true);        // bits per sample
+    view.setUint32(28, sampleRate * 2, true);
+    view.setUint16(32, 2, true);
+    view.setUint16(34, 16, true);
     writeStr(36, 'data');
     view.setUint32(40, dataLen, true);
-    // samples are already zero (ArrayBuffer zeros by default)
 
     const blob = new Blob([wavBuffer], { type: 'audio/wav' });
     const url = URL.createObjectURL(blob);
@@ -135,29 +174,28 @@ function primeAudioSession(): void {
     audio.loop = false;
     audio.volume = 0;
     audio.setAttribute('playsinline', '');
-    audio.play().catch(() => {}); // fire-and-forget; may fail in some contexts
-    // Clean up the object URL after a short delay
+    audio.play().catch(() => {});
     setTimeout(() => URL.revokeObjectURL(url), 500);
   } catch {
-    // Silent WAV priming failed — non-critical, audio may still work
+    // non-critical
   }
 }
 
 export async function start(initial: Track[], bpm: number): Promise<void> {
-  // 1. Prime audio session (iOS / WKWebView)
   primeAudioSession();
-
-  // 2. Resume AudioContext (requires a user gesture)
   await Tone.start();
+
+  // Load default drum kit on first start
+  if (!currentPlayers) {
+    await loadDrumKit('cr78');
+  }
 
   currentTracks = initial;
 
   const transport = Tone.getTransport();
   transport.bpm.value = bpm;
 
-  // One global step counter. Each track samples its own pattern via
-  // `step % track.steps`, so tracks of different lengths drift naturally
-  // against each other (honest polyrhythm, no per-track phase bookkeeping).
+  // One global step counter.
   let step = 0;
   transport.scheduleRepeat((time) => {
     for (const track of audibleTracks(currentTracks)) {
@@ -185,18 +223,12 @@ export function stop(): void {
 
 // --- iOS AudioContext lifecycle handling ---
 
-/**
- * Monitor AudioContext state changes and auto-resume when returning from
- * background (iOS suspends/interrupts the context).
- */
 if (typeof window !== 'undefined') {
   const ctx = (Tone.getContext() as any)._context as AudioContext | undefined;
   if (ctx && typeof ctx.onstatechange !== 'undefined') {
     ctx.onstatechange = () => {
       if (ctx.state === 'interrupted' || ctx.state === 'suspended') {
         ctx.resume().catch(() => {
-          // Audio context couldn't resume automatically; user may need to
-          // tap Play again after returning to the tab.
           console.warn('AudioContext was suspended/interrupted and resume() failed.');
         });
       }
