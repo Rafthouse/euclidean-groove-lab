@@ -1,8 +1,12 @@
 interface SequencerProps {
-  /** The resolved pattern from the engine (single source of truth). */
+  /** The generated (source) pattern from the engine — the authoritative shape. */
   pattern: boolean[];
+  /** Manual mute overlay (step-indexed). A muted onset stays visible but dimmed. */
+  mutedSteps?: boolean[];
   /** Currently sounding step while playing, or -1 when stopped. */
   currentStep: number;
+  /** Toggle the manual mute of a generated onset (only onsets are clickable). */
+  onToggleStep?: (step: number) => void;
 }
 
 // Coordinates live in the SVG's own units; visible size is driven entirely
@@ -19,11 +23,17 @@ function coord(index: number, steps: number): { x: number; y: number } {
   };
 }
 
-export default function Sequencer({ pattern, currentStep }: SequencerProps) {
+export default function Sequencer({
+  pattern,
+  mutedSteps,
+  currentStep,
+  onToggleStep,
+}: SequencerProps) {
   const steps = pattern.length;
   const onsets = pattern.filter(Boolean).length;
 
-  // The polygon connecting onsets is the rhythm's "shape" (Toussaint geometry).
+  // The polygon connects the GENERATED onsets (muted ones included): the
+  // Toussaint shape always reflects what the Euclidean engine produced.
   const shapePoints = pattern
     .map((on, i) => (on ? coord(i, steps) : null))
     .filter((p): p is { x: number; y: number } => p !== null)
@@ -45,9 +55,36 @@ export default function Sequencer({ pattern, currentStep }: SequencerProps) {
       {hand && <line className="hand" x1={CENTER} y1={CENTER} x2={hand.x} y2={hand.y} />}
       {pattern.map((on, i) => {
         const { x, y } = coord(i, steps);
+        const muted = on && !!mutedSteps?.[i];
         const classes =
-          'step ' + (on ? 'onset' : 'rest') + (i === localStep ? ' current' : '');
-        return <circle key={i} className={classes} cx={x} cy={y} r={on ? 11 : 5} />;
+          'step ' +
+          (on ? 'onset' : 'rest') +
+          (muted ? ' muted' : '') +
+          (i === localStep ? ' current' : '') +
+          (on && onToggleStep ? ' clickable' : '');
+        return (
+          <g key={i}>
+            <circle
+              className={classes}
+              cx={x}
+              cy={y}
+              r={on ? 11 : 5}
+              onClick={on && onToggleStep ? () => onToggleStep(i) : undefined}
+              role={on && onToggleStep ? 'button' : undefined}
+              aria-label={
+                on && onToggleStep
+                  ? `${muted ? 'Unmute' : 'Mute'} onset at step ${i}`
+                  : undefined
+              }
+            />
+            {muted && (
+              <g className="mute-cross" pointerEvents="none">
+                <line x1={x - 6} y1={y - 6} x2={x + 6} y2={y + 6} />
+                <line x1={x - 6} y1={y + 6} x2={x + 6} y2={y - 6} />
+              </g>
+            )}
+          </g>
+        );
       })}
     </svg>
   );

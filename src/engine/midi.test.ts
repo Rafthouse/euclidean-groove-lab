@@ -93,6 +93,20 @@ describe('renderMidi — structure', () => {
     expect(t.notes.map((n) => n.note)).toEqual([48, 55, 48, 55, 48]);
   });
 
+  it('manual mute overlay excludes muted onsets from the export', () => {
+    // kick E(4,8) -> onsets at local steps 0,2,4,6. Mute local step 2.
+    const mask = [false, false, true, false, false, false, false, false];
+    const plain = renderMidi([make({ voiceId: 'kick', steps: 8, hits: 4 })], 1, 120);
+    const muted = renderMidi([make({ voiceId: 'kick', steps: 8, hits: 4, manualMute: mask })], 1, 120);
+    // 1 bar over an 8-step track = 8 onsets; local step 2 recurs at global 2 and 10.
+    expect(plain.tracks[0].notes).toHaveLength(8);
+    expect(muted.tracks[0].notes).toHaveLength(6);
+    // none of the surviving notes start on a muted step (ticks 2*24 or 10*24)
+    const mutedTicks = muted.tracks[0].notes.map((n) => n.startTick);
+    expect(mutedTicks).not.toContain(2 * 24);
+    expect(mutedTicks).not.toContain(10 * 24);
+  });
+
   it('ticks: 16th-note grid maps to 24 ticks/step; default velocity 100 -> 127', () => {
     const p = renderMidi([make({ voiceId: 'kick', steps: 8, hits: 4 })], 1, 120);
     const first = p.tracks[0].notes[0];

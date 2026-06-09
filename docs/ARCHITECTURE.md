@@ -198,6 +198,14 @@ specs resolve against — built later with the Variant C inspector.
   drums → GM channel 10, pitched → melodic channels; mirrors the audio scheduler
   via `resolveOnset`. Deterministic, no external deps, no DOM (download lives in
   `src/download.ts`). "⤓ MIDI" button in the transport exports 4 bars.
+- **Test-release UX additions** (user-directed, within the freeze): per-track
+  **volume mixer** (`Track.volume`, applied via the existing `volume.value`);
+  **responsive grid** (1 / 2 / 4 columns at 768 / 1200px); **manual mute
+  overlay** (`Track.manualMute?: boolean[]`, step-indexed). Manual mute is a
+  post-processing layer: `isStepMuted()` suppresses output in the audio
+  scheduler and MIDI export, but never touches the Euclidean generator,
+  rotation, density, or pitch onset-indexing — the generated pattern stays
+  authoritative; click a ring onset to mute/restore it.
 - **Metrics already shipped:** `density`, `syncopation` (LHL), `balance`
   (Toussaint), `isMaximallyEven`, `metricWeights`, `interOnsetIntervals`.
 

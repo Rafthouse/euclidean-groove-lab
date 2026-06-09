@@ -10,7 +10,7 @@
  * Lab track becomes its own MTrk so a DAW can mute/replace voices individually.
  */
 import type { Track, VoiceId } from './track';
-import { trackPattern } from './track';
+import { trackPattern, isStepMuted } from './track';
 import { resolveOnset, isPitchedVoice } from './pitch';
 
 const TICKS_PER_QUARTER = 96;
@@ -80,6 +80,7 @@ export function renderMidi(tracks: Track[], bars: number, bpm: number): MidiProj
     const notes: MidiNoteEvent[] = [];
 
     for (let step = 0; step < totalSteps; step++) {
+      if (isStepMuted(track, step)) continue; // manual mute overlay: no note event
       if (pitched) {
         const onset = resolveOnset(track, tp, step);
         if (!onset || onset.velocity <= 0) continue;

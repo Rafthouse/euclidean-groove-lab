@@ -182,6 +182,20 @@ header h1 {
 .sequencer .step.current {
   fill: var(--current);
 }
+.sequencer .step.clickable {
+  cursor: pointer;
+}
+/* A manually muted onset stays visible (original generated position) but
+   dimmed, with a cross — the rhythm is being sculpted, not regenerated. */
+.sequencer .step.onset.muted {
+  opacity: 0.3;
+}
+.sequencer .mute-cross line {
+  stroke: var(--text-hi);
+  stroke-width: 2;
+  stroke-linecap: round;
+  opacity: 0.8;
+}
 
 /* ---------- controls (sliders) ---------- */
 

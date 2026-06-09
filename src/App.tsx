@@ -37,6 +37,15 @@ export default function App() {
         merged.rotation = merged.steps > 0
           ? ((merged.rotation % merged.steps) + merged.steps) % merged.steps
           : 0;
+        // Keep the manual-mute overlay the same length as the pattern when
+        // steps changes (preserve existing entries; collapse to undefined if
+        // nothing remains muted).
+        if (merged.manualMute && merged.manualMute.length !== merged.steps) {
+          const resized = new Array<boolean>(merged.steps).fill(false);
+          const n = Math.min(merged.steps, merged.manualMute.length);
+          for (let i = 0; i < n; i++) resized[i] = merged.manualMute[i];
+          merged.manualMute = resized.some(Boolean) ? resized : undefined;
+        }
         return merged;
       })
     );

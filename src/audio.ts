@@ -1,5 +1,5 @@
 import * as Tone from 'tone';
-import { audibleTracks, trackPattern, resolveOnset, isPitchedVoice } from './engine';
+import { audibleTracks, trackPattern, resolveOnset, isPitchedVoice, isStepMuted } from './engine';
 import type { Track, VoiceId, MidiNote } from './engine';
 import { DRUM_KITS } from './drumKits';
 import type { DrumKitId } from './drumKits';
@@ -246,6 +246,7 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
       const tp = trackPattern(track);
       const localStep = step % track.steps;
       if (!tp.pulses[localStep]) continue;
+      if (isStepMuted(track, step)) continue; // manual mute overlay: suppress output
 
       const volume = (track.volume ?? 100) / 100;
       if (isPitchedVoice(track.voiceId)) {

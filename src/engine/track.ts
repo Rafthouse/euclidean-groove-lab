@@ -48,6 +48,15 @@ export interface Track {
   /** Per-track mixer level, 0–100 (default 100). Audio-only; not exported to MIDI. */
   volume?: number;
 
+  /**
+   * Manual mute overlay, indexed by STEP (length === steps when present). `true`
+   * suppresses the generated onset at that step. A post-processing layer ON TOP
+   * of the Euclidean pattern — it never changes generation, rotation, density,
+   * or onset indexing; it only suppresses output (audio + MIDI). `undefined` =
+   * no overrides.
+   */
+  manualMute?: boolean[];
+
   /** Optional cyclic velocity sequence indexed by onset order (not step index). */
   velocityPattern?: VelocityPattern;
 
@@ -98,6 +107,19 @@ export function computeVelocities(
     onsetIndex++;
     return v;
   });
+}
+
+/**
+ * Whether the generated onset at `globalStep` is manually muted. This is the
+ * post-processing overlay: it never affects generation, rotation, density, or
+ * pitch onset-indexing — callers (audio scheduler, MIDI export) use it only to
+ * suppress output. Returns false when there is no mute mask.
+ */
+export function isStepMuted(track: Track, globalStep: number): boolean {
+  const mask = track.manualMute;
+  if (!mask || mask.length === 0 || track.steps <= 0) return false;
+  const i = ((globalStep % track.steps) + track.steps) % track.steps;
+  return mask[i] === true;
 }
 
 /**

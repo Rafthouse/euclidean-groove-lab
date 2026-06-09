@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { trackPattern, audibleTracks, defaultTracks, computeVelocities, VELOCITY_PRESETS } from './track';
+import { trackPattern, audibleTracks, defaultTracks, computeVelocities, isStepMuted, VELOCITY_PRESETS } from './track';
 import type { Track, VoiceId, VelocityPattern } from './track';
 import { euclid } from './euclidean';
 import { rotate } from './rotate';
+import { density, onsetCount } from './metrics';
 
 const make = (overrides: Partial<Track> = {}): Track => ({
   id: 't',
@@ -186,5 +187,44 @@ describe('defaultTracks', () => {
       expect(onsets).toBeGreaterThan(0);
       expect(onsets).toBeLessThan(p.length);
     }
+  });
+});
+
+describe('isStepMuted (manual mute overlay)', () => {
+  it('returns false when there is no mask', () => {
+    const t = make({ steps: 8, hits: 4 });
+    expect(isStepMuted(t, 0)).toBe(false);
+    expect(isStepMuted(t, 5)).toBe(false);
+  });
+
+  it('returns true only for masked step indices', () => {
+    const mask = [false, false, true, false, false, false, false, false];
+    const t = make({ steps: 8, hits: 4, manualMute: mask });
+    expect(isStepMuted(t, 2)).toBe(true);
+    expect(isStepMuted(t, 0)).toBe(false);
+  });
+
+  it('wraps the global step into the pattern length', () => {
+    const mask = [false, false, true, false, false, false, false, false];
+    const t = make({ steps: 8, hits: 4, manualMute: mask });
+    expect(isStepMuted(t, 2 + 8)).toBe(true); // step 10 -> local 2
+    expect(isStepMuted(t, 2 + 16)).toBe(true); // step 18 -> local 2
+  });
+});
+
+describe('manual mute does NOT touch the generated pattern (Euclidean stays authoritative)', () => {
+  it('trackPattern.pulses ignore manualMute entirely', () => {
+    const mask = [false, false, true, false, false, false, false, false];
+    const plain = make({ steps: 8, hits: 4 });
+    const muted = make({ steps: 8, hits: 4, manualMute: mask });
+    expect(trackPattern(muted).pulses).toEqual(trackPattern(plain).pulses);
+  });
+
+  it('density and onset count are unchanged by manualMute', () => {
+    const mask = [true, true, true, true, true, true, true, true];
+    const plain = trackPattern(make({ steps: 8, hits: 4 })).pulses;
+    const muted = trackPattern(make({ steps: 8, hits: 4, manualMute: mask })).pulses;
+    expect(density(muted)).toBe(density(plain));
+    expect(onsetCount(muted)).toBe(onsetCount(plain));
   });
 });

@@ -22,6 +22,18 @@ export default function TrackCard({
   const pattern = trackPattern(track).pulses;
   const style = { ['--track-color' as string]: track.color } as CSSProperties;
 
+  // Toggle the manual mute overlay for a single generated onset. The mask is
+  // step-indexed and kept the same length as the pattern; an all-false mask
+  // collapses back to undefined so "no overrides" stays the clean default.
+  const toggleStep = (step: number) => {
+    const mask =
+      track.manualMute && track.manualMute.length === track.steps
+        ? [...track.manualMute]
+        : new Array<boolean>(track.steps).fill(false);
+    mask[step] = !mask[step];
+    onChange({ manualMute: mask.some(Boolean) ? mask : undefined });
+  };
+
   const cardClass =
     'track-card' +
     (track.mute ? ' is-muted' : '') +
@@ -55,7 +67,12 @@ export default function TrackCard({
         </div>
       </div>
 
-      <Sequencer pattern={pattern} currentStep={currentStep} />
+      <Sequencer
+        pattern={pattern}
+        mutedSteps={track.manualMute}
+        currentStep={currentStep}
+        onToggleStep={toggleStep}
+      />
 
       {isPitchedVoice(track.voiceId) && (
         <PitchLane track={track} onChange={onChange} />

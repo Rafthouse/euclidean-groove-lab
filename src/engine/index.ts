@@ -26,6 +26,7 @@ export {
   audibleTracks,
   defaultTracks,
   computeVelocities,
+  isStepMuted,
   VELOCITY_PRESETS,
 } from './track';
 
