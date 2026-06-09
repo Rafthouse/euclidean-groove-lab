@@ -3,20 +3,45 @@
 > **Status:** Design exploration (no code).
 > **Context:** Pitch layer is orthogonal to rhythm, per-onset (not per-step), universal across Track types, optional for drums, and first-class for MIDI export.
 
-## Data model (approved)
+## Data model (locked)
+
+> **Superseded.** The earlier `mode`-union sketch is replaced by the reconciled
+> model in `docs/PITCH-DATA-MODEL-RECONCILIATION.md`. The canonical types:
 
 ```ts
-type PitchSpec =
-  | { mode: 'none' }                              // no pitch (default: snare, hat)
-  | { mode: 'fixed'; note: string }               // single note (default: bass = 'E1')
-  | { mode: 'sequence'; notes: string[] }          // per-onset notes list
-  | { mode: 'scale'; root: string; scale: ScaleType; pattern: number[] };
-                                                  // scale-degree per onset
+type MidiNote = number;                 // 0–127, C4=60, E2=40; storage + export
+
+type PitchSpec =                        // how ONE note is named
+  | { kind: 'absolute'; midi: MidiNote }
+  | { kind: 'degree'; degree: number; octaveOffset?: number };  // inert until Harmonic Layer
+
+interface PitchEvent { pitch: PitchSpec; velocity?: number; durationSteps?: number; }
+type PitchSlot = PitchEvent | null;     // null = sounded onset, no pitch (ghost / rest)
+interface PitchSequence { id: string; name?: string; slots: PitchSlot[]; }  // onset-indexed
+
+// Track.pitches?: PitchSequence        // absent => drum-style (no pitch layer)
 ```
 
-Pitch attaches to `Track` as `pitch?: PitchSpec`. Drum tracks default to `'none'`;
-Bass defaults to `'fixed'` (no sequence, user adds explicitly). MIDI export maps
-`notes` → MIDI note numbers; scale mode resolves degrees → MIDI via root + scale.
+Three layers, never one union: **Track presence** (`pitches?`), **sequence content**
+(`slots`), **per-note spec** (`PitchSpec`). The mode words used in the mockups below —
+`none / fixed / sequence / scale` — are a **derived UI view-state**, not stored fields:
+
+```ts
+type PitchMode = 'none' | 'fixed' | 'sequence' | 'scale';
+function pitchMode(seq?: PitchSequence): PitchMode {
+  if (!seq) return 'none';
+  if (seq.slots.every((s) => s && s.pitch.kind === 'degree')) return 'scale';
+  if (seq.slots.length === 1) return 'fixed';
+  return 'sequence';
+}
+```
+
+Drum tracks have `pitches === undefined`. **Default Bass also has no pitch layer**
+(`pitches === undefined`); the audible `E2` is the bass voice's intrinsic fallback note,
+a property of the audio layer, not of this model. The user adds a sequence explicitly.
+Note names (`E2`) shown in the editors are display only — storage is always `MidiNote`.
+MIDI export reads `MidiNote` directly (no parsing); `degree` specs resolve via the global
+`HarmonicContext` once the Harmonic Layer lands.
 
 ---
 
@@ -232,19 +257,23 @@ Instead of inline controls, each track card shows a compact pitch badge:
 
 ---
 
-## Recommendation
+## Recommendation (decided)
 
-None yet — this is an open design for discussion. My leaning based on the project's
-pedagogical thesis:
+**Locked:**
 
-- **Variant B** (Pitch Lane) fits the "laboratory" spirit best: the lane makes
-  melodic shape visible at a glance without hiding the ring. The 48px lane is
-  compact enough to coexist with the ring, and the dual encoding (cyclic on ring,
-  linear in lane) is inherently educational.
-- **Variant C** (Inspector) is architecturally the most future-proof — it can grow
-  into a full event editor (velocity, accent, microtiming) and maps trivially to
-  MIDI. But it's a larger build and adds a context switch for simple edits.
+- **Variant B (Pitch Lane) = primary Pitch Layer UI.** It is the only variant that
+  shows isorhythm drift across the 2×2 grid at a glance — the core pedagogical value —
+  and the per-track onset lane is the most faithful view of the locked data model.
+- **Variant C (Inspector) = future Harmonic Layer.** Deferred, and framed as a
+  *separate inspector*, not a replacement for B. It is the natural home for the global
+  `HarmonicContext` and `ChordProgression` (per-bar chords, up to 16-bar phrases).
+  When it lands, the Variant B lane becomes its consumer: change a chord → degree specs
+  re-resolve → lane bars move.
+- **Variant A (Drawer) = dropped.** Inline drawer grows card height and cannot compare
+  pitch across tracks.
 
-**Hybrid possibility:** Start as Variant B (lane), with an optional "expand to
-inspector" button for detailed editing. This gives the best of both: immediate
-visual feedback via the lane, and a full editor when the user needs it.
+This is not a hybrid "expand button" — B and C serve *different layers*: B edits
+per-onset pitches, C edits the harmonic context those pitches resolve against.
+
+Rationale and the full per-criterion comparison live with the decision record;
+the data model is locked in `docs/PITCH-DATA-MODEL-RECONCILIATION.md`.

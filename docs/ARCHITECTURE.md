@@ -89,6 +89,10 @@ interface Track {                       // config / identity
   solo: boolean;                        // if ANY track has solo=true,
                                         // only solo tracks sound (mute ignored within the solo set)
   voiceId: VoiceId;
+
+  pitches?: PitchSequence;              // optional pitch layer; absent => drum-style.
+                                        // Orthogonal to rhythm, onset-indexed, independent length.
+                                        // Full model: docs/PITCH-DATA-MODEL-RECONCILIATION.md
 }
 
 interface Preset {                      // multi-track snapshot
@@ -107,6 +111,45 @@ multi-track snapshot, never a single rhythm config — that decision is locked
 because Bossa / Techno / Reggae are kits, not single patterns; folding them
 into a single-rhythm model would force a rewrite in Commit 3.
 
+### Pitch layer (orthogonal to rhythm)
+
+The pitch layer is a **second independent cycle** that crosses the rhythm
+pipeline's output — it is *not* a pipeline stage. It is onset-indexed (onset N
+reads slot `N % slots.length`), so its length is independent of the rhythm;
+when the two lengths differ, the cycles drift (isorhythm: rhythm = *talea*,
+pitch = *color*). Drums omit it entirely. The model is reconciled and locked in
+`docs/PITCH-DATA-MODEL-RECONCILIATION.md`; the canonical types:
+
+```ts
+type MidiNote = number;                 // 0–127, C4=60, E2=40; canonical for storage + export
+
+type PitchSpec =                        // how ONE note is named
+  | { kind: 'absolute'; midi: MidiNote }
+  | { kind: 'degree'; degree: number; octaveOffset?: number };  // inert until Harmonic Layer
+
+interface PitchEvent {                  // one sounded pitch at one onset
+  pitch: PitchSpec;
+  velocity?: number;                    // onset dynamics; precedence:
+                                        //   PitchEvent.velocity > TrackPattern.velocities[step] > default
+  durationSteps?: number;               // note length in 16th-steps (default 1); MIDI NoteOff
+}
+
+type PitchSlot = PitchEvent | null;     // null = sounded onset, no pitch (ghost / rest)
+
+interface PitchSequence {               // onset-indexed cycle; length independent of rhythm
+  id: string;
+  name?: string;
+  slots: PitchSlot[];
+}
+```
+
+Three distinct concepts, never collapsed into one union: **Track presence**
+(`pitches?` absent = none), **sequence content** (`PitchSequence.slots`), and
+**per-note spec** (`PitchSpec`). The UI labels `none / fixed / sequence / scale`
+are *derived* from the data, never stored. Harmony (`HarmonicContext` with global
+`root` + `scale` + optional `chord`) is a separate global layer the `degree`
+specs resolve against — built later with the Variant C inspector.
+
 ## Current state
 
 - **Commit 1 (done).** Multi-track engine with `Track`, `TrackPattern`,
@@ -122,21 +165,26 @@ into a single-rhythm model would force a rewrite in Commit 3.
 
 ## Roadmap
 
-### Next: Pitch UI Design (design doc only, no code)
-- 2–3 UI layout variants for a pitch layer that is:
-  - orthogonal to the rhythm pipeline (pitch cycles independently)
-  - bound to onset index (not step index)
-  - universal across all Track types (not just Bass)
-  - optional: drum tracks work without pitch layer
-  - compatible with MIDI Export as a first-class citizen
-- Deliverable: short design doc with pros/cons per variant.
-- See `docs/DESIGN-PITCH-UI.md` once created.
+### Pitch UI Design (done — design docs only)
+- `docs/DESIGN-PITCH-UI.md` — three layout variants (A/B/C), pros/cons.
+- **Decided:** Variant B (per-track Pitch Lane) is the primary Pitch Layer UI;
+  Variant C (centralized Inspector) is deferred to the Harmonic Layer as a
+  separate inspector, not a replacement for B; Variant A dropped.
+- `docs/PITCH-DATA-MODEL-RECONCILIATION.md` — single locked data model
+  (reconciles this contract, the UI doc, and the approved model).
 
-### Commit 3 (after Pitch UI approval) — `feat: harmonic layer`
-- PitchSpec union on Track (pitch sequence or scale-based)
-- Pitch is per-onset (indexed by onset order, not absolute step)
-- No pitch layer on drum tracks (voiceId = snare/hat)
-- Default Bass has no pitch sequence; user adds it explicitly
+### Commit 3 (next) — `feat: Pitch Layer (Variant B)`
+- `pitches?: PitchSequence` on Track (onset-indexed, length-independent of rhythm).
+- Implement only the `absolute` path: per-track lane, draggable bars → MidiNote storage.
+- No pitch layer on drum tracks; default Bass has no pitch sequence (intrinsic E2 is a
+  voice property, not the model). User adds a sequence explicitly.
+- `degree` / `HarmonicContext` / `ChordProgression` types declared but inert.
+- MIDI export stays first-class: storage is already MidiNote, so export needs no parsing.
+
+### Later — `feat: Harmonic Layer (Variant C)`
+- Global `HarmonicContext` (root + scale + optional chord); `degree` resolution goes live.
+- `ChordProgression` as a bar-indexed cycle (up to 16-bar phrases); Variant C inspector.
+- Variant B lane becomes a consumer: change a chord → degree specs re-resolve → bars move.
 
 ### Commit 4 — `feat: presets`
 - Preset model = `Track[]` (multi-track snapshot), not a single-rhythm config.
