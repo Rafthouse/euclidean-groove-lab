@@ -39,7 +39,7 @@ describe('renderMidi — structure', () => {
     expect(a).toEqual(b);
   });
 
-  it('produces one MidiTrack per Groove Lab track, format 1, PPQ 96', () => {
+  it('produces one MidiTrack per app track, format 1, PPQ 96', () => {
     const p = renderMidi(defaultTracks(), 2, 120);
     expect(p.format).toBe(1);
     expect(p.ticksPerQuarter).toBe(96);

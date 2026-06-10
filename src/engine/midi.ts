@@ -48,7 +48,7 @@ export interface MidiProject {
   format: 1;
   ticksPerQuarter: number;
   bpm: number;
-  /** One per Groove Lab track; the tempo/meta conductor is track 0 at serialize time. */
+  /** One per app track; the tempo/meta conductor is track 0 at serialize time. */
   tracks: MidiTrackData[];
 }
 

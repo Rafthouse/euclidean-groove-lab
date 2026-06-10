@@ -111,7 +111,7 @@ export default function App() {
   return (
     <main className="app">
       <header>
-        <h1>Groove Lab</h1>
+        <h1>Euclidean Rhythm Reactor</h1>
         <p className="tagline">
           Four tracks. Each rhythm is a shape. Watch them interlock.
         </p>

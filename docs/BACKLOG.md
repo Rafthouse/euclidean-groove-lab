@@ -28,7 +28,7 @@
 
 ## Pain points & feedback (fill during live use)
 
-> Capture real findings here while using Groove Lab as an instrument and testing
+> Capture real findings here while using the app as an instrument and testing
 > MIDI in Ableton/Reaper. Keep them concrete: what blocked making music, what was
 > confusing, what broke.
 

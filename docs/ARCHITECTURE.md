@@ -30,7 +30,7 @@ straight to code. Goal: stabilize this version before the next development phase
 
 ## Core Product Thesis
 
-**Euclidean Groove Lab is not a sequencer.** It is an educational laboratory for
+**Euclidean Rhythm Reactor is not a sequencer.** It is an educational laboratory for
 studying how groove *emerges* from relationships between rhythmic structures.
 
 Two rules follow, and must hold for the life of the project:
@@ -194,7 +194,7 @@ specs resolve against — built later with the Variant C inspector.
   so a sequence's rests can't become an accidental gate on a drum.
 - **MIDI export (done).** Pure `engine/midi.ts`: `renderMidi(tracks, bars, bpm)`
   → `MidiProject`, then `serializeMidi(project)` → `Uint8Array` (Standard MIDI
-  File, Format 1). Track 0 = tempo/meta conductor; one MTrk per Groove Lab track;
+  File, Format 1). Track 0 = tempo/meta conductor; one MTrk per app track;
   drums → GM channel 10, pitched → melodic channels; mirrors the audio scheduler
   via `resolveOnset`. Deterministic, no external deps, no DOM (download lives in
   `src/download.ts`). "⤓ MIDI" button in the transport exports 4 bars.
