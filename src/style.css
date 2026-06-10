@@ -272,16 +272,20 @@ header h1 {
 .sequencer .step.onset {
   fill: var(--track-color);
 }
-/* Only the ACTIVE onset breathes. A small opacity pulse marks WHERE the
-   rhythm is right now, without scaling the dot (which would shift the ring
-   geometry every tick). */
-@keyframes onset-pulse {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.55; }
+/* One-shot flash when the playhead ENTERS an onset. CSS animations
+   auto-restart whenever the class is (re)applied to a new element, and the
+   scheduler hands `.current` to a different dot each tick — so each entry
+   triggers a fresh, short flash and then the dot stays static until the
+   playhead moves on. No infinite pulse, no ambient flicker. Opacity only
+   (no scale) keeps the ring geometry frozen. */
+@keyframes onset-flash {
+  0%   { opacity: 1; }
+  35%  { opacity: 0.4; }
+  100% { opacity: 1; }
 }
 .sequencer .step.current {
   fill: var(--current);
-  animation: onset-pulse 0.45s ease-in-out infinite;
+  animation: onset-flash 0.18s ease-out;
 }
 .sequencer .step.clickable {
   cursor: pointer;
