@@ -66,7 +66,10 @@ export default function App() {
   }, [bpm]);
   useEffect(() => onStep((g, perTrack) => {
     gRef.current = g;        // single canonical clock for change-time math
-    setCurrentSteps(perTrack); // playhead state for each track card
+    setCurrentSteps((prev) => ({
+      ...prev,
+      ...perTrack,
+    })); // playhead state for each track card
   }), []);
   useEffect(() => onKitLoading(setKitLoading), []);
 
