@@ -31,16 +31,18 @@
 /* Warm, tactile, analog — a composer's notebook. Only CSS variables change;
    the DOM, components and layout are identical to Dark Neon. */
 :root[data-theme='paper'] {
-  --bg: #f4eedf;
-  --panel: #fbf7ee;
-  --panel-hi: #f2eadb;
-  --text: #746b5f;
-  --text-dim: #9a9287;
-  --text-hi: #3b352d;
+  /* Whitepaper / engineer's notebook: warmer than pure white, cooler and more
+     neutral than the previous vintage tan — a lab journal, not parchment. */
+  --bg: #f4f0e6;
+  --panel: #f8f5ed;
+  --panel-hi: #efeadf;
+  --text: #5b554c;
+  --text-dim: #8e887d;
+  --text-hi: #2f2b25;
   --accent: #8c6bae;
   --accent-dim: rgba(140, 107, 174, 0.2);
-  --rest: #d8cdb8;
-  --current: #3b352d; /* playhead is ink, not white */
+  --rest: #d9d2c3;
+  --current: #2f2b25; /* playhead is ink, not white */
   --danger: #b5675f;
   --warn: #c2944e;
 
@@ -50,9 +52,29 @@
   --color-hat: #6d8fb5; /* vintage blue */
   --color-bass: #6fa17a; /* sage green */
 
-  --card-shadow: 0 1px 2px rgba(60, 50, 30, 0.06), 0 4px 12px rgba(60, 50, 30, 0.05);
+  /* Soft "sheet on the desk" elevation — readable, never neon. */
+  --card-shadow: 0 1px 2px rgba(40, 30, 15, 0.04), 0 8px 24px rgba(40, 30, 15, 0.05);
 
   color-scheme: light; /* native controls (sliders, selects) render light */
+}
+
+/* Procedural paper grain. SVG fractal noise inline as a data-uri — no external
+   file, no PNG, no GPU-heavy filter. The overlay sits above the background but
+   below content with pointer-events: none so it can never block interaction. */
+:root[data-theme='paper'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.9 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  background-size: 240px 240px;
+}
+/* Content must stack above the grain. */
+:root[data-theme='paper'] .app {
+  position: relative;
+  z-index: 1;
 }
 
 /* Track colour follows the active theme, by voice (no inline data colour). */
@@ -72,13 +94,19 @@
 /* Paper buttons: warm, slightly inset; no neon, no glow. */
 :root[data-theme='paper'] .toggle,
 :root[data-theme='paper'] .export,
+:root[data-theme='paper'] .reset,
 :root[data-theme='paper'] .kit-select select,
 :root[data-theme='paper'] .theme-select select {
-  background: #e8dfcf;
+  background: #ece5d5;
 }
 :root[data-theme='paper'] .toggle:hover,
-:root[data-theme='paper'] .export:hover {
-  background: #ddd1bc;
+:root[data-theme='paper'] .export:hover,
+:root[data-theme='paper'] .reset:hover {
+  background: #ddd3bc;
+}
+/* Softer borders in paper mode so cards read as sheets, not panels. */
+:root[data-theme='paper'] .track-card {
+  border-color: #e2dac8;
 }
 
 * {
@@ -229,22 +257,31 @@ header h1 {
   stroke-width: 1.5;
   stroke-linejoin: round;
 }
+/* Playhead arrow: stable. No transition, no pulse — it just rotates to point
+   at the current step. The eye follows the dots, not the arrow. */
 .sequencer .hand {
   stroke: var(--current);
   stroke-width: 2;
-  opacity: 0.65;
+  opacity: 0.5;
 }
-.sequencer .step {
-  transition: r 0.08s ease, fill 0.08s ease;
-}
+/* Non-current dots are static — no fill/radius transitions mean the eye
+   isn't pulled around by ghost-pulses on neighbouring positions. */
 .sequencer .step.rest {
   fill: var(--rest);
 }
 .sequencer .step.onset {
   fill: var(--track-color);
 }
+/* Only the ACTIVE onset breathes. A small opacity pulse marks WHERE the
+   rhythm is right now, without scaling the dot (which would shift the ring
+   geometry every tick). */
+@keyframes onset-pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.55; }
+}
 .sequencer .step.current {
   fill: var(--current);
+  animation: onset-pulse 0.45s ease-in-out infinite;
 }
 .sequencer .step.clickable {
   cursor: pointer;
