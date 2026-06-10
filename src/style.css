@@ -364,6 +364,76 @@ header h1 {
   border-color: var(--danger);
 }
 
+/* ---------- velocity lane (cross-bar drag editor) ---------- */
+
+.velocity-lane {
+  display: grid;
+  gap: 8px;
+}
+.velocity-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toggle.is-on[data-kind='velocity'] {
+  background: var(--track-color);
+  border-color: var(--track-color);
+  color: var(--bg);
+}
+.velocity-count {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.velocity-buttons {
+  margin-left: auto;
+  display: flex;
+  gap: 4px;
+}
+.velocity-step {
+  font: 600 13px/1 var(--mono);
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 1px solid var(--rest);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+.velocity-step:hover:not(:disabled) {
+  color: var(--text-hi);
+  border-color: var(--text-dim);
+}
+.velocity-step:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* The drag surface. Bars are visually inside but pointer events go to the
+   container so a single press-and-drag can paint a curve across many bars. */
+.velocity-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 60px;
+  padding: 4px;
+  background: var(--panel-hi);
+  border-radius: 8px;
+  cursor: crosshair;
+  user-select: none;
+  touch-action: none;
+}
+.velocity-bar {
+  flex: 1 1 0;
+  min-width: 3px;
+  background: var(--track-color);
+  border-radius: 2px 2px 0 0;
+  opacity: 0.85;
+  pointer-events: none; /* drag is handled on the container */
+}
+
 /* ---------- mini metrics on each card ---------- */
 
 .mini-metrics {

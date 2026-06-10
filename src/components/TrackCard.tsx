@@ -1,7 +1,13 @@
 import Sequencer from './Sequencer';
 import PitchLane from './PitchLane';
+import VelocityLane from './VelocityLane';
 import { trackPattern, onsetCount, density, isPitchedVoice } from '../engine';
 import type { Track } from '../engine';
+
+// Voices that expose the velocity-layer editor in the UI. The data model and
+// the VelocityLane component are universal — gating happens only here so
+// adding kick/snare/bass later is a one-line change.
+const VELOCITY_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['hat'];
 
 interface TrackCardProps {
   track: Track;
@@ -76,6 +82,10 @@ export default function TrackCard({
 
       {isPitchedVoice(track.voiceId) && (
         <PitchLane track={track} onChange={onChange} />
+      )}
+
+      {VELOCITY_EDITOR_VOICES.includes(track.voiceId) && (
+        <VelocityLane track={track} onChange={onChange} />
       )}
 
       <div className="controls">
