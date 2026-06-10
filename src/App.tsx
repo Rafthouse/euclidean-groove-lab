@@ -53,6 +53,17 @@ export default function App() {
   useEffect(() => setTracks(tracks), [tracks]);
   useEffect(() => setBpm(bpm), [bpm]);
   useEffect(() => setSwing(swing / 100), [swing]);
+
+  // Adapt the playhead flash duration to BPM. On fast tempos with a fast
+  // voice (e.g. 240 BPM × 2× × Hat 16/16 → `.current` switches every ~31 ms)
+  // a fixed 180 ms flash only plays ~17% before the class moves on, painting
+  // the whole ring as a low-level shimmer. Scaling the flash to the 32n tick
+  // interval keeps each entry visually discrete.
+  useEffect(() => {
+    const tickMs = 60000 / (bpm * 8); // master subdivision = 32n
+    const ms = Math.max(80, Math.min(180, Math.round(tickMs * 2.5)));
+    document.documentElement.style.setProperty('--flash-duration', `${ms}ms`);
+  }, [bpm]);
   useEffect(() => onStep((g, perTrack) => {
     gRef.current = g;        // single canonical clock for change-time math
     setCurrentSteps(perTrack); // playhead state for each track card

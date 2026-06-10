@@ -14,6 +14,12 @@
   --radius: 14px;
   --mono: ui-monospace, Consolas, monospace;
 
+  /* Playhead flash duration. Adapted by App from BPM so the dip stays
+     discrete at fast tempos (avoids a shimmer-ring on 240 BPM + 2x speed
+     + 16/16 hat where ticks arrive every ~31 ms). Default = slow-tempo
+     value; the inline JS-set rule clamps it to [80ms, 180ms]. */
+  --flash-duration: 180ms;
+
   /* Per-voice track colours (themeable). Dark Neon = the original values. */
   --color-kick: #c084fc;
   --color-snare: #f472b6;
@@ -285,7 +291,7 @@ header h1 {
 }
 .sequencer .step.current {
   fill: var(--current);
-  animation: onset-flash 0.18s ease-out;
+  animation: onset-flash var(--flash-duration) ease-out;
 }
 .sequencer .step.clickable {
   cursor: pointer;
