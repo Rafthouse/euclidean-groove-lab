@@ -1,6 +1,16 @@
 import * as Tone from 'tone';
-import { audibleTracks, trackPattern, resolveOnset, isPitchedVoice, isStepMuted } from './engine';
-import type { Track, VoiceId, MidiNote } from './engine';
+import {
+  audibleTracks,
+  trackPattern,
+  isPitchedVoice,
+  isStepMuted,
+  isActive,
+  adjustedTick,
+  localStep,
+  onsetIndexAt,
+  resolvePitchSpec,
+} from './engine';
+import type { Track, VoiceId, MidiNote, PlaybackMode, PlaybackSpeed } from './engine';
 import { DRUM_KITS } from './drumKits';
 import type { DrumKitId } from './drumKits';
 
@@ -130,7 +140,12 @@ const voices: Record<
 };
 
 let currentTracks: Track[] = [];
-let stepCallback: ((step: number) => void) | null = null;
+
+/** Per-track step callback shape: emits the GLOBAL clock `g` and the per-track
+ * local step the resolver computed for that `g`. UI uses `g` for phaseOffset
+ * math on user changes; the per-track map drives playhead rendering. */
+export type StepCallback = (g: number, perTrack: Record<string, number>) => void;
+let stepCallback: StepCallback | null = null;
 
 /**
  * Atomic update of the playing track set. The scheduler reads `currentTracks`
@@ -159,8 +174,8 @@ export function setSwing(amount: number): void {
   transport.swingSubdivision = '8n';
 }
 
-/** Subscribe to the global step counter (drawn on the visual frame). */
-export function onStep(callback: (step: number) => void): void {
+/** Subscribe to the per-tick state (global clock + per-track local steps). */
+export function onStep(callback: StepCallback): void {
   stepCallback = callback;
 }
 
@@ -232,34 +247,61 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
   const transport = Tone.getTransport();
   transport.bpm.value = bpm;
 
-  // One global step counter. The two voice families take different paths so
-  // that each layer keeps a single responsibility:
-  //  - Pitched voices (bass, future melodic) go through resolveOnset(), which
-  //    folds the onset test, the onset-indexed pitch lookup (isorhythm), the
-  //    rest slots, and the velocity precedence into one call.
-  //  - Drum voices stay PURELY rhythmic: a plain pulse test plus the step
-  //    accent. resolveOnset is never called for them, so a pitch sequence's
-  //    rests can never become an accidental gate on a drum.
-  let step = 0;
+  // SINGLE-CLOCK MODEL.
+  // One Tone.Transport, one global step counter `g`, master subdivision = 32n
+  // (smallest grid we need: 2× speed on a 16n pattern lands on 32n).
+  // Each track is just a different INTERPRETATION of `g`:
+  //   isActive(g, speed) ∧ localStep(g, mode, speed, offset, N) → playback
+  // Pure resolver in engine/playback.ts. No per-track timers, no accumulating
+  // counters — by construction, polyrhythm cannot desynchronise.
+  let g = 0;
   transport.scheduleRepeat((time) => {
+    const perTrack: Record<string, number> = {};
     for (const track of audibleTracks(currentTracks)) {
+      const speed: PlaybackSpeed = track.playbackSpeed ?? 1;
+      if (!isActive(g, speed)) continue; // this track has no event on this 32n tick
+
+      const mode: PlaybackMode = track.playbackMode ?? 'forward';
+      const offset = track.phaseOffset ?? 0;
+      const step = localStep(g, mode, speed, offset, track.steps);
+      if (step < 0) continue; // degenerate (N=0)
+      perTrack[track.id] = step;
+
       const tp = trackPattern(track);
-      const localStep = step % track.steps;
-      if (!tp.pulses[localStep]) continue;
-      if (isStepMuted(track, step)) continue; // manual mute overlay: suppress output
+      if (!tp.pulses[step]) continue;
+      if (isStepMuted(track, step)) continue; // manualMute is step-indexed → reverse safe
 
       const volume = (track.volume ?? 100) / 100;
       if (isPitchedVoice(track.voiceId)) {
-        const onset = resolveOnset(track, tp, step);
-        if (onset) voices[track.voiceId](time, onset.velocity / 100, volume, onset.midi);
+        // Pitch index advances LINEARLY through monotonic `t`, regardless of
+        // playback mode — isorhythm variant (a): each played note = +1 in the
+        // pitch cycle. Inlined here instead of going through resolveOnset()
+        // so we can decouple "is this an audible onset?" (uses `step`, just
+        // confirmed by tp.pulses above) from "which pitch slot is it?" (uses
+        // `t`). engine/pitch.ts is not modified.
+        if (track.pitches && track.pitches.slots.length > 0) {
+          const t = adjustedTick(g, speed, offset);
+          const onsetIdx = onsetIndexAt(tp.pulses, t);
+          const slot = track.pitches.slots[onsetIdx % track.pitches.slots.length];
+          if (slot === null) continue; // explicit rest in the pitch cycle
+          const midi = resolvePitchSpec(slot.pitch);
+          const stepVel = tp.velocities ? tp.velocities[step] : undefined;
+          const velocity = (slot.velocity ?? stepVel ?? 100) / 100;
+          voices[track.voiceId](time, velocity, volume, midi);
+        } else {
+          // No pitch layer → drum-style fallback. The bass voice falls back
+          // to its intrinsic E2 when midi is undefined.
+          const velocity = tp.velocities ? (tp.velocities[step] ?? 100) / 100 : 1;
+          voices[track.voiceId](time, velocity, volume);
+        }
       } else {
-        const velocity = tp.velocities ? (tp.velocities[localStep] ?? 100) / 100 : 1;
+        const velocity = tp.velocities ? (tp.velocities[step] ?? 100) / 100 : 1;
         voices[track.voiceId](time, velocity, volume);
       }
     }
-    Tone.getDraw().schedule(() => stepCallback?.(step), time);
-    step += 1;
-  }, '16n');
+    Tone.getDraw().schedule(() => stepCallback?.(g, perTrack), time);
+    g += 1;
+  }, '32n');
 
   transport.start();
 }

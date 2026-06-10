@@ -2,7 +2,7 @@ import Sequencer from './Sequencer';
 import PitchLane from './PitchLane';
 import VelocityLane from './VelocityLane';
 import { trackPattern, onsetCount, density, isPitchedVoice } from '../engine';
-import type { Track } from '../engine';
+import type { Track, PlaybackMode, PlaybackSpeed } from '../engine';
 
 // Voices that expose the velocity-layer editor in the UI. The data model and
 // the VelocityLane component are universal — gating happens only here so
@@ -117,6 +117,33 @@ export default function TrackCard({
           max={100}
           onChange={(v) => onChange({ volume: v })}
         />
+      </div>
+
+      <div className="playback-controls">
+        <label className="playback-select">
+          <span>Mode</span>
+          <select
+            value={track.playbackMode ?? 'forward'}
+            onChange={(e) => onChange({ playbackMode: e.target.value as PlaybackMode })}
+            aria-label={`Playback mode for ${track.name}`}
+          >
+            <option value="forward">▶ Forward</option>
+            <option value="reverse">◀ Reverse</option>
+            <option value="pendulum">↔ Pendulum</option>
+          </select>
+        </label>
+        <label className="playback-select">
+          <span>Speed</span>
+          <select
+            value={String(track.playbackSpeed ?? 1)}
+            onChange={(e) => onChange({ playbackSpeed: Number(e.target.value) as PlaybackSpeed })}
+            aria-label={`Playback speed for ${track.name}`}
+          >
+            <option value="0.5">½×</option>
+            <option value="1">1×</option>
+            <option value="2">2×</option>
+          </select>
+        </label>
       </div>
 
       <div className="mini-metrics">

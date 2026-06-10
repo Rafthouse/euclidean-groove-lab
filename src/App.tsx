@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
-import { defaultTracks, renderMidi, serializeMidi } from './engine';
-import type { Track } from './engine';
+import { defaultTracks, renderMidi, serializeMidi, computePhaseOffsetForChange } from './engine';
+import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading } from './audio';
 import { downloadBytes } from './download';
@@ -27,7 +27,10 @@ export default function App() {
   const [bpm, setTempo] = useState(120);
   const [swing, setSwingState] = useState(0);
   const [playing, setPlaying] = useState(false);
-  const [currentStep, setCurrentStep] = useState(-1);
+  const [currentSteps, setCurrentSteps] = useState<Record<string, number>>({});
+  // The global clock `g` is consumed only by the change handler (to compute
+  // phaseOffset). Keep it in a ref so it doesn't trigger re-renders every 32n.
+  const gRef = useRef(-1);
   const [kitId, setKitId] = useState<DrumKitId>('cr78');
   const [kitLoading, setKitLoading] = useState(false);
   const [theme, setTheme] = useState<ThemeId>(initialTheme);
@@ -36,7 +39,10 @@ export default function App() {
   useEffect(() => setTracks(tracks), [tracks]);
   useEffect(() => setBpm(bpm), [bpm]);
   useEffect(() => setSwing(swing / 100), [swing]);
-  useEffect(() => onStep(setCurrentStep), []);
+  useEffect(() => onStep((g, perTrack) => {
+    gRef.current = g;        // single canonical clock for change-time math
+    setCurrentSteps(perTrack); // playhead state for each track card
+  }), []);
   useEffect(() => onKitLoading(setKitLoading), []);
 
   // Theme: reflect on <html data-theme> (CSS variables do the rest) + persist.
@@ -49,7 +55,11 @@ export default function App() {
     }
   }, [theme]);
 
-  // Keep hits/rotation valid as steps shrinks.
+  // Track patch + clamping + phaseOffset preservation.
+  // When the user changes mode/speed/steps, recompute phaseOffset so the
+  // resolver's localStep at the current global tick stays the same — no
+  // playhead teleport, no audible jump. Single-clock: the only state the
+  // computation needs is `gRef.current`, read from the existing onStep flow.
   const updateTrack = useCallback((id: string, patch: Partial<Track>) => {
     setTracksState((prev) =>
       prev.map((t) => {
@@ -67,6 +77,21 @@ export default function App() {
           const n = Math.min(merged.steps, merged.manualMute.length);
           for (let i = 0; i < n; i++) resized[i] = merged.manualMute[i];
           merged.manualMute = resized.some(Boolean) ? resized : undefined;
+        }
+
+        // Preserve musical phase when playback params or steps change.
+        const oldMode: PlaybackMode = t.playbackMode ?? 'forward';
+        const oldSpeed: PlaybackSpeed = t.playbackSpeed ?? 1;
+        const newMode: PlaybackMode = merged.playbackMode ?? 'forward';
+        const newSpeed: PlaybackSpeed = merged.playbackSpeed ?? 1;
+        const playbackChanged =
+          oldMode !== newMode || oldSpeed !== newSpeed || t.steps !== merged.steps;
+        if (playbackChanged && gRef.current >= 0 && t.steps > 0 && merged.steps > 0) {
+          merged.phaseOffset = computePhaseOffsetForChange(
+            gRef.current,
+            oldMode, oldSpeed, t.phaseOffset ?? 0, t.steps,
+            newMode, newSpeed, merged.steps,
+          );
         }
         return merged;
       })
@@ -89,7 +114,7 @@ export default function App() {
     if (playing) {
       stop();
       setPlaying(false);
-      setCurrentStep(-1);
+      setCurrentSteps({});
     } else {
       await start(tracks, bpm);
       setPlaying(true);
@@ -122,7 +147,7 @@ export default function App() {
           <TrackCard
             key={track.id}
             track={track}
-            currentStep={currentStep}
+            currentStep={currentSteps[track.id] ?? -1}
             onChange={(patch) => updateTrack(track.id, patch)}
             onToggleMute={() => toggleMute(track.id)}
             onToggleSolo={() => toggleSolo(track.id)}

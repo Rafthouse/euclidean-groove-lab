@@ -9,6 +9,15 @@
 export type { Pattern } from './types';
 export type { OnsetTime } from './phase';
 export type { Track, TrackPattern, VoiceId, VelocityPattern } from './track';
+export type { PlaybackMode, PlaybackSpeed } from './playback';
+export {
+  divider,
+  isActive,
+  adjustedTick,
+  localStep,
+  computePhaseOffsetForChange,
+  playbackPeriodLocalTicks,
+} from './playback';
 export type {
   MidiNote,
   PitchSpec,

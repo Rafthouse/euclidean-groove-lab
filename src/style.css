@@ -434,6 +434,37 @@ header h1 {
   pointer-events: none; /* drag is handled on the container */
 }
 
+/* ---------- per-track playback controls (mode + speed) ---------- */
+
+.playback-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.playback-select {
+  display: grid;
+  gap: 4px;
+}
+.playback-select span {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.playback-select select {
+  background: var(--panel-hi);
+  color: var(--text-hi);
+  border: 1px solid var(--rest);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font: 500 12px var(--mono);
+  cursor: pointer;
+}
+.playback-select select:focus {
+  outline: none;
+  border-color: var(--track-color);
+}
+
 /* ---------- mini metrics on each card ---------- */
 
 .mini-metrics {

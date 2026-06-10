@@ -1,5 +1,6 @@
 import type { Pattern } from './types';
 import type { PitchSequence } from './pitch';
+import type { PlaybackMode, PlaybackSpeed } from './playback';
 import { euclid } from './euclidean';
 import { rotate } from './rotate';
 
@@ -65,6 +66,17 @@ export interface Track {
    * Absent => drum-style (no pitch). See docs/PITCH-DATA-MODEL-RECONCILIATION.md.
    */
   pitches?: PitchSequence;
+
+  /**
+   * Per-track playback config. The audio scheduler runs a SINGLE clock; these
+   * fields only change how that clock's `g` is INTERPRETED for this track.
+   * Defaults: forward / 1× / no offset → identical to the pre-C3 behaviour.
+   * `phaseOffset` preserves musical position across mode/speed/steps changes
+   * (computed and written by the event handler; the resolver only reads it).
+   */
+  playbackMode?: PlaybackMode;
+  playbackSpeed?: PlaybackSpeed;
+  phaseOffset?: number;
 }
 
 /**
@@ -157,6 +169,8 @@ export function defaultTracks(): Track[] {
       solo: false,
       voiceId: 'kick',
       volume: 100,
+      playbackMode: 'forward',
+      playbackSpeed: 1,
     },
     {
       id: 'snare',
@@ -169,6 +183,8 @@ export function defaultTracks(): Track[] {
       solo: false,
       voiceId: 'snare',
       volume: 100,
+      playbackMode: 'forward',
+      playbackSpeed: 1,
     },
     {
       id: 'hat',
@@ -181,6 +197,8 @@ export function defaultTracks(): Track[] {
       solo: false,
       voiceId: 'hat',
       volume: 100,
+      playbackMode: 'forward',
+      playbackSpeed: 1,
       velocityPattern: [100], // flat velocity; ready for accent ramp
     },
     {
@@ -194,6 +212,8 @@ export function defaultTracks(): Track[] {
       solo: false,
       voiceId: 'bass',
       volume: 100,
+      playbackMode: 'forward',
+      playbackSpeed: 1,
     },
   ];
 }
