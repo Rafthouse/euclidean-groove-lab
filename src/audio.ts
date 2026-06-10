@@ -141,6 +141,23 @@ const voices: Record<
 
 let currentTracks: Track[] = [];
 
+/**
+ * The single global step counter. Module-scoped so an external `resetClock()`
+ * call can zero it without stopping Tone.Transport. Single-clock invariant is
+ * preserved: this is the SAME `g` the scheduler advances, not a second source.
+ */
+let globalStep = 0;
+
+/**
+ * Reset the global cycle counter to 0 without touching Tone.Transport. The
+ * transport keeps running (no stop/start glitch, no sample tail cut), but
+ * every track restarts its cycle from origin on the very next 32n tick.
+ * Swing is unaffected — it lives on Transport.position, not on `g`.
+ */
+export function resetClock(): void {
+  globalStep = 0;
+}
+
 /** Per-track step callback shape: emits the GLOBAL clock `g` and the per-track
  * local step the resolver computed for that `g`. UI uses `g` for phaseOffset
  * math on user changes; the per-track map drives playhead rendering. */
@@ -248,14 +265,15 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
   transport.bpm.value = bpm;
 
   // SINGLE-CLOCK MODEL.
-  // One Tone.Transport, one global step counter `g`, master subdivision = 32n
-  // (smallest grid we need: 2× speed on a 16n pattern lands on 32n).
-  // Each track is just a different INTERPRETATION of `g`:
+  // One Tone.Transport, one module-scoped `globalStep`, master subdivision =
+  // 32n. Each track is just a different INTERPRETATION of `globalStep`:
   //   isActive(g, speed) ∧ localStep(g, mode, speed, offset, N) → playback
   // Pure resolver in engine/playback.ts. No per-track timers, no accumulating
-  // counters — by construction, polyrhythm cannot desynchronise.
-  let g = 0;
+  // counters — by construction, polyrhythm cannot desynchronise. `resetClock`
+  // zeros `globalStep`; the transport keeps running, so there's no click.
+  globalStep = 0;
   transport.scheduleRepeat((time) => {
+    const g = globalStep;
     const perTrack: Record<string, number> = {};
     for (const track of audibleTracks(currentTracks)) {
       const speed: PlaybackSpeed = track.playbackSpeed ?? 1;
@@ -300,7 +318,7 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
       }
     }
     Tone.getDraw().schedule(() => stepCallback?.(g, perTrack), time);
-    g += 1;
+    globalStep += 1;
   }, '32n');
 
   transport.start();

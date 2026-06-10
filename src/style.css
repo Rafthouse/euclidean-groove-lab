@@ -523,7 +523,8 @@ header h1 {
   box-shadow: inset 0 0 0 1px var(--accent);
 }
 
-.export {
+.export,
+.reset {
   font: 600 13px/1 var(--mono);
   color: var(--text-hi);
   background: var(--panel);
@@ -533,12 +534,28 @@ header h1 {
   cursor: pointer;
   transition: border-color 0.12s ease, color 0.12s ease;
 }
-.export:hover {
+.export:hover,
+.reset:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
-.export:active {
+.export:active,
+.reset:active {
   transform: scale(0.97);
+}
+
+.preference {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-dim);
+  cursor: pointer;
+  user-select: none;
+}
+.preference input[type='checkbox'] {
+  accent-color: var(--accent);
+  cursor: pointer;
 }
 
 .bpm,

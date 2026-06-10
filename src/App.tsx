@@ -4,7 +4,7 @@ import DrumKitSelect from './components/DrumKitSelect';
 import { defaultTracks, renderMidi, serializeMidi, computePhaseOffsetForChange } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
-  onKitLoading } from './audio';
+  onKitLoading, resetClock } from './audio';
 import { downloadBytes } from './download';
 import type { DrumKitId } from './drumKits';
 
@@ -13,12 +13,22 @@ const EXPORT_BARS = 4;
 
 type ThemeId = 'dark' | 'paper';
 const THEME_KEY = 'groove-theme';
+const RESTART_KEY = 'groove-restart-on-mode-change';
 
 function initialTheme(): ThemeId {
   try {
     return localStorage.getItem(THEME_KEY) === 'paper' ? 'paper' : 'dark';
   } catch {
     return 'dark';
+  }
+}
+
+function initialRestartOnModeChange(): boolean {
+  try {
+    const v = localStorage.getItem(RESTART_KEY);
+    return v === null ? true : v === 'true';
+  } catch {
+    return true;
   }
 }
 
@@ -34,6 +44,10 @@ export default function App() {
   const [kitId, setKitId] = useState<DrumKitId>('cr78');
   const [kitLoading, setKitLoading] = useState(false);
   const [theme, setTheme] = useState<ThemeId>(initialTheme);
+  const [restartOnModeChange, setRestartOnModeChange] = useState<boolean>(initialRestartOnModeChange);
+  // Read in the (synchronous) updateTrack closure without re-renders.
+  const restartOnModeChangeRef = useRef(restartOnModeChange);
+  restartOnModeChangeRef.current = restartOnModeChange;
 
   // Engine -> audio sync.
   useEffect(() => setTracks(tracks), [tracks]);
@@ -55,23 +69,69 @@ export default function App() {
     }
   }, [theme]);
 
-  // Track patch + clamping + phaseOffset preservation.
-  // When the user changes mode/speed/steps, recompute phaseOffset so the
-  // resolver's localStep at the current global tick stays the same — no
-  // playhead teleport, no audible jump. Single-clock: the only state the
-  // computation needs is `gRef.current`, read from the existing onStep flow.
+  // Persist the restart-on-mode-change preference.
+  useEffect(() => {
+    try {
+      localStorage.setItem(RESTART_KEY, restartOnModeChange ? 'true' : 'false');
+    } catch {
+      // ignore persistence failures
+    }
+  }, [restartOnModeChange]);
+
+  // Reset all tracks to a deterministic cycle origin.
+  // - Zeros the SAME global clock the scheduler reads (no second timing source).
+  // - Clears every track's phaseOffset (no preserved-position carryover).
+  // - Clears the playhead state so the UI snaps to cycle start immediately.
+  // Transport keeps running: no stop/start glitch, no sample tail cut.
+  const resetAllTracks = useCallback(() => {
+    resetClock();
+    setTracksState((prev) => prev.map((t) => ({ ...t, phaseOffset: 0 })));
+    setCurrentSteps({});
+    gRef.current = 0;
+  }, []);
+
+  // Track patch + clamping + (optional) phase preservation.
+  //
+  // Mode change behaviour depends on the `restartOnModeChange` preference:
+  //  - ON  (default, musician-friendly): trigger resetAllTracks(), then apply
+  //    the new mode with phaseOffset = 0. Every track snaps to its own cycle
+  //    origin so the new mode is heard from a predictable boundary.
+  //  - OFF (power-user): preserve the current localStep across the change via
+  //    computePhaseOffsetForChange — the old behaviour, no audible jump.
+  //
+  // Speed change is ALWAYS smooth — it never auto-resets. We still preserve
+  // phase across speed changes (so 1× → 2× doesn't teleport), but the cycle
+  // origin stays where it was.
+  // Steps change also uses phase preservation (preserves position within the
+  // pattern when N grows/shrinks).
   const updateTrack = useCallback((id: string, patch: Partial<Track>) => {
+    const isModeChange = patch.playbackMode !== undefined;
+    const doRestart = isModeChange && restartOnModeChangeRef.current;
+
+    if (doRestart) {
+      // Reset clock and offsets BEFORE applying the patch so the new mode
+      // starts from origin. Single-clock invariant intact: we only zero the
+      // counter and phaseOffsets — no new timing source.
+      resetClock();
+      gRef.current = 0;
+      setCurrentSteps({});
+    }
+
     setTracksState((prev) =>
       prev.map((t) => {
-        if (t.id !== id) return t;
+        // Reset all OTHER tracks' phaseOffset too when a restart fires — the
+        // whole rig must snap to a known phase, not just the changed track.
+        if (t.id !== id) {
+          return doRestart && (t.phaseOffset ?? 0) !== 0
+            ? { ...t, phaseOffset: 0 }
+            : t;
+        }
+
         const merged = { ...t, ...patch };
         merged.hits = Math.min(merged.hits, merged.steps);
         merged.rotation = merged.steps > 0
           ? ((merged.rotation % merged.steps) + merged.steps) % merged.steps
           : 0;
-        // Keep the manual-mute overlay the same length as the pattern when
-        // steps changes (preserve existing entries; collapse to undefined if
-        // nothing remains muted).
         if (merged.manualMute && merged.manualMute.length !== merged.steps) {
           const resized = new Array<boolean>(merged.steps).fill(false);
           const n = Math.min(merged.steps, merged.manualMute.length);
@@ -79,19 +139,25 @@ export default function App() {
           merged.manualMute = resized.some(Boolean) ? resized : undefined;
         }
 
-        // Preserve musical phase when playback params or steps change.
-        const oldMode: PlaybackMode = t.playbackMode ?? 'forward';
-        const oldSpeed: PlaybackSpeed = t.playbackSpeed ?? 1;
-        const newMode: PlaybackMode = merged.playbackMode ?? 'forward';
-        const newSpeed: PlaybackSpeed = merged.playbackSpeed ?? 1;
-        const playbackChanged =
-          oldMode !== newMode || oldSpeed !== newSpeed || t.steps !== merged.steps;
-        if (playbackChanged && gRef.current >= 0 && t.steps > 0 && merged.steps > 0) {
-          merged.phaseOffset = computePhaseOffsetForChange(
-            gRef.current,
-            oldMode, oldSpeed, t.phaseOffset ?? 0, t.steps,
-            newMode, newSpeed, merged.steps,
-          );
+        if (doRestart) {
+          // Clean cycle origin — no preserved offset.
+          merged.phaseOffset = 0;
+        } else {
+          // Preserve musical position across speed/steps changes (and across
+          // mode change too when the user opted out of restart).
+          const oldMode: PlaybackMode = t.playbackMode ?? 'forward';
+          const oldSpeed: PlaybackSpeed = t.playbackSpeed ?? 1;
+          const newMode: PlaybackMode = merged.playbackMode ?? 'forward';
+          const newSpeed: PlaybackSpeed = merged.playbackSpeed ?? 1;
+          const resolverChanged =
+            oldMode !== newMode || oldSpeed !== newSpeed || t.steps !== merged.steps;
+          if (resolverChanged && gRef.current >= 0 && t.steps > 0 && merged.steps > 0) {
+            merged.phaseOffset = computePhaseOffsetForChange(
+              gRef.current,
+              oldMode, oldSpeed, t.phaseOffset ?? 0, t.steps,
+              newMode, newSpeed, merged.steps,
+            );
+          }
         }
         return merged;
       })
@@ -162,6 +228,14 @@ export default function App() {
         >
           {playing ? '■ Stop' : '▶ Play'}
         </button>
+        <button
+          type="button"
+          className="reset"
+          onClick={resetAllTracks}
+          title="Reset all tracks to cycle origin (clock stays running)"
+        >
+          ↺ Reset
+        </button>
         <label className="bpm">
           Tempo
           <input
@@ -203,6 +277,14 @@ export default function App() {
             <option value="dark">Dark Neon</option>
             <option value="paper">Vintage Paper</option>
           </select>
+        </label>
+        <label className="preference">
+          <input
+            type="checkbox"
+            checked={restartOnModeChange}
+            onChange={(e) => setRestartOnModeChange(e.target.checked)}
+          />
+          <span>Restart cycle on mode change</span>
         </label>
       </section>
 
