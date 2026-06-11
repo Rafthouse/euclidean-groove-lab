@@ -11,15 +11,26 @@ import type { DrumKitId } from './drumKits';
 /** How many 4/4 bars the MIDI export renders. */
 const EXPORT_BARS = 4;
 
-type ThemeId = 'dark' | 'paper';
+type ThemeId = 'dark' | 'paper' | 'elements';
 const THEME_KEY = 'groove-theme';
+const FX_KEY = 'groove-elements-fx';
 const RESTART_KEY = 'groove-restart-on-mode-change';
 
 function initialTheme(): ThemeId {
   try {
-    return localStorage.getItem(THEME_KEY) === 'paper' ? 'paper' : 'dark';
+    const t = localStorage.getItem(THEME_KEY);
+    return t === 'paper' || t === 'elements' ? t : 'dark';
   } catch {
     return 'dark';
+  }
+}
+
+function initialFx(): boolean {
+  try {
+    const v = localStorage.getItem(FX_KEY);
+    return v === null ? true : v === 'true';
+  } catch {
+    return true;
   }
 }
 
@@ -44,6 +55,7 @@ export default function App() {
   const [kitId, setKitId] = useState<DrumKitId>('cr78');
   const [kitLoading, setKitLoading] = useState(false);
   const [theme, setTheme] = useState<ThemeId>(initialTheme);
+  const [elementFx, setElementFx] = useState<boolean>(initialFx);
   const [restartOnModeChange, setRestartOnModeChange] = useState<boolean>(initialRestartOnModeChange);
   // Read in the (synchronous) updateTrack closure without re-renders.
   const restartOnModeChangeRef = useRef(restartOnModeChange);
@@ -82,6 +94,16 @@ export default function App() {
       // ignore persistence failures
     }
   }, [theme]);
+
+  // Element FX: reflect on <html data-fx> + persist.
+  useEffect(() => {
+    document.documentElement.dataset.fx = elementFx ? 'on' : 'off';
+    try {
+      localStorage.setItem(FX_KEY, elementFx ? 'true' : 'false');
+    } catch {
+      // ignore persistence failures
+    }
+  }, [elementFx]);
 
   // Persist the restart-on-mode-change preference.
   useEffect(() => {
@@ -290,8 +312,19 @@ export default function App() {
           >
             <option value="dark">Dark Neon</option>
             <option value="paper">Vintage Paper</option>
+            <option value="elements">Elements</option>
           </select>
         </label>
+        {theme === 'elements' && (
+          <label className="preference fx-toggle">
+            <input
+              type="checkbox"
+              checked={elementFx}
+              onChange={(e) => setElementFx(e.target.checked)}
+            />
+            <span>Element FX</span>
+          </label>
+        )}
         <label className="preference">
           <input
             type="checkbox"

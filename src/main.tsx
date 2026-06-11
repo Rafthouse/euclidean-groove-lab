@@ -5,8 +5,9 @@ import './style.css'
 // Apply the saved theme before first paint so a paper-mode user never sees a
 // dark flash. The default (no/invalid value) is Dark Neon = the :root defaults.
 try {
-  if (localStorage.getItem('groove-theme') === 'paper') {
-    document.documentElement.dataset.theme = 'paper'
+  const savedTheme = localStorage.getItem('groove-theme');
+  if (savedTheme === 'paper' || savedTheme === 'elements') {
+    document.documentElement.dataset.theme = savedTheme;
   }
 } catch {
   // localStorage unavailable — fall back to the default dark theme

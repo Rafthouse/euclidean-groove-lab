@@ -33,6 +33,290 @@
   color-scheme: dark;
 }
 
+/* ---------- Elements Theme (Alchemical 4 Elements) ---------- */
+:root[data-theme='elements'] {
+  --bg: #0f1218;
+  --panel: rgba(24, 28, 36, 0.45);
+  --panel-hi: rgba(31, 38, 48, 0.7);
+  --text: #ccd2e0;
+  --text-dim: #7f8a9e;
+  --text-hi: #f0f4fa;
+  --accent: #ff8a00;
+  --accent-dim: rgba(255, 138, 0, 0.2);
+  --rest: rgba(58, 68, 86, 0.35);
+  --current: #ffffff;
+  --danger: #ff5b2e;
+  --warn: #ffd24a;
+
+  /* Element thematic colors */
+  --color-kick: #8b6b45;  /* Earth base: rich clay/clay brown */
+  --color-kick-mid: #a38763;
+  --color-kick-light: #d0b089;
+
+  --color-snare: #ff5b2e; /* Fire base: deep burning orange */
+  --color-snare-mid: #ff8a00;
+  --color-snare-light: #ffd24a;
+
+  --color-hat: #cfe8ff;   /* Air base: airy gas-blue/sky */
+  --color-hat-mid: #a7d2ff;
+  --color-hat-light: #7fb6ff;
+
+  --color-bass: #00d2c8;  /* Water base: glowing turquoise/ocean */
+  --color-bass-mid: #2fb5ff;
+  --color-bass-light: #86f0ff;
+
+  --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  color-scheme: dark;
+}
+
+/* Alchemical Reactor Glow background */
+:root[data-theme='elements'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(139, 107, 69, 0.15), transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(255, 91, 46, 0.14), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(127, 182, 255, 0.14), transparent 45%),
+    radial-gradient(circle at 20% 80%, rgba(0, 210, 200, 0.14), transparent 45%),
+    #0f1218;
+  background-size: 200% 240%;
+}
+
+:root[data-theme='elements'][data-fx='on'] body::before {
+  animation: reactor-flow 45s linear infinite;
+}
+
+@keyframes reactor-flow {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 120%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+:root[data-theme='elements'] .app {
+  position: relative;
+  z-index: 1;
+}
+
+/* Elements unique track-card glass look */
+:root[data-theme='elements'] .track-card {
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  background: linear-gradient(135deg, rgba(24, 28, 36, 0.5) 0%, rgba(15, 18, 24, 0.75) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  box-shadow: 
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+/* Earth (Kick) theme styling */
+:root[data-theme='elements'] .track-card[data-voice='kick'] {
+  --track-color: var(--color-kick-mid);
+}
+:root[data-theme='elements'] .track-card[data-voice='kick'] .step.onset {
+  fill: var(--color-kick-mid);
+}
+:root[data-theme='elements'] .track-card[data-voice='kick'] .shape {
+  fill: color-mix(in srgb, var(--color-kick) 18%, transparent);
+  stroke: var(--color-kick-mid);
+}
+
+/* Kick Earth Hit pulse */
+:root[data-theme='elements'][data-fx='on'] .track-card[data-voice='kick'] .step.current {
+  animation: earth-hit 120ms ease-out forwards;
+}
+@keyframes earth-hit {
+  0% {
+    transform: scale(1) translate(0, 0);
+    fill: var(--color-kick-light);
+  }
+  50% {
+    transform: scale(1.25);
+    fill: var(--color-kick-light);
+  }
+  100% {
+    transform: scale(1);
+    fill: var(--current);
+  }
+}
+
+/* Fire (Snare) theme styling */
+:root[data-theme='elements'] .track-card[data-voice='snare'] {
+  --track-color: var(--color-snare-mid);
+}
+:root[data-theme='elements'] .track-card[data-voice='snare'] .step.onset {
+  fill: var(--color-snare-mid);
+}
+:root[data-theme='elements'] .track-card[data-voice='snare'] .shape {
+  fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
+  stroke: var(--color-snare-mid);
+}
+
+/* Snare Fire Glow Flash */
+:root[data-theme='elements'][data-fx='on'] .track-card[data-voice='snare'] .step.current {
+  animation: fire-glow 150ms ease-out forwards;
+}
+@keyframes fire-glow {
+  0% {
+    fill: var(--color-snare-light);
+    filter: drop-shadow(0 0 10px var(--color-snare-light)) brightness(2);
+  }
+  100% {
+    fill: var(--current);
+    filter: drop-shadow(0 0 2px var(--color-snare-mid)) brightness(1.2);
+  }
+}
+
+/* Air (Hat) theme styling */
+:root[data-theme='elements'] .track-card[data-voice='hat'] {
+  --track-color: var(--color-hat-mid);
+}
+:root[data-theme='elements'] .track-card[data-voice='hat'] .step.onset {
+  fill: var(--color-hat-mid);
+}
+:root[data-theme='elements'] .track-card[data-voice='hat'] .shape {
+  fill: color-mix(in srgb, var(--color-hat) 15%, transparent);
+  stroke: var(--color-hat-mid);
+}
+
+/* Hat Step fade transition that creates a natural 3-step trailing trail without JS */
+:root[data-theme='elements'] .track-card[data-voice='hat'] .step {
+  transition: opacity 0.5s ease-out, fill 0.5s ease-out, r 0.4s ease-out;
+}
+
+:root[data-theme='elements'][data-fx='on'] .track-card[data-voice='hat'] .step {
+  /* Allow particles behind to slowly fade out over multiple ticks smoothly */
+  transition: opacity 0.6s cubic-bezier(0.1, 0.8, 0.3, 1), fill 0.6s cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+
+/* Air Trail particles simulation via classes with delay-fading opacity */
+:root[data-theme='elements'][data-fx='on'] .track-card[data-voice='hat'] .step.current {
+  opacity: 1 !important;
+  fill: var(--color-hat-light) !important;
+  animation: air-wind 140ms ease-out forwards;
+}
+@keyframes air-wind {
+  0% {
+    opacity: 1;
+    fill: #ffffff;
+  }
+  100% {
+    opacity: 0.9;
+    fill: var(--color-hat-light);
+  }
+}
+
+/* Water (Bass) theme styling */
+:root[data-theme='elements'] .track-card[data-voice='bass'] {
+  --track-color: var(--color-bass-mid);
+}
+:root[data-theme='elements'] .track-card[data-voice='bass'] .step.onset {
+  fill: var(--color-bass-mid);
+}
+:root[data-theme='elements'] .track-card[data-voice='bass'] .shape {
+  fill: color-mix(in srgb, var(--color-bass) 18%, transparent);
+  stroke: var(--color-bass-mid);
+}
+
+/* Bass polygon shape wave Shimmer */
+:root[data-theme='elements'][data-fx='on'] .track-card[data-voice='bass'] .shape {
+  animation: water-shimmer 9s ease-in-out infinite alternate;
+}
+@keyframes water-shimmer {
+  0% {
+    fill-opacity: 0.3;
+    stroke: var(--color-bass-mid);
+    filter: drop-shadow(0 0 1px var(--color-bass-mid));
+  }
+  50% {
+    fill-opacity: 0.5;
+    stroke: var(--color-bass-light);
+    filter: drop-shadow(0 0 4px var(--color-bass-light));
+  }
+  100% {
+    fill-opacity: 0.25;
+    stroke: var(--color-bass);
+    filter: drop-shadow(0 0 2px var(--color-bass));
+  }
+}
+
+/* Water step ripple active dot flash */
+:root[data-theme='elements'][data-fx='on'] .track-card[data-voice='bass'] .step.current {
+  animation: water-ripple 400ms ease-out forwards;
+}
+@keyframes water-ripple {
+  0% {
+    fill: var(--color-bass-light);
+    r: 13px;
+    opacity: 1;
+  }
+  40% {
+    r: 14.5px;
+    opacity: 0.85;
+  }
+  100% {
+    fill: var(--current);
+    r: 11px;
+    opacity: 1;
+  }
+}
+
+/* Step base overrides for Earth scale-transform support */
+:root[data-theme='elements'] .sequencer .step {
+  transform-origin: center;
+}
+
+:root[data-theme='elements'] .toggle,
+:root[data-theme='elements'] .export,
+:root[data-theme='elements'] .reset,
+:root[data-theme='elements'] .kit-select select,
+:root[data-theme='elements'] .theme-select select {
+  background: rgba(31, 38, 48, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ccd2e0;
+}
+:root[data-theme='elements'] .toggle:hover,
+:root[data-theme='elements'] .export:hover,
+:root[data-theme='elements'] .reset:hover,
+:root[data-theme='elements'] .kit-select select:hover,
+:root[data-theme='elements'] .theme-select select:hover {
+  background: rgba(45, 54, 68, 0.8);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+:root[data-theme='elements'] .toggle.is-on[data-kind='mute'] {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #0f1218;
+}
+:root[data-theme='elements'] .toggle.is-on[data-kind='solo'] {
+  background: var(--warn);
+  border-color: var(--warn);
+  color: #0f1218;
+}
+
+:root[data-theme='elements'] .fx-toggle {
+  background: rgba(31, 38, 48, 0.4);
+  padding: 5px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  transition: all 0.15s ease;
+}
+:root[data-theme='elements'] .fx-toggle:hover {
+  background: rgba(45, 54, 68, 0.6);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
 /* ---------- Vintage Paper theme (light) ---------- */
 /* Warm, tactile, analog — a composer's notebook. Only CSS variables change;
    the DOM, components and layout are identical to Dark Neon. */
