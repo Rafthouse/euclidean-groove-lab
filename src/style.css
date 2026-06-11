@@ -77,13 +77,19 @@
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: 
-    radial-gradient(circle at 15% 15%, rgba(139, 107, 69, 0.15), transparent 45%),
-    radial-gradient(circle at 85% 20%, rgba(255, 91, 46, 0.14), transparent 45%),
-    radial-gradient(circle at 80% 80%, rgba(127, 182, 255, 0.14), transparent 45%),
-    radial-gradient(circle at 20% 80%, rgba(0, 210, 200, 0.14), transparent 45%),
-    #0f1218;
-  background-size: 200% 240%;
+  /* Multi-layered cinematic gradient backdrops with fractal micro-grain */
+  background:
+    /* Layer 3: Ultra subtle procedural organic grain to eradicate banding */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>"),
+    /* Layer 2: Extreme-blurred alchemical organic clouds */
+    radial-gradient(circle at 10% 20%, rgba(139, 90, 43, 0.075) 0%, transparent 65%),
+    radial-gradient(circle at 90% 10%, rgba(255, 91, 46, 0.07) 0%, transparent 70%),
+    radial-gradient(circle at 85% 90%, rgba(127, 200, 255, 0.07) 0%, transparent 75%),
+    radial-gradient(circle at 15% 85%, rgba(0, 210, 200, 0.065) 0%, transparent 65%),
+    /* Layer 1: Dark cinematographic base matrix (synth-visualization core) */
+    radial-gradient(ellipse at center, #121620 0%, #07090d 100%);
+  background-size: 180% 180%;
+  opacity: 1;
 }
 
 :root[data-theme='elements'][data-fx='on'] body::before {
