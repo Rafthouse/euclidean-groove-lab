@@ -38,9 +38,10 @@ describe('UI Polish Persistence & Elements FX Verifier', () => {
     expect(track.velocity).toEqual(initialVelocity);
   });
 
-  it('Main and Ghost velocity fields are structurally separate on Track', () => {
-    // Main is `track.velocity: number[]` and Ghost is `track.ghost.velocity: number[]`.
-    // Writing to one MUST NOT mutate the other — this guards the contract at the type level.
+  it('Main velocity and Ghost params are structurally separate on Track', () => {
+    // Main note level is `track.velocity: number[]`. The ghost is its OWN
+    // module (`track.ghost`) with its own `amount` — a different field on a
+    // different object. Writing to one MUST NOT mutate the other.
     const track: Track = {
       id: 'snare', name: 'Snare', color: '#f472b6',
       steps: 16, hits: 2, rotation: 4,
@@ -49,21 +50,21 @@ describe('UI Polish Persistence & Elements FX Verifier', () => {
       volume: 100,
       velocityEnabled: true,
       velocity: [100, 80],
-      ghost: { enabled: true, delaySteps: 1, probability: 0.5, velocity: [40, 60] },
+      ghost: { enabled: true, amount: 55, delaySteps: 1, probability: 0.5, hpHz: 200, lpHz: 6000 },
     };
 
     // Mutate main velocity — ghost untouched.
     const mainMutated: Track = { ...track, velocity: [10, 10] };
-    expect(mainMutated.ghost!.velocity).toEqual([40, 60]);
+    expect(mainMutated.ghost!.amount).toBe(55);
 
-    // Mutate ghost velocity — main untouched.
-    const ghostMutated: Track = { ...track, ghost: { ...track.ghost!, velocity: [5, 5] } };
+    // Mutate ghost amount — main untouched.
+    const ghostMutated: Track = { ...track, ghost: { ...track.ghost!, amount: 5 } };
     expect(ghostMutated.velocity).toEqual([100, 80]);
   });
 
   it('Engine trackPattern() consumes ONLY track.velocity for the main note', () => {
     // The scheduler computes main-note velocity from trackPattern(track).velocities,
-    // which is derived from track.velocity. ghost.velocity must never reach this output.
+    // which is derived from track.velocity. The ghost module never reaches this output.
     const track: Track = {
       id: 'snare', name: 'Snare', color: '#f472b6',
       steps: 8, hits: 4, rotation: 0,
@@ -71,14 +72,14 @@ describe('UI Polish Persistence & Elements FX Verifier', () => {
       voiceId: 'snare',
       velocityEnabled: true,
       velocity: [90, 70],
-      ghost: { enabled: true, delaySteps: 1, probability: 1, velocity: [10, 10] },
+      ghost: { enabled: true, amount: 10, delaySteps: 1, probability: 1, hpHz: 200, lpHz: 6000 },
     };
     const tp = trackPattern(track);
     // E(4,8) = [x.x.x.x.] → main velocities at onsets 0,2,4,6 follow [90,70] cycle.
     expect(tp.velocities).toBeDefined();
     expect(tp.velocities![0]).toBe(90);
     expect(tp.velocities![2]).toBe(70);
-    // Ghost pattern [10,10] does NOT show up anywhere in main velocities.
+    // The ghost amount (10) does NOT show up anywhere in main velocities.
     expect(tp.velocities!.includes(10)).toBe(false);
   });
 });

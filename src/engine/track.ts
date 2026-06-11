@@ -108,19 +108,21 @@ export interface Track {
 }
 
 /**
- * Ghost Delay module — duplicates the main hit on a probabilistic delayed retrigger.
- * Snare's signature module; lives on Track for future portability.
+ * Ghost Delay module — duplicates the main hit on a probabilistic delayed
+ * retrigger. Snare's signature module; lives on Track for future portability.
  *
- * `velocity` is OWN, separate per-onset cycle (GHOST ONLY). Independent in
- * length from rhythm and from main-note velocity — the scheduler reads
- * `velocity[ghostOnsetIdx % velocity.length]` and never falls back to the
- * main path's `tp.velocities`. UI writes to this field ONLY from GhostLane.
+ * CRITICAL: the ghost is a SEPARATE audio lane — its own Tone.Player and its
+ * own HP→LP filter chain in audio.ts. It never shares the main snare voice,
+ * so retriggering it can no longer cut the main sample's transient. The fields
+ * below are all GHOST-ONLY; none is ever read by the main-note path.
  */
 export interface GhostModule {
   enabled: boolean;
+  amount: number;       // 0..100 — ghost level (own gain, never the main velocity)
   delaySteps: number;   // 1..4, expressed in 16th-note steps
   probability: number;  // 0..1
-  velocity: number[];   // per-onset cycle, each value 0..100
+  hpHz: number;         // high-pass cutoff for the ghost lane
+  lpHz: number;         // low-pass cutoff for the ghost lane
 }
 
 /**

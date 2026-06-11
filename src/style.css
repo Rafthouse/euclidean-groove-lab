@@ -735,20 +735,54 @@ header h1 {
   padding: 4px 8px;
   cursor: pointer;
 }
-.ghost-vel-grid {
+/* ---------- knobs (ghost module) ---------- */
+.knob-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(38px, 1fr));
-  gap: 4px;
+  grid-template-columns: repeat(auto-fit, minmax(54px, 1fr));
+  gap: 6px;
+  padding: 8px;
+  background: var(--panel-hi);
+  border-radius: 8px;
 }
-.ghost-vel-cell {
+.knob {
   display: grid;
+  justify-items: center;
   gap: 2px;
-  text-align: center;
+  cursor: ns-resize;
+  user-select: none;
+  touch-action: none;
 }
-.ghost-vel-cell input[type='range'] {
-  width: 100%;
+.knob:focus-visible {
+  outline: 1px solid var(--track-color);
+  border-radius: 6px;
 }
-.ghost-vel-cell b {
+.knob-dial {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+.knob-track {
+  fill: none;
+  stroke: var(--rest);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.knob-fill {
+  fill: none;
+  stroke: var(--track-color);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+.knob-dot {
+  fill: var(--text-hi);
+}
+.knob-label {
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.knob-value {
   font: 500 10px var(--mono);
   color: var(--text-hi);
 }

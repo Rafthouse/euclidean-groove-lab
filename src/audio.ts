@@ -27,6 +27,14 @@ const bass = new Tone.MonoSynth({
   filter: { type: 'lowpass', Q: 0.7, frequency: BASS_FILTER_FREQ, rolloff: -12 },
 }).toDestination();
 
+// --- Ghost lane (Snare) — a SEPARATE audio path so the ghost retrigger can
+// never cut the main snare's transient. Source → HP → LP → destination.
+// -24 dB/oct (Tone.Filter has no -18; -24 is the next steeper native slope).
+const ghostHP = new Tone.Filter({ type: 'highpass', frequency: 200, rolloff: -24 });
+const ghostLP = new Tone.Filter({ type: 'lowpass', frequency: 6000, rolloff: -24 });
+ghostHP.connect(ghostLP);
+ghostLP.toDestination();
+
 // --- Drum kit (sample-based, swappable) ---
 const SAMPLE_BASE = '/euclidean-groove-lab/samples/';
 
@@ -34,6 +42,11 @@ let currentPlayers: {
   kick: Tone.Player;
   snare: Tone.Player;
   hat: Tone.Player;
+  // Dedicated ghost-snare player. Same sample as `snare`, but its OWN Player
+  // instance routed through the ghost filter chain (NOT toDestination). The
+  // main snare and the ghost are different voices — retriggering one never
+  // interrupts the other.
+  ghostSnare: Tone.Player;
 } | null = null;
 
 let currentKitId: DrumKitId = 'cr78';
@@ -59,6 +72,7 @@ async function loadDrumKit(id: DrumKitId): Promise<void> {
       currentPlayers.kick.dispose();
       currentPlayers.snare.dispose();
       currentPlayers.hat.dispose();
+      currentPlayers.ghostSnare.dispose();
     } catch {
       // dispose may throw if already disposed; safe to ignore
     }
@@ -69,19 +83,23 @@ async function loadDrumKit(id: DrumKitId): Promise<void> {
   const kit = DRUM_KITS[id];
   const makeUrl = (p: string) => `${SAMPLE_BASE}${p}`;
 
-  // 3. Create new Players (no URL yet — load manually for promise control)
+  // 3. Create new Players (no URL yet — load manually for promise control).
+  // ghostSnare routes through the ghost filter chain instead of the master.
     const kick = new Tone.Player().toDestination();
     const snare = new Tone.Player().toDestination();
     const hat = new Tone.Player().toDestination();
+    const ghostSnare = new Tone.Player().connect(ghostHP);
 
-    // 4. Load in parallel — each failure caught individually
+    // 4. Load in parallel — each failure caught individually. The ghost loads
+    // the SAME snare sample into its own buffer/voice.
     await Promise.allSettled([
       kick.load(makeUrl(kit.kick)).catch(() => {}),
       snare.load(makeUrl(kit.snare)).catch(() => {}),
       hat.load(makeUrl(kit.hat)).catch(() => {}),
+      ghostSnare.load(makeUrl(kit.snare)).catch(() => {}),
     ]);
 
-  currentPlayers = { kick, snare, hat };
+  currentPlayers = { kick, snare, hat, ghostSnare };
   currentKitId = id;
   loadingCallback?.(false);
 }
@@ -334,27 +352,23 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
       }
 
       // ──────────────────────────────────────────────────────────────────
-      // GHOST NOTE PATH (Snare only). Velocity is read ONLY from
-      // `track.ghost.velocity[ghostOnsetIdx]` — a SEPARATE FIELD from main's
-      // `track.velocity`. The two paths share no variable, no derived value,
-      // and no scope. The ghost path computes its own mixer volume from
-      // `track.volume` independently of the main path so attenuation on
-      // either side cannot leak.
+      // GHOST NOTE PATH (Snare only). Fires on a DEDICATED player
+      // (`currentPlayers.ghostSnare`) through its OWN HP→LP filter chain.
+      // It never calls voices['snare'] and never touches the main player,
+      // so the ghost retrigger cannot cut the main snare's transient. Level
+      // comes from the ghost's own `amount` (× track volume); the filter
+      // cutoffs come from the module params — both GHOST-ONLY.
       // ──────────────────────────────────────────────────────────────────
       if (track.voiceId === 'snare' && track.ghost?.enabled) {
-        const ghostPattern = track.ghost.velocity;
-        if (ghostPattern.length > 0 && Math.random() < clamp01(track.ghost.probability)) {
+        const gp = currentPlayers?.ghostSnare;
+        if (gp && Math.random() < clamp01(track.ghost.probability)) {
           const sixteenthSec = Tone.Time('16n').toSeconds();
           const ghostTime = time + sixteenthSec * Math.max(1, track.ghost.delaySteps);
-          // Onset index is the linear count of audible snare onsets to this
-          // tick. Each ghost fires once per snare hit, so cycling the ghost
-          // velocity pattern by onset gives a clean drift independent of the
-          // main-note pattern length — even when both happen to be sequences.
-          const t = adjustedTick(g, speed, offset);
-          const ghostOnsetIdx = onsetIndexAt(tp.pulses, t);
-          const ghostVelocity = clamp01(ghostPattern[ghostOnsetIdx % ghostPattern.length] / 100);
-          const ghostMixerVolume = (track.volume ?? 100) / 100;
-          voices['snare'](ghostTime, ghostVelocity, ghostMixerVolume);
+          ghostHP.frequency.value = track.ghost.hpHz;
+          ghostLP.frequency.value = track.ghost.lpHz;
+          const ghostLevel = clamp01(track.ghost.amount / 100) * ((track.volume ?? 100) / 100);
+          gp.volume.value = linearToDb(ghostLevel);
+          gp.start(ghostTime);
         }
       }
     }

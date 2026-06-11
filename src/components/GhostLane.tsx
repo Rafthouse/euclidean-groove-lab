@@ -1,26 +1,27 @@
 import type { Track, GhostModule } from '../engine';
+import Knob from './Knob';
 
 /**
- * MIDI Ghost Delay module editor. Lives on the snare track today.
+ * MIDI Ghost Delay module editor (Snare). Knob-based, compact.
  *
- * Schedules a duplicate of every main snare hit, `delaySteps` 16th-notes later,
- * with `probability` chance, using a per-onset-cycled velocity pattern stored
- * IN THIS MODULE (`ghost.velocity: number[]`). The pattern is GHOST ONLY —
- * the audio scheduler reads it via `track.ghost.velocity[onsetIdx % len]`
- * and the editor below writes to `track.ghost.velocity` exclusively. Neither
- * side ever touches `track.velocity` (which belongs to the main note).
+ * The ghost is a SEPARATE audio lane in audio.ts — its own Tone.Player routed
+ * through an HP→LP filter chain — so it never shares the main snare voice or
+ * envelope. This editor writes ONLY to `track.ghost`; it never touches
+ * `track.velocity` (the main note).
  *
  * Module contract:
  *   - Visibility gated by `track.ghost?.enabled === true`.
  *   - Toggling never deletes params; just flips `enabled`.
- *   - Defaults on first enable: delay 1 step, 50% probability, velocity [60].
+ *   - Defaults on first enable below.
  */
 
 const DEFAULT_GHOST: GhostModule = {
   enabled: true,
+  amount: 55,
   delaySteps: 1,
   probability: 0.5,
-  velocity: [60],
+  hpHz: 200,
+  lpHz: 6000,
 };
 
 interface GhostLaneProps {
@@ -31,41 +32,20 @@ interface GhostLaneProps {
 export default function GhostLane({ track, onChange }: GhostLaneProps) {
   const ghost = track.ghost;
   const enabled = ghost?.enabled === true;
-  const ghostVel = ghost?.velocity ?? [];
 
   const toggle = () => {
     if (enabled) {
       onChange({ ghost: { ...ghost!, enabled: false } });
     } else if (ghost) {
-      // Re-enable preserving prior data; if velocity array somehow empty, seed it.
-      const velocity = ghost.velocity.length > 0 ? ghost.velocity : [...DEFAULT_GHOST.velocity];
-      onChange({ ghost: { ...ghost, enabled: true, velocity } });
+      onChange({ ghost: { ...ghost, enabled: true } });
     } else {
-      onChange({ ghost: { ...DEFAULT_GHOST, velocity: [...DEFAULT_GHOST.velocity] } });
+      onChange({ ghost: { ...DEFAULT_GHOST } });
     }
   };
 
   const update = (patch: Partial<GhostModule>) => {
     if (!ghost) return;
     onChange({ ghost: { ...ghost, ...patch } });
-  };
-
-  const setVelocityAt = (i: number, v: number) => {
-    if (!ghost) return;
-    const next = ghost.velocity.slice();
-    next[i] = Math.max(0, Math.min(100, Math.round(v)));
-    update({ velocity: next });
-  };
-
-  const addPoint = () => {
-    if (!ghost) return;
-    const last = ghost.velocity[ghost.velocity.length - 1] ?? 60;
-    update({ velocity: [...ghost.velocity, last] });
-  };
-
-  const removePoint = () => {
-    if (!ghost || ghost.velocity.length <= 1) return;
-    update({ velocity: ghost.velocity.slice(0, -1) });
   };
 
   return (
@@ -81,79 +61,54 @@ export default function GhostLane({ track, onChange }: GhostLaneProps) {
         >
           ♪ Ghost
         </button>
-        {enabled && (
-          <span className="velocity-count" style={{ marginLeft: 'auto' }}>
-            {ghostVel.length} {ghostVel.length === 1 ? 'pt' : 'pts'}
-          </span>
-        )}
       </div>
 
       {enabled && ghost && (
-        <div className="module-controls">
-          <label className="control">
-            <span className="control-label">
-              Delay
-              <b>{ghost.delaySteps} st</b>
-            </span>
-            <input
-              type="range"
-              min={1}
-              max={4}
-              step={1}
-              value={ghost.delaySteps}
-              onChange={(e) => update({ delaySteps: Number(e.target.value) })}
-            />
-          </label>
-          <label className="control">
-            <span className="control-label">
-              Probability
-              <b>{Math.round(ghost.probability * 100)}%</b>
-            </span>
-            <input
-              type="range"
-              min={0}
-              max={100}
-              value={Math.round(ghost.probability * 100)}
-              onChange={(e) => update({ probability: Number(e.target.value) / 100 })}
-            />
-          </label>
-          <div className="control">
-            <span className="control-label">
-              <span>Velocity</span>
-              <span style={{ display: 'inline-flex', gap: 4 }}>
-                <button
-                  type="button"
-                  className="velocity-step"
-                  onClick={removePoint}
-                  disabled={ghostVel.length <= 1}
-                  aria-label="Remove last ghost velocity point"
-                  title="Remove last point"
-                >−</button>
-                <button
-                  type="button"
-                  className="velocity-step"
-                  onClick={addPoint}
-                  aria-label="Add a ghost velocity point"
-                  title="Add a point at the end"
-                >+</button>
-              </span>
-            </span>
-            <div className="ghost-vel-grid">
-              {ghostVel.map((v, i) => (
-                <label key={i} className="ghost-vel-cell">
-                  <input
-                    type="range"
-                    min={0}
-                    max={100}
-                    value={v}
-                    onChange={(e) => setVelocityAt(i, Number(e.target.value))}
-                    aria-label={`Ghost velocity ${i + 1}`}
-                  />
-                  <b>{v}</b>
-                </label>
-              ))}
-            </div>
-          </div>
+        <div className="knob-row">
+          <Knob
+            label="Amount"
+            value={ghost.amount}
+            min={0}
+            max={100}
+            format={(v) => `${v}%`}
+            onChange={(v) => update({ amount: v })}
+          />
+          <Knob
+            label="Delay"
+            value={ghost.delaySteps}
+            min={1}
+            max={4}
+            step={1}
+            sensitivity={120}
+            format={(v) => `${v} st`}
+            onChange={(v) => update({ delaySteps: v })}
+          />
+          <Knob
+            label="Prob"
+            value={Math.round(ghost.probability * 100)}
+            min={0}
+            max={100}
+            format={(v) => `${v}%`}
+            onChange={(v) => update({ probability: v / 100 })}
+          />
+          <Knob
+            label="HP"
+            value={ghost.hpHz}
+            min={20}
+            max={2000}
+            step={10}
+            format={(v) => `${v}`}
+            onChange={(v) => update({ hpHz: v })}
+          />
+          <Knob
+            label="LP"
+            value={ghost.lpHz}
+            min={1000}
+            max={16000}
+            step={100}
+            format={(v) => (v >= 1000 ? `${(v / 1000).toFixed(1)}k` : `${v}`)}
+            onChange={(v) => update({ lpHz: v })}
+          />
         </div>
       )}
     </div>
