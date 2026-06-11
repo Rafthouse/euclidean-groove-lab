@@ -58,14 +58,42 @@ export interface Track {
    */
   manualMute?: boolean[];
 
-  /** Optional cyclic velocity sequence indexed by onset order (not step index). */
+  /**
+   * Velocity module.
+   *  - `velocityPattern` holds the cyclic per-onset velocity sequence.
+   *  - `velocityEnabled` gates the module ON/OFF (default OFF). When OFF the
+   *    engine ignores the pattern entirely (flat velocity). The pattern data is
+   *    NEVER cleared by toggling — disabling preserves it for the next enable.
+   * Universal field on Track; UI exposes the editor only for the hat voice.
+   */
+  velocityEnabled?: boolean;
   velocityPattern?: VelocityPattern;
 
   /**
-   * Optional pitch layer — an independent, onset-indexed cycle (isorhythm).
-   * Absent => drum-style (no pitch). See docs/PITCH-DATA-MODEL-RECONCILIATION.md.
+   * Pitch module.
+   *  - `pitches` holds the onset-indexed cycle (isorhythm).
+   *  - `pitchEnabled` gates the module ON/OFF (default OFF). When OFF the audio
+   *    scheduler treats the track as drum-style (no pitch). Data preserved on
+   *    toggle. Universal; UI exposes the editor only for the bass voice.
+   * See docs/PITCH-DATA-MODEL-RECONCILIATION.md.
    */
+  pitchEnabled?: boolean;
   pitches?: PitchSequence;
+
+  /**
+   * Ghost Delay module (Snare). Schedules a duplicate of the main hit `delaySteps`
+   * 16th-notes later with `probability` chance, at `velocity` 0–100. Persistent
+   * data is the params themselves; `enabled` gates the whole module.
+   */
+  ghost?: GhostModule;
+
+  /**
+   * Ducking module (Kick). When the kick fires, the target voice's volume is
+   * attenuated for `decaySteps` 16ths by up to `amount` (0–1). Single shared
+   * scheduler-side state; persistent data is the params here. Target defaults
+   * to 'bass'.
+   */
+  ducking?: DuckingModule;
 
   /**
    * Per-track playback config. The audio scheduler runs a SINGLE clock; these
@@ -80,6 +108,29 @@ export interface Track {
 }
 
 /**
+ * Ghost Delay module — duplicates the main hit on a probabilistic delayed retrigger.
+ * Snare's signature module; lives on Track for future portability.
+ */
+export interface GhostModule {
+  enabled: boolean;
+  delaySteps: number;   // 1..4, expressed in 16th-note steps
+  probability: number;  // 0..1
+  velocity: number;     // 0..100 — applied as a multiplier on the main velocity
+}
+
+/**
+ * Ducking module — attenuates `target` voice's volume after the source voice fires.
+ * Used by Kick to make space for Bass. Single source of truth on the source Track;
+ * the scheduler maintains a one-shot `lastTrigger` state to apply the decay.
+ */
+export interface DuckingModule {
+  enabled: boolean;
+  target: VoiceId;      // default 'bass'
+  amount: number;       // 0..1 — fraction of volume to remove at peak
+  decaySteps: number;   // 1..8 — how many 16ths until ducking fully recovers
+}
+
+/**
  * The per-track carrier that grows over time.
  */
 export interface TrackPattern {
@@ -91,11 +142,19 @@ export interface TrackPattern {
 
 /**
  * Derive a track's playable pattern.
+ *
+ * Velocity is gated by the `velocityEnabled` module flag — the pattern data is
+ * preserved across toggles, but only consumed when the module is ON. When OFF
+ * `velocities` is undefined and the audio scheduler falls back to flat 1.0.
  */
 export function trackPattern(track: Track): TrackPattern {
   const pulses = rotate(euclid(track.hits, track.steps), track.rotation);
-  const velocities = track.velocityPattern
-    ? computeVelocities(pulses, track.velocityPattern)
+  const velocityActive =
+    track.velocityEnabled === true &&
+    !!track.velocityPattern &&
+    track.velocityPattern.length > 0;
+  const velocities = velocityActive
+    ? computeVelocities(pulses, track.velocityPattern!)
     : undefined;
   return { pulses, velocities };
 }
@@ -153,8 +212,9 @@ export function audibleTracks(tracks: readonly Track[]): Track[] {
  * These are *defaults*, not a preset. A `Preset` is a named multi-track
  * snapshot (Commit 3). Defaults are the bootstrap state of an empty session.
  *
- * Hat starts with a velocity ramp (mode 1 = flat 100) to demonstrate the
- * layer; users can clear it or switch modes via the accent UI later.
+ * All optional modules (velocity, pitch, ghost, ducking) ship DISABLED so
+ * playback starts as pure rhythm and the user opts into each module
+ * deliberately via its UI toggle.
  */
 export function defaultTracks(): Track[] {
   return [
@@ -199,7 +259,6 @@ export function defaultTracks(): Track[] {
       volume: 100,
       playbackMode: 'forward',
       playbackSpeed: 1,
-      velocityPattern: [100], // flat velocity; ready for accent ramp
     },
     {
       id: 'bass',

@@ -1,16 +1,19 @@
 import { useReducer } from 'react';
 import type { Track } from '../engine';
 import { resolvePitchSpec, midiToNoteName, pitchSequenceToText, parseNoteSequence } from '../engine';
-import { laneReducer, initLaneState, pitchesFromText } from './pitchLaneState';
+import { laneReducer, initLaneState, pitchesFromText, PITCH_STARTER } from './pitchLaneState';
 
 /**
- * Variant B Pitch Lane. First version: TEXT INPUT for editing, with a bar
- * contour as read-only visualization of the melodic shape. Drag editing is a
- * deliberate later commit (see docs/DESIGN-PITCH-UI.md).
+ * Pitch module editor (Variant B). Universal component; TrackCard decides
+ * which voices expose it.
  *
- * Open/closed is a UI state (LaneState.open) controlled ONLY by the ♪ toggle.
- * Clearing the text makes `track.pitches` undefined but keeps the lane open, so
- * "select-all → delete → retype" works without the field disappearing.
+ * Module contract:
+ *   - Visibility is gated by `track.pitchEnabled` (default false). The toggle
+ *     button flips that flag — it never clears `track.pitches`.
+ *   - On first enable, if no pitches exist yet, seed PITCH_STARTER so the
+ *     editor opens with an audible default (req. "Default Hat velocity = [100]
+ *     if empty" — same principle for Pitch).
+ *   - Disabling preserves both `track.pitches` and the editor's text.
  */
 
 interface PitchLaneProps {
@@ -19,19 +22,32 @@ interface PitchLaneProps {
 }
 
 export default function PitchLane({ track, onChange }: PitchLaneProps) {
+  const open = track.pitchEnabled === true;
+
   const [state, dispatch] = useReducer(laneReducer, undefined, () =>
-    initLaneState(track.pitches ? pitchSequenceToText(track.pitches) : '', !!track.pitches),
+    initLaneState(track.pitches ? pitchSequenceToText(track.pitches) : PITCH_STARTER),
   );
 
-  // Text edits update local text + the data patch, but never the open state.
+  // Text edits write the data patch but never touch the enabled flag.
   const setText = (text: string) => {
     dispatch({ type: 'setText', text });
     onChange({ pitches: pitchesFromText(track.id, text) });
   };
 
-  // The toggle is the ONLY control over open/closed.
+  // Toggle is the ONLY control over the module's enabled flag. Data is
+  // preserved across toggles — req. (3) "Toggling MUST NOT reset stored
+  // pattern data". On first enable, seed a default if the track has no
+  // pitches yet.
   const toggle = () => {
-    dispatch({ type: 'toggle' });
+    if (open) {
+      onChange({ pitchEnabled: false });
+    } else {
+      const patch: Partial<Track> = { pitchEnabled: true };
+      if (!track.pitches || track.pitches.slots.length === 0) {
+        patch.pitches = pitchesFromText(track.id, PITCH_STARTER);
+      }
+      onChange(patch);
+    }
   };
 
   // Contour: one bar per slot, height normalized to the sequence's own range so
@@ -47,26 +63,26 @@ export default function PitchLane({ track, onChange }: PitchLaneProps) {
   const { errors } = parseNoteSequence(state.text);
 
   return (
-    <div className={'pitch-lane' + (state.open ? ' is-on' : '')}>
+    <div className={'pitch-lane' + (open ? ' is-on' : '')}>
       <div className="pitch-head">
         <button
           type="button"
-          className={'toggle' + (state.open ? ' is-on' : '')}
+          className={'toggle' + (open ? ' is-on' : '')}
           data-kind="pitch"
           onClick={toggle}
-          aria-pressed={state.open}
+          aria-pressed={open}
           aria-label={`Toggle pitch layer for ${track.name}`}
         >
           ♪ Pitch
         </button>
-        {state.open && (
+        {open && (
           <span className="pitch-count">
             {midis.length} {midis.length === 1 ? 'note' : 'notes'}
           </span>
         )}
       </div>
 
-      {state.open && (
+      {open && (
         <>
           <div className="pitch-contour" aria-hidden="true">
             {midis.map((m, i) => (

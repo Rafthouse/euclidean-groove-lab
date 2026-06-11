@@ -1,13 +1,17 @@
 import Sequencer from './Sequencer';
 import PitchLane from './PitchLane';
 import VelocityLane from './VelocityLane';
-import { trackPattern, onsetCount, density, isPitchedVoice } from '../engine';
+import GhostLane from './GhostLane';
+import DuckingLane from './DuckingLane';
+import { trackPattern, onsetCount, density } from '../engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from '../engine';
 
-// Voices that expose the velocity-layer editor in the UI. The data model and
-// the VelocityLane component are universal — gating happens only here so
-// adding kick/snare/bass later is a one-line change.
+// Per-voice module assignment. Adding a module to another voice is a one-line
+// change here — engine/UI are universal, gating is purely presentational.
 const VELOCITY_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['hat'];
+const PITCH_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['bass'];
+const GHOST_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['snare'];
+const DUCKING_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['kick'];
 
 interface TrackCardProps {
   track: Track;
@@ -80,12 +84,20 @@ export default function TrackCard({
         onToggleStep={toggleStep}
       />
 
-      {isPitchedVoice(track.voiceId) && (
+      {PITCH_EDITOR_VOICES.includes(track.voiceId) && (
         <PitchLane track={track} onChange={onChange} />
       )}
 
       {VELOCITY_EDITOR_VOICES.includes(track.voiceId) && (
         <VelocityLane track={track} onChange={onChange} />
+      )}
+
+      {GHOST_EDITOR_VOICES.includes(track.voiceId) && (
+        <GhostLane track={track} onChange={onChange} />
+      )}
+
+      {DUCKING_EDITOR_VOICES.includes(track.voiceId) && (
+        <DuckingLane track={track} onChange={onChange} />
       )}
 
       <div className="controls">

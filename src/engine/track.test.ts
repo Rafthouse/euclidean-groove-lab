@@ -36,8 +36,8 @@ describe('trackPattern', () => {
     expect(tp.microtiming).toBeUndefined();
   });
 
-  it('populates velocities when velocityPattern is set', () => {
-    const t = make({ hits: 4, steps: 8, velocityPattern: [100, 80] });
+  it('populates velocities when velocityEnabled is true and velocityPattern is set', () => {
+    const t = make({ hits: 4, steps: 8, velocityEnabled: true, velocityPattern: [100, 80] });
     const tp = trackPattern(t);
     expect(tp.velocities).toBeDefined();
     // E(4,8) = [1,0,1,0,1,0,1,0]; velocity by onset index: 100,80,100,80

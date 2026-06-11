@@ -6,43 +6,33 @@ import {
   PITCH_STARTER,
 } from './pitchLaneState';
 
-describe('laneReducer — open/close is controlled only by toggle', () => {
-  it('toggle opens a closed lane and seeds the starter text', () => {
-    const s = laneReducer(initLaneState('', false), { type: 'toggle' });
-    expect(s.open).toBe(true);
-    expect(s.text).toBe(PITCH_STARTER);
+/**
+ * Under the new module contract:
+ *   - The lane's visibility is derived from `track.pitchEnabled` (not LaneState).
+ *   - LaneState owns ONLY the raw editor text, so partial typing is preserved.
+ *   - The reducer therefore has a single action: setText. Toggle is done on the
+ *     Track via onChange, not in this reducer.
+ */
+describe('laneReducer — text-only state, never destroys data', () => {
+  it('initLaneState seeds the text', () => {
+    expect(initLaneState('C3 D3 G3').text).toBe('C3 D3 G3');
+    expect(initLaneState('').text).toBe('');
   });
 
-  it('toggle closes an open lane and clears the text', () => {
-    const s = laneReducer({ open: true, text: 'C3 D3' }, { type: 'toggle' });
-    expect(s.open).toBe(false);
-    expect(s.text).toBe('');
+  it('setText updates the text', () => {
+    expect(laneReducer({ text: 'old' }, { type: 'setText', text: 'new' }).text).toBe('new');
   });
 
-  it('REGRESSION: clearing the text keeps the lane OPEN', () => {
-    // Open, type something, then clear it (Ctrl+A -> Delete).
-    const opened = laneReducer(initLaneState('', false), { type: 'toggle' });
-    const typed = laneReducer(opened, { type: 'setText', text: 'C3 D3 G3' });
-    const cleared = laneReducer(typed, { type: 'setText', text: '' });
-    expect(cleared.open).toBe(true); // <-- the fix: empty text must NOT close
-    expect(cleared.text).toBe('');
+  it('setText to empty preserves the field (but it can be empty)', () => {
+    expect(laneReducer({ text: 'C3 D3' }, { type: 'setText', text: '' }).text).toBe('');
   });
 
-  it('REGRESSION: retyping after clearing keeps the lane open throughout', () => {
-    let s = laneReducer(initLaneState('', false), { type: 'toggle' });
-    s = laneReducer(s, { type: 'setText', text: '' }); // clear
-    s = laneReducer(s, { type: 'setText', text: 'E2 G2' }); // retype
-    expect(s.open).toBe(true);
-    expect(s.text).toBe('E2 G2');
-  });
-
-  it('text edits never change the open flag (open stays open, closed stays closed)', () => {
-    expect(laneReducer({ open: true, text: 'x' }, { type: 'setText', text: 'y' }).open).toBe(true);
-    expect(laneReducer({ open: false, text: '' }, { type: 'setText', text: 'C3' }).open).toBe(false);
+  it('PITCH_STARTER is a non-empty starter sequence', () => {
+    expect(PITCH_STARTER.length).toBeGreaterThan(0);
   });
 });
 
-describe('pitchesFromText — data derivation (independent of open state)', () => {
+describe('pitchesFromText — data derivation', () => {
   it('empty text -> undefined (no pitch layer in the data)', () => {
     expect(pitchesFromText('bass', '')).toBeUndefined();
     expect(pitchesFromText('bass', '   ')).toBeUndefined();

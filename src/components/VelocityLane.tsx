@@ -1,24 +1,22 @@
-import { useReducer, useRef } from 'react';
+import { useRef } from 'react';
 import type { PointerEvent as ReactPointerEvent } from 'react';
 import type { Track } from '../engine';
 import {
-  velocityLaneReducer,
-  initVelocityLaneState,
   paintBar,
   pointerToBarValue,
+  VELOCITY_STARTER,
 } from './velocityLaneState';
 
 /**
- * Variant of the per-track editor for the velocity layer. Mirrors PitchLane's
- * shape but the input is a CROSS-BAR DRAG instead of a text field — closer to
- * an FL-Studio piano-roll feel: press, drag, draw a curve in one stroke.
+ * Velocity module editor — cross-bar drag, FL-Studio piano-roll feel.
  *
- * The velocity sequence is its own cycle, INDEPENDENT in length from both the
- * rhythm and the pitch sequence. A 3-point velocity against 8 onsets drifts
- * through accents — that drift is the musical point of the layer.
- *
- * Universal — accepts any Track. The decision of WHICH tracks expose this
- * editor lives in TrackCard.
+ * Module contract:
+ *   - Visibility gated by `track.velocityEnabled` (default false). The toggle
+ *     button flips that flag; data (`track.velocityPattern`) is NEVER cleared
+ *     on toggle off — req. (3) persistence.
+ *   - On first enable, if no velocityPattern exists, seed VELOCITY_STARTER
+ *     ([100]) — req. (5) "Default Hat velocity = [100] if empty".
+ *   - Universal component; TrackCard gates which voices expose it.
  */
 
 interface VelocityLaneProps {
@@ -27,9 +25,7 @@ interface VelocityLaneProps {
 }
 
 export default function VelocityLane({ track, onChange }: VelocityLaneProps) {
-  const [state, dispatch] = useReducer(velocityLaneReducer, undefined, () =>
-    initVelocityLaneState(!!track.velocityPattern),
-  );
+  const open = track.velocityEnabled === true;
 
   // Tracks the bar last touched during a drag so cross-bar moves fill the trail.
   const lastIdxRef = useRef<number | null>(null);
@@ -43,8 +39,18 @@ export default function VelocityLane({ track, onChange }: VelocityLaneProps) {
 
   const pattern = track.velocityPattern ?? [];
 
+  // Toggle: flips enabled flag. On first enable, seed [100] if no pattern yet.
+  // Disabling preserves the pattern on Track.
   const toggle = () => {
-    dispatch({ type: 'toggle' });
+    if (open) {
+      onChange({ velocityEnabled: false });
+    } else {
+      const patch: Partial<Track> = { velocityEnabled: true };
+      if (!track.velocityPattern || track.velocityPattern.length === 0) {
+        patch.velocityPattern = [...VELOCITY_STARTER];
+      }
+      onChange(patch);
+    }
   };
 
   const addPoint = () => {
@@ -95,19 +101,19 @@ export default function VelocityLane({ track, onChange }: VelocityLaneProps) {
   };
 
   return (
-    <div className={'velocity-lane' + (state.open ? ' is-on' : '')}>
+    <div className={'velocity-lane' + (open ? ' is-on' : '')}>
       <div className="velocity-head">
         <button
           type="button"
-          className={'toggle' + (state.open ? ' is-on' : '')}
+          className={'toggle' + (open ? ' is-on' : '')}
           data-kind="velocity"
           onClick={toggle}
-          aria-pressed={state.open}
+          aria-pressed={open}
           aria-label={`Toggle velocity layer for ${track.name}`}
         >
           ♪ Velocity
         </button>
-        {state.open && (
+        {open && (
           <>
             <span className="velocity-count">
               {pattern.length} {pattern.length === 1 ? 'point' : 'points'}
@@ -137,7 +143,7 @@ export default function VelocityLane({ track, onChange }: VelocityLaneProps) {
         )}
       </div>
 
-      {state.open && pattern.length > 0 && (
+      {open && pattern.length > 0 && (
         <div
           ref={containerRef}
           className="velocity-bars"

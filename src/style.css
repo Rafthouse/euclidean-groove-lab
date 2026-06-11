@@ -699,6 +699,43 @@ header h1 {
   accent-color: var(--track-color, var(--accent));
 }
 
+/* ---------- generic module lane (ghost / ducking) ---------- */
+
+.module-lane {
+  display: grid;
+  gap: 8px;
+}
+.module-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.module-controls {
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  background: var(--panel-hi);
+  border-radius: 8px;
+}
+.module-controls .control {
+  gap: 2px;
+}
+.toggle.is-on[data-kind='ghost'],
+.toggle.is-on[data-kind='ducking'] {
+  background: var(--track-color);
+  border-color: var(--track-color);
+  color: var(--bg);
+}
+.module-select {
+  font: 500 12px var(--mono);
+  color: var(--text-hi);
+  background: var(--panel);
+  border: 1px solid var(--rest);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
 /* ---------- pitch lane (Variant B) ---------- */
 
 .pitch-lane {

@@ -103,6 +103,10 @@ function linearToDb(normalized: number): number {
   return 20 * Math.log10(normalized);
 }
 
+function clamp01(v: number): number {
+  return v < 0 ? 0 : v > 1 ? 1 : v;
+}
+
 // Voices take `velocity` (per-hit dynamics, 0–1) and `volume` (per-track mixer
 // level, 0–1). Both feed the same `volume.value` control via linearToDb, so the
 // mixer is applied without adding any nodes to the audio graph: the effective
@@ -149,6 +153,15 @@ let currentTracks: Track[] = [];
 let globalStep = 0;
 
 /**
+ * Ducking state. When a kick with ducking enabled fires, we record the global
+ * tick `g` and the target/amount/decay. While the target voice plays, its
+ * effective volume is attenuated by an exponentially-decaying factor. This is
+ * a *gain* modulation only — it does not touch timing or the scheduler tick.
+ */
+let lastDucking: { target: VoiceId; g: number; amount: number; decayTicks: number } | null = null;
+function resetDucking(): void { lastDucking = null; }
+
+/**
  * Reset the global cycle counter to 0 without touching Tone.Transport. The
  * transport keeps running (no stop/start glitch, no sample tail cut), but
  * every track restarts its cycle from origin on the very next 32n tick.
@@ -156,6 +169,7 @@ let globalStep = 0;
  */
 export function resetClock(): void {
   globalStep = 0;
+  resetDucking();
 }
 
 /** Per-track step callback shape: emits the GLOBAL clock `g` and the per-track
@@ -289,32 +303,75 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
       if (!tp.pulses[step]) continue;
       if (isStepMuted(track, step)) continue; // manualMute is step-indexed → reverse safe
 
-      const volume = (track.volume ?? 100) / 100;
-      if (isPitchedVoice(track.voiceId)) {
+      // Ducking modulation. If a kick with ducking enabled fired recently
+      // and this voice is its target, attenuate the effective volume by a
+      // linearly decaying factor over `decayTicks`. Single global state on
+      // the scheduler — no per-track timer; the decay is computed each tick
+      // from `g - lastDucking.g`. Single-clock invariant intact.
+      let effVolume = (track.volume ?? 100) / 100;
+      if (lastDucking && lastDucking.target === track.voiceId) {
+        const dg = g - lastDucking.g;
+        if (dg >= 0 && dg < lastDucking.decayTicks) {
+          const recover = dg / lastDucking.decayTicks; // 0 → fresh kick, 1 → fully recovered
+          const cut = lastDucking.amount * (1 - recover);
+          effVolume *= Math.max(0, 1 - cut);
+        }
+      }
+
+      // Pitch module: gated by `pitchEnabled`. Only the bass voice exposes
+      // this in the UI; the gate makes a track without an active pitch
+      // module fall back to its intrinsic drum/voice behaviour.
+      const pitchActive =
+        track.pitchEnabled === true &&
+        !!track.pitches &&
+        track.pitches.slots.length > 0;
+
+      if (isPitchedVoice(track.voiceId) && pitchActive) {
         // Pitch index advances LINEARLY through monotonic `t`, regardless of
         // playback mode — isorhythm variant (a): each played note = +1 in the
         // pitch cycle. Inlined here instead of going through resolveOnset()
         // so we can decouple "is this an audible onset?" (uses `step`, just
         // confirmed by tp.pulses above) from "which pitch slot is it?" (uses
         // `t`). engine/pitch.ts is not modified.
-        if (track.pitches && track.pitches.slots.length > 0) {
-          const t = adjustedTick(g, speed, offset);
-          const onsetIdx = onsetIndexAt(tp.pulses, t);
-          const slot = track.pitches.slots[onsetIdx % track.pitches.slots.length];
-          if (slot === null) continue; // explicit rest in the pitch cycle
-          const midi = resolvePitchSpec(slot.pitch);
-          const stepVel = tp.velocities ? tp.velocities[step] : undefined;
-          const velocity = (slot.velocity ?? stepVel ?? 100) / 100;
-          voices[track.voiceId](time, velocity, volume, midi);
-        } else {
-          // No pitch layer → drum-style fallback. The bass voice falls back
-          // to its intrinsic E2 when midi is undefined.
-          const velocity = tp.velocities ? (tp.velocities[step] ?? 100) / 100 : 1;
-          voices[track.voiceId](time, velocity, volume);
-        }
+        const t = adjustedTick(g, speed, offset);
+        const onsetIdx = onsetIndexAt(tp.pulses, t);
+        const slot = track.pitches!.slots[onsetIdx % track.pitches!.slots.length];
+        if (slot === null) continue; // explicit rest in the pitch cycle
+        const midi = resolvePitchSpec(slot.pitch);
+        const stepVel = tp.velocities ? tp.velocities[step] : undefined;
+        const velocity = (slot.velocity ?? stepVel ?? 100) / 100;
+        voices[track.voiceId](time, velocity, effVolume, midi);
       } else {
         const velocity = tp.velocities ? (tp.velocities[step] ?? 100) / 100 : 1;
-        voices[track.voiceId](time, velocity, volume);
+        voices[track.voiceId](time, velocity, effVolume);
+      }
+
+      // Source-side modules (fired AFTER the main hit so they observe the
+      // current effective velocity but never alter the main scheduling).
+
+      // Kick → ducking: record this hit so the target voice attenuates on
+      // its upcoming hits. Decay measured in 16th-note steps but stored as
+      // 32n master ticks (×2) to align with `g`.
+      if (track.voiceId === 'kick' && track.ducking?.enabled) {
+        lastDucking = {
+          target: track.ducking.target,
+          g,
+          amount: clamp01(track.ducking.amount),
+          decayTicks: Math.max(1, Math.round(track.ducking.decaySteps * 2)),
+        };
+      }
+
+      // Snare → ghost delay: probabilistic delayed duplicate. Uses Tone's
+      // absolute-time scheduling on the SAME transport (no second timer).
+      // The duplicate is fire-and-forget — it does not feed the perTrack
+      // playhead map (visualisation stays anchored to the main grid).
+      if (track.voiceId === 'snare' && track.ghost?.enabled) {
+        if (Math.random() < clamp01(track.ghost.probability)) {
+          const sixteenthSec = Tone.Time('16n').toSeconds();
+          const ghostTime = time + sixteenthSec * Math.max(1, track.ghost.delaySteps);
+          const ghostVel = clamp01(track.ghost.velocity / 100);
+          voices['snare'](ghostTime, ghostVel, effVolume);
+        }
       }
     }
     Tone.getDraw().schedule(() => stepCallback?.(g, perTrack), time);

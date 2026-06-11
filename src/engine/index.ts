@@ -8,7 +8,7 @@
  */
 export type { Pattern } from './types';
 export type { OnsetTime } from './phase';
-export type { Track, TrackPattern, VoiceId, VelocityPattern } from './track';
+export type { Track, TrackPattern, VoiceId, VelocityPattern, GhostModule, DuckingModule } from './track';
 export type { PlaybackMode, PlaybackSpeed } from './playback';
 export {
   divider,
