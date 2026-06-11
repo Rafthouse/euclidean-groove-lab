@@ -59,15 +59,15 @@ export interface Track {
   manualMute?: boolean[];
 
   /**
-   * Velocity module.
-   *  - `velocityPattern` holds the cyclic per-onset velocity sequence.
+   * Main-note velocity module (MAIN ONLY — never read by the ghost path).
+   *  - `velocity` holds the cyclic per-onset velocity sequence for the main hit.
    *  - `velocityEnabled` gates the module ON/OFF (default OFF). When OFF the
    *    engine ignores the pattern entirely (flat velocity). The pattern data is
    *    NEVER cleared by toggling — disabling preserves it for the next enable.
    * Universal field on Track; UI exposes the editor only for the hat voice.
    */
   velocityEnabled?: boolean;
-  velocityPattern?: VelocityPattern;
+  velocity?: VelocityPattern;
 
   /**
    * Pitch module.
@@ -110,12 +110,17 @@ export interface Track {
 /**
  * Ghost Delay module — duplicates the main hit on a probabilistic delayed retrigger.
  * Snare's signature module; lives on Track for future portability.
+ *
+ * `velocity` is OWN, separate per-onset cycle (GHOST ONLY). Independent in
+ * length from rhythm and from main-note velocity — the scheduler reads
+ * `velocity[ghostOnsetIdx % velocity.length]` and never falls back to the
+ * main path's `tp.velocities`. UI writes to this field ONLY from GhostLane.
  */
 export interface GhostModule {
   enabled: boolean;
   delaySteps: number;   // 1..4, expressed in 16th-note steps
   probability: number;  // 0..1
-  velocity: number;     // 0..100 — applied as a multiplier on the main velocity
+  velocity: number[];   // per-onset cycle, each value 0..100
 }
 
 /**
@@ -151,10 +156,10 @@ export function trackPattern(track: Track): TrackPattern {
   const pulses = rotate(euclid(track.hits, track.steps), track.rotation);
   const velocityActive =
     track.velocityEnabled === true &&
-    !!track.velocityPattern &&
-    track.velocityPattern.length > 0;
+    !!track.velocity &&
+    track.velocity.length > 0;
   const velocities = velocityActive
-    ? computeVelocities(pulses, track.velocityPattern!)
+    ? computeVelocities(pulses, track.velocity!)
     : undefined;
   return { pulses, velocities };
 }

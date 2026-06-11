@@ -12,7 +12,7 @@ import {
  *
  * Module contract:
  *   - Visibility gated by `track.velocityEnabled` (default false). The toggle
- *     button flips that flag; data (`track.velocityPattern`) is NEVER cleared
+ *     button flips that flag; data (`track.velocity`) is NEVER cleared
  *     on toggle off — req. (3) persistence.
  *   - On first enable, if no velocityPattern exists, seed VELOCITY_STARTER
  *     ([100]) — req. (5) "Default Hat velocity = [100] if empty".
@@ -32,12 +32,12 @@ export default function VelocityLane({ track, onChange }: VelocityLaneProps) {
   // Always read the latest pattern through a ref — pointermove handlers fire
   // far faster than React re-renders, and we want each move to build on the
   // CURRENT pattern, not a stale closure copy.
-  const patternRef = useRef<number[]>(track.velocityPattern ?? []);
-  patternRef.current = track.velocityPattern ?? [];
+  const patternRef = useRef<number[]>(track.velocity ?? []);
+  patternRef.current = track.velocity ?? [];
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const pattern = track.velocityPattern ?? [];
+  const pattern = track.velocity ?? [];
 
   // Toggle: flips enabled flag. On first enable, seed [100] if no pattern yet.
   // Disabling preserves the pattern on Track.
@@ -46,8 +46,8 @@ export default function VelocityLane({ track, onChange }: VelocityLaneProps) {
       onChange({ velocityEnabled: false });
     } else {
       const patch: Partial<Track> = { velocityEnabled: true };
-      if (!track.velocityPattern || track.velocityPattern.length === 0) {
-        patch.velocityPattern = [...VELOCITY_STARTER];
+      if (!track.velocity || track.velocity.length === 0) {
+        patch.velocity = [...VELOCITY_STARTER];
       }
       onChange(patch);
     }
@@ -55,12 +55,12 @@ export default function VelocityLane({ track, onChange }: VelocityLaneProps) {
 
   const addPoint = () => {
     const last = pattern[pattern.length - 1] ?? 100;
-    onChange({ velocityPattern: [...pattern, last] });
+    onChange({ velocity: [...pattern, last] });
   };
 
   const removePoint = () => {
     if (pattern.length <= 1) return;
-    onChange({ velocityPattern: pattern.slice(0, -1) });
+    onChange({ velocity: pattern.slice(0, -1) });
   };
 
   const applyAt = (clientX: number, clientY: number) => {
@@ -79,7 +79,7 @@ export default function VelocityLane({ track, onChange }: VelocityLaneProps) {
     const next = paintBar(patternRef.current, lastIdxRef.current, idx, velocity);
     lastIdxRef.current = idx;
     patternRef.current = next;
-    onChange({ velocityPattern: next });
+    onChange({ velocity: next });
   };
 
   const handlePointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {

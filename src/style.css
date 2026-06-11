@@ -735,6 +735,23 @@ header h1 {
   padding: 4px 8px;
   cursor: pointer;
 }
+.ghost-vel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(38px, 1fr));
+  gap: 4px;
+}
+.ghost-vel-cell {
+  display: grid;
+  gap: 2px;
+  text-align: center;
+}
+.ghost-vel-cell input[type='range'] {
+  width: 100%;
+}
+.ghost-vel-cell b {
+  font: 500 10px var(--mono);
+  color: var(--text-hi);
+}
 
 /* ---------- pitch lane (Variant B) ---------- */
 

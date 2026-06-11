@@ -334,18 +334,25 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
       }
 
       // ──────────────────────────────────────────────────────────────────
-      // GHOST NOTE PATH (Snare only). Velocity comes ONLY from the Ghost
-      // module's own `velocity` parameter (Option B: separate Ghost Velocity
-      // parameter). It MUST NOT read tp.velocities, mainVelocity, or share
-      // mainVolume — both are computed independently from `track.volume`,
-      // and the ghost call has its own local scope so the main-note velocity
-      // is never reachable from here.
+      // GHOST NOTE PATH (Snare only). Velocity is read ONLY from
+      // `track.ghost.velocity[ghostOnsetIdx]` — a SEPARATE FIELD from main's
+      // `track.velocity`. The two paths share no variable, no derived value,
+      // and no scope. The ghost path computes its own mixer volume from
+      // `track.volume` independently of the main path so attenuation on
+      // either side cannot leak.
       // ──────────────────────────────────────────────────────────────────
       if (track.voiceId === 'snare' && track.ghost?.enabled) {
-        if (Math.random() < clamp01(track.ghost.probability)) {
+        const ghostPattern = track.ghost.velocity;
+        if (ghostPattern.length > 0 && Math.random() < clamp01(track.ghost.probability)) {
           const sixteenthSec = Tone.Time('16n').toSeconds();
           const ghostTime = time + sixteenthSec * Math.max(1, track.ghost.delaySteps);
-          const ghostVelocity = clamp01(track.ghost.velocity / 100);
+          // Onset index is the linear count of audible snare onsets to this
+          // tick. Each ghost fires once per snare hit, so cycling the ghost
+          // velocity pattern by onset gives a clean drift independent of the
+          // main-note pattern length — even when both happen to be sequences.
+          const t = adjustedTick(g, speed, offset);
+          const ghostOnsetIdx = onsetIndexAt(tp.pulses, t);
+          const ghostVelocity = clamp01(ghostPattern[ghostOnsetIdx % ghostPattern.length] / 100);
           const ghostMixerVolume = (track.volume ?? 100) / 100;
           voices['snare'](ghostTime, ghostVelocity, ghostMixerVolume);
         }

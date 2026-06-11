@@ -134,13 +134,13 @@ describe('resolveOnset — velocity precedence', () => {
       id: 's',
       slots: [{ pitch: { kind: 'absolute', midi: 60 }, velocity: 42 }],
     };
-    const t = make({ steps: 8, hits: 3, pitches, velocityEnabled: true, velocityPattern: [90] });
+    const t = make({ steps: 8, hits: 3, pitches, velocityEnabled: true, velocity: [90] });
     const tp = trackPattern(t);
     expect(resolveOnset(t, tp, 0)!.velocity).toBe(42);
   });
 
   it('falls back to TrackPattern.velocities[step] when the event has none', () => {
-    const t = make({ steps: 8, hits: 3, pitches: seq([60]), velocityEnabled: true, velocityPattern: [73] });
+    const t = make({ steps: 8, hits: 3, pitches: seq([60]), velocityEnabled: true, velocity: [73] });
     const tp = trackPattern(t);
     expect(resolveOnset(t, tp, 0)!.velocity).toBe(73);
   });
