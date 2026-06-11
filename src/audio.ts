@@ -36,17 +36,20 @@ ghostHP.connect(ghostLP);
 ghostLP.toDestination();
 
 // --- Drum kit (sample-based, swappable) ---
+// POLYPHONIC, EVENT-DRIVEN model: we hold one BUFFER per voice (not a shared
+// Player). Each hit spawns its OWN one-shot ToneBufferSource with the level
+// baked in at trigger time, then auto-disposes. Consequences:
+//   - No shared mutable voice state → editing velocity can never change a
+//     note that is already sounding (its source/gain are frozen at trigger).
+//   - No monophonic retrigger → fast hats/snare/ghost never choke each other.
+//   - Level is applied AT the scheduled time (start(time, …, gain)), not
+//     synchronously during the scheduler's look-ahead.
 const SAMPLE_BASE = '/euclidean-groove-lab/samples/';
 
-let currentPlayers: {
-  kick: Tone.Player;
-  snare: Tone.Player;
-  hat: Tone.Player;
-  // Dedicated ghost-snare player. Same sample as `snare`, but its OWN Player
-  // instance routed through the ghost filter chain (NOT toDestination). The
-  // main snare and the ghost are different voices — retriggering one never
-  // interrupts the other.
-  ghostSnare: Tone.Player;
+let buffers: {
+  kick: Tone.ToneAudioBuffer;
+  snare: Tone.ToneAudioBuffer;
+  hat: Tone.ToneAudioBuffer;
 } | null = null;
 
 let currentKitId: DrumKitId = 'cr78';
@@ -59,47 +62,57 @@ export function onKitLoading(callback: (busy: boolean) => void): void {
 }
 
 /**
- * Load a drum kit: dispose previous Players, create new ones, fetch audio.
- * Graceful fallback: if a sample fails to load, the kit is still usable
- * (silent on that voice) and the app never crashes.
+ * Fire a sample as an independent one-shot voice. The gain is frozen into THIS
+ * trigger at `time` — nothing about a later edit or a later hit can reach back
+ * and alter it. The source disposes itself when it finishes playing.
+ */
+function triggerSample(
+  buffer: Tone.ToneAudioBuffer | undefined,
+  time: number,
+  level: number,
+  destination: Tone.InputNode,
+): void {
+  if (!buffer || !buffer.loaded) return;
+  const src = new Tone.ToneBufferSource(buffer);
+  src.connect(destination);
+  src.onended = () => src.dispose();
+  // start(time, offset, duration, gain): gain is the per-source playback level.
+  src.start(time, 0, undefined, clamp01(level));
+}
+
+/**
+ * Load a drum kit: dispose previous buffers, fetch the new samples. Graceful
+ * fallback: a sample that fails to load just stays silent; the app never
+ * crashes. Buffers are shared by the main voices and the ghost lane.
  */
 async function loadDrumKit(id: DrumKitId): Promise<void> {
   loadingCallback?.(true);
 
-  // 1. Dispose old players
-  if (currentPlayers) {
+  // 1. Dispose old buffers
+  if (buffers) {
     try {
-      currentPlayers.kick.dispose();
-      currentPlayers.snare.dispose();
-      currentPlayers.hat.dispose();
-      currentPlayers.ghostSnare.dispose();
+      buffers.kick.dispose();
+      buffers.snare.dispose();
+      buffers.hat.dispose();
     } catch {
       // dispose may throw if already disposed; safe to ignore
     }
-    currentPlayers = null;
+    buffers = null;
   }
 
   // 2. Build paths
   const kit = DRUM_KITS[id];
   const makeUrl = (p: string) => `${SAMPLE_BASE}${p}`;
+  const silent = () => new Tone.ToneAudioBuffer(); // empty buffer, .loaded === false
 
-  // 3. Create new Players (no URL yet — load manually for promise control).
-  // ghostSnare routes through the ghost filter chain instead of the master.
-    const kick = new Tone.Player().toDestination();
-    const snare = new Tone.Player().toDestination();
-    const hat = new Tone.Player().toDestination();
-    const ghostSnare = new Tone.Player().connect(ghostHP);
+  // 3. Load buffers in parallel; each failure degrades to a silent buffer.
+  const [kick, snare, hat] = await Promise.all([
+    Tone.ToneAudioBuffer.fromUrl(makeUrl(kit.kick)).catch(silent),
+    Tone.ToneAudioBuffer.fromUrl(makeUrl(kit.snare)).catch(silent),
+    Tone.ToneAudioBuffer.fromUrl(makeUrl(kit.hat)).catch(silent),
+  ]);
 
-    // 4. Load in parallel — each failure caught individually. The ghost loads
-    // the SAME snare sample into its own buffer/voice.
-    await Promise.allSettled([
-      kick.load(makeUrl(kit.kick)).catch(() => {}),
-      snare.load(makeUrl(kit.snare)).catch(() => {}),
-      hat.load(makeUrl(kit.hat)).catch(() => {}),
-      ghostSnare.load(makeUrl(kit.snare)).catch(() => {}),
-    ]);
-
-  currentPlayers = { kick, snare, hat, ghostSnare };
+  buffers = { kick, snare, hat };
   currentKitId = id;
   loadingCallback?.(false);
 }
@@ -126,36 +139,25 @@ function clamp01(v: number): number {
 }
 
 // Voices take `velocity` (per-hit dynamics, 0–1) and `volume` (per-track mixer
-// level, 0–1). Both feed the same `volume.value` control via linearToDb, so the
-// mixer is applied without adding any nodes to the audio graph: the effective
-// level is volume × velocity (a sum in dB). At volume = 1 the behaviour is
-// identical to before. `midi` is used only by the (pitched) bass voice.
+// level, 0–1). For the sample voices the effective level is volume × velocity,
+// baked into a fresh one-shot source at trigger time — no shared node, no
+// monophonic retrigger. `midi` is used only by the (pitched) bass voice.
 const voices: Record<
   VoiceId,
   (time: number, velocity?: number, volume?: number, midi?: MidiNote) => void
 > = {
-  kick: (time, velocity = 1, volume = 1) => {
-    const p = currentPlayers?.kick;
-    if (!p) return;
-    p.volume.value = linearToDb(volume * velocity);
-    p.start(time);
-  },
-  snare: (time, velocity = 1, volume = 1) => {
-    const p = currentPlayers?.snare;
-    if (!p) return;
-    p.volume.value = linearToDb(volume * velocity);
-    p.start(time);
-  },
-  hat: (time, velocity = 1, volume = 1) => {
-    const p = currentPlayers?.hat;
-    if (!p) return;
-    p.volume.value = linearToDb(volume * velocity);
-    p.start(time);
-  },
+  kick: (time, velocity = 1, volume = 1) =>
+    triggerSample(buffers?.kick, time, volume * velocity, Tone.getDestination()),
+  snare: (time, velocity = 1, volume = 1) =>
+    triggerSample(buffers?.snare, time, volume * velocity, Tone.getDestination()),
+  hat: (time, velocity = 1, volume = 1) =>
+    triggerSample(buffers?.hat, time, volume * velocity, Tone.getDestination()),
   bass: (time, velocity = 1, volume = 1, midi) => {
     const note = midi !== undefined ? Tone.Frequency(midi, 'midi').toNote() : 'E2';
-    // Bass velocity is carried by the envelope (triggerAttackRelease); the mixer
-    // level rides on the synth's output volume.
+    // Bass is a monophonic synth; triggerAttackRelease already creates an
+    // independent envelope per trigger with the velocity baked in. The mixer
+    // level rides on the synth's output volume (changes with the Volume slider,
+    // not per note).
     bass.volume.value = linearToDb(volume);
     bass.triggerAttackRelease(note, '8n', time, velocity);
   },
@@ -277,7 +279,7 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
   await Tone.start();
 
   // Load default drum kit on first start
-  if (!currentPlayers) {
+  if (!buffers) {
     await loadDrumKit('cr78');
   }
 
@@ -352,23 +354,20 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
       }
 
       // ──────────────────────────────────────────────────────────────────
-      // GHOST NOTE PATH (Snare only). Fires on a DEDICATED player
-      // (`currentPlayers.ghostSnare`) through its OWN HP→LP filter chain.
-      // It never calls voices['snare'] and never touches the main player,
-      // so the ghost retrigger cannot cut the main snare's transient. Level
-      // comes from the ghost's own `amount` (× track volume); the filter
-      // cutoffs come from the module params — both GHOST-ONLY.
+      // GHOST NOTE PATH (Snare only). Fires its OWN one-shot source from the
+      // snare buffer, routed through the dedicated HP→LP filter chain — never
+      // voices['snare'], never the main voice. Level (amount × track volume)
+      // is frozen into the source at trigger time. The filter cutoffs come
+      // from the module params; all GHOST-ONLY.
       // ──────────────────────────────────────────────────────────────────
       if (track.voiceId === 'snare' && track.ghost?.enabled) {
-        const gp = currentPlayers?.ghostSnare;
-        if (gp && Math.random() < clamp01(track.ghost.probability)) {
+        if (buffers && Math.random() < clamp01(track.ghost.probability)) {
           const sixteenthSec = Tone.Time('16n').toSeconds();
           const ghostTime = time + sixteenthSec * Math.max(1, track.ghost.delaySteps);
           ghostHP.frequency.value = track.ghost.hpHz;
           ghostLP.frequency.value = track.ghost.lpHz;
           const ghostLevel = clamp01(track.ghost.amount / 100) * ((track.volume ?? 100) / 100);
-          gp.volume.value = linearToDb(ghostLevel);
-          gp.start(ghostTime);
+          triggerSample(buffers.snare, ghostTime, ghostLevel, ghostHP);
         }
       }
     }
