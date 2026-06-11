@@ -11,7 +11,10 @@ import type { Track, PlaybackMode, PlaybackSpeed } from '../engine';
 const VELOCITY_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['hat'];
 const PITCH_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['bass'];
 const GHOST_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['snare'];
-const DUCKING_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['kick'];
+// Ducking module is currently DISABLED (per bug-fix requirement). Type and
+// component preserved so the lane can be revived later by adding the voice
+// back to this list; for now no voice exposes it.
+const DUCKING_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = [];
 
 interface TrackCardProps {
   track: Track;

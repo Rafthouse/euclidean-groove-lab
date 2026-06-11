@@ -153,15 +153,6 @@ let currentTracks: Track[] = [];
 let globalStep = 0;
 
 /**
- * Ducking state. When a kick with ducking enabled fires, we record the global
- * tick `g` and the target/amount/decay. While the target voice plays, its
- * effective volume is attenuated by an exponentially-decaying factor. This is
- * a *gain* modulation only — it does not touch timing or the scheduler tick.
- */
-let lastDucking: { target: VoiceId; g: number; amount: number; decayTicks: number } | null = null;
-function resetDucking(): void { lastDucking = null; }
-
-/**
  * Reset the global cycle counter to 0 without touching Tone.Transport. The
  * transport keeps running (no stop/start glitch, no sample tail cut), but
  * every track restarts its cycle from origin on the very next 32n tick.
@@ -169,7 +160,6 @@ function resetDucking(): void { lastDucking = null; }
  */
 export function resetClock(): void {
   globalStep = 0;
-  resetDucking();
 }
 
 /** Per-track step callback shape: emits the GLOBAL clock `g` and the per-track
@@ -303,20 +293,17 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
       if (!tp.pulses[step]) continue;
       if (isStepMuted(track, step)) continue; // manualMute is step-indexed → reverse safe
 
-      // Ducking modulation. If a kick with ducking enabled fired recently
-      // and this voice is its target, attenuate the effective volume by a
-      // linearly decaying factor over `decayTicks`. Single global state on
-      // the scheduler — no per-track timer; the decay is computed each tick
-      // from `g - lastDucking.g`. Single-clock invariant intact.
-      let effVolume = (track.volume ?? 100) / 100;
-      if (lastDucking && lastDucking.target === track.voiceId) {
-        const dg = g - lastDucking.g;
-        if (dg >= 0 && dg < lastDucking.decayTicks) {
-          const recover = dg / lastDucking.decayTicks; // 0 → fresh kick, 1 → fully recovered
-          const cut = lastDucking.amount * (1 - recover);
-          effVolume *= Math.max(0, 1 - cut);
-        }
-      }
+      // ──────────────────────────────────────────────────────────────────
+      // MAIN NOTE PATH. The velocity of the main hit comes ONLY from the
+      // Velocity Lane (`tp.velocities`, gated by `velocityEnabled`) or from
+      // the per-onset PitchEvent. Nothing downstream is allowed to mutate it,
+      // and the ghost path below MUST NOT read either of these variables.
+      // ──────────────────────────────────────────────────────────────────
+      const mainVolume = (track.volume ?? 100) / 100;
+
+      // Ducking module is DISABLED per requirement (#5). The data model and
+      // UI types stay so the lane can be revived later, but the scheduler
+      // performs no modulation and records no source-side state.
 
       // Pitch module: gated by `pitchEnabled`. Only the bass voice exposes
       // this in the UI; the gate makes a track without an active pitch
@@ -339,38 +326,28 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
         if (slot === null) continue; // explicit rest in the pitch cycle
         const midi = resolvePitchSpec(slot.pitch);
         const stepVel = tp.velocities ? tp.velocities[step] : undefined;
-        const velocity = (slot.velocity ?? stepVel ?? 100) / 100;
-        voices[track.voiceId](time, velocity, effVolume, midi);
+        const mainVelocity = (slot.velocity ?? stepVel ?? 100) / 100;
+        voices[track.voiceId](time, mainVelocity, mainVolume, midi);
       } else {
-        const velocity = tp.velocities ? (tp.velocities[step] ?? 100) / 100 : 1;
-        voices[track.voiceId](time, velocity, effVolume);
+        const mainVelocity = tp.velocities ? (tp.velocities[step] ?? 100) / 100 : 1;
+        voices[track.voiceId](time, mainVelocity, mainVolume);
       }
 
-      // Source-side modules (fired AFTER the main hit so they observe the
-      // current effective velocity but never alter the main scheduling).
-
-      // Kick → ducking: record this hit so the target voice attenuates on
-      // its upcoming hits. Decay measured in 16th-note steps but stored as
-      // 32n master ticks (×2) to align with `g`.
-      if (track.voiceId === 'kick' && track.ducking?.enabled) {
-        lastDucking = {
-          target: track.ducking.target,
-          g,
-          amount: clamp01(track.ducking.amount),
-          decayTicks: Math.max(1, Math.round(track.ducking.decaySteps * 2)),
-        };
-      }
-
-      // Snare → ghost delay: probabilistic delayed duplicate. Uses Tone's
-      // absolute-time scheduling on the SAME transport (no second timer).
-      // The duplicate is fire-and-forget — it does not feed the perTrack
-      // playhead map (visualisation stays anchored to the main grid).
+      // ──────────────────────────────────────────────────────────────────
+      // GHOST NOTE PATH (Snare only). Velocity comes ONLY from the Ghost
+      // module's own `velocity` parameter (Option B: separate Ghost Velocity
+      // parameter). It MUST NOT read tp.velocities, mainVelocity, or share
+      // mainVolume — both are computed independently from `track.volume`,
+      // and the ghost call has its own local scope so the main-note velocity
+      // is never reachable from here.
+      // ──────────────────────────────────────────────────────────────────
       if (track.voiceId === 'snare' && track.ghost?.enabled) {
         if (Math.random() < clamp01(track.ghost.probability)) {
           const sixteenthSec = Tone.Time('16n').toSeconds();
           const ghostTime = time + sixteenthSec * Math.max(1, track.ghost.delaySteps);
-          const ghostVel = clamp01(track.ghost.velocity / 100);
-          voices['snare'](ghostTime, ghostVel, effVolume);
+          const ghostVelocity = clamp01(track.ghost.velocity / 100);
+          const ghostMixerVolume = (track.volume ?? 100) / 100;
+          voices['snare'](ghostTime, ghostVelocity, ghostMixerVolume);
         }
       }
     }
