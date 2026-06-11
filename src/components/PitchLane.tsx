@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 import type { Track } from '../engine';
 import { resolvePitchSpec, midiToNoteName, pitchSequenceToText, parseNoteSequence } from '../engine';
-import { laneReducer, initLaneState, pitchesFromText, PITCH_STARTER } from './pitchLaneState';
+import { laneReducer, initLaneState, pitchesFromText } from './pitchLaneState';
 
 /**
  * Variant B Pitch Lane. First version: TEXT INPUT for editing, with a bar
@@ -31,9 +31,7 @@ export default function PitchLane({ track, onChange }: PitchLaneProps) {
 
   // The toggle is the ONLY control over open/closed.
   const toggle = () => {
-    const opening = !state.open;
     dispatch({ type: 'toggle' });
-    onChange({ pitches: opening ? pitchesFromText(track.id, PITCH_STARTER) : undefined });
   };
 
   // Contour: one bar per slot, height normalized to the sequence's own range so

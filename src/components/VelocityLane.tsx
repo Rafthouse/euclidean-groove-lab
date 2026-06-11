@@ -6,7 +6,6 @@ import {
   initVelocityLaneState,
   paintBar,
   pointerToBarValue,
-  VELOCITY_STARTER,
 } from './velocityLaneState';
 
 /**
@@ -45,9 +44,7 @@ export default function VelocityLane({ track, onChange }: VelocityLaneProps) {
   const pattern = track.velocityPattern ?? [];
 
   const toggle = () => {
-    const opening = !state.open;
     dispatch({ type: 'toggle' });
-    onChange({ velocityPattern: opening ? [...VELOCITY_STARTER] : undefined });
   };
 
   const addPoint = () => {
