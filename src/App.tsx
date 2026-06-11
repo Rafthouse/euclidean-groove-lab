@@ -314,17 +314,17 @@ export default function App() {
             <option value="dark">Dark Neon</option>
             <option value="paper">Vintage Paper</option>
             <option value="elements">Elements</option>
-            <option value="military">Military</option>
+            <option value="military">Tactical</option>
           </select>
         </label>
-        {(theme === 'elements' || theme === 'military') && (
+        {theme === 'elements' && (
           <label className="preference fx-toggle">
             <input
               type="checkbox"
               checked={elementFx}
               onChange={(e) => setElementFx(e.target.checked)}
             />
-            <span>{theme === 'military' ? 'Radar FX' : 'Element FX'}</span>
+            <span>Element FX</span>
           </label>
         )}
         <label className="preference">
