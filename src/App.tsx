@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
-import { defaultTracks, militaryPreset, renderMidi, serializeMidi, computePhaseOffsetForChange } from './engine';
+import { defaultTracks, renderMidi, serializeMidi, computePhaseOffsetForChange } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading, resetClock } from './audio';
@@ -86,16 +86,13 @@ export default function App() {
   useEffect(() => onKitLoading(setKitLoading), []);
 
   // Theme: reflect on <html data-theme> (CSS variables do the rest) + persist.
-  // Also apply military track preset when the theme is selected.
+  // Theme is visual layer only — never modifies track state.
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try {
       localStorage.setItem(THEME_KEY, theme);
     } catch {
       // ignore persistence failures
-    }
-    if (theme === 'military') {
-      setTracksState(militaryPreset());
     }
   }, [theme]);
 
