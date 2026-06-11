@@ -70,51 +70,119 @@
   color-scheme: dark;
 }
 
-/* Alchemical Reactor Glow background.
-   Two earlier defects fixed together:
-   (a) `transparent` as the second stop = rgba(0,0,0,0), so each gradient
-       interpolated through BLACK and painted a dark ring at the stop —
-       four such rings collided to form a visible horizontal seam. Each
-       gradient now fades to alpha=0 of its OWN colour, so the falloff
-       stays in-hue (no halo).
-   (b) The stop at 45% left little overlap; sibling gradients met at a
-       sharp boundary. Pushing it past 80% gives every layer ~3× more
-       reach, so neighbouring colours blend on the way to the centre of
-       the viewport instead of terminating before they meet. */
+/* Aurora Glass background — three independently-blurred colour blobs.
+   The previous reactor used 4 radial gradients in a single `background`
+   layer; they shared one `transparent` fade and met at sharp stops,
+   producing visible horizontal seams. This version uses THREE separate
+   pseudo-element layers, each with `filter: blur(120px)` and
+   `mix-blend-mode: screen`, so the only thing that touches the dark base
+   is light — never a fade-to-black halo, never an edge to another blob.
+   No PNG/JPG/SVG, no JS, no canvas. Existing Elements palette only. */
+
+:root[data-theme='elements'] body {
+  background: var(--bg);
+}
+
+/* Layer A — Earth + Fire (warm). Upper-left / top-centre. */
 :root[data-theme='elements'] body::before {
   content: '';
   position: fixed;
-  inset: 0;
+  top: -20vmax;
+  left: -15vmax;
+  width: 80vmax;
+  height: 80vmax;
+  border-radius: 50%;
   pointer-events: none;
   z-index: 0;
-  background:
-    radial-gradient(circle at 15% 15%, rgba(139, 107, 69, 0.18), rgba(139, 107, 69, 0) 82%),
-    radial-gradient(circle at 85% 20%, rgba(255, 91, 46, 0.16), rgba(255, 91, 46, 0) 82%),
-    radial-gradient(circle at 80% 80%, rgba(127, 182, 255, 0.16), rgba(127, 182, 255, 0) 82%),
-    radial-gradient(circle at 20% 80%, rgba(0, 210, 200, 0.16), rgba(0, 210, 200, 0) 82%),
-    #0f1218;
-  background-size: 200% 240%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 138, 0, 0.42) 0%,
+    rgba(139, 107, 69, 0.28) 45%,
+    rgba(139, 107, 69, 0) 70%
+  );
+  filter: blur(120px);
+  mix-blend-mode: screen;
+  will-change: transform;
 }
 
-:root[data-theme='elements'][data-fx='on'] body::before {
-  animation: reactor-flow 45s linear infinite;
+/* Layer B — Air (blue). Upper-right. */
+:root[data-theme='elements'] body::after {
+  content: '';
+  position: fixed;
+  top: -25vmax;
+  right: -20vmax;
+  width: 75vmax;
+  height: 75vmax;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(127, 182, 255, 0.38) 0%,
+    rgba(167, 210, 255, 0.22) 45%,
+    rgba(127, 182, 255, 0) 70%
+  );
+  filter: blur(120px);
+  mix-blend-mode: screen;
+  will-change: transform;
 }
 
-@keyframes reactor-flow {
-  0% {
-    background-position: 0% 0%;
-  }
-  50% {
-    background-position: 100% 120%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
-}
-
+/* Layer C — Water (cyan/turquoise). Lower-left.
+   Hosted on .app::before so we get a third pseudo-element without
+   touching the DOM. .app's z-index:1 stacking context keeps the blob
+   below page content while still painting against the dark body. */
 :root[data-theme='elements'] .app {
   position: relative;
   z-index: 1;
+  isolation: auto;
+}
+:root[data-theme='elements'] .app::before {
+  content: '';
+  position: fixed;
+  bottom: -25vmax;
+  left: -15vmax;
+  width: 80vmax;
+  height: 80vmax;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 210, 200, 0.36) 0%,
+    rgba(47, 181, 255, 0.22) 45%,
+    rgba(0, 210, 200, 0) 70%
+  );
+  filter: blur(120px);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+/* Almost-imperceptible drift. Three independent keyframes so the blobs
+   never line up; amplitude is 2-4% so motion reads as breathing, not
+   travel. Translate only — no rotation, no scaling, no opacity pulse.
+   Long durations (130s / 170s / 150s) → ~0.005 Hz, well below any
+   conscious detection threshold. */
+:root[data-theme='elements'][data-fx='on'] body::before {
+  animation: aurora-drift-a 150s ease-in-out infinite;
+}
+:root[data-theme='elements'][data-fx='on'] body::after {
+  animation: aurora-drift-b 170s ease-in-out infinite;
+}
+:root[data-theme='elements'][data-fx='on'] .app::before {
+  animation: aurora-drift-c 130s ease-in-out infinite;
+}
+
+@keyframes aurora-drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(3%, 2%, 0); }
+}
+@keyframes aurora-drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(-2%, 3%, 0); }
+}
+@keyframes aurora-drift-c {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(2%, -3%, 0); }
 }
 
 /* Elements unique track-card glass look */
