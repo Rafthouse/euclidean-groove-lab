@@ -1,4 +1,194 @@
+/* ---------- Military Theme (Tactical / Radar) ---------- */
+:root[data-theme='military'] {
+  --bg: #0b0e0b;
+  --panel: #121812;
+  --panel-hi: #1a221a;
+  --text: #b5c9b5;
+  --text-dim: #667a66;
+  --text-hi: #e0f0e0;
+  --accent: #a3cfa3;
+  --accent-dim: rgba(163, 207, 163, 0.18);
+  --rest: #2a3a2a;
+  --current: #cdffcd;
+  --danger: #f0785a;
+  --warn: #e8c840;
+  --radius: 12px;
+  --mono: ui-monospace, Consolas, monospace;
+
+  --color-kick: #6d8a6d;     /* Olive drab */
+  --color-kick-mid: #8aab8a;
+  --color-kick-light: #b0cfb0;
+
+  --color-snare: #b0a070;   /* Khaki / sand */
+  --color-snare-mid: #c8b888;
+  --color-snare-light: #e0d4a8;
+
+  --color-hat: #7090b0;     /* Steel blue */
+  --color-hat-mid: #90b0d0;
+  --color-hat-light: #b8d4ed;
+
+  --color-bass: #3d6b3d;    /* Forest / dark green */
+  --color-bass-mid: #5a8f5a;
+  --color-bass-light: #80b080;
+
+  --card-shadow: 0 4px 20px 0 rgba(0, 20, 0, 0.5);
+  color-scheme: dark;
+}
+
+/* Military background — tactical radar grid */
+:root[data-theme='military'] body {
+  background:
+    linear-gradient(rgba(60, 90, 60, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(60, 90, 60, 0.06) 1px, transparent 1px),
+    var(--bg);
+  background-size: 40px 40px, 40px 40px;
+}
+
+/* Radar sweeps on fx on */
+:root[data-theme='military'][data-fx='on'] body::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: none;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(100, 160, 80, 0);
+  animation: radar-pulse 4s ease-out infinite;
+}
+:root[data-theme='military'][data-fx='on'] body::after {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+  z-index: 0;
+  width: 120vmax;
+  height: 120vmax;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(100, 200, 80, 0.04) 2deg,
+    transparent 5deg
+  );
+  animation: radar-sweep 8s linear infinite;
+  border-radius: 50%;
+}
+@keyframes radar-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(100, 200, 80, 0.15); }
+  100% { box-shadow: 0 0 0 80vmax rgba(100, 200, 80, 0); }
+}
+@keyframes radar-sweep {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Military track-card styling */
+:root[data-theme='military'] .track-card {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: linear-gradient(135deg, rgba(18, 24, 18, 0.85) 0%, rgba(11, 14, 11, 0.95) 100%);
+  border: 1px solid rgba(100, 160, 80, 0.15);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(100, 160, 80, 0.08),
+    0 10px 30px -10px rgba(0, 0, 0, 0.6);
+}
+
+:root[data-theme='military'] .track-card[data-voice='kick'] {
+  --track-color: var(--color-kick);
+}
+:root[data-theme='military'] .track-card[data-voice='kick'] .step.onset {
+  fill: var(--color-kick-mid);
+}
+:root[data-theme='military'] .track-card[data-voice='kick'] .shape {
+  fill: color-mix(in srgb, var(--color-kick) 20%, transparent);
+  stroke: var(--color-kick-mid);
+}
+:root[data-theme='military'][data-fx='on'] .track-card[data-voice='kick'] .step.current.onset {
+  animation: mil-hit 120ms ease-out forwards;
+}
+@keyframes mil-hit {
+  0%   { r: 11px; fill: var(--color-kick-light); filter: drop-shadow(0 0 6px var(--color-kick-light)); }
+  100% { r: 11px; fill: var(--current); filter: none; }
+}
+
+:root[data-theme='military'] .track-card[data-voice='snare'] {
+  --track-color: var(--color-snare);
+}
+:root[data-theme='military'] .track-card[data-voice='snare'] .step.onset {
+  fill: var(--color-snare-mid);
+}
+:root[data-theme='military'] .track-card[data-voice='snare'] .shape {
+  fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
+  stroke: var(--color-snare-mid);
+}
+:root[data-theme='military'][data-fx='on'] .track-card[data-voice='snare'] .step.current.onset {
+  animation: mil-snare-flash 120ms ease-out forwards;
+}
+@keyframes mil-snare-flash {
+  0%   { fill: var(--color-snare-light); filter: drop-shadow(0 0 8px var(--color-snare-light)) brightness(1.8); }
+  100% { fill: var(--current); filter: none; }
+}
+
+:root[data-theme='military'] .track-card[data-voice='hat'] {
+  --track-color: var(--color-hat);
+}
+:root[data-theme='military'] .track-card[data-voice='hat'] .step.onset {
+  fill: var(--color-hat-mid);
+}
+:root[data-theme='military'] .track-card[data-voice='hat'] .shape {
+  fill: color-mix(in srgb, var(--color-hat) 15%, transparent);
+  stroke: var(--color-hat-mid);
+}
+:root[data-theme='military'][data-fx='on'] .track-card[data-voice='hat'] .step.current.onset {
+  animation: mil-hat-tap 80ms ease-out forwards;
+}
+@keyframes mil-hat-tap {
+  0%   { fill: #e0f0e0; r: 12px; filter: drop-shadow(0 0 4px var(--color-hat-light)); }
+  100% { fill: var(--current); r: 10px; filter: none; }
+}
+
+:root[data-theme='military'] .track-card[data-voice='bass'] {
+  --track-color: var(--color-bass);
+}
+:root[data-theme='military'] .track-card[data-voice='bass'] .step.onset {
+  fill: var(--color-bass-mid);
+}
+:root[data-theme='military'] .track-card[data-voice='bass'] .shape {
+  fill: color-mix(in srgb, var(--color-bass) 20%, transparent);
+  stroke: var(--color-bass-mid);
+}
+:root[data-theme='military'][data-fx='on'] .track-card[data-voice='bass'] .step.current.onset {
+  animation: mil-bass-hit 140ms ease-out forwards;
+}
+@keyframes mil-bass-hit {
+  0%   { r: 12px; fill: var(--color-bass-light); filter: drop-shadow(0 0 8px var(--color-bass-light)); }
+  100% { r: 11px; fill: var(--current); filter: none; }
+}
+
+:root[data-theme='military'] .play {
+  box-shadow: 0 0 12px rgba(100, 200, 80, 0.15);
+}
+
+:root[data-theme='military'] .step.pulse .step-indicator {
+  stroke: var(--accent);
+  stroke-opacity: 0.5;
+}
+
+:root[data-theme='military'] input[type='range']::-webkit-slider-thumb {
+  background: var(--accent);
+  box-shadow: 0 0 6px rgba(100, 200, 80, 0.3);
+}
+:root[data-theme='military'] input[type='range']::-webkit-slider-runnable-track {
+  background: linear-gradient(90deg, var(--color-bass) 0%, var(--accent) 100%);
+}
+
 :root {
+
   --bg: #0f1014;
   --panel: #181a21;
   --panel-hi: #1f2129;

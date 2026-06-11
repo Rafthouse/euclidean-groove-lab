@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
-import { defaultTracks, renderMidi, serializeMidi, computePhaseOffsetForChange } from './engine';
+import { defaultTracks, militaryPreset, renderMidi, serializeMidi, computePhaseOffsetForChange } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading, resetClock } from './audio';
@@ -11,7 +11,7 @@ import type { DrumKitId } from './drumKits';
 /** How many 4/4 bars the MIDI export renders. */
 const EXPORT_BARS = 4;
 
-type ThemeId = 'dark' | 'paper' | 'elements';
+type ThemeId = 'dark' | 'paper' | 'elements' | 'military';
 const THEME_KEY = 'groove-theme';
 const FX_KEY = 'groove-elements-fx';
 const RESTART_KEY = 'groove-restart-on-mode-change';
@@ -19,7 +19,7 @@ const RESTART_KEY = 'groove-restart-on-mode-change';
 function initialTheme(): ThemeId {
   try {
     const t = localStorage.getItem(THEME_KEY);
-    return t === 'paper' || t === 'elements' ? t : 'dark';
+    return t === 'paper' || t === 'elements' || t === 'military' ? t : 'dark';
   } catch {
     return 'dark';
   }
@@ -86,12 +86,16 @@ export default function App() {
   useEffect(() => onKitLoading(setKitLoading), []);
 
   // Theme: reflect on <html data-theme> (CSS variables do the rest) + persist.
+  // Also apply military track preset when the theme is selected.
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try {
       localStorage.setItem(THEME_KEY, theme);
     } catch {
       // ignore persistence failures
+    }
+    if (theme === 'military') {
+      setTracksState(militaryPreset());
     }
   }, [theme]);
 
@@ -313,16 +317,17 @@ export default function App() {
             <option value="dark">Dark Neon</option>
             <option value="paper">Vintage Paper</option>
             <option value="elements">Elements</option>
+            <option value="military">Military</option>
           </select>
         </label>
-        {theme === 'elements' && (
+        {(theme === 'elements' || theme === 'military') && (
           <label className="preference fx-toggle">
             <input
               type="checkbox"
               checked={elementFx}
               onChange={(e) => setElementFx(e.target.checked)}
             />
-            <span>Element FX</span>
+            <span>{theme === 'military' ? 'Radar FX' : 'Element FX'}</span>
           </label>
         )}
         <label className="preference">

@@ -223,6 +223,81 @@ export function audibleTracks(tracks: readonly Track[]): Track[] {
  * playback starts as pure rhythm and the user opts into each module
  * deliberately via its UI toggle.
  */
+/**
+ * Military tactical preset — staccato, percussive, grid-like.
+ * Each voice tuned for a march / strut feel.
+ */
+export function militaryPreset(): Track[] {
+  return [
+    {
+      id: 'kick',
+      name: 'Kick',
+      color: '#6d8a6d',
+      steps: 16,
+      hits: 5,
+      rotation: 0,
+      mute: false,
+      solo: false,
+      voiceId: 'kick',
+      volume: 100,
+      velocityEnabled: true,
+      velocity: [100, 90, 100, 85, 95],
+      playbackMode: 'forward',
+      playbackSpeed: 1,
+    },
+    {
+      id: 'snare',
+      name: 'Snare',
+      color: '#b0a070',
+      steps: 16,
+      hits: 4,
+      rotation: 4,
+      mute: false,
+      solo: false,
+      voiceId: 'snare',
+      volume: 100,
+      manualMute: [false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false],
+      velocityEnabled: true,
+      velocity: [100, 85, 90, 80],
+      playbackMode: 'forward',
+      playbackSpeed: 1,
+    },
+    {
+      id: 'hat',
+      name: 'Hat',
+      color: '#7090b0',
+      steps: 16,
+      hits: 11,
+      rotation: 0,
+      mute: false,
+      solo: false,
+      voiceId: 'hat',
+      volume: 80,
+      velocityEnabled: true,
+      velocity: [70, 80, 65, 85, 75, 90, 60, 88, 72, 82, 68],
+      playbackMode: 'forward',
+      playbackSpeed: 1,
+    },
+    {
+      id: 'bass',
+      name: 'Bass',
+      color: '#3d6b3d',
+      steps: 16,
+      hits: 4,
+      rotation: 2,
+      mute: false,
+      solo: false,
+      voiceId: 'bass',
+      volume: 100,
+      manualMute: [false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false],
+      velocityEnabled: true,
+      velocity: [100, 80, 90, 75],
+      playbackMode: 'forward',
+      playbackSpeed: 1,
+    },
+  ];
+}
+
 export function defaultTracks(): Track[] {
   return [
     {

@@ -34,6 +34,7 @@ export {
   trackPattern,
   audibleTracks,
   defaultTracks,
+  militaryPreset,
   computeVelocities,
   isStepMuted,
   VELOCITY_PRESETS,
