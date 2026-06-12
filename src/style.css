@@ -1541,19 +1541,19 @@
 /* A musical instrument built inside a living dream.
    Premium psychedelic — flowing gradients, stained-glass light. */
 :root[data-theme='trip'] {
-  --bg: #0A0014;
-  --panel: rgba(10, 0, 20, 0.45);
-  --panel-hi: rgba(20, 5, 35, 0.35);
+  --bg: #06000e;
+  --panel: #120824;
+  --panel-hi: #1e0f38;
   --text: #E8D8FF;
-  --text-dim: rgba(200, 180, 230, 0.55);
+  --text-dim: #b09ac8;
   --text-hi: #FFFFFF;
   --accent: #D48AFF;
-  --accent-dim: rgba(212, 138, 255, 0.12);
-  --rest: rgba(20, 10, 40, 0.3);
+  --accent-dim: rgba(212, 138, 255, 0.15);
+  --rest: #1a0d30;
   --current: #FFFFFF;
   --danger: #FF6B9D;
   --warn: #FFBA00;
-  --radius: 16px;
+  --radius: 14px;
   --mono: ui-monospace, Consolas, monospace;
 
   --color-kick: #FF7A00;
@@ -1572,11 +1572,11 @@
   --color-bass-mid: #3EDAA0;
   --color-bass-light: #70E4B8;
 
-  --card-shadow: 0 0 0 0 transparent;
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
   color-scheme: dark;
 }
 
-/* Background: static color field — like a premium printed poster */
+/* Background: deeper, darker color field */
 :root[data-theme='trip'] body {
   overflow-x: hidden;
   background:
@@ -1586,7 +1586,7 @@
     radial-gradient(ellipse 32% 25% at 78% 72%, rgba(255, 122, 0, 0.07) 0%, transparent 60%),
     radial-gradient(ellipse 38% 30% at 28% 78%, rgba(0, 217, 255, 0.06) 0%, transparent 60%),
     radial-gradient(ellipse 35% 30% at 58% 15%, rgba(74, 0, 232, 0.12) 0%, transparent 60%),
-    #0A0014;
+    #06000e;
 }
 
 :root[data-theme='trip'] .app {
@@ -1594,18 +1594,15 @@
   z-index: 1;
 }
 
-/* Track cards: glass-like, tinted by the color field below */
+/* Track cards: solid base, clearly separate from background */
 :root[data-theme='trip'] .track-card {
-  background: rgba(10, 0, 20, 0.45);
-  backdrop-filter: blur(24px) saturate(1.3);
-  -webkit-backdrop-filter: blur(24px) saturate(1.3);
-  border: 1px solid rgba(212, 138, 255, 0.06);
-  border-radius: 16px;
+  background: #120824;
+  border: 1px solid rgba(212, 138, 255, 0.08);
+  border-radius: 14px;
   box-shadow:
-    inset 0 0.5px 0 0 rgba(212, 138, 255, 0.08),
-    0 8px 32px rgba(0, 0, 0, 0.3);
+    inset 0 0.5px 0 0 rgba(212, 138, 255, 0.06),
+    0 4px 24px rgba(0, 0, 0, 0.5);
   position: relative;
-  overflow: hidden;
 }
 
 :root[data-theme='trip'] .track-card[data-voice='kick'] {
@@ -1682,7 +1679,7 @@
   }
 }
 
-/* Playhead: luminous point of colored light */
+/* Playhead: luminous point */
 :root[data-theme='trip'] .step.current .step-indicator {
   fill: #FFFFFF;
   stroke: #D48AFF;
@@ -1709,49 +1706,104 @@
   stroke-width: 0.5px;
 }
 
-/* Buttons: glass capsules tinted by the environment */
+/* ===== CONTROLS — solid, readable ===== */
 :root[data-theme='trip'] button {
-  border-radius: 16px;
-  border: 1px solid rgba(212, 138, 255, 0.08);
-  background: rgba(10, 0, 20, 0.4);
+  border-radius: 14px;
+  border: 1px solid rgba(212, 138, 255, 0.10);
+  background: #1e0f38;
   color: #E8D8FF;
   font-weight: 450;
   letter-spacing: 0.3px;
   padding: 8px 18px;
-  transition: background 0.2s cubic-bezier(0.32, 0.94, 0.6, 1);
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 :root[data-theme='trip'] button:hover {
-  background: rgba(20, 5, 35, 0.6);
-  box-shadow: inset 0 0 0 0.5px rgba(212, 138, 255, 0.08);
+  background: #2a1a44;
+  border-color: rgba(212, 138, 255, 0.20);
 }
 
 :root[data-theme='trip'] .play {
-  background: rgba(10, 0, 20, 0.5);
+  background: #1e0f38;
   border: 1px solid rgba(212, 138, 255, 0.12);
   color: #E8D8FF;
 }
 :root[data-theme='trip'] .play.is-playing {
-  background: rgba(10, 0, 20, 0.3);
-  border: 1px solid rgba(212, 138, 255, 0.06);
+  background: rgba(212, 138, 255, 0.10);
+  border-color: #D48AFF;
+  color: #FFFFFF;
 }
 
-:root[data-theme='trip'] .export {
-  border-radius: 16px;
-  border: 1px solid rgba(212, 138, 255, 0.08);
-  background: rgba(10, 0, 20, 0.4);
+:root[data-theme='trip'] .export,
+:root[data-theme='trip'] .reset-pattern {
+  border-radius: 14px;
+  border: 1px solid rgba(212, 138, 255, 0.10);
+  background: #1e0f38;
   color: #E8D8FF;
 }
+:root[data-theme='trip'] .export:hover,
+:root[data-theme='trip'] .reset-pattern:hover {
+  border-color: rgba(212, 138, 255, 0.25);
+  background: #2a1a44;
+}
 
+/* ===== PATTERN SLOTS — clearly visible ===== */
+:root[data-theme='trip'] .pattern-slot {
+  border-radius: 14px;
+  padding: 5px 0;
+  font-size: 10px;
+  background: rgba(10, 0, 20, 0.3);
+}
+:root[data-theme='trip'] .pattern-slot:hover {
+  background: rgba(30, 15, 56, 0.6);
+  border-color: rgba(212, 138, 255, 0.12);
+}
+
+/* ===== MASK SECTION — strong separation ===== */
+:root[data-theme='trip'] .mask-label {
+  color: #b09ac8;
+}
+:root[data-theme='trip'] .mask-cell {
+  border-radius: 14px;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+}
+:root[data-theme='trip'] .mask-cell.rest {
+  background: rgba(212, 138, 255, 0.03);
+  border-color: rgba(212, 138, 255, 0.06);
+  opacity: 1;
+}
+:root[data-theme='trip'] .mask-cell.onset {
+  background: var(--track-color);
+  border-color: var(--track-color);
+  opacity: 1;
+}
+:root[data-theme='trip'] .mask-cell.onset.muted {
+  background: transparent;
+  border-color: var(--track-color);
+  opacity: 0.50;
+}
+:root[data-theme='trip'] .mask-cell.onset:hover {
+  filter: brightness(1.2);
+}
+:root[data-theme='trip'] .mask-cell.is-current {
+  box-shadow: 0 0 0 2px #06000e, 0 0 0 3px #D48AFF;
+}
+
+/* ===== TOGGLES ===== */
 :root[data-theme='trip'] .toggle {
   border-radius: 14px;
   min-width: 32px;
-  padding: 4px 12px;
+  padding: 4px 14px;
+  border: 1px solid rgba(212, 138, 255, 0.08);
+  background: rgba(10, 0, 20, 0.3);
 }
 :root[data-theme='trip'] .toggle.is-on {
-  background: rgba(212, 138, 255, 0.10);
-  border-color: rgba(212, 138, 255, 0.15);
+  background: rgba(212, 138, 255, 0.12);
+  border-color: #D48AFF;
 }
 
+/* ===== SLIDERS ===== */
 :root[data-theme='trip'] input[type='range'] {
   height: 4px;
   cursor: pointer;
@@ -1759,7 +1811,7 @@
 :root[data-theme='trip'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(212, 138, 255, 0.06);
+  background: rgba(212, 138, 255, 0.08);
 }
 :root[data-theme='trip'] input[type='range']::-webkit-slider-thumb {
   width: 16px;
@@ -1769,7 +1821,7 @@
   border: none;
   box-shadow: 0 0 0 2px rgba(212, 138, 255, 0.12), 0 0 8px rgba(212, 138, 255, 0.10);
   margin-top: -6px;
-  transition: transform 0.15s cubic-bezier(0.32, 0.94, 0.6, 1);
+  transition: transform 0.12s ease;
 }
 :root[data-theme='trip'] input[type='range']::-webkit-slider-thumb:hover {
   transform: scale(1.2);
@@ -1777,7 +1829,7 @@
 :root[data-theme='trip'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(212, 138, 255, 0.06);
+  background: rgba(212, 138, 255, 0.08);
   border: none;
 }
 :root[data-theme='trip'] input[type='range']::-moz-range-thumb {
@@ -1789,37 +1841,39 @@
   box-shadow: 0 0 0 2px rgba(212, 138, 255, 0.12);
 }
 
+/* ===== DROPDOWNS ===== */
 :root[data-theme='trip'] select {
-  background: rgba(10, 0, 20, 0.5);
-  border: 1px solid rgba(212, 138, 255, 0.08);
+  background: #1e0f38;
+  border: 1px solid rgba(212, 138, 255, 0.10);
   color: #E8D8FF;
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 6px 14px;
   letter-spacing: 0.3px;
 }
 :root[data-theme='trip'] select option {
-  background: #0d0518;
+  background: #120824;
   color: #E8D8FF;
 }
 :root[data-theme='trip'] select option:checked {
-  background: rgba(212, 138, 255, 0.20);
+  background: rgba(212, 138, 255, 0.15);
 }
 
+/* ===== LABELS & META — improved contrast ===== */
 :root[data-theme='trip'] label {
-  color: rgba(200, 180, 230, 0.6);
+  color: #b09ac8;
   font-weight: 450;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
 
 :root[data-theme='trip'] .control-label {
-  color: rgba(200, 180, 230, 0.5);
+  color: #b09ac8;
   font-size: 10px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 :root[data-theme='trip'] .control-label b {
-  color: rgba(232, 216, 255, 0.8);
+  color: #d4b8f0;
 }
 
 :root[data-theme='trip'] .bpm b,
@@ -1835,14 +1889,14 @@
 }
 
 :root[data-theme='trip'] .tagline {
-  color: rgba(200, 180, 230, 0.35);
+  color: #7a648f;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 :root[data-theme='trip'] .track-name {
-  color: rgba(232, 216, 255, 0.85);
+  color: #E8D8FF;
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -1850,20 +1904,25 @@
 }
 
 :root[data-theme='trip'] .mini-metrics b {
-  color: rgba(232, 216, 255, 0.65);
+  color: #d4b8f0;
 }
 :root[data-theme='trip'] .mini-metrics span {
-  color: rgba(232, 216, 255, 0.30);
+  color: #7a648f;
 }
 
 :root[data-theme='trip'] .playback-select select {
-  background: rgba(10, 0, 20, 0.5);
-  border: 1px solid rgba(212, 138, 255, 0.08);
+  background: #1e0f38;
+  border: 1px solid rgba(212, 138, 255, 0.10);
   border-radius: 14px;
   padding: 4px 12px;
+  color: #E8D8FF;
 }
 :root[data-theme='trip'] .playback-select span {
-  color: rgba(200, 180, 230, 0.4);
+  color: #7a648f;
+}
+
+:root[data-theme='trip'] .module-lane {
+  border-top: 1px solid rgba(212, 138, 255, 0.04);
 }
 
 /* ===== Dark Side (Forbidden Ritual Instrument / Obsidian Cathedral) ===== */
