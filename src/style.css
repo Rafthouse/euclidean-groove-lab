@@ -479,9 +479,9 @@
   color: #ffb8e8;
 }
 
-/* ---------- Nostradamus Theme (Renaissance Astrologer) ---------- */
-/* A prophetic astronomical engine — aged brass, celestial void,
-   alchemical manuscript aesthetic. Independent theme. */
+/* ---------- Nostradamus V2 (Living Celestial Nebula) ---------- */
+/* A silent observatory: animated nebula fog, star-flash onsets,
+   constellation geometry. Independent theme. */
 :root[data-theme='nostradamus'] {
   --bg: #0D1117;
   --panel: #161B22;
@@ -492,26 +492,25 @@
   --accent: #C9A227;
   --accent-dim: rgba(201, 162, 39, 0.15);
   --rest: rgba(31, 41, 55, 0.5);
-  --current: #C9A227;
+  --current: #FFF7D6;
   --danger: #8B2E2E;
   --warn: #B87333;
   --radius: 6px;
   --mono: ui-monospace, Consolas, monospace;
 
-  /* Track colors — inspired by celestial bodies */
-  --color-kick: #B87333;      /* Copper — Mars/masculine */
+  --color-kick: #B87333;
   --color-kick-mid: #C98A4A;
   --color-kick-light: #DCA86A;
 
-  --color-snare: #C9A227;     /* Gold — Jupiter/regal */
+  --color-snare: #C9A227;
   --color-snare-mid: #D8B43E;
   --color-snare-light: #E8C85A;
 
-  --color-hat: #5B8FA8;      /* Mercury/steel blue */
+  --color-hat: #5B8FA8;
   --color-hat-mid: #7AADC4;
   --color-hat-light: #A0C8D8;
 
-  --color-bass: #4E6E58;      /* Viridian — Saturn/earthy */
+  --color-bass: #4E6E58;
   --color-bass-mid: #6A8C74;
   --color-bass-light: #8CAC94;
 
@@ -519,15 +518,101 @@
   color-scheme: dark;
 }
 
-/* Background: deep observatory void with aged warmth */
+/* ===== ANIMATED NEBULA BACKGROUND ===== */
+/* Three independent pseudo-layer gradients drifting at different speeds.
+   GPU-friendly: only translate + scale transforms, no repaints.
+   Each cycle: 60-120s. Movement is barely perceptible. */
+
 :root[data-theme='nostradamus'] body {
-  background:
-    radial-gradient(ellipse 100% 60% at 30% 0%, rgba(201, 162, 39, 0.04) 0%, transparent 70%),
-    radial-gradient(ellipse 60% 80% at 70% 100%, rgba(184, 115, 51, 0.03) 0%, transparent 60%),
-    #0D1117;
+  position: relative;
+  background: #0D1117;
+  overflow-x: hidden;
 }
 
-/* Track cards: aged parchment-like panels with thin gold borders */
+:root[data-theme='nostradamus'] body::before {
+  content: '';
+  position: fixed;
+  top: -30%;
+  left: -30%;
+  width: 160%;
+  height: 160%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    /* Deep indigo drift — slow, large */
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(27, 26, 85, 0.30) 0%, transparent 60%),
+    /* Cosmic violet — medium */
+    radial-gradient(ellipse 40% 60% at 70% 60%, rgba(76, 42, 133, 0.20) 0%, transparent 55%),
+    /* Midnight blue — slowest, largest */
+    radial-gradient(ellipse 80% 40% at 50% 80%, rgba(10, 22, 51, 0.35) 0%, transparent 65%),
+    /* Dark lilac hint — smallest */
+    radial-gradient(ellipse 30% 40% at 85% 20%, rgba(107, 79, 163, 0.12) 0%, transparent 50%);
+  will-change: transform, opacity;
+  animation: nebula-drift-a 90s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+:root[data-theme='nostradamus'] body::after {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 50% 40% at 40% 50%, rgba(27, 26, 85, 0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 55% at 60% 30%, rgba(76, 42, 133, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 45% 35% at 30% 70%, rgba(107, 79, 163, 0.08) 0%, transparent 50%);
+  will-change: transform, opacity;
+  animation: nebula-drift-b 120s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+/* Occasional faint light pulse — the nebula "breathes" */
+:root[data-theme='nostradamus'] .app::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(214, 196, 255, 0.03) 0%, transparent 50%);
+  will-change: opacity;
+  animation: nebula-pulse 60s ease-in-out infinite;
+}
+
+/* Layer A: slow elliptical translation (85s) */
+@keyframes nebula-drift-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33%      { transform: translate3d(2%, -1.5%, 0) scale(1.02); }
+  66%      { transform: translate3d(-1.5%, 1%, 0) scale(0.98); }
+}
+
+/* Layer B: even slower, different path (110s) */
+@keyframes nebula-drift-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  25%      { transform: translate3d(-2%, 1%, 0) scale(1.01); }
+  50%      { transform: translate3d(1.5%, -2%, 0) scale(0.99); }
+  75%      { transform: translate3d(-1%, 1.5%, 0) scale(1.01); }
+}
+
+/* Pulse: subtle brightness shift over 60s */
+@keyframes nebula-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+
+/* Ensure app content sits above nebula */
+:root[data-theme='nostradamus'] .app {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== TRACK CARDS ===== */
 :root[data-theme='nostradamus'] .track-card {
   background: #161B22;
   border: 1px solid rgba(201, 162, 39, 0.10);
@@ -538,7 +623,7 @@
   position: relative;
 }
 
-/* Decorative corner ornaments via pseudo-element */
+/* Decorative corner ornaments */
 :root[data-theme='nostradamus'] .track-card::before {
   content: '';
   position: absolute;
@@ -548,13 +633,9 @@
   height: 100%;
   pointer-events: none;
   background:
-    /* top-left corner */
     conic-gradient(from 135deg at 12px 12px, rgba(201, 162, 39, 0.12) 0deg, transparent 90deg) 0 0 / 24px 24px,
-    /* top-right corner */
     conic-gradient(from 225deg at calc(100% - 12px) 12px, rgba(201, 162, 39, 0.12) 0deg, transparent 90deg) 100% 0 / 24px 24px,
-    /* bottom-left corner */
     conic-gradient(from 45deg at 12px calc(100% - 12px), rgba(201, 162, 39, 0.12) 0deg, transparent 90deg) 0 100% / 24px 24px,
-    /* bottom-right corner */
     conic-gradient(from 315deg at calc(100% - 12px) calc(100% - 12px), rgba(201, 162, 39, 0.12) 0deg, transparent 90deg) 100% 100% / 24px 24px;
   background-repeat: no-repeat;
 }
@@ -603,23 +684,76 @@
   stroke: var(--color-bass-mid);
 }
 
-/* Playhead: warm golden glow */
+/* ===== STAR-FLASH ON ACTIVE NOTE ===== */
+/* When a step becomes current, emit a brief celestial flash.
+   Scale 1.0 → 1.35 → 1.0 over 350ms. Soft radial glow. */
+:root[data-theme='nostradamus'] .step.onset.current {
+  animation: star-flash 350ms ease-out forwards;
+}
+
+@keyframes star-flash {
+  0% {
+    fill: #FFF7D6;
+    r: 11px;
+    filter: drop-shadow(0 0 0 rgba(214, 196, 255, 0));
+  }
+  15% {
+    fill: #FFF7D6;
+    r: 15px;
+    filter: drop-shadow(0 0 6px rgba(214, 196, 255, 0.35));
+  }
+  40% {
+    fill: #D6C4FF;
+    r: 13px;
+    filter: drop-shadow(0 0 4px rgba(214, 196, 255, 0.20));
+  }
+  100% {
+    fill: var(--color-kick-mid);
+    r: 11px;
+    filter: drop-shadow(0 0 0 rgba(214, 196, 255, 0));
+  }
+}
+
+/* ===== CONSTELLATION LINES ===== */
+/* Within each sequencer SVG, draw faint luminous chords between
+   the circle center and active steps — like ancient astrolabe.
+   These use the existing .hand line styled as a celestial ray. */
+:root[data-theme='nostradamus'] .hand {
+  stroke: rgba(214, 196, 255, 0.12);
+  stroke-width: 0.5px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+:root[data-theme='nostradamus'] .step.current ~ .hand,
+:root[data-theme='nostradamus'] .sequencer:has(.step.current) .hand {
+  opacity: 1;
+}
+
+/* Faint circular guide ring as astrolabe */
+:root[data-theme='nostradamus'] .guide {
+  fill: none;
+  stroke: rgba(201, 162, 39, 0.06);
+  stroke-width: 0.5px;
+}
+
+/* ===== PLAYHEAD ===== */
 :root[data-theme='nostradamus'] .step.current .step-indicator {
-  fill: #C9A227;
-  stroke: #D8B43E;
-  stroke-width: 2px;
-  filter: drop-shadow(0 0 4px rgba(201, 162, 39, 0.3));
+  fill: #FFF7D6;
+  stroke: #D6C4FF;
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 6px rgba(214, 196, 255, 0.25));
 }
 :root[data-theme='nostradamus'] .step.current .visual {
-  fill: #C9A227;
+  fill: #FFF7D6;
 }
 
 /* Rest steps */
 :root[data-theme='nostradamus'] .step.rest .step-indicator {
-  opacity: 0.20;
+  opacity: 0.15;
 }
 
-/* Controls: dark brass with gold borders */
+/* ===== CONTROLS ===== */
 :root[data-theme='nostradamus'] button {
   border-radius: 6px;
   border: 1px solid rgba(201, 162, 39, 0.15);
@@ -653,7 +787,7 @@
   color: #E8DCC2;
 }
 
-/* Sliders: engraved brass */
+/* Sliders */
 :root[data-theme='nostradamus'] input[type='range'] {
   height: 3px;
 }
@@ -672,7 +806,6 @@
   margin-top: -5px;
 }
 
-/* Select */
 :root[data-theme='nostradamus'] select {
   background: #161B22;
   border: 1px solid rgba(201, 162, 39, 0.10);
@@ -682,7 +815,6 @@
   letter-spacing: 0.3px;
 }
 
-/* Labels: manuscript-style */
 :root[data-theme='nostradamus'] label {
   color: rgba(184, 170, 140, 0.7);
   font-weight: 400;
@@ -691,13 +823,11 @@
   font-size: 10px;
 }
 
-/* BPM / Swing values */
 :root[data-theme='nostradamus'] .bpm b,
 :root[data-theme='nostradamus'] .swing b {
   color: #C9A227;
 }
 
-/* Header */
 :root[data-theme='nostradamus'] h1 {
   color: #E8DCC2;
   letter-spacing: 2px;
