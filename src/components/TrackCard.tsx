@@ -223,10 +223,10 @@ interface PatternBankProps {
 }
 
 /**
- * Pattern bank selector — 12 slots labelled A–L. The active slot is the live
- * working copy; other slots show as "stored" once they hold a snapshot. Clicking
- * a slot saves the current generator state and loads the target (handled by the
- * pure `switchTrackPattern` in the engine, via App).
+ * Pattern bank selector — 16 slots labelled A–P in two rows of 8. The active
+ * slot is the live working copy; other slots show as "stored" once they hold a
+ * snapshot. Clicking a slot saves the current generator state and loads the
+ * target (handled by `switchTrackPattern` in the engine, via App).
  */
 function PatternBank({ track, activeSlot, onSwitchPattern }: PatternBankProps) {
   return (
