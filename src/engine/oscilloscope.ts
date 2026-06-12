@@ -248,6 +248,55 @@ export function clearChannelHistory(): void {
   for (const key of Object.keys(channelHistory)) {
     delete channelHistory[key];
   }
+
+  // Also clear sonagram history
+  sonagramHistory.length = 0;
+}
+
+// ---------------------------------------------------------------------------
+// Sonagram (spectrogram) — rolling buffer of FFT magnitude frames
+//   - Each frame is a slice of frequency magnitudes (0 = low, end = high)
+//   - Newest frame appended on request; canvas paints oldest-left → newest-right
+//   - Max frames = CANVAS_WIDTH (256) so each column = 1px
+// ---------------------------------------------------------------------------
+
+const SONAGRAM_MAX_FRAMES = 256;
+const sonagramHistory: Float32Array[] = [];
+let sonagramTimer = 0;
+const SONAGRAM_INTERVAL_MS = 60; // ~16 fps refresh
+
+/**
+ * Capture a new sonagram frame from the master analyser and store it.
+ * Returns the full history (oldest → newest) for drawing, or null if unavailable.
+ * Frame magnitudes are 0–1 normalised.
+ */
+export function captureSonagramFrame(): Float32Array[] | null {
+  if (!masterAnalyser || !masterEnabled) return null;
+
+  const now = Date.now();
+  if (now - sonagramTimer < SONAGRAM_INTERVAL_MS) {
+    return sonagramHistory.length > 0 ? sonagramHistory : null;
+  }
+  sonagramTimer = now;
+
+  // Get frequency magnitude data (linear scale for sonagram)
+  const buf = new Uint8Array(masterAnalyser.frequencyBinCount);
+  masterAnalyser.getByteFrequencyData(buf);
+
+  // Convert to 0-1 float and store
+  const frame = new Float32Array(buf.length);
+  for (let i = 0; i < buf.length; i++) {
+    frame[i] = buf[i] / 255;
+  }
+
+  sonagramHistory.push(frame);
+
+  // Trim to max frames
+  while (sonagramHistory.length > SONAGRAM_MAX_FRAMES) {
+    sonagramHistory.shift();
+  }
+
+  return sonagramHistory;
 }
 
 

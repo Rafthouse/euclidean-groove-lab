@@ -7,18 +7,18 @@
  */
 
 import React, { useRef, useEffect, useCallback } from 'react';
-import { getMasterWaveform, getMasterFrequencyData, getChannelWaveform } from '../engine/oscilloscope';
+import { getMasterWaveform, getMasterFrequencyData, getChannelWaveform, captureSonagramFrame } from '../engine/oscilloscope';
 
 export interface OscilloscopeProps {
   /** Track ID for per-channel scope. Omit or empty for master. */
   trackId?: string;
   /** Display mode. Default 'waveform'. */
-  mode?: 'waveform' | 'spectrum';
+  mode?: 'waveform' | 'spectrum' | 'sonagram';
   /** Color for the waveform/stroke. Inherits track color for per-channel. */
   color?: string;
   /** Width. Default fills parent. */
   width?: number;
-  /** Height. Default 80 for per-channel, 160 for master. */
+  /** Height. Default 64 for per-channel, 160 for master. */
   height?: number;
   /** Whether this scope is active (enabled by user). */
   active: boolean;
@@ -56,6 +56,8 @@ const Oscilloscope: React.FC<OscilloscopeProps> = ({
 
     if (mode === 'spectrum' && isMaster) {
       drawSpectrum(ctx, w, h, color);
+    } else if (mode === 'sonagram' && isMaster) {
+      drawSonagram(ctx, w, h, color);
     } else {
       drawWaveform(ctx, w, h, color, trackId);
     }
@@ -114,23 +116,21 @@ function drawWaveform(
   color: string,
   trackId?: string,
 ): void {
-  let data: Float32Array | null;
-
   if (trackId) {
-    // Per-channel: step-data driven waveform
-    data = getChannelWaveform(trackId, w);
-  } else {
-    // Master: real audio waveform
-    data = getMasterWaveform();
+    // Per-channel: simple pulse bar — one vertical bar that jumps on hit
+    drawChannelPulse(ctx, w, h, color, trackId);
+    return;
   }
 
+  // Master: real audio waveform
+  const data = getMasterWaveform();
   if (!data || data.length < 2) {
     drawGrid(ctx, w, h, color);
     return;
   }
 
   const mid = h / 2;
-  const scale = h * 0.4;
+  const scale = h * 0.45;
 
   ctx.beginPath();
   ctx.strokeStyle = color;
@@ -138,51 +138,94 @@ function drawWaveform(
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
 
-  // Grid
   drawGrid(ctx, w, h, color);
 
   for (let i = 0; i < data.length; i++) {
     const x = (i / data.length) * w;
-    let y: number;
-
-    if (trackId) {
-      // Per-channel: 0–1 mapped bottom-to-top
-      y = h - data[i] * h * 0.85 - (h * 0.075);
-    } else {
-      // Master: -1 to 1 centered
-      y = mid + data[i] * scale;
-    }
-
-    if (i === 0) {
-      ctx.moveTo(x, y);
-    } else {
-      ctx.lineTo(x, y);
-    }
+    const y = mid + data[i] * scale;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
   }
-
   ctx.stroke();
 
-  // Subtle glow
+  // Subtle glow underlay
   ctx.save();
   ctx.strokeStyle = color;
   ctx.shadowColor = color;
-  ctx.shadowBlur = 6;
-  ctx.globalAlpha = 0.3;
-  ctx.beginPath();
+  ctx.shadowBlur = 8;
+  ctx.globalAlpha = 0.25;
   ctx.lineWidth = 0.5;
+  ctx.beginPath();
   for (let i = 0; i < data.length; i++) {
     const x = (i / data.length) * w;
-    let y: number;
-    if (trackId) {
-      y = h - data[i] * h * 0.85 - (h * 0.075);
-    } else {
-      y = mid + data[i] * scale;
-    }
+    const y = mid + data[i] * scale;
     if (i === 0) ctx.moveTo(x, y);
     else ctx.lineTo(x, y);
   }
   ctx.stroke();
   ctx.restore();
+}
+
+/**
+ * Per-channel scope: a simple vertical pulse bar.
+ * Shows a thick bar whose height reflects the current hit value,
+ * with quick decay between hits — "just a line that pulses".
+ */
+function drawChannelPulse(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  color: string,
+  trackId: string,
+): void {
+  const data = getChannelWaveform(trackId, Math.min(w, 128));
+  if (!data || data.length < 2) {
+    drawGrid(ctx, w, h, color);
+    return;
+  }
+
+  // Find the peak value in the most recent data
+  const recentCount = Math.min(8, data.length);
+  let peak = 0;
+  for (let i = data.length - recentCount; i < data.length; i++) {
+    const v = data[i];
+    if (v > peak) peak = v;
+  }
+
+  // Scale: make it pop even at low velocities
+  const scaledPeak = Math.min(1, peak * 2.5);
+
+  // Draw a thick centered bar
+  const barWidth = Math.max(4, w * 0.3);
+  const barX = (w - barWidth) / 2;
+  const barH = Math.max(1, scaledPeak * h * 0.9);
+  const barY = h - barH;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Fill
+  ctx.fillStyle = color;
+  ctx.globalAlpha = 0.6 + scaledPeak * 0.4;
+  ctx.fillRect(barX, barY, barWidth, barH);
+
+  // Glow
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.shadowColor = color;
+  ctx.shadowBlur = 12;
+  ctx.globalAlpha = 0.3;
+  ctx.fillRect(barX, barY, barWidth, barH);
+  ctx.restore();
+
+  // Baseline
+  ctx.strokeStyle = color;
+  ctx.globalAlpha = 0.15;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(0, h - 1);
+  ctx.lineTo(w, h - 1);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
 }
 
 // ── Spectrum renderer (master only) ────────────────────────────────────
@@ -220,6 +263,51 @@ function drawSpectrum(
   }
   ctx.globalAlpha = 1;
 }
+
+// ── Sonagram renderer (master only) ───────────────────────────────────
+// Draws a scrolling spectrogram: horizontal axis = time, vertical = frequency,
+// colour intensity = magnitude.
+
+function drawSonagram(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  color: string,
+): void {
+  const frames = captureSonagramFrame();
+  if (!frames || frames.length < 2) {
+    drawGrid(ctx, w, h, color);
+    return;
+  }
+
+  const frameCount = frames.length;
+  const freqBins = frames[0].length;
+
+  // Map each frequency bin to a hue based on its index (low = warm, high = cool)
+  // within the track colour's hue family
+
+  for (let fi = 0; fi < frameCount; fi++) {
+    const x = (fi / frameCount) * w;
+    const nextX = ((fi + 1) / frameCount) * w;
+    const colWidth = Math.max(1, nextX - x);
+
+    for (let bi = 0; bi < freqBins; bi++) {
+      const mag = frames[fi][bi];
+      if (mag < 0.02) continue; // skip near-silent bins
+
+      const y = h - (bi / freqBins) * h;
+      const barH = Math.max(1, h / freqBins);
+
+      // Intensity: low magnitues are transparent, high are opaque
+      ctx.globalAlpha = 0.15 + mag * 0.85;
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, colWidth, barH);
+    }
+  }
+
+  ctx.globalAlpha = 1;
+}
+
 
 // ── Grid helper ─────────────────────────────────────────────────────────
 

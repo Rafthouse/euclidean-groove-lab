@@ -80,6 +80,7 @@ export default function App() {
 
   // ── Oscilloscope state (all OFF by default) ────────────────
   const [scopeMaster, setScopeMaster] = useState(false);
+  const [scopeMasterMode, setScopeMasterMode] = useState<'waveform' | 'spectrum' | 'sonagram'>('waveform');
   const [scopeChannels, setScopeChannels] = useState<Record<string, boolean>>({});
 
   const toggleScopeChannel = useCallback((trackId: string) => {
@@ -590,7 +591,8 @@ export default function App() {
                   type="radio"
                   name="scope-mode"
                   value="waveform"
-                  defaultChecked
+                  checked={scopeMasterMode === 'waveform'}
+                  onChange={() => setScopeMasterMode('waveform')}
                 />
                 Wave
               </label>
@@ -599,13 +601,26 @@ export default function App() {
                   type="radio"
                   name="scope-mode"
                   value="spectrum"
+                  checked={scopeMasterMode === 'spectrum'}
+                  onChange={() => setScopeMasterMode('spectrum')}
                 />
-                Spectrum
+                Spec
+              </label>
+              <label className="scope-mode-toggle">
+                <input
+                  type="radio"
+                  name="scope-mode"
+                  value="sonagram"
+                  checked={scopeMasterMode === 'sonagram'}
+                  onChange={() => setScopeMasterMode('sonagram')}
+                />
+                Sonagram
               </label>
             </div>
           </div>
           <Oscilloscope
             active={scopeMaster && playing}
+            mode={scopeMasterMode}
             color="#88cc88"
             height={140}
           />
