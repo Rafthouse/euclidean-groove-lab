@@ -4479,49 +4479,46 @@ header h1 {
   border-top: 1px solid rgba(143, 212, 216, 0.04);
 }
 
-/* ===== Satisfaction (Benny Benassi / Electribe / 2004 Club) ===== */
-/* Groovebox hardware, orange LEDs, dark club. Industrial, solid, precise.
-   No glassmorphism, no paper, no blue/purple — only orange intensity. */
+/* ===== Satisfaction (Retro Instrument / Braun / Warm Amber Faceplate) ===== */
+/* Vintage electronic instrument panel — printed into the machine.
+   Orange monochrome display, Dieter Rams industrial design.
+   No black backgrounds, no club, no neon. Warm amber on cream. */
 :root[data-theme='satisfaction'] {
-  --bg: #0b0b0b;
-  --panel: #121212;
-  --panel-hi: #1a1a1a;
-  --text: #f5f1ea;
-  --text-dim: #9c8f82;
-  --text-hi: #ffffff;
-  --accent: #ff7a00;
-  --accent-dim: rgba(255, 122, 0, 0.18);
-  --rest: #2a2a2a;
-  --current: #ff7a00;
-  --danger: #e65000;
-  --warn: #ffb347;
-  --radius: 4px;
-  --mono: ui-monospace, Consolas, monospace;
+  --bg: #ece4d8;
+  --panel: #e0d5c4;
+  --panel-hi: #d4c6b0;
+  --text: #4a3f35;
+  --text-dim: #8a7a66;
+  --text-hi: #2c2420;
+  --accent: #c47a3a;
+  --accent-dim: rgba(196, 122, 58, 0.18);
+  --rest: #c7b8a2;
+  --current: #c47a3a;
+  --danger: #b05030;
+  --warn: #c47a3a;
+  --radius: 3px;
+  --mono: ui-monospace, 'SF Mono', Consolas, monospace;
 
-  --color-kick: #ff5a00;
-  --color-kick-mid: #ff7a30;
-  --color-kick-light: #ff9a5e;
-  --color-snare: #ff8f1f;
-  --color-snare-mid: #ffa544;
-  --color-snare-light: #ffba68;
-  --color-hat: #ffb347;
-  --color-hat-mid: #ffc46e;
-  --color-hat-light: #ffd594;
-  --color-bass: #ff6d3a;
-  --color-bass-mid: #ff8a5a;
-  --color-bass-light: #ffa77a;
+  --color-kick: #6b4c30;
+  --color-kick-mid: #8a6638;
+  --color-kick-light: #b08850;
+  --color-snare: #b07040;
+  --color-snare-mid: #c88a4e;
+  --color-snare-light: #d8a468;
+  --color-hat: #9a9068;
+  --color-hat-mid: #b0a678;
+  --color-hat-light: #c8be8e;
+  --color-bass: #7a6a58;
+  --color-bass-mid: #968470;
+  --color-bass-light: #b09e88;
 
-  --card-shadow: 0 0 0 1px rgba(255, 122, 0, 0.06), 0 4px 20px rgba(0, 0, 0, 0.6);
-  color-scheme: dark;
+  --card-shadow: 0 0 0 1px rgba(196, 122, 58, 0.06), 0 1px 4px rgba(0, 0, 0, 0.06);
+  color-scheme: light;
 }
 
-/* Dark black environment with soft orange glows */
+/* Warm cream background — clean instrument workbench */
 :root[data-theme='satisfaction'] body {
-  background:
-    radial-gradient(ellipse 70% 40% at 30% 20%, rgba(255, 90, 0, 0.03) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 70% 40%, rgba(255, 143, 31, 0.02) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 30% at 50% 80%, rgba(255, 109, 58, 0.02) 0%, transparent 50%),
-    #0b0b0b;
+  background: #ece4d8;
 }
 
 :root[data-theme='satisfaction'] .app {
@@ -4529,15 +4526,17 @@ header h1 {
   z-index: 1;
 }
 
-/* Hardware groovebox cards — solid, industrial, precise.
-   No glass, no blur — flat deep panels with crisp orange accent lines. */
+/* Instrument faceplates — printed into the panel, not floating.
+   Warm cream cards with subtle amber-toned borders.
+   Think: machine printed interface, not glass UI. */
 :root[data-theme='satisfaction'] .track-card {
-  background: #121212;
-  border: 1px solid rgba(255, 122, 0, 0.06);
-  border-radius: 4px;
+  background: #e0d5c4;
+  border: 1px solid rgba(196, 122, 58, 0.06);
+  border-radius: 3px;
   box-shadow:
-    0 0 0 1px rgba(255, 122, 0, 0.06),
-    0 4px 20px rgba(0, 0, 0, 0.6);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.4),
+    0 0 0 1px rgba(196, 122, 58, 0.06),
+    0 1px 4px rgba(0, 0, 0, 0.06);
   position: relative;
 }
 
@@ -4545,10 +4544,10 @@ header h1 {
   content: '';
   position: absolute;
   top: 0;
-  left: 3px;
-  right: 3px;
+  left: 4px;
+  right: 4px;
   height: 1px;
-  background: rgba(255, 122, 0, 0.08);
+  background: linear-gradient(90deg, transparent, rgba(196, 122, 58, 0.06), transparent);
   pointer-events: none;
 }
 
@@ -4560,7 +4559,7 @@ header h1 {
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='kick'] .shape {
   fill: color-mix(in srgb, var(--color-kick) 18%, transparent);
-  stroke: rgba(255, 90, 0, 0.20);
+  stroke: rgba(107, 76, 48, 0.18);
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] {
@@ -4571,7 +4570,7 @@ header h1 {
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] .shape {
   fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
-  stroke: rgba(255, 143, 31, 0.20);
+  stroke: rgba(176, 112, 64, 0.18);
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] {
@@ -4582,7 +4581,7 @@ header h1 {
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] .shape {
   fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
-  stroke: rgba(255, 179, 71, 0.15);
+  stroke: rgba(154, 144, 104, 0.15);
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] {
@@ -4593,31 +4592,31 @@ header h1 {
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] .shape {
   fill: color-mix(in srgb, var(--color-bass) 18%, transparent);
-  stroke: rgba(255, 109, 58, 0.20);
+  stroke: rgba(122, 106, 88, 0.15);
 }
 
-/* Kick: short punch pulse */
+/* Kick: warm impulse on the panel */
 @keyframes satisfaction-kick-pulse {
-  0% { r: 11px; fill: #ff7a30; }
-  20% { r: 14px; fill: #ff9a5e; filter: drop-shadow(0 0 8px rgba(255, 90, 0, 0.15)); }
+  0% { r: 11px; fill: #8a6638; }
+  20% { r: 13px; fill: #b08850; filter: drop-shadow(0 0 4px rgba(107, 76, 48, 0.06)); }
   100% { r: 11px; fill: var(--color-kick-mid); filter: none; }
 }
-/* Snare: bright flash */
+/* Snare: amber highlight */
 @keyframes satisfaction-snare-flash {
-  0% { r: 11px; fill: #ffa544; }
-  15% { r: 14px; fill: #ffba68; filter: drop-shadow(0 0 10px rgba(255, 143, 31, 0.12)); }
+  0% { r: 11px; fill: #c88a4e; }
+  15% { r: 13px; fill: #d8a468; filter: drop-shadow(0 0 6px rgba(176, 112, 64, 0.05)); }
   100% { r: 11px; fill: var(--color-snare-mid); filter: none; }
 }
-/* Hat: fast shimmer */
+/* Hat: soft dusty shimmer */
 @keyframes satisfaction-hat-shimmer {
-  0% { r: 9px; fill: #ffc46e; }
-  25% { r: 11px; fill: #ffd594; filter: drop-shadow(0 0 6px rgba(255, 179, 71, 0.08)); }
+  0% { r: 9px; fill: #b0a678; }
+  25% { r: 10px; fill: #c8be8e; filter: drop-shadow(0 0 3px rgba(154, 144, 104, 0.04)); }
   100% { r: 9px; fill: var(--color-hat-mid); filter: none; }
 }
-/* Bass: warm glow */
+/* Bass: warm brown glow */
 @keyframes satisfaction-bass-glow {
-  0% { r: 11px; fill: #ff8a5a; }
-  25% { r: 14px; fill: #ffa77a; filter: drop-shadow(0 0 10px rgba(255, 109, 58, 0.10)); }
+  0% { r: 11px; fill: #968470; }
+  25% { r: 13px; fill: #b09e88; filter: drop-shadow(0 0 6px rgba(122, 106, 88, 0.05)); }
   100% { r: 11px; fill: var(--color-bass-mid); filter: none; }
 }
 
@@ -4634,92 +4633,91 @@ header h1 {
   animation: satisfaction-bass-glow 350ms ease-out forwards;
 }
 
-/* Playhead: orange LED */
+/* Playhead: warm amber indicator */
 :root[data-theme='satisfaction'] .step.current .step-indicator {
-  fill: #ff7a00;
-  stroke: #ffa544;
+  fill: #c47a3a;
+  stroke: #c88a4e;
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 8px rgba(255, 122, 0, 0.20));
+  filter: drop-shadow(0 0 4px rgba(196, 122, 58, 0.10));
 }
 :root[data-theme='satisfaction'] .step.current .visual {
-  fill: #ff7a00;
+  fill: #c47a3a;
 }
 :root[data-theme='satisfaction'] .step.rest .step-indicator {
-  opacity: 0.10;
+  opacity: 0.12;
 }
 
 :root[data-theme='satisfaction'] .guide {
   fill: none;
-  stroke: rgba(255, 122, 0, 0.04);
+  stroke: rgba(196, 122, 58, 0.04);
   stroke-width: 0.5px;
 }
 
 :root[data-theme='satisfaction'] .hand {
-  stroke: rgba(255, 122, 0, 0.06);
+  stroke: rgba(196, 122, 58, 0.05);
   stroke-width: 0.5px;
 }
 
 :root[data-theme='satisfaction'] button {
-  border-radius: 4px;
-  border: 1px solid rgba(255, 122, 0, 0.08);
-  background: #1a1a1a;
-  color: #f5f1ea;
+  border-radius: 3px;
+  border: 1px solid rgba(196, 122, 58, 0.08);
+  background: #d4c6b0;
+  color: #4a3f35;
   font-weight: 500;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
   padding: 8px 18px;
-  text-transform: uppercase;
+  font-family: var(--mono);
   font-size: 11px;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition: background 0.12s ease, border-color 0.12s ease;
 }
 :root[data-theme='satisfaction'] button:hover {
-  background: #242424;
-  border-color: #ff7a00;
+  background: #cabb9e;
+  border-color: #c47a3a;
 }
 
 :root[data-theme='satisfaction'] .play {
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 122, 0, 0.12);
-  color: #f5f1ea;
+  background: #d4c6b0;
+  border: 1px solid rgba(196, 122, 58, 0.10);
+  color: #4a3f35;
 }
 :root[data-theme='satisfaction'] .play.is-playing {
-  background: rgba(255, 90, 0, 0.08);
-  border-color: #ff7a00;
-  color: #ffffff;
+  background: rgba(196, 122, 58, 0.08);
+  border-color: #c47a3a;
+  color: #2c2420;
 }
 
 :root[data-theme='satisfaction'] .export,
 :root[data-theme='satisfaction'] .reset-pattern {
-  border-radius: 4px;
-  border: 1px solid rgba(255, 122, 0, 0.08);
-  background: #1a1a1a;
-  color: #f5f1ea;
-  text-transform: uppercase;
+  border-radius: 3px;
+  border: 1px solid rgba(196, 122, 58, 0.08);
+  background: #d4c6b0;
+  color: #4a3f35;
+  font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.5px;
 }
 :root[data-theme='satisfaction'] .export:hover,
 :root[data-theme='satisfaction'] .reset-pattern:hover {
-  border-color: #ff7a00;
+  border-color: #c47a3a;
 }
 
 :root[data-theme='satisfaction'] .pattern-slot {
-  border-radius: 4px;
+  border-radius: 3px;
   padding: 5px 0;
   font-size: 10px;
 }
 
 :root[data-theme='satisfaction'] .mask-label {
-  color: #9c8f82;
+  color: #8a7a66;
 }
 :root[data-theme='satisfaction'] .mask-cell {
-  border-radius: 4px;
+  border-radius: 3px;
   padding: 0;
   width: 15px;
   height: 15px;
 }
 :root[data-theme='satisfaction'] .mask-cell.rest {
-  background: rgba(255, 122, 0, 0.03);
-  border-color: rgba(255, 122, 0, 0.04);
+  background: rgba(196, 122, 58, 0.03);
+  border-color: rgba(196, 122, 58, 0.05);
   opacity: 1;
 }
 :root[data-theme='satisfaction'] .mask-cell.onset {
@@ -4730,150 +4728,149 @@ header h1 {
 :root[data-theme='satisfaction'] .mask-cell.onset.muted {
   background: transparent;
   border-color: var(--track-color);
-  opacity: 0.45;
+  opacity: 0.50;
 }
 :root[data-theme='satisfaction'] .mask-cell.onset:hover {
-  filter: brightness(1.20);
+  filter: brightness(0.95);
 }
 :root[data-theme='satisfaction'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #0b0b0b, 0 0 0 3px #ff7a00;
+  box-shadow: 0 0 0 2px #ece4d8, 0 0 0 3px #c47a3a;
 }
 
 :root[data-theme='satisfaction'] .toggle {
-  border-radius: 4px;
+  border-radius: 3px;
   min-width: 32px;
   padding: 4px 12px;
-  text-transform: uppercase;
+  font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 :root[data-theme='satisfaction'] .toggle.is-on {
-  background: rgba(255, 122, 0, 0.12);
-  border-color: #ff7a00;
+  background: rgba(196, 122, 58, 0.10);
+  border-color: #c47a3a;
 }
 
 :root[data-theme='satisfaction'] input[type='range'] {
-  height: 4px;
+  height: 3px;
   cursor: pointer;
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-runnable-track {
-  height: 4px;
-  border-radius: 2px;
-  background: #1a1a1a;
+  height: 3px;
+  border-radius: 1.5px;
+  background: #c7b8a2;
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #ff7a00;
+  width: 13px;
+  height: 13px;
+  border-radius: 0;
+  background: #c47a3a;
   border: none;
-  box-shadow: 0 0 0 2px rgba(255, 122, 0, 0.15);
   margin-top: -5px;
-  transition: transform 0.12s ease;
+  transition: transform 0.10s ease;
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
+  transform: scale(1.10);
 }
 :root[data-theme='satisfaction'] input[type='range']::-moz-range-track {
-  height: 4px;
-  border-radius: 2px;
-  background: #1a1a1a;
+  height: 3px;
+  border-radius: 1.5px;
+  background: #c7b8a2;
   border: none;
 }
 :root[data-theme='satisfaction'] input[type='range']::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #ff7a00;
+  width: 13px;
+  height: 13px;
+  border-radius: 0;
+  background: #c47a3a;
   border: none;
 }
 
 :root[data-theme='satisfaction'] select {
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 122, 0, 0.08);
-  color: #f5f1ea;
-  border-radius: 4px;
+  background: #d4c6b0;
+  border: 1px solid rgba(196, 122, 58, 0.08);
+  color: #4a3f35;
+  border-radius: 3px;
   padding: 6px 14px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-family: var(--mono);
   font-size: 11px;
 }
 :root[data-theme='satisfaction'] select option {
-  background: #121212;
-  color: #f5f1ea;
+  background: #e0d5c4;
+  color: #4a3f35;
 }
 :root[data-theme='satisfaction'] select option:checked {
-  background: rgba(255, 122, 0, 0.15);
+  background: rgba(196, 122, 58, 0.12);
 }
 
 :root[data-theme='satisfaction'] label {
-  color: #9c8f82;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  color: #8a7a66;
+  font-weight: 450;
+  letter-spacing: 0.3px;
+  font-family: var(--mono);
   font-size: 10px;
 }
 
 :root[data-theme='satisfaction'] .control-label {
-  color: #9c8f82;
+  color: #8a7a66;
   font-size: 10px;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 :root[data-theme='satisfaction'] .control-label b {
-  color: #ff9a5e;
+  color: #8a6638;
 }
 
 :root[data-theme='satisfaction'] .bpm b,
 :root[data-theme='satisfaction'] .swing b {
-  color: #ff7a00;
+  color: #c47a3a;
 }
 
 :root[data-theme='satisfaction'] h1 {
-  color: #f5f1ea;
-  letter-spacing: 4px;
+  color: #4a3f35;
+  letter-spacing: 2px;
   font-weight: 400;
-  text-transform: uppercase;
+  font-family: var(--mono);
   font-size: 18px;
 }
 
 :root[data-theme='satisfaction'] .tagline {
-  color: #9c8f82;
+  color: #8a7a66;
   font-size: 11px;
-  letter-spacing: 3px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
 :root[data-theme='satisfaction'] .track-name {
-  color: #f5f1ea;
-  font-weight: 600;
-  letter-spacing: 1.5px;
+  color: #4a3f35;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
+  font-family: var(--mono);
   font-size: 11px;
 }
 
 :root[data-theme='satisfaction'] .mini-metrics b {
-  color: #ff9a5e;
+  color: #8a6638;
 }
 :root[data-theme='satisfaction'] .mini-metrics span {
-  color: #9c8f82;
+  color: #8a7a66;
 }
 
 :root[data-theme='satisfaction'] .playback-select select {
-  background: #1a1a1a;
-  border: 1px solid rgba(255, 122, 0, 0.08);
-  border-radius: 4px;
+  background: #d4c6b0;
+  border: 1px solid rgba(196, 122, 58, 0.08);
+  border-radius: 3px;
   padding: 4px 12px;
-  color: #f5f1ea;
-  text-transform: uppercase;
+  color: #4a3f35;
+  font-family: var(--mono);
   font-size: 11px;
 }
 :root[data-theme='satisfaction'] .playback-select span {
-  color: #9c8f82;
+  color: #8a7a66;
 }
 
 :root[data-theme='satisfaction'] .module-lane {
-  border-top: 1px solid rgba(255, 122, 0, 0.04);
+  border-top: 1px solid rgba(196, 122, 58, 0.04);
 }
 
 /* ===== Revelation (Medieval Astronomy / Sacred Geometry / Cosmic Manuscript) ===== */
