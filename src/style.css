@@ -5719,12 +5719,12 @@ header h1 {
    Translucent plastic, bokeh lights, soft party atmosphere.
    Euphoric, playful, nostalgic — not RGB, not rave, not gaming. */
 :root[data-theme='candyflip'] {
-  --bg: #fff7fc;
+  --bg: #e8dce6;
   --panel: #ffffff;
   --panel-hi: #fff0f8;
   --text: #2b2430;
-  --text-dim: #6b6272;
-  --text-hi: #1a1420;
+  --text-dim: #5f5667;
+  --text-hi: #160f1e;
   --accent: #ff7aa8;
   --accent-dim: rgba(255, 122, 168, 0.12);
   --rest: #e2dbe4;
@@ -5734,9 +5734,9 @@ header h1 {
   --radius: 16px;
   --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
 
-  --color-kick: #ff7aa8;
-  --color-kick-mid: #ff94ba;
-  --color-kick-light: #ffb0cc;
+  --color-kick: #ff6ea8;
+  --color-kick-mid: #ff88ba;
+  --color-kick-light: #ffa4cc;
   --color-snare: #ffb86c;
   --color-snare-mid: #ffca8a;
   --color-snare-light: #ffdca8;
@@ -5751,43 +5751,42 @@ header h1 {
   color-scheme: light;
 }
 
-/* Background: pastel pool with very soft layered radials + ambient bokeh lights */
+/* Background: slightly darker pastel — neon candy at night */
 :root[data-theme='candyflip'] body {
   background:
-    /* Slow ambient bokeh — large blurry coloured blobs */
-    radial-gradient(ellipse 40% 30% at 18% 12%,   rgba(255, 122, 168, 0.07) 0%, transparent 50%),
-    radial-gradient(ellipse 35% 40% at 82% 18%,   rgba(118, 216, 255, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse 30% 35% at 65% 75%,   rgba(125, 231, 184, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse 25% 30% at 22% 82%,   rgba(255, 184, 108, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 35% at 50% 50%,   rgba(255, 240, 248, 0.6) 0%, transparent 60%),
-    #fff7fc;
+    radial-gradient(ellipse 40% 30% at 18% 12%,   rgba(255, 106, 168, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 40% at 82% 18%,   rgba(118, 216, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 35% at 65% 75%,   rgba(125, 231, 184, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 25% 30% at 22% 82%,   rgba(255, 184, 108, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 35% at 50% 50%,   rgba(232, 220, 230, 0.6) 0%, transparent 60%),
+    #e8dce6;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Ambient floating bokeh orbs — CSS-animated, SVG filter, very slow drift */
+/* Ambient bokeh orbs — slightly more visible against darker bg */
 :root[data-theme='candyflip'] body::before {
   content: '';
   position: fixed;
   inset: -100px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.25;
+  opacity: 0.28;
   background-image:
-    radial-gradient(circle 180px at 15% 10%, rgba(255, 122, 168, 0.06) 0%, transparent 50%),
-    radial-gradient(circle 140px at 75% 12%, rgba(118, 216, 255, 0.04) 0%, transparent 50%),
-    radial-gradient(circle 160px at 60% 82%, rgba(125, 231, 184, 0.04) 0%, transparent 50%),
-    radial-gradient(circle 120px at 30% 75%, rgba(255, 184, 108, 0.03) 0%, transparent 50%),
-    radial-gradient(circle 200px at 85% 55%, rgba(255, 122, 168, 0.03) 0%, transparent 50%);
+    radial-gradient(circle 200px at 15% 10%, rgba(255, 122, 168, 0.07) 0%, transparent 50%),
+    radial-gradient(circle 150px at 75% 12%, rgba(118, 216, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle 170px at 60% 82%, rgba(125, 231, 184, 0.04) 0%, transparent 50%),
+    radial-gradient(circle 130px at 30% 75%, rgba(255, 184, 108, 0.04) 0%, transparent 50%),
+    radial-gradient(circle 200px at 85% 55%, rgba(255, 122, 168, 0.04) 0%, transparent 50%);
   animation: candyflip-bokeh-drift 30s ease-in-out infinite alternate;
 }
 
 @keyframes candyflip-bokeh-drift {
-  0%   { transform: translate(0px, 0px) scale(1); opacity: 0.22; }
-  25%  { transform: translate(-20px, 12px) scale(1.03); opacity: 0.28; }
-  50%  { transform: translate(15px, -18px) scale(0.97); opacity: 0.20; }
-  75%  { transform: translate(-8px, 22px) scale(1.04); opacity: 0.26; }
-  100% { transform: translate(10px, -8px) scale(1.01); opacity: 0.23; }
+  0%   { transform: translate(0px, 0px) scale(1); opacity: 0.26; }
+  25%  { transform: translate(-20px, 12px) scale(1.03); opacity: 0.32; }
+  50%  { transform: translate(15px, -18px) scale(0.97); opacity: 0.24; }
+  75%  { transform: translate(-8px, 22px) scale(1.04); opacity: 0.30; }
+  100% { transform: translate(10px, -8px) scale(1.01); opacity: 0.27; }
 }
 
 :root[data-theme='candyflip'] .app {
@@ -5795,18 +5794,88 @@ header h1 {
   z-index: 1;
 }
 
-/* Cards: translucent candy-coloured acrylic. Soft glass effect, rounded. */
+/* Cards: per-voice tinted translucent candy-coloured acrylic panels.
+   From a distance: pink = kick, peach = snare, blue = hat, mint = bass. */
 :root[data-theme='candyflip'] .track-card {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 122, 168, 0.06);
+  border: 1px solid rgba(255, 122, 168, 0.08);
   border-radius: 16px;
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.6),
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.5),
     0 4px 24px rgba(255, 122, 168, 0.06),
     0 1px 3px rgba(0, 0, 0, 0.03);
   position: relative;
+  transition: background 0.2s ease;
+}
+
+/* Kick card — strawberry candy tint */
+:root[data-theme='candyflip'] .track-card[data-voice='kick'] {
+  --track-color: var(--color-kick);
+  background: rgba(255, 212, 227, 0.4);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='kick'] .step.onset {
+  fill: var(--color-kick-mid);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='kick'] .shape {
+  fill: color-mix(in srgb, var(--color-kick) 20%, transparent);
+  stroke: rgba(255, 110, 168, 0.20);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='kick'] .mask-cell.rest {
+  background: rgba(255, 110, 168, 0.04);
+  border-color: rgba(255, 110, 168, 0.08);
+}
+
+/* Snare card — peach candy tint */
+:root[data-theme='candyflip'] .track-card[data-voice='snare'] {
+  --track-color: var(--color-snare);
+  background: rgba(255, 225, 199, 0.4);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='snare'] .step.onset {
+  fill: var(--color-snare-mid);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='snare'] .shape {
+  fill: color-mix(in srgb, var(--color-snare) 20%, transparent);
+  stroke: rgba(255, 184, 108, 0.20);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='snare'] .mask-cell.rest {
+  background: rgba(255, 184, 108, 0.04);
+  border-color: rgba(255, 184, 108, 0.08);
+}
+
+/* Hat card — blue raspberry candy tint */
+:root[data-theme='candyflip'] .track-card[data-voice='hat'] {
+  --track-color: var(--color-hat);
+  background: rgba(223, 243, 255, 0.4);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='hat'] .step.onset {
+  fill: var(--color-hat-mid);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='hat'] .shape {
+  fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
+  stroke: rgba(118, 216, 255, 0.20);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='hat'] .mask-cell.rest {
+  background: rgba(118, 216, 255, 0.04);
+  border-color: rgba(118, 216, 255, 0.08);
+}
+
+/* Bass card — mint candy tint */
+:root[data-theme='candyflip'] .track-card[data-voice='bass'] {
+  --track-color: var(--color-bass);
+  background: rgba(220, 248, 234, 0.4);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='bass'] .step.onset {
+  fill: var(--color-bass-mid);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='bass'] .shape {
+  fill: color-mix(in srgb, var(--color-bass) 20%, transparent);
+  stroke: rgba(125, 231, 184, 0.20);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='bass'] .mask-cell.rest {
+  background: rgba(125, 231, 184, 0.04);
+  border-color: rgba(125, 231, 184, 0.08);
 }
 
 :root[data-theme='candyflip'] .track-card::after {
@@ -5820,54 +5889,10 @@ header h1 {
   pointer-events: none;
 }
 
-:root[data-theme='candyflip'] .track-card[data-voice='kick'] {
-  --track-color: var(--color-kick);
-}
-:root[data-theme='candyflip'] .track-card[data-voice='kick'] .step.onset {
-  fill: var(--color-kick-mid);
-}
-:root[data-theme='candyflip'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-kick) 18%, transparent);
-  stroke: rgba(255, 122, 168, 0.20);
-}
-
-:root[data-theme='candyflip'] .track-card[data-voice='snare'] {
-  --track-color: var(--color-snare);
-}
-:root[data-theme='candyflip'] .track-card[data-voice='snare'] .step.onset {
-  fill: var(--color-snare-mid);
-}
-:root[data-theme='candyflip'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
-  stroke: rgba(255, 184, 108, 0.20);
-}
-
-:root[data-theme='candyflip'] .track-card[data-voice='hat'] {
-  --track-color: var(--color-hat);
-}
-:root[data-theme='candyflip'] .track-card[data-voice='hat'] .step.onset {
-  fill: var(--color-hat-mid);
-}
-:root[data-theme='candyflip'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
-  stroke: rgba(118, 216, 255, 0.20);
-}
-
-:root[data-theme='candyflip'] .track-card[data-voice='bass'] {
-  --track-color: var(--color-bass);
-}
-:root[data-theme='candyflip'] .track-card[data-voice='bass'] .step.onset {
-  fill: var(--color-bass-mid);
-}
-:root[data-theme='candyflip'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-bass) 18%, transparent);
-  stroke: rgba(125, 231, 184, 0.20);
-}
-
-/* Kick: soft pink bubble pulse */
+/* Kick: pink bubble pulse */
 @keyframes candyflip-kick-bubble {
-  0%   { r: 11px; fill: #ff94ba; }
-  20%  { r: 14px; fill: #ffb0cc; filter: drop-shadow(0 0 8px rgba(255, 122, 168, 0.12)); }
+  0%   { r: 11px; fill: #ff88ba; }
+  20%  { r: 14px; fill: #ffa4cc; filter: drop-shadow(0 0 8px rgba(255, 110, 168, 0.12)); }
   100% { r: 11px; fill: var(--color-kick-mid); filter: none; }
 }
 /* Snare: warm peach sparkle */
@@ -5902,71 +5927,72 @@ header h1 {
   animation: candyflip-bass-glow 220ms ease-out forwards;
 }
 
-/* Playhead: pink candy dot — no animation on the playhead itself */
+/* Playhead: pink candy dot */
 :root[data-theme='candyflip'] .step.current .step-indicator {
   fill: #ff7aa8;
-  stroke: #ff94ba;
+  stroke: #ff6ea8;
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 6px rgba(255, 122, 168, 0.10));
+  filter: drop-shadow(0 0 8px rgba(255, 122, 168, 0.10));
 }
 :root[data-theme='candyflip'] .step.current .visual {
   fill: #ff7aa8;
 }
 :root[data-theme='candyflip'] .step.rest .step-indicator {
-  opacity: 0.08;
+  opacity: 0.06;
 }
 
 :root[data-theme='candyflip'] .guide {
   fill: none;
-  stroke: rgba(255, 122, 168, 0.03);
+  stroke: rgba(255, 122, 168, 0.04);
   stroke-width: 0.5px;
 }
 
 :root[data-theme='candyflip'] .hand {
-  stroke: rgba(255, 122, 168, 0.05);
+  stroke: rgba(255, 122, 168, 0.06);
   stroke-width: 0.5px;
 }
 
-/* Buttons: candy-like, soft rounded, tactile */
+/* Buttons: candy-like, stronger hierarchy */
 :root[data-theme='candyflip'] button {
   border-radius: 16px;
-  border: 1px solid rgba(255, 122, 168, 0.06);
-  background: rgba(255, 240, 248, 0.6);
+  border: 1px solid rgba(255, 122, 168, 0.08);
+  background: rgba(255, 240, 248, 0.7);
   color: #2b2430;
   font-weight: 500;
   letter-spacing: 0.3px;
   padding: 8px 18px;
   font-size: 12px;
-  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
 }
 :root[data-theme='candyflip'] button:hover {
-  background: rgba(255, 122, 168, 0.06);
-  border-color: rgba(255, 122, 168, 0.12);
-  box-shadow: 0 0 12px rgba(255, 122, 168, 0.04);
+  background: rgba(255, 240, 248, 0.95);
+  border-color: rgba(255, 122, 168, 0.15);
+  box-shadow: 0 0 12px rgba(255, 122, 168, 0.05);
 }
 
 :root[data-theme='candyflip'] .play {
-  background: rgba(255, 240, 248, 0.6);
+  background: rgba(255, 240, 248, 0.7);
   border: 1px solid rgba(255, 122, 168, 0.08);
   color: #2b2430;
 }
 :root[data-theme='candyflip'] .play.is-playing {
-  background: rgba(255, 122, 168, 0.06);
+  background: rgba(255, 122, 168, 0.08);
   border-color: #ff7aa8;
   color: #2b2430;
+  box-shadow: 0 0 12px rgba(255, 122, 168, 0.06);
 }
 
 :root[data-theme='candyflip'] .export,
 :root[data-theme='candyflip'] .reset-pattern {
   border-radius: 16px;
-  border: 1px solid rgba(255, 122, 168, 0.06);
-  background: rgba(255, 240, 248, 0.6);
+  border: 1px solid rgba(255, 122, 168, 0.08);
+  background: rgba(255, 240, 248, 0.7);
   color: #2b2430;
 }
 :root[data-theme='candyflip'] .export:hover,
 :root[data-theme='candyflip'] .reset-pattern:hover {
-  border-color: rgba(255, 122, 168, 0.15);
-  background: rgba(255, 122, 168, 0.04);
+  border-color: rgba(255, 122, 168, 0.20);
+  background: rgba(255, 240, 248, 0.95);
 }
 
 :root[data-theme='candyflip'] .pattern-slot {
@@ -5975,10 +6001,10 @@ header h1 {
   font-size: 10px;
 }
 :root[data-theme='candyflip'] .pattern-slot:hover {
-  background: rgba(255, 122, 168, 0.04);
+  background: rgba(255, 240, 248, 0.6);
 }
 
-/* Mask section */
+/* Mask section — improved readability */
 :root[data-theme='candyflip'] .mask-label {
   color: #6b6272;
 }
@@ -5989,8 +6015,8 @@ header h1 {
   height: 15px;
 }
 :root[data-theme='candyflip'] .mask-cell.rest {
-  background: rgba(255, 122, 168, 0.02);
-  border-color: rgba(255, 122, 168, 0.04);
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.06);
   opacity: 1;
 }
 :root[data-theme='candyflip'] .mask-cell.onset {
@@ -6004,21 +6030,21 @@ header h1 {
   opacity: 0.55;
 }
 :root[data-theme='candyflip'] .mask-cell.onset:hover {
-  filter: brightness(1.08);
+  filter: brightness(1.10);
 }
 :root[data-theme='candyflip'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #fff7fc, 0 0 0 3px #ff7aa8;
+  box-shadow: 0 0 0 2px #e8dce6, 0 0 0 3px #ff7aa8;
 }
 
 :root[data-theme='candyflip'] .toggle {
   border-radius: 16px;
   min-width: 32px;
   padding: 4px 14px;
-  border: 1px solid rgba(255, 122, 168, 0.06);
-  background: rgba(255, 240, 248, 0.4);
+  border: 1px solid rgba(255, 122, 168, 0.08);
+  background: rgba(255, 240, 248, 0.5);
 }
 :root[data-theme='candyflip'] .toggle.is-on {
-  background: rgba(255, 122, 168, 0.08);
+  background: rgba(255, 122, 168, 0.10);
   border-color: #ff7aa8;
 }
 
@@ -6030,7 +6056,7 @@ header h1 {
 :root[data-theme='candyflip'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 122, 168, 0.06);
+  background: rgba(255, 122, 168, 0.08);
 }
 :root[data-theme='candyflip'] input[type='range']::-webkit-slider-thumb {
   width: 14px;
@@ -6038,7 +6064,7 @@ header h1 {
   border-radius: 50%;
   background: #ff7aa8;
   border: none;
-  box-shadow: 0 0 0 2px rgba(255, 122, 168, 0.10);
+  box-shadow: 0 0 0 2px rgba(255, 122, 168, 0.12);
   margin-top: -5px;
   transition: transform 0.12s ease;
 }
@@ -6048,7 +6074,7 @@ header h1 {
 :root[data-theme='candyflip'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 122, 168, 0.06);
+  background: rgba(255, 122, 168, 0.08);
   border: none;
 }
 :root[data-theme='candyflip'] input[type='range']::-moz-range-thumb {
@@ -6060,8 +6086,8 @@ header h1 {
 }
 
 :root[data-theme='candyflip'] select {
-  background: rgba(255, 240, 248, 0.6);
-  border: 1px solid rgba(255, 122, 168, 0.06);
+  background: rgba(255, 240, 248, 0.8);
+  border: 1px solid rgba(255, 122, 168, 0.08);
   color: #2b2430;
   border-radius: 16px;
   padding: 6px 14px;
@@ -6076,20 +6102,20 @@ header h1 {
 }
 
 :root[data-theme='candyflip'] label {
-  color: #6b6272;
-  font-weight: 450;
+  color: #5f5667;
+  font-weight: 500;
   letter-spacing: 0.3px;
   font-size: 11px;
 }
 
 :root[data-theme='candyflip'] .control-label {
-  color: #6b6272;
+  color: #5f5667;
   font-size: 10px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 :root[data-theme='candyflip'] .control-label b {
-  color: #4a4052;
+  color: #2b2430;
 }
 
 :root[data-theme='candyflip'] .bpm b,
@@ -6100,12 +6126,12 @@ header h1 {
 :root[data-theme='candyflip'] h1 {
   color: #2b2430;
   letter-spacing: 2px;
-  font-weight: 350;
+  font-weight: 400;
   font-size: 19px;
 }
 
 :root[data-theme='candyflip'] .tagline {
-  color: #6b6272;
+  color: #5f5667;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -6114,39 +6140,35 @@ header h1 {
 
 :root[data-theme='candyflip'] .track-name {
   color: #2b2430;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
 
 :root[data-theme='candyflip'] .mini-metrics b {
-  color: #4a4052;
+  color: #2b2430;
 }
 :root[data-theme='candyflip'] .mini-metrics span {
-  color: #6b6272;
-  opacity: 0.6;
+  color: #5f5667;
+  opacity: 0.65;
 }
 
 :root[data-theme='candyflip'] .playback-select select {
-  background: rgba(255, 240, 248, 0.6);
-  border: 1px solid rgba(255, 122, 168, 0.06);
+  background: rgba(255, 240, 248, 0.8);
+  border: 1px solid rgba(255, 122, 168, 0.08);
   border-radius: 16px;
   padding: 4px 12px;
   color: #2b2430;
   font-size: 12px;
 }
 :root[data-theme='candyflip'] .playback-select span {
-  color: #6b6272;
-  opacity: 0.6;
+  color: #5f5667;
+  opacity: 0.65;
 }
 
 :root[data-theme='candyflip'] .module-lane {
   border-top: 1px solid rgba(255, 122, 168, 0.03);
 }
-
-/* ===== Barbie V2 (Luxury Pink / Fashion Boutique / High Contrast) ===== */
-/* Richer rose background, clearer hierarchy, stronger readability.
-   Same pink — immediately more readable. Luxury cosmetic, not pastel. */
 :root[data-theme='barbie'] {
   --bg: #e888b8;
   --panel: #ffd6e7;
