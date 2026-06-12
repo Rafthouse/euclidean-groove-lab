@@ -105,12 +105,14 @@ export default function TrackCard({
         onSwitchPattern={onSwitchPattern}
       />
 
-      <Sequencer
-        pattern={pattern}
-        mutedSteps={mutedStepMask}
-        currentStep={currentStep}
-        onToggleStep={toggleStep}
-      />
+      <div className="sequencer-wrapper">
+        <Sequencer
+          pattern={pattern}
+          mutedSteps={mutedStepMask}
+          currentStep={currentStep}
+          onToggleStep={toggleStep}
+        />
+      </div>
 
       {PITCH_EDITOR_VOICES.includes(track.voiceId) && (
         <PitchLane track={track} onChange={onChange} />

@@ -2682,6 +2682,7 @@ header h1 {
   grid-template-columns: 1fr;
   gap: 12px;
   box-shadow: var(--card-shadow);
+  overflow: hidden;
 }
 
 .track-card.is-muted {
@@ -2737,6 +2738,10 @@ header h1 {
 
 /* ---------- sequencer ring ---------- */
 
+.sequencer-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
 .sequencer {
   /* Same SVG as before; size is CSS-driven so cards control it. */
   width: 100%;
