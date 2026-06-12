@@ -8,10 +8,12 @@ import {
   localStep,
   onsetIndexAt,
   resolvePitchSpec,
+  GM_DRUM_MAP,
 } from './engine';
 import type { Track, VoiceId, MidiNote, PlaybackMode, PlaybackSpeed } from './engine';
 import { DRUM_KITS } from './drumKits';
 import type { DrumKitId } from './drumKits';
+import { sendNoteOn, sendNoteOff } from './midiOut';
 
 // The audio layer is a *consumer* of the engine: it never generates rhythm,
 // it only plays whatever tracks the app feeds it.
@@ -219,6 +221,44 @@ export function onStep(callback: StepCallback): void {
   stepCallback = callback;
 }
 
+// ── MIDI OUT integration ───────────────────────────────────────────────
+// When enabled, every onset also fires MIDI Note On/Off to the selected
+// Web MIDI output port. Uses Tone.context.currentTime for sync.
+
+let midiOutEnabled = false;
+
+/** Enable or disable MIDI OUT for all tracks. */
+export function setMidiOut(enabled: boolean): void {
+  midiOutEnabled = enabled;
+}
+
+export function isMidiOutEnabled(): boolean {
+  return midiOutEnabled;
+}
+
+/**
+ * Send a MIDI note for an onset from inside the scheduler callback.
+ * `time` is Tone's AudioContext time (seconds). Only fires when MIDI out
+ * is enabled and the note is audible (non-zero velocity).
+ */
+function fireMidiNote(
+  time: number,
+  note: number,
+  velocity01: number,
+  channel: number,
+  durationSixteenths: number,
+): void {
+  if (!midiOutEnabled) return;
+  const vel = Math.max(1, Math.min(127, Math.round(velocity01 * 127)));
+  if (vel <= 0) return;
+  const noteStart = time;
+  sendNoteOn(note, vel, channel, noteStart);
+  // Schedule Note Off at the end of the note duration
+  const sixteenthSec = Tone.Time('16n').toSeconds();
+  const noteEnd = noteStart + sixteenthSec * durationSixteenths;
+  sendNoteOff(note, channel, noteEnd);
+}
+
 /**
  * Prime the iOS audio session for playback.
  */
@@ -332,6 +372,10 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
         !!track.pitches &&
         track.pitches.slots.length > 0;
 
+      let mainMidiNote: number | undefined;
+      let mainMidiChannel: number = 9;
+      let mainMidiVelocity: number = 0;
+
       if (isPitchedVoice(track.voiceId) && pitchActive) {
         // Pitch index advances LINEARLY through monotonic `t`, regardless of
         // playback mode — isorhythm variant (a): each played note = +1 in the
@@ -347,9 +391,20 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
         const stepVel = tp.velocities ? tp.velocities[step] : undefined;
         const mainVelocity = (slot.velocity ?? stepVel ?? 100) / 100;
         voices[track.voiceId](time, mainVelocity, mainVolume, midi);
+        mainMidiNote = midi;
+        mainMidiChannel = 0;
+        mainMidiVelocity = mainVelocity * mainVolume;
       } else {
         const mainVelocity = tp.velocities ? (tp.velocities[step] ?? 100) / 100 : 1;
         voices[track.voiceId](time, mainVelocity, mainVolume);
+        mainMidiNote = GM_DRUM_MAP[track.voiceId];
+        mainMidiChannel = 9;
+        mainMidiVelocity = mainVelocity * mainVolume;
+      }
+
+      // MIDI OUT: fire Note On for every audible onset
+      if (mainMidiNote !== undefined) {
+        fireMidiNote(time, mainMidiNote, mainMidiVelocity, mainMidiChannel, 1);
       }
 
       // ──────────────────────────────────────────────────────────────────
@@ -367,6 +422,11 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
           ghostLP.frequency.value = track.ghost.lpHz;
           const ghostLevel = clamp01(track.ghost.amount / 100) * ((track.volume ?? 100) / 100);
           triggerSample(buffers.snare, ghostTime, ghostLevel, ghostHP);
+
+          // MIDI OUT: ghost note on the same MIDI channel as snare
+          const ghostNote = GM_DRUM_MAP.snare;
+          const ghostVel = clamp01(track.ghost.amount / 100) * ((track.volume ?? 100) / 100);
+          fireMidiNote(ghostTime, ghostNote, ghostVel, 9, 1);
         }
       }
     }

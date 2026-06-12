@@ -4,9 +4,11 @@ import DrumKitSelect from './components/DrumKitSelect';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
-  onKitLoading, resetClock } from './audio';
+  onKitLoading, resetClock, setMidiOut } from './audio';
 import { downloadBytes } from './download';
 import type { DrumKitId } from './drumKits';
+import { init as initMidi, onPortsChange, selectPort } from './midiOut';
+import type { MidiOutputPort } from './midiOut';
 
 /** How many 4/4 bars the MIDI export renders. */
 const EXPORT_BARS = 4;
@@ -60,6 +62,37 @@ export default function App() {
   // Read in the (synchronous) updateTrack closure without re-renders.
   const restartOnModeChangeRef = useRef(restartOnModeChange);
   restartOnModeChangeRef.current = restartOnModeChange;
+
+  const [midiPorts, setMidiPorts] = useState<MidiOutputPort[]>([]);
+  const [midiSelected, setMidiSelected] = useState<string | null>(null);
+  const [midiEnabled, setMidiEnabled] = useState(false);
+
+  // Initialise Web MIDI on mount
+  useEffect(() => {
+    initMidi().then((ports) => {
+      setMidiPorts(ports);
+      if (ports.length > 0) {
+        selectPort(ports[0].id);
+        setMidiSelected(ports[0].id);
+      }
+    });
+    const unsub = onPortsChange((ports) => setMidiPorts(ports));
+    return () => { unsub(); setMidiOut(false); };
+  }, []);
+
+  const handleMidiToggle = useCallback(() => {
+    setMidiEnabled((prev) => {
+      const next = !prev;
+      setMidiOut(next);
+      return next;
+    });
+  }, []);
+
+  const handleMidiPortChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    const id = e.target.value;
+    selectPort(id);
+    setMidiSelected(id);
+  }, []);
 
   // Engine -> audio sync.
   useEffect(() => setTracks(tracks), [tracks]);
@@ -354,6 +387,27 @@ export default function App() {
           <b>{swing}%</b>
         </label>
         <DrumKitSelect value={kitId} loading={kitLoading} onChange={handleKitChange} />
+        {midiPorts.length > 0 && (
+          <label className="midi-out">
+            MIDI
+            <select value={midiSelected ?? ''} onChange={handleMidiPortChange}>
+              {midiPorts.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name}
+                </option>
+              ))}
+            </select>
+            <button
+              type="button"
+              className={'toggle' + (midiEnabled ? ' is-on' : '')}
+              onClick={handleMidiToggle}
+              aria-pressed={midiEnabled}
+              title="Send MIDI notes to the selected port in real time"
+            >
+              {midiEnabled ? 'ON' : 'OFF'}
+            </button>
+          </label>
+        )}
         <button
           type="button"
           className="export"

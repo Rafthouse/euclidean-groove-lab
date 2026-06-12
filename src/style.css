@@ -4357,6 +4357,44 @@ header h1 {
   font-family: var(--mono);
 }
 
+/* ---------- MIDI OUT ---------- */
+
+.midi-out {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.midi-out select {
+  background: var(--panel);
+  color: var(--text-hi);
+  border: 1px solid var(--rest);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font: inherit;
+  cursor: pointer;
+  max-width: 120px;
+}
+.midi-out .toggle {
+  font: 600 11px/1 var(--mono);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--rest);
+  background: var(--panel);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: border-color 0.12s ease, color 0.12s ease, background 0.12s ease;
+}
+.midi-out .toggle.is-on {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+.midi-out .toggle:hover {
+  border-color: var(--accent);
+}
+
 /* ---------- drum kit selector ---------- */
 
 .kit-select,
