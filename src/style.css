@@ -1759,6 +1759,327 @@
   color: rgba(200, 180, 230, 0.4);
 }
 
+/* ===== Dark Side (Forbidden Ritual Instrument / Obsidian Cathedral) ===== */
+:root[data-theme='dark-side'] {
+  --bg: #050505;
+  --panel: rgba(5, 5, 5, 0.55);
+  --panel-hi: rgba(10, 5, 5, 0.35);
+  --text: #D9D3CC;
+  --text-dim: rgba(180, 175, 165, 0.50);
+  --text-hi: #F0EDE8;
+  --accent: #B31217;
+  --accent-dim: rgba(179, 18, 23, 0.12);
+  --rest: rgba(10, 5, 5, 0.25);
+  --current: rgba(217, 28, 28, 0.90);
+  --danger: #D91C1C;
+  --warn: #8B0000;
+  --radius: 12px;
+  --mono: ui-monospace, Consolas, monospace;
+
+  --color-kick: #8B0000;
+  --color-kick-mid: #B31217;
+  --color-kick-light: #D91C1C;
+
+  --color-snare: #B31217;
+  --color-snare-mid: #D91C1C;
+  --color-snare-light: #FF2A2A;
+
+  --color-hat: #6D071A;
+  --color-hat-mid: #8B0000;
+  --color-hat-light: #B31217;
+
+  --color-bass: #8B0000;
+  --color-bass-mid: #B31217;
+  --color-bass-light: #D91C1C;
+
+  --card-shadow: 0 0 0 0 transparent;
+  color-scheme: dark;
+}
+
+/* Background: absolute black — nothing else */
+:root[data-theme='dark-side'] body {
+  background: #050505;
+}
+
+:root[data-theme='dark-side'] .app {
+  position: relative;
+  z-index: 1;
+}
+
+/* Panels: obsidian glass — dark, barely there, subtle red glow at edge */
+:root[data-theme='dark-side'] .track-card {
+  background: rgba(5, 5, 5, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(139, 0, 0, 0.06);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(179, 18, 23, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.50);
+  position: relative;
+  overflow: hidden;
+}
+
+:root[data-theme='dark-side'] .track-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(217, 28, 28, 0.08), transparent);
+  pointer-events: none;
+}
+
+:root[data-theme='dark-side'] .track-card[data-voice='kick'] {
+  --track-color: var(--color-kick);
+}
+:root[data-theme='dark-side'] .track-card[data-voice='kick'] .step.onset {
+  fill: var(--color-kick-mid);
+}
+:root[data-theme='dark-side'] .track-card[data-voice='kick'] .shape {
+  fill: color-mix(in srgb, var(--color-kick) 15%, transparent);
+  stroke: rgba(179, 18, 23, 0.15);
+}
+
+:root[data-theme='dark-side'] .track-card[data-voice='snare'] {
+  --track-color: var(--color-snare);
+}
+:root[data-theme='dark-side'] .track-card[data-voice='snare'] .step.onset {
+  fill: var(--color-snare-mid);
+}
+:root[data-theme='dark-side'] .track-card[data-voice='snare'] .shape {
+  fill: color-mix(in srgb, var(--color-snare) 15%, transparent);
+  stroke: rgba(217, 28, 28, 0.15);
+}
+
+:root[data-theme='dark-side'] .track-card[data-voice='hat'] {
+  --track-color: var(--color-hat);
+}
+:root[data-theme='dark-side'] .track-card[data-voice='hat'] .step.onset {
+  fill: var(--color-hat-mid);
+}
+:root[data-theme='dark-side'] .track-card[data-voice='hat'] .shape {
+  fill: color-mix(in srgb, var(--color-hat) 15%, transparent);
+  stroke: rgba(109, 7, 26, 0.12);
+}
+
+:root[data-theme='dark-side'] .track-card[data-voice='bass'] {
+  --track-color: var(--color-bass);
+}
+:root[data-theme='dark-side'] .track-card[data-voice='bass'] .step.onset {
+  fill: var(--color-bass-mid);
+}
+:root[data-theme='dark-side'] .track-card[data-voice='bass'] .shape {
+  fill: color-mix(in srgb, var(--color-bass) 15%, transparent);
+  stroke: rgba(139, 0, 0, 0.12);
+}
+
+/* Active note: coal becoming incandescent — brief crimson ignition */
+:root[data-theme='dark-side'] .step.onset.current {
+  animation: dark-side-ignite 350ms ease-out forwards;
+}
+
+@keyframes dark-side-ignite {
+  0% {
+    fill: #D91C1C;
+    r: 11px;
+    filter: drop-shadow(0 0 0 rgba(217, 28, 28, 0));
+  }
+  12% {
+    fill: #FF2A2A;
+    r: 14px;
+    filter: drop-shadow(0 0 10px rgba(217, 28, 28, 0.35))
+            drop-shadow(0 0 24px rgba(179, 18, 23, 0.12));
+  }
+  35% {
+    fill: #B31217;
+    r: 12px;
+    filter: drop-shadow(0 0 6px rgba(217, 28, 28, 0.20));
+  }
+  100% {
+    fill: var(--color-kick-mid);
+    r: 11px;
+    filter: drop-shadow(0 0 0 rgba(217, 28, 28, 0));
+  }
+}
+
+/* Playhead: ember point */
+:root[data-theme='dark-side'] .step.current .step-indicator {
+  fill: #D91C1C;
+  stroke: #8B0000;
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 8px rgba(217, 28, 28, 0.20));
+}
+:root[data-theme='dark-side'] .step.current .visual {
+  fill: #D91C1C;
+}
+
+:root[data-theme='dark-side'] .step.rest .step-indicator {
+  opacity: 0.08;
+}
+
+:root[data-theme='dark-side'] .guide {
+  fill: none;
+  stroke: rgba(139, 0, 0, 0.03);
+  stroke-width: 0.5px;
+}
+
+:root[data-theme='dark-side'] .hand {
+  stroke: rgba(139, 0, 0, 0.04);
+  stroke-width: 0.5px;
+}
+
+/* Buttons: carved obsidian */
+:root[data-theme='dark-side'] button {
+  border-radius: 12px;
+  border: 1px solid rgba(139, 0, 0, 0.06);
+  background: rgba(10, 5, 5, 0.60);
+  color: #D9D3CC;
+  font-weight: 450;
+  letter-spacing: 0.3px;
+  padding: 8px 18px;
+  transition: background 0.2s cubic-bezier(0.32, 0.94, 0.6, 1);
+}
+:root[data-theme='dark-side'] button:hover {
+  background: rgba(20, 8, 8, 0.70);
+  box-shadow: inset 0 0 0 0.5px rgba(179, 18, 23, 0.08);
+}
+
+:root[data-theme='dark-side'] .play {
+  background: rgba(10, 5, 5, 0.70);
+  border: 1px solid rgba(179, 18, 23, 0.12);
+  color: #D9D3CC;
+}
+:root[data-theme='dark-side'] .play.is-playing {
+  background: rgba(10, 5, 5, 0.50);
+  border: 1px solid rgba(139, 0, 0, 0.06);
+}
+
+:root[data-theme='dark-side'] .export {
+  border-radius: 12px;
+  border: 1px solid rgba(139, 0, 0, 0.06);
+  background: rgba(10, 5, 5, 0.60);
+  color: #D9D3CC;
+}
+
+:root[data-theme='dark-side'] .toggle {
+  border-radius: 10px;
+  min-width: 32px;
+  padding: 4px 12px;
+}
+:root[data-theme='dark-side'] .toggle.is-on {
+  background: rgba(179, 18, 23, 0.08);
+  border-color: rgba(179, 18, 23, 0.12);
+}
+
+:root[data-theme='dark-side'] input[type='range'] {
+  height: 4px;
+  cursor: pointer;
+}
+:root[data-theme='dark-side'] input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(139, 0, 0, 0.06);
+}
+:root[data-theme='dark-side'] input[type='range']::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #B31217;
+  border: none;
+  box-shadow: 0 0 0 2px rgba(179, 18, 23, 0.08), 0 0 6px rgba(217, 28, 28, 0.08);
+  margin-top: -6px;
+  transition: transform 0.15s cubic-bezier(0.32, 0.94, 0.6, 1);
+}
+:root[data-theme='dark-side'] input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+:root[data-theme='dark-side'] input[type='range']::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(139, 0, 0, 0.06);
+  border: none;
+}
+:root[data-theme='dark-side'] input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #B31217;
+  border: none;
+  box-shadow: 0 0 0 2px rgba(179, 18, 23, 0.08);
+}
+
+:root[data-theme='dark-side'] select {
+  background: rgba(10, 5, 5, 0.70);
+  border: 1px solid rgba(139, 0, 0, 0.06);
+  color: #D9D3CC;
+  border-radius: 12px;
+  padding: 6px 14px;
+  letter-spacing: 0.3px;
+}
+
+:root[data-theme='dark-side'] label {
+  color: rgba(180, 175, 165, 0.55);
+  font-weight: 450;
+  letter-spacing: 0.5px;
+  font-size: 11px;
+}
+
+:root[data-theme='dark-side'] .control-label {
+  color: rgba(180, 175, 165, 0.45);
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+:root[data-theme='dark-side'] .control-label b {
+  color: rgba(217, 28, 28, 0.70);
+}
+
+:root[data-theme='dark-side'] .bpm b,
+:root[data-theme='dark-side'] .swing b {
+  color: #B31217;
+}
+
+:root[data-theme='dark-side'] h1 {
+  color: #D9D3CC;
+  letter-spacing: 3px;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+:root[data-theme='dark-side'] .tagline {
+  color: rgba(180, 175, 165, 0.25);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+:root[data-theme='dark-side'] .track-name {
+  color: rgba(217, 211, 204, 0.75);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+:root[data-theme='dark-side'] .mini-metrics b {
+  color: rgba(179, 18, 23, 0.55);
+}
+:root[data-theme='dark-side'] .mini-metrics span {
+  color: rgba(180, 175, 165, 0.25);
+}
+
+:root[data-theme='dark-side'] .playback-select select {
+  background: rgba(10, 5, 5, 0.70);
+  border: 1px solid rgba(139, 0, 0, 0.06);
+  border-radius: 10px;
+  padding: 4px 12px;
+}
+:root[data-theme='dark-side'] .playback-select span {
+  color: rgba(180, 175, 165, 0.35);
+}
+
 :root {
 
   --bg: #0f1014;
