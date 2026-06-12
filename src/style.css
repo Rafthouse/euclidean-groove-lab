@@ -2131,9 +2131,17 @@
 
   /* Per-voice track colours (themeable). Dark Neon = the original values. */
   --color-kick: #c084fc;
+  --color-kick-mid: #d8b4fe;
+  --color-kick-light: #e9d5ff;
   --color-snare: #f472b6;
+  --color-snare-mid: #f9a8d4;
+  --color-snare-light: #fbcfe8;
   --color-hat: #60a5fa;
+  --color-hat-mid: #93c5fd;
+  --color-hat-light: #bfdbfe;
   --color-bass: #34d399;
+  --color-bass-mid: #6ee7b7;
+  --color-bass-light: #a7f3d0;
 
   /* Card elevation: none in dark (flat neon), soft ink-on-paper in light. */
   --card-shadow: none;
@@ -2528,9 +2536,17 @@
 
   /* Desaturated, paper-reinterpreted track identities. */
   --color-kick: #8c6bae; /* dusty plum */
+  --color-kick-mid: #a88bc8;
+  --color-kick-light: #c4addb;
   --color-snare: #c97b9f; /* muted rose */
+  --color-snare-mid: #d99bb7;
+  --color-snare-light: #e8bbcf;
   --color-hat: #6d8fb5; /* vintage blue */
+  --color-hat-mid: #91b0d0;
+  --color-hat-light: #b5cce4;
   --color-bass: #6fa17a; /* sage green */
+  --color-bass-mid: #8fba98;
+  --color-bass-light: #b0d2b6;
 
   /* Soft "sheet on the desk" elevation — readable, never neon. */
   --card-shadow: 0 1px 2px rgba(40, 30, 15, 0.04), 0 8px 24px rgba(40, 30, 15, 0.05);
