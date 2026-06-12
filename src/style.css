@@ -1450,6 +1450,36 @@
   color: rgba(26, 29, 36, 0.4);
 }
 
+/* Mask controls: stronger contrast on glass */
+:root[data-theme='university'] .mask-label {
+  color: rgba(26, 29, 36, 0.70);
+}
+:root[data-theme='university'] .mask-cell {
+  border-color: rgba(0, 0, 0, 0.12);
+  background: transparent;
+}
+:root[data-theme='university'] .mask-cell.rest {
+  opacity: 1;
+  border-color: rgba(0, 0, 0, 0.10);
+  background: rgba(0, 0, 0, 0.03);
+  cursor: default;
+}
+:root[data-theme='university'] .mask-cell.onset.muted {
+  opacity: 0.70;
+  border-color: var(--track-color);
+  background: transparent;
+}
+:root[data-theme='university'] .mask-cell.onset.muted:hover {
+  opacity: 0.90;
+  background: color-mix(in srgb, var(--track-color) 15%, transparent);
+}
+:root[data-theme='university'] .mask-cell.onset:hover {
+  filter: brightness(1.25);
+}
+:root[data-theme='university'] .mask-cell.is-current {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px #1A1D24;
+}
+
 /* ===== TRIP (Liquid Synesthesia / Living Color) ===== */
 /* A musical instrument built inside a living dream.
    Premium psychedelic — flowing gradients, stained-glass light. */
