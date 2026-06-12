@@ -11,7 +11,7 @@
 import { parseNoteSequence } from '../engine';
 import type { PitchSequence } from '../engine';
 
-export const PITCH_STARTER = 'C3 D3 G3 Bb3';
+export const PITCH_STARTER = 'F1 F2 F#1 F#2';
 
 export interface LaneState {
   /** The raw text in the editor (kept verbatim so partial input survives). */
