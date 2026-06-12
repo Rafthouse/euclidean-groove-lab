@@ -241,10 +241,23 @@
   border: 1px solid #FF6B00;
 }
 
-:root[data-theme='old-school'] .export {
+:root[data-theme='old-school'] .export,
+:root[data-theme='old-school'] .reset-pattern {
   border-radius: 2px;
   border: 1px solid #3A3A3A;
   background: var(--panel-hi);
+}
+/* Restore compact size for tiny slot/mask buttons that the global `button` rule overrides */
+:root[data-theme='old-school'] .pattern-slot {
+  border-radius: 4px;
+  padding: 5px 0;
+  font-size: 10px;
+}
+:root[data-theme='old-school'] .mask-cell {
+  border-radius: 4px;
+  padding: 0;
+  width: 15px;
+  height: 15px;
 }
 
 /* Sliders — flat */
@@ -1956,11 +1969,24 @@
   border: 1px solid rgba(139, 0, 0, 0.06);
 }
 
-:root[data-theme='dark-side'] .export {
+:root[data-theme='dark-side'] .export,
+:root[data-theme='dark-side'] .reset-pattern {
   border-radius: 12px;
   border: 1px solid rgba(139, 0, 0, 0.06);
   background: rgba(10, 5, 5, 0.60);
   color: #D9D3CC;
+}
+/* Restore compact size for tiny slot/mask buttons that the global `button` rule overrides */
+:root[data-theme='dark-side'] .pattern-slot {
+  border-radius: 4px;
+  padding: 5px 0;
+  font-size: 10px;
+}
+:root[data-theme='dark-side'] .mask-cell {
+  border-radius: 4px;
+  padding: 0;
+  width: 15px;
+  height: 15px;
 }
 
 :root[data-theme='dark-side'] .toggle {
@@ -2440,6 +2466,7 @@
 :root[data-theme='elements'] .toggle,
 :root[data-theme='elements'] .export,
 :root[data-theme='elements'] .reset,
+:root[data-theme='elements'] .reset-pattern,
 :root[data-theme='elements'] .kit-select select,
 :root[data-theme='elements'] .theme-select select {
   background: rgba(31, 38, 48, 0.6);
@@ -2449,6 +2476,7 @@
 :root[data-theme='elements'] .toggle:hover,
 :root[data-theme='elements'] .export:hover,
 :root[data-theme='elements'] .reset:hover,
+:root[data-theme='elements'] .reset-pattern:hover,
 :root[data-theme='elements'] .kit-select select:hover,
 :root[data-theme='elements'] .theme-select select:hover {
   background: rgba(45, 54, 68, 0.8);
@@ -2547,13 +2575,15 @@
 :root[data-theme='paper'] .toggle,
 :root[data-theme='paper'] .export,
 :root[data-theme='paper'] .reset,
+:root[data-theme='paper'] .reset-pattern,
 :root[data-theme='paper'] .kit-select select,
 :root[data-theme='paper'] .theme-select select {
   background: #ece5d5;
 }
 :root[data-theme='paper'] .toggle:hover,
 :root[data-theme='paper'] .export:hover,
-:root[data-theme='paper'] .reset:hover {
+:root[data-theme='paper'] .reset:hover,
+:root[data-theme='paper'] .reset-pattern:hover {
   background: #ddd3bc;
 }
 /* Softer borders in paper mode so cards read as sheets, not panels. */
@@ -3190,7 +3220,8 @@ header h1 {
 }
 
 .export,
-.reset {
+.reset,
+.reset-pattern {
   font: 600 13px/1 var(--mono);
   color: var(--text-hi);
   background: var(--panel);
@@ -3201,12 +3232,14 @@ header h1 {
   transition: border-color 0.12s ease, color 0.12s ease;
 }
 .export:hover,
-.reset:hover {
+.reset:hover,
+.reset-pattern:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
 .export:active,
-.reset:active {
+.reset:active,
+.reset-pattern:active {
   transform: scale(0.97);
 }
 

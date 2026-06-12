@@ -190,41 +190,73 @@ describe('defaultTracks', () => {
   });
 });
 
-describe('isStepMuted (manual mute overlay)', () => {
+// E(4,8) = [1,0,1,0,1,0,1,0]. Onset indices: 0→step0, 1→step2, 2→step4, 3→step6.
+describe('isStepMuted — onset-indexed manual mute overlay', () => {
   it('returns false when there is no mask', () => {
     const t = make({ steps: 8, hits: 4 });
     expect(isStepMuted(t, 0)).toBe(false);
     expect(isStepMuted(t, 5)).toBe(false);
   });
 
-  it('returns true only for masked step indices', () => {
-    const mask = [false, false, true, false, false, false, false, false];
+  it('returns false for rest steps even when mask entry would be true', () => {
+    // onset-indexed: step 1 is a REST for E(4,8), so it cannot be muted
+    const mask = [false, true, false, false]; // onset 1 (step 2) muted
     const t = make({ steps: 8, hits: 4, manualMute: mask });
-    expect(isStepMuted(t, 2)).toBe(true);
-    expect(isStepMuted(t, 0)).toBe(false);
+    expect(isStepMuted(t, 1)).toBe(false); // step 1 = rest
+    expect(isStepMuted(t, 3)).toBe(false); // step 3 = rest
   });
 
-  it('wraps the global step into the pattern length', () => {
-    const mask = [false, false, true, false, false, false, false, false];
+  it('mutes the correct onset regardless of step position', () => {
+    // Mute onset 1 = step 2 in E(4,8)
+    const mask = [false, true, false, false];
     const t = make({ steps: 8, hits: 4, manualMute: mask });
-    expect(isStepMuted(t, 2 + 8)).toBe(true); // step 10 -> local 2
-    expect(isStepMuted(t, 2 + 16)).toBe(true); // step 18 -> local 2
+    expect(isStepMuted(t, 2)).toBe(true);  // onset 1 is at step 2
+    expect(isStepMuted(t, 0)).toBe(false); // onset 0 is not muted
+    expect(isStepMuted(t, 4)).toBe(false); // onset 2 is not muted
+  });
+
+  it('wraps the global step modulo pattern length', () => {
+    const mask = [false, true, false, false]; // onset 1 → step 2
+    const t = make({ steps: 8, hits: 4, manualMute: mask });
+    expect(isStepMuted(t, 2 + 8)).toBe(true);  // step 10 → local 2
+    expect(isStepMuted(t, 2 + 16)).toBe(true); // step 18 → local 2
+  });
+
+  it('muted onset stays at the same event after rotation', () => {
+    // E(4,8) rotated 2 = [1,0,1,0,1,0,1,0] → onsets at 0,2,4,6 → same (period 2)
+    // Use rotation 1: E(4,8) rotated 1 = [0,1,0,1,0,1,0,1] → onsets at 1,3,5,7
+    // Mute onset 0 (now at step 1 after rotation 1).
+    const mask = [true, false, false, false]; // onset 0 muted
+    const t = make({ steps: 8, hits: 4, rotation: 1, manualMute: mask });
+    expect(isStepMuted(t, 1)).toBe(true);  // onset 0 is at step 1 (rotated)
+    expect(isStepMuted(t, 0)).toBe(false); // step 0 is now a rest
+    expect(isStepMuted(t, 3)).toBe(false); // onset 1, not muted
   });
 });
 
 describe('manual mute does NOT touch the generated pattern (Euclidean stays authoritative)', () => {
   it('trackPattern.pulses ignore manualMute entirely', () => {
-    const mask = [false, false, true, false, false, false, false, false];
+    // onset 1 muted — but pulses must still show all 4 onsets
+    const mask = [false, true, false, false]; // onset-indexed, length 4
     const plain = make({ steps: 8, hits: 4 });
     const muted = make({ steps: 8, hits: 4, manualMute: mask });
     expect(trackPattern(muted).pulses).toEqual(trackPattern(plain).pulses);
   });
 
-  it('density and onset count are unchanged by manualMute', () => {
-    const mask = [true, true, true, true, true, true, true, true];
+  it('density and onset count are unchanged by manualMute (pulses are authoritative)', () => {
+    const mask = [true, true, true, true]; // all onsets muted (onset-indexed, length 4)
     const plain = trackPattern(make({ steps: 8, hits: 4 })).pulses;
     const muted = trackPattern(make({ steps: 8, hits: 4, manualMute: mask })).pulses;
     expect(density(muted)).toBe(density(plain));
     expect(onsetCount(muted)).toBe(onsetCount(plain));
+  });
+
+  it('effectivePulses suppresses muted onsets; pulses stays unchanged', () => {
+    const mask = [false, true, false, false]; // onset 1 = step 2 muted in E(4,8)
+    const tp = trackPattern(make({ steps: 8, hits: 4, manualMute: mask }));
+    expect(tp.pulses[2]).toBe(true);           // generator still sees it
+    expect(tp.effectivePulses[2]).toBe(false); // scheduler skips it
+    expect(tp.mutedStepMask[2]).toBe(true);    // UI shows the cross
+    expect(tp.mutedStepMask[0]).toBe(false);   // onset 0 untouched
   });
 });

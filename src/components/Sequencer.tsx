@@ -1,10 +1,20 @@
 interface SequencerProps {
   /** The generated (source) pattern from the engine — the authoritative shape. */
   pattern: boolean[];
-  /** Manual mute overlay (step-indexed). A muted onset stays visible but dimmed. */
+  /**
+   * Step-indexed mute mask derived from onset-indexed manualMute via
+   * `trackPattern().mutedStepMask`. A muted onset stays visible but dimmed.
+   */
   mutedSteps?: boolean[];
   /** Currently sounding step while playing, or -1 when stopped. */
   currentStep: number;
+  /**
+   * Optional: toggle the mute of the generated onset at `step`. When provided
+   * the ring becomes an interactive editing surface — clicking an onset circle
+   * mutes/unmutes that musical event (onset-indexed in the engine).
+   * Rests are never clickable.
+   */
+  onToggleStep?: (step: number) => void;
 }
 
 // Coordinates live in the SVG's own units; visible size is driven entirely
@@ -22,22 +32,21 @@ function coord(index: number, steps: number): { x: number; y: number } {
 }
 
 /**
- * Pure VISUALISATION of a track's generated Euclidean pattern. It draws what
- * the engine produced — onsets, rests, the Toussaint polygon, the mute overlay
- * and the playhead — and is intentionally NON-interactive: there is no manual
- * step editing here. The rhythm is owned entirely by the generator params
- * (steps/hits/rotation) and the mask is edited via the dedicated Mask control,
- * so the ring only ever reflects state, never authors it.
+ * Euclidean pattern ring — primary editing surface for the mute overlay.
+ * Clicking an onset mutes/unmutes that musical EVENT (not the step position):
+ * the same event stays muted even after the rotation knob is turned.
+ * The polygon always reflects the full unmasked Euclidean shape.
  */
 export default function Sequencer({
   pattern,
   mutedSteps,
   currentStep,
+  onToggleStep,
 }: SequencerProps) {
   const steps = pattern.length;
   const onsets = pattern.filter(Boolean).length;
 
-  // The polygon connects the GENERATED onsets (muted ones included): the
+  // The polygon connects ALL generated onsets (muted ones included): the
   // Toussaint shape always reflects what the Euclidean engine produced.
   const shapePoints = pattern
     .map((on, i) => (on ? coord(i, steps) : null))
@@ -61,14 +70,28 @@ export default function Sequencer({
       {pattern.map((on, i) => {
         const { x, y } = coord(i, steps);
         const muted = on && !!mutedSteps?.[i];
+        const clickable = on && !!onToggleStep;
         const classes =
           'step ' +
           (on ? 'onset' : 'rest') +
           (muted ? ' muted' : '') +
-          (i === localStep ? ' current' : '');
+          (i === localStep ? ' current' : '') +
+          (clickable ? ' clickable' : '');
         return (
           <g key={i}>
-            <circle className={classes} cx={x} cy={y} r={on ? 11 : 5} />
+            <circle
+              className={classes}
+              cx={x}
+              cy={y}
+              r={on ? 11 : 5}
+              onClick={clickable ? () => onToggleStep(i) : undefined}
+              role={clickable ? 'button' : undefined}
+              aria-label={
+                clickable
+                  ? `${muted ? 'Unmute' : 'Mute'} onset at step ${i + 1}`
+                  : undefined
+              }
+            />
             {muted && (
               <g className="mute-cross" pointerEvents="none">
                 <line x1={x - 6} y1={y - 6} x2={x + 6} y2={y + 6} />

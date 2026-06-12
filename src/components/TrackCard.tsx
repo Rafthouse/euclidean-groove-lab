@@ -34,25 +34,34 @@ export default function TrackCard({
   onToggleMute,
   onToggleSolo,
 }: TrackCardProps) {
-  const pattern = trackPattern(track).pulses;
+  const { pulses: pattern, mutedStepMask } = trackPattern(track);
   // --track-color is sourced from CSS by voice (`[data-voice]`), so it follows
   // the active theme (dark neon vs vintage paper) instead of a fixed data color.
 
-  // Local step (for the mask row's playhead echo). The grid below is purely
-  // generated — there is NO manual step authoring; the rhythm comes from the
-  // Euclidean params, and the mask is a mute overlay edited via the Mask row.
+  // Local step (for the mask row's playhead echo). The pattern is generator-
+  // driven — there is NO manual step authoring; the rhythm comes from the
+  // Euclidean params, and the mask is a mute overlay edited via the ring or mask row.
   const localStep = currentStep >= 0 && track.steps > 0 ? currentStep % track.steps : -1;
 
-  // Toggle the manual mute overlay for a single generated onset. The mask is
-  // step-indexed and kept the same length as the pattern; an all-false mask
-  // collapses back to undefined so "no overrides" stays the clean default.
+  // Toggle the manual mute overlay for a generated onset.
+  //
+  // The mask is ONSET-indexed: index 0 = first Euclidean hit, index 1 = second,
+  // etc., regardless of rotation. The ring calls toggleStep(step) where `step`
+  // is the STEP position; we convert to onset index here so the engine contract
+  // stays correct. Rotating the pattern never changes which event is muted.
   const toggleStep = (step: number) => {
-    const mask =
-      track.manualMute && track.manualMute.length === track.steps
+    if (!pattern[step]) return; // step is a rest — nothing to mute
+    let onsetIndex = 0;
+    for (let i = 0; i < step; i++) {
+      if (pattern[i]) onsetIndex++;
+    }
+    const numOnsets = track.hits;
+    const current =
+      track.manualMute && track.manualMute.length === numOnsets
         ? [...track.manualMute]
-        : new Array<boolean>(track.steps).fill(false);
-    mask[step] = !mask[step];
-    onChange({ manualMute: mask.some(Boolean) ? mask : undefined });
+        : new Array<boolean>(numOnsets).fill(false);
+    current[onsetIndex] = !current[onsetIndex];
+    onChange({ manualMute: current.some(Boolean) ? current : undefined });
   };
 
   const activeSlot = track.activePattern ?? 0;
@@ -98,8 +107,9 @@ export default function TrackCard({
 
       <Sequencer
         pattern={pattern}
-        mutedSteps={track.manualMute}
+        mutedSteps={mutedStepMask}
         currentStep={currentStep}
+        onToggleStep={toggleStep}
       />
 
       {PITCH_EDITOR_VOICES.includes(track.voiceId) && (
@@ -155,7 +165,7 @@ export default function TrackCard({
 
       <MaskRow
         pattern={pattern}
-        mutedSteps={track.manualMute}
+        mutedSteps={mutedStepMask}
         localStep={localStep}
         onToggleStep={toggleStep}
       />

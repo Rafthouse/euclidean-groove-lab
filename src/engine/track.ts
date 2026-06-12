@@ -168,12 +168,56 @@ export interface DuckingModule {
 
 /**
  * The per-track carrier that grows over time.
+ *
+ * MUTE CONTRACT (onset-indexed):
+ *   `pulses`         — raw Euclidean output: every generated onset is true,
+ *                      regardless of the manual mute overlay. Used for:
+ *                      shape rendering, density metrics, velocity/pitch
+ *                      onset-indexing.
+ *   `effectivePulses`— pulses with muted onsets suppressed to false. Used by
+ *                      the audio scheduler and MIDI export to decide whether
+ *                      to emit a sound / note event.
+ *   `mutedStepMask`  — step-indexed boolean: true wherever an onset is
+ *                      currently muted. Used by the ring and mask row to
+ *                      render the dimmed/crossed visual without re-deriving
+ *                      the onset index in the UI.
  */
 export interface TrackPattern {
   pulses: Pattern;
+  effectivePulses: Pattern;
+  mutedStepMask: boolean[];
   accents?: number[];
   velocities?: number[];
   microtiming?: number[];
+}
+
+/**
+ * Derive the mute overlay from an onset-indexed mask. Returns:
+ *  - `effectivePulses`: copy of `pulses` with muted onsets zeroed.
+ *  - `mutedStepMask`:   step-indexed mirror of which onsets are muted.
+ *
+ * When there are no active mutes, `effectivePulses` IS `pulses` (same
+ * reference — no allocation) and `mutedStepMask` is all-false.
+ */
+function computeMuteFields(
+  pulses: boolean[],
+  manualMute?: boolean[],
+): { effectivePulses: boolean[]; mutedStepMask: boolean[] } {
+  const mutedStepMask = new Array<boolean>(pulses.length).fill(false);
+  if (!manualMute || !manualMute.some(Boolean)) {
+    return { effectivePulses: pulses, mutedStepMask };
+  }
+  const effectivePulses = pulses.slice();
+  let onsetIndex = 0;
+  for (let i = 0; i < pulses.length; i++) {
+    if (!pulses[i]) continue;
+    if (manualMute[onsetIndex] === true) {
+      mutedStepMask[i] = true;
+      effectivePulses[i] = false;
+    }
+    onsetIndex++;
+  }
+  return { effectivePulses, mutedStepMask };
 }
 
 /**
@@ -182,9 +226,14 @@ export interface TrackPattern {
  * Velocity is gated by the `velocityEnabled` module flag — the pattern data is
  * preserved across toggles, but only consumed when the module is ON. When OFF
  * `velocities` is undefined and the audio scheduler falls back to flat 1.0.
+ *
+ * The manual mute overlay (`manualMute`) is ONSET-indexed: index 0 is the first
+ * generated onset, index 1 the second, etc. — regardless of rotation. Rotating
+ * the pattern therefore never changes which musical event is muted.
  */
 export function trackPattern(track: Track): TrackPattern {
   const pulses = rotate(euclid(track.hits, track.steps), track.rotation);
+  const { effectivePulses, mutedStepMask } = computeMuteFields(pulses, track.manualMute);
   const velocityActive =
     track.velocityEnabled === true &&
     !!track.velocity &&
@@ -192,7 +241,7 @@ export function trackPattern(track: Track): TrackPattern {
   const velocities = velocityActive
     ? computeVelocities(pulses, track.velocity!)
     : undefined;
-  return { pulses, velocities };
+  return { pulses, effectivePulses, mutedStepMask, velocities };
 }
 
 /**
@@ -217,16 +266,29 @@ export function computeVelocities(
 }
 
 /**
- * Whether the generated onset at `globalStep` is manually muted. This is the
- * post-processing overlay: it never affects generation, rotation, density, or
- * pitch onset-indexing — callers (audio scheduler, MIDI export) use it only to
- * suppress output. Returns false when there is no mute mask.
+ * Whether the generated onset at `globalStep` is manually muted.
+ *
+ * The manual mute overlay is ONSET-indexed: `manualMute[k]` suppresses the
+ * k-th onset in the ROTATED Euclidean pattern. Rotating the pattern never
+ * changes which musical event is muted — the same note stays silent regardless
+ * of where it lands on the step grid.
+ *
+ * Callers with access to a pre-computed `TrackPattern` should prefer
+ * `tp.mutedStepMask[localStep]` (no extra allocation). `isStepMuted` is kept
+ * for callers that only have the `Track` (e.g. MIDI export iterating steps
+ * without caching the pattern).
  */
 export function isStepMuted(track: Track, globalStep: number): boolean {
   const mask = track.manualMute;
-  if (!mask || mask.length === 0 || track.steps <= 0) return false;
-  const i = ((globalStep % track.steps) + track.steps) % track.steps;
-  return mask[i] === true;
+  if (!mask || mask.length === 0 || !mask.some(Boolean) || track.steps <= 0) return false;
+  const pulses = rotate(euclid(track.hits, track.steps), track.rotation);
+  const step = ((globalStep % track.steps) + track.steps) % track.steps;
+  if (!pulses[step]) return false; // rest — cannot be muted
+  let onsetIndex = 0;
+  for (let i = 0; i < step; i++) {
+    if (pulses[i]) onsetIndex++;
+  }
+  return mask[onsetIndex] === true;
 }
 
 /**
@@ -292,12 +354,19 @@ export function switchTrackPattern(
   const hits = Math.min(target.hits, steps);
   const rotation =
     steps > 0 ? ((target.rotation % steps) + steps) % steps : 0;
-  const mask =
-    target.manualMute &&
-    target.manualMute.length === steps &&
-    target.manualMute.some(Boolean)
-      ? target.manualMute.slice()
-      : undefined;
+  // manualMute is ONSET-indexed (length === hits). Resize defensively if the
+  // stored slot's mute array length doesn't match the (clamped) hit count.
+  let mask: boolean[] | undefined;
+  if (target.manualMute && target.manualMute.some(Boolean)) {
+    if (target.manualMute.length === hits) {
+      mask = target.manualMute.slice();
+    } else {
+      const resized = new Array<boolean>(hits).fill(false);
+      const n = Math.min(hits, target.manualMute.length);
+      for (let i = 0; i < n; i++) resized[i] = target.manualMute[i];
+      if (resized.some(Boolean)) mask = resized;
+    }
+  }
 
   const mode: PlaybackMode = track.playbackMode ?? 'forward';
   const speed: PlaybackSpeed = track.playbackSpeed ?? 1;
@@ -378,7 +447,6 @@ export function militaryPreset(): Track[] {
       solo: false,
       voiceId: 'snare',
       volume: 100,
-      manualMute: [false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false],
       velocityEnabled: true,
       velocity: [100, 85, 90, 80],
       playbackMode: 'forward',
@@ -411,7 +479,6 @@ export function militaryPreset(): Track[] {
       solo: false,
       voiceId: 'bass',
       volume: 100,
-      manualMute: [false, false, false, false, true, false, false, false, false, false, false, false, false, false, false, false],
       velocityEnabled: true,
       velocity: [100, 80, 90, 75],
       playbackMode: 'forward',

@@ -3,7 +3,6 @@ import {
   audibleTracks,
   trackPattern,
   isPitchedVoice,
-  isStepMuted,
   isActive,
   adjustedTick,
   localStep,
@@ -311,7 +310,7 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
 
       const tp = trackPattern(track);
       if (!tp.pulses[step]) continue;
-      if (isStepMuted(track, step)) continue; // manualMute is step-indexed → reverse safe
+      if (tp.mutedStepMask[step]) continue; // onset-indexed mute: same onset muted in all playback modes
 
       // ──────────────────────────────────────────────────────────────────
       // MAIN NOTE PATH. The velocity of the main hit comes ONLY from the

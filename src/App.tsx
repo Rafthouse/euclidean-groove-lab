@@ -127,6 +127,34 @@ export default function App() {
     gRef.current = 0;
   }, []);
 
+  // Pattern reset: restore every track's generator state (steps/hits/rotation/
+  // mask/velocity/pitch) to the application's factory defaults, while preserving
+  // audio routing (volume, ghost, mute/solo, playback mode/speed).
+  const resetPatterns = useCallback(() => {
+    const defaults = defaultTracks();
+    setTracksState((prev) =>
+      prev.map((t) => {
+        const def = defaults.find((d) => d.id === t.id) ?? t;
+        return {
+          ...t,
+          steps: def.steps,
+          hits: def.hits,
+          rotation: def.rotation,
+          manualMute: undefined,
+          velocity: undefined,
+          velocityEnabled: undefined,
+          pitches: undefined,
+          pitchEnabled: undefined,
+          ghost: undefined,
+          ducking: undefined,
+          patterns: undefined,
+          activePattern: undefined,
+          phaseOffset: 0,
+        };
+      })
+    );
+  }, []);
+
   // Track patch + clamping + (optional) phase preservation.
   //
   // Mode change behaviour depends on the `restartOnModeChange` preference:
@@ -169,9 +197,11 @@ export default function App() {
         merged.rotation = merged.steps > 0
           ? ((merged.rotation % merged.steps) + merged.steps) % merged.steps
           : 0;
-        if (merged.manualMute && merged.manualMute.length !== merged.steps) {
-          const resized = new Array<boolean>(merged.steps).fill(false);
-          const n = Math.min(merged.steps, merged.manualMute.length);
+        // manualMute is ONSET-indexed (length === hits). Resize whenever hits
+        // changes so the mask stays aligned with the onset count.
+        if (merged.manualMute && merged.manualMute.length !== merged.hits) {
+          const resized = new Array<boolean>(merged.hits).fill(false);
+          const n = Math.min(merged.hits, merged.manualMute.length);
           for (let i = 0; i < n; i++) resized[i] = merged.manualMute[i];
           merged.manualMute = resized.some(Boolean) ? resized : undefined;
         }
@@ -283,6 +313,14 @@ export default function App() {
           title="Reset all tracks to cycle origin (clock stays running)"
         >
           ↺ Reset
+        </button>
+        <button
+          type="button"
+          className="reset-pattern"
+          onClick={resetPatterns}
+          title="Restore all tracks to factory default patterns (steps, hits, rotation, velocity, pitch)"
+        >
+          ⟳ Reset Pattern
         </button>
         <label className="bpm">
           Tempo

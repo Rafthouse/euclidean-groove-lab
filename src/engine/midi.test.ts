@@ -94,8 +94,9 @@ describe('renderMidi — structure', () => {
   });
 
   it('manual mute overlay excludes muted onsets from the export', () => {
-    // kick E(4,8) -> onsets at local steps 0,2,4,6. Mute local step 2.
-    const mask = [false, false, true, false, false, false, false, false];
+    // kick E(4,8) -> onsets at local steps 0,2,4,6. Mute onset 1 (= step 2).
+    // onset-indexed mask: length = hits = 4; onset 1 at step 2.
+    const mask = [false, true, false, false];
     const plain = renderMidi([make({ voiceId: 'kick', steps: 8, hits: 4 })], 1, 120);
     const muted = renderMidi([make({ voiceId: 'kick', steps: 8, hits: 4, manualMute: mask })], 1, 120);
     // 1 bar over an 8-step track = 8 onsets; local step 2 recurs at global 2 and 10.
