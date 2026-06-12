@@ -8010,74 +8010,76 @@ header h1 {
   border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 /* ======================================================================== */
-/* BEEKEEPER — handcrafted wooden apiary, warm honey and beeswax.
-   Not cartoon, not neon, not rustic. Premium gold craftsmanship.
-   Inspired by sunlit wooden hives, amber glass, golden honey.
+/* BEEKEEPER — high-contrast rebuild
+   Vintage analogue instrument workshop.
+   Layer 0: dark amber background.
+   Layer 1: warm cream cards (explicit separation).
+   Layer 2: deep brown text (WCAG AA).
+   Layer 3: bright golden accents.
+   Sequencer vertices are the principal actors.
    ======================================================================== */
 :root[data-theme='beekeeper'] {
-  --bg: #F7D57A;
-  --panel: #F8E8A0;
-  --panel-hi: #F0DA90;
-  --text: #4A2C12;
-  --text-dim: #6B4620;
-  --text-hi: #2A1608;
-  --accent: #D4941A;
-  --accent-dim: rgba(212, 148, 26, 0.15);
-  --rest: rgba(80, 40, 0, 0.12);
-  --current: #E8B830;
-  --danger: #A06018;
-  --warn: #C88420;
+  --bg: #b37a14;
+  --panel: #f0da90;
+  --panel-hi: #e8cc78;
+  --text: #3a2208;
+  --text-dim: #6b4217;
+  --text-hi: #1f0e00;
+  --accent: #d88b00;
+  --accent-bright: #f0a800;
+  --accent-dim: rgba(216, 139, 0, 0.20);
+  --rest: rgba(60, 30, 0, 0.15);
+  --current: #f0a800;
+  --danger: #8b4500;
+  --warn: #b37a14;
   --radius: 12px;
   --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
 
-  --color-honey-raw:       #D4941A;
-  --color-honey-raw-mid:   #E0A830;
-  --color-honey-raw-light: #ECC060;
-  --color-pollen:          #E8B830;
-  --color-pollen-mid:      #F0C850;
-  --color-pollen-light:    #F8DC80;
-  --color-beeswax:         #F0D870;
-  --color-beeswax-mid:     #F4E088;
-  --color-beeswax-light:   #F8EAA0;
-  --color-forest-honey:    #A06818;
-  --color-forest-mid:      #B88028;
-  --color-forest-light:    #D09840;
+  --color-honey-raw:       #c87800;
+  --color-honey-raw-mid:   #e09400;
+  --color-honey-raw-light: #f0b800;
+  --color-pollen:          #d89400;
+  --color-pollen-mid:      #e8a800;
+  --color-pollen-light:    #f8c850;
+  --color-beeswax:         #d4a830;
+  --color-beeswax-mid:     #e0bc50;
+  --color-beeswax-light:   #eccc70;
+  --color-forest-honey:    #8b4500;
+  --color-forest-mid:      #a85d00;
+  --color-forest-light:    #c87a18;
 
-  --card-shadow: 0 4px 12px rgba(60, 30, 0, 0.20), 0 12px 35px rgba(120, 60, 0, 0.18);
+  --card-shadow: 0 4px 16px rgba(30, 15, 0, 0.25), 0 12px 40px rgba(80, 40, 0, 0.20);
   color-scheme: light;
 }
 
-/* Warm honey gradient background — golden dawn through midday amber */
+/* Layer 0: Dark amber ground — rich, warm, deep */
 :root[data-theme='beekeeper'] body {
   background:
-    radial-gradient(ellipse 55% 50% at 20% 40%,   rgba(247, 213, 122, 0.50) 0%, transparent 60%),
-    radial-gradient(ellipse 45% 40% at 55% 30%,   rgba(232, 181, 71, 0.35) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 45% at 75% 65%,   rgba(185, 120, 40, 0.25) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 50% at 45% 60%,   rgba(247, 213, 122, 0.30) 0%, transparent 60%),
-    linear-gradient(165deg, #F7D57A 0%, #E8B547 45%, #DAA040 75%, #B97828 100%);
+    radial-gradient(ellipse 60% 55% at 20% 40%,   rgba(220, 170, 50, 0.40) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 55% 30%,   rgba(200, 140, 30, 0.30) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 50% at 75% 65%,   rgba(160, 100, 20, 0.25) 0%, transparent 55%),
+    linear-gradient(165deg, #c48f1c 0%, #b37a14 40%, #9a6010 75%, #804800 100%);
   position: relative;
   overflow-x: hidden;
 }
 
-/* Honey shimmer — subtle light moving across the surface like sunlight through honey */
+/* Warm atmospheric light — very subtle */
 :root[data-theme='beekeeper'] body::before {
   content: '';
   position: fixed;
-  inset: -80px;
+  inset: -120px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.20;
+  opacity: 0.12;
   background:
-    radial-gradient(circle 400px at 25% 35%, rgba(255, 225, 140, 0.10) 0%, transparent 50%),
-    radial-gradient(circle 300px at 60% 55%, rgba(255, 210, 100, 0.08) 0%, transparent 50%);
-  animation: beekeeper-shimmer 20s ease-in-out infinite alternate;
+    radial-gradient(circle 500px at 30% 40%, rgba(240, 200, 70, 0.08) 0%, transparent 50%);
+  animation: beekeeper-shimmer 25s ease-in-out infinite alternate;
 }
 
 @keyframes beekeeper-shimmer {
-  0%   { transform: translate(-20px, -10px) scale(1);    opacity: 0.18; }
-  33%  { transform: translate(10px, 15px) scale(1.04);   opacity: 0.24; }
-  66%  { transform: translate(-8px, 20px) scale(0.96);   opacity: 0.16; }
-  100% { transform: translate(15px, -5px) scale(1.02);   opacity: 0.22; }
+  0%   { transform: translate(-20px, -10px) scale(1);    opacity: 0.10; }
+  50%  { transform: translate(15px, 15px) scale(1.05);   opacity: 0.14; }
+  100% { transform: translate(-5px, 20px) scale(0.95);   opacity: 0.10; }
 }
 
 :root[data-theme='beekeeper'] .app {
@@ -8085,218 +8087,212 @@ header h1 {
   z-index: 1;
 }
 
-/* BACKGROUND BEESWAX TEXTURE — ultra-subtle grain overlay */
+/* Subtle beeswax grain — barely perceptible */
 :root[data-theme='beekeeper'] body::after {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.035;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 256px 256px;
 }
 
-/* ===== TRACK CARDS — beeswax panels with warm amber glow ===== */
+/* ===== TRACK CARDS — warm cream panels, clearly lighter than bg ===== */
 :root[data-theme='beekeeper'] .track-card {
-  background: #F8E8A0;
+  background: #f0da90;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-radius: 12px;
   position: relative;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
-  filter: drop-shadow(0 2px 4px rgba(60, 30, 0, 0.12)) drop-shadow(0 6px 12px rgba(80, 40, 0, 0.08));
+  box-shadow:
+    0 2px 6px rgba(30, 15, 0, 0.18),
+    0 8px 20px rgba(50, 25, 0, 0.12);
 }
 
-/* ===== KICK — Raw Honey: deep golden amber ===== */
+/* ===== KICK — Burnt amber. Dark, punchy, authoritative. ===== */
 :root[data-theme='beekeeper'] .track-card[data-voice='kick'] {
-  --track-color: var(--color-honey-raw);
-  border: 1px solid rgba(218, 154, 28, 0.40);
+  --track-color: #c87800;
+  border: 2px solid rgba(200, 120, 0, 0.55);
   box-shadow:
     var(--card-shadow),
-    0 0 15px rgba(212, 148, 26, 0.30),
-    0 0 35px rgba(200, 130, 20, 0.18);
+    0 0 15px rgba(200, 120, 0, 0.25);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='kick']:hover {
-  border-color: rgba(212, 148, 26, 0.70);
+  border-color: rgba(200, 120, 0, 0.80);
   box-shadow:
     var(--card-shadow),
-    0 0 20px rgba(212, 148, 26, 0.40),
-    0 0 45px rgba(200, 130, 20, 0.25);
+    0 0 22px rgba(200, 120, 0, 0.35);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='kick'] .step.onset {
-  fill: var(--color-honey-raw);
-  filter: drop-shadow(0 0 6px rgba(229, 169, 26, 0.35));
+  fill: #c87800;
+  filter: drop-shadow(0 0 8px rgba(200, 120, 0, 0.45)) drop-shadow(0 1px 2px rgba(0,0,0,0.20));
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-honey-raw) 22%, transparent);
-  stroke: rgba(229, 169, 26, 0.40);
-  filter: drop-shadow(0 0 4px rgba(229, 169, 26, 0.15));
+  fill: color-mix(in srgb, #c87800 28%, transparent);
+  stroke: rgba(200, 120, 0, 0.55);
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 6px rgba(200, 120, 0, 0.20));
 }
 
-/* ===== SNARE — Pollen: bright warm yellow ===== */
+/* ===== SNARE — Golden pollen. Bright, warm, cutting. ===== */
 :root[data-theme='beekeeper'] .track-card[data-voice='snare'] {
-  --track-color: var(--color-pollen);
-  border: 1px solid rgba(244, 200, 66, 0.45);
+  --track-color: #d89400;
+  border: 2px solid rgba(216, 148, 0, 0.55);
   box-shadow:
     var(--card-shadow),
-    0 0 15px rgba(232, 184, 48, 0.30),
-    0 0 35px rgba(220, 170, 40, 0.18);
+    0 0 15px rgba(216, 148, 0, 0.25);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='snare']:hover {
-  border-color: rgba(232, 184, 48, 0.70);
+  border-color: rgba(216, 148, 0, 0.80);
   box-shadow:
     var(--card-shadow),
-    0 0 20px rgba(232, 184, 48, 0.40),
-    0 0 45px rgba(220, 170, 40, 0.25);
+    0 0 22px rgba(216, 148, 0, 0.35);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='snare'] .step.onset {
-  fill: var(--color-pollen);
-  filter: drop-shadow(0 0 6px rgba(244, 200, 66, 0.35));
+  fill: #d89400;
+  filter: drop-shadow(0 0 8px rgba(216, 148, 0, 0.45)) drop-shadow(0 1px 2px rgba(0,0,0,0.20));
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-pollen) 20%, transparent);
-  stroke: rgba(244, 200, 66, 0.42);
-  filter: drop-shadow(0 0 4px rgba(244, 200, 66, 0.15));
+  fill: color-mix(in srgb, #d89400 28%, transparent);
+  stroke: rgba(216, 148, 0, 0.55);
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 6px rgba(216, 148, 0, 0.20));
 }
 
-/* ===== HAT — Beeswax: light creamy yellow ===== */
+/* ===== HAT — Amber wax. Medium contrast, warm texture. ===== */
 :root[data-theme='beekeeper'] .track-card[data-voice='hat'] {
-  --track-color: var(--color-beeswax);
-  border: 1px solid rgba(255, 241, 166, 0.40);
+  --track-color: #d4a830;
+  border: 2px solid rgba(212, 168, 48, 0.50);
   box-shadow:
     var(--card-shadow),
-    0 0 12px rgba(240, 216, 112, 0.25),
-    0 0 30px rgba(230, 200, 90, 0.15);
+    0 0 12px rgba(212, 168, 48, 0.20);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='hat']:hover {
-  border-color: rgba(240, 216, 112, 0.65);
+  border-color: rgba(212, 168, 48, 0.75);
   box-shadow:
     var(--card-shadow),
-    0 0 18px rgba(240, 216, 112, 0.35),
-    0 0 40px rgba(230, 200, 90, 0.22);
+    0 0 18px rgba(212, 168, 48, 0.30);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='hat'] .step.onset {
-  fill: var(--color-beeswax);
-  filter: drop-shadow(0 0 4px rgba(255, 241, 166, 0.35));
+  fill: #d4a830;
+  filter: drop-shadow(0 0 6px rgba(212, 168, 48, 0.40)) drop-shadow(0 1px 2px rgba(0,0,0,0.15));
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-beeswax) 18%, transparent);
-  stroke: rgba(255, 241, 166, 0.38);
-  filter: drop-shadow(0 0 3px rgba(255, 241, 166, 0.12));
+  fill: color-mix(in srgb, #d4a830 25%, transparent);
+  stroke: rgba(212, 168, 48, 0.50);
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 4px rgba(212, 168, 48, 0.15));
 }
 
-/* ===== BASS — Dark Forest Honey: rich caramel brown ===== */
+/* ===== BASS — Dark forest honey. Deep, rich, foundational. ===== */
 :root[data-theme='beekeeper'] .track-card[data-voice='bass'] {
-  --track-color: var(--color-forest-honey);
-  border: 1px solid rgba(179, 106, 26, 0.40);
+  --track-color: #8b4500;
+  border: 2px solid rgba(139, 69, 0, 0.55);
   box-shadow:
     var(--card-shadow),
-    0 0 15px rgba(160, 104, 24, 0.30),
-    0 0 35px rgba(140, 80, 20, 0.18);
+    0 0 15px rgba(139, 69, 0, 0.25);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='bass']:hover {
-  border-color: rgba(160, 104, 24, 0.70);
+  border-color: rgba(139, 69, 0, 0.80);
   box-shadow:
     var(--card-shadow),
-    0 0 20px rgba(160, 104, 24, 0.40),
-    0 0 45px rgba(140, 80, 20, 0.25);
+    0 0 22px rgba(139, 69, 0, 0.35);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='bass'] .step.onset {
-  fill: var(--color-forest-honey);
-  filter: drop-shadow(0 0 6px rgba(179, 106, 26, 0.35));
+  fill: #8b4500;
+  filter: drop-shadow(0 0 8px rgba(139, 69, 0, 0.45)) drop-shadow(0 1px 2px rgba(0,0,0,0.20));
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-forest-honey) 22%, transparent);
-  stroke: rgba(179, 106, 26, 0.40);
-  filter: drop-shadow(0 0 4px rgba(179, 106, 26, 0.15));
+  fill: color-mix(in srgb, #8b4500 28%, transparent);
+  stroke: rgba(139, 69, 0, 0.55);
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 6px rgba(139, 69, 0, 0.20));
 }
 
-/* ===== HONEY NODE ANIMATIONS ===== */
+/* ===== HONEY NODE ANIMATIONS — bold bloom, strong glow ===== */
 
-/* Raw Honey: thick golden bloom */
-@keyframes beekeeper-honey-bloom {
-  0%   { r: 10px; fill: var(--color-honey-raw-mid);    filter: drop-shadow(0 0 6px rgba(229, 169, 26, 0.35)); }
-  15%  { r: 13px; fill: var(--color-honey-raw-light);  filter: drop-shadow(0 0 14px rgba(229, 169, 26, 0.55)); }
-  50%  { r: 11px;                                               filter: drop-shadow(0 0 8px rgba(229, 169, 26, 0.25)); }
-  100% { r: 10px; fill: var(--color-honey-raw);         filter: drop-shadow(0 0 6px rgba(229, 169, 26, 0.35)); }
+@keyframes beekeeper-kick-bloom {
+  0%   { r: 11px; fill: #e09400; filter: drop-shadow(0 0 10px rgba(200, 120, 0, 0.50)) drop-shadow(0 0 20px rgba(200, 120, 0, 0.25)); }
+  15%  { r: 15px; fill: #f0b800; filter: drop-shadow(0 0 18px rgba(200, 120, 0, 0.70)) drop-shadow(0 0 30px rgba(200, 120, 0, 0.35)); }
+  60%  { r: 12px;                                         filter: drop-shadow(0 0 8px rgba(200, 120, 0, 0.35)); }
+  100% { r: 11px; fill: #c87800; filter: drop-shadow(0 0 8px rgba(200, 120, 0, 0.45)); }
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='kick'] .step.onset.current {
-  animation: beekeeper-honey-bloom 400ms ease-out forwards;
+  animation: beekeeper-kick-bloom 380ms ease-out forwards;
 }
 
-/* Pollen: warm yellow glow */
-@keyframes beekeeper-pollen-glow {
-  0%   { r: 10px; fill: var(--color-pollen-mid);       filter: drop-shadow(0 0 6px rgba(244, 200, 66, 0.35)); }
-  15%  { r: 13px; fill: var(--color-pollen-light);     filter: drop-shadow(0 0 14px rgba(244, 200, 66, 0.55)); }
-  50%  { r: 11px;                                               filter: drop-shadow(0 0 8px rgba(244, 200, 66, 0.25)); }
-  100% { r: 10px; fill: var(--color-pollen);            filter: drop-shadow(0 0 6px rgba(244, 200, 66, 0.35)); }
+@keyframes beekeeper-snare-glow {
+  0%   { r: 11px; fill: #e8a800; filter: drop-shadow(0 0 10px rgba(216, 148, 0, 0.50)) drop-shadow(0 0 20px rgba(216, 148, 0, 0.25)); }
+  15%  { r: 15px; fill: #f8c850; filter: drop-shadow(0 0 18px rgba(216, 148, 0, 0.70)) drop-shadow(0 0 30px rgba(216, 148, 0, 0.35)); }
+  60%  { r: 12px;                                         filter: drop-shadow(0 0 8px rgba(216, 148, 0, 0.35)); }
+  100% { r: 11px; fill: #d89400; filter: drop-shadow(0 0 8px rgba(216, 148, 0, 0.45)); }
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='snare'] .step.onset.current {
-  animation: beekeeper-pollen-glow 380ms ease-out forwards;
+  animation: beekeeper-snare-glow 360ms ease-out forwards;
 }
 
-/* Beeswax: soft cream shimmer */
-@keyframes beekeeper-beeswax-shimmer {
-  0%   { r: 9px; fill: var(--color-beeswax-mid);       filter: drop-shadow(0 0 4px rgba(255, 241, 166, 0.35)); }
-  20%  { r: 12px; fill: var(--color-beeswax-light);    filter: drop-shadow(0 0 10px rgba(255, 241, 166, 0.50)); }
-  60%  { r: 10px;                                               filter: drop-shadow(0 0 5px rgba(255, 241, 166, 0.25)); }
-  100% { r: 9px; fill: var(--color-beeswax);            filter: drop-shadow(0 0 4px rgba(255, 241, 166, 0.35)); }
+@keyframes beekeeper-hat-shimmer {
+  0%   { r: 10px; fill: #e0bc50; filter: drop-shadow(0 0 6px rgba(212, 168, 48, 0.40)) drop-shadow(0 0 12px rgba(212, 168, 48, 0.20)); }
+  20%  { r: 13px; fill: #eccc70; filter: drop-shadow(0 0 12px rgba(212, 168, 48, 0.60)) drop-shadow(0 0 20px rgba(212, 168, 48, 0.30)); }
+  65%  { r: 11px;                                         filter: drop-shadow(0 0 6px rgba(212, 168, 48, 0.25)); }
+  100% { r: 10px; fill: #d4a830; filter: drop-shadow(0 0 6px rgba(212, 168, 48, 0.40)); }
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='hat'] .step.onset.current {
-  animation: beekeeper-beeswax-shimmer 360ms ease-out forwards;
+  animation: beekeeper-hat-shimmer 350ms ease-out forwards;
 }
 
-/* Dark Forest Honey: deep caramel bloom */
-@keyframes beekeeper-forest-bloom {
-  0%   { r: 10px; fill: var(--color-forest-mid);       filter: drop-shadow(0 0 6px rgba(179, 106, 26, 0.35)); }
-  15%  { r: 13px; fill: var(--color-forest-light);     filter: drop-shadow(0 0 14px rgba(179, 106, 26, 0.55)); }
-  50%  { r: 11px;                                               filter: drop-shadow(0 0 8px rgba(179, 106, 26, 0.25)); }
-  100% { r: 10px; fill: var(--color-forest-honey);      filter: drop-shadow(0 0 6px rgba(179, 106, 26, 0.35)); }
+@keyframes beekeeper-bass-bloom {
+  0%   { r: 11px; fill: #a85d00; filter: drop-shadow(0 0 10px rgba(139, 69, 0, 0.50)) drop-shadow(0 0 20px rgba(139, 69, 0, 0.25)); }
+  15%  { r: 15px; fill: #c87a18; filter: drop-shadow(0 0 18px rgba(139, 69, 0, 0.70)) drop-shadow(0 0 30px rgba(139, 69, 0, 0.35)); }
+  60%  { r: 12px;                                         filter: drop-shadow(0 0 8px rgba(139, 69, 0, 0.35)); }
+  100% { r: 11px; fill: #8b4500; filter: drop-shadow(0 0 8px rgba(139, 69, 0, 0.45)); }
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='bass'] .step.onset.current {
-  animation: beekeeper-forest-bloom 400ms ease-out forwards;
+  animation: beekeeper-bass-bloom 380ms ease-out forwards;
 }
 
-/* ===== PLAYHEAD — warm golden marker ===== */
+/* ===== PLAYHEAD — bright golden flash, visible from across the room ===== */
 :root[data-theme='beekeeper'] .step.current .step-indicator {
-  fill: #F5C43D;
-  stroke: rgba(245, 196, 61, 0.50);
-  stroke-width: 1.5px;
-  filter: drop-shadow(0 0 10px rgba(245, 196, 61, 0.30));
+  fill: #f0a800;
+  stroke: rgba(240, 168, 0, 0.60);
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 14px rgba(240, 168, 0, 0.50)) drop-shadow(0 0 30px rgba(240, 168, 0, 0.20));
 }
 :root[data-theme='beekeeper'] .step.current .visual {
-  fill: #F5C43D;
+  fill: #f0a800;
 }
 
 :root[data-theme='beekeeper'] .step.rest .step-indicator {
-  fill: rgba(80, 40, 0, 0.07);
+  fill: rgba(60, 30, 0, 0.10);
 }
 
-/* Orbit dots — honey droplets, not gray */
+/* Orbit dots — warm honey droplets, visible against cream panel */
 :root[data-theme='beekeeper'] .track-card[data-voice='kick'] .step.rest .step-indicator {
-  fill: rgba(218, 154, 28, 0.25);
+  fill: rgba(200, 120, 0, 0.35);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='snare'] .step.rest .step-indicator {
-  fill: rgba(200, 170, 60, 0.25);
+  fill: rgba(216, 148, 0, 0.35);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='hat'] .step.rest .step-indicator {
-  fill: rgba(200, 190, 140, 0.25);
+  fill: rgba(212, 168, 48, 0.30);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='bass'] .step.rest .step-indicator {
-  fill: rgba(160, 100, 30, 0.25);
+  fill: rgba(139, 69, 0, 0.35);
 }
 
 :root[data-theme='beekeeper'] .guide {
   fill: none;
-  stroke: rgba(80, 40, 0, 0.06);
-  stroke-width: 0.5px;
+  stroke: rgba(60, 30, 0, 0.12);
+  stroke-width: 1px;
 }
 
 :root[data-theme='beekeeper'] .hand {
-  stroke: rgba(80, 40, 0, 0.08);
-  stroke-width: 0.5px;
+  stroke: rgba(60, 30, 0, 0.12);
+  stroke-width: 0.8px;
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -8304,37 +8300,41 @@ header h1 {
   opacity: 1;
 }
 
-/* ===== CONTROLS — warm wooden knobs, honey-glazed ===== */
+/* ===== CONTROLS — dark knobs, bright accents, clear hierarchy ===== */
 :root[data-theme='beekeeper'] button {
   border-radius: 10px;
-  border: 1px solid rgba(80, 40, 0, 0.12);
-  background: rgba(248, 232, 160, 0.85);
-  color: #4A2C12;
+  border: 1px solid rgba(60, 30, 0, 0.15);
+  background: #e8d080;
+  color: #3a2208;
   font-weight: 600;
   letter-spacing: 0.3px;
   padding: 7px 16px;
   font-size: 12px;
   transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-  box-shadow: 0 1px 3px rgba(60, 30, 0, 0.10);
+  box-shadow: 0 1px 3px rgba(30, 15, 0, 0.12);
 }
 :root[data-theme='beekeeper'] button:hover {
-  background: rgba(248, 232, 160, 0.95);
-  border-color: rgba(212, 148, 26, 0.35);
-  box-shadow: 0 2px 6px rgba(60, 30, 0, 0.14);
+  background: #f0da90;
+  border-color: rgba(216, 139, 0, 0.40);
+  box-shadow: 0 2px 8px rgba(30, 15, 0, 0.16);
 }
 
 :root[data-theme='beekeeper'] .play {
-  background: rgba(212, 148, 26, 0.15);
-  border: 1px solid rgba(212, 148, 26, 0.28);
-  color: #4A2C12;
-  font-weight: 600;
-  box-shadow: 0 1px 3px rgba(60, 30, 0, 0.10);
+  background: #d88b00;
+  border: 1px solid #c47a00;
+  color: #fff8e0;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(30, 15, 0, 0.15);
+}
+:root[data-theme='beekeeper'] .play:hover {
+  background: #e89900;
+  border-color: #b36a00;
 }
 :root[data-theme='beekeeper'] .play.is-playing {
-  background: rgba(212, 148, 26, 0.22);
-  border-color: #D4941A;
-  color: #2A1608;
-  box-shadow: 0 0 14px rgba(212, 148, 26, 0.20), 0 1px 3px rgba(60, 30, 0, 0.10);
+  background: #f0da90;
+  border: 2px solid #d88b00;
+  color: #3a2208;
+  box-shadow: 0 0 16px rgba(216, 139, 0, 0.35), 0 1px 3px rgba(30, 15, 0, 0.10);
   font-weight: 700;
 }
 
@@ -8342,52 +8342,54 @@ header h1 {
 :root[data-theme='beekeeper'] .reset,
 :root[data-theme='beekeeper'] .reset-pattern {
   border-radius: 10px;
-  border: 1px solid rgba(80, 40, 0, 0.12);
-  background: rgba(248, 232, 160, 0.85);
-  color: #4A2C12;
+  border: 1px solid rgba(60, 30, 0, 0.15);
+  background: #e8d080;
+  color: #3a2208;
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(60, 30, 0, 0.10);
+  box-shadow: 0 1px 3px rgba(30, 15, 0, 0.12);
 }
 :root[data-theme='beekeeper'] .export:hover,
 :root[data-theme='beekeeper'] .reset:hover,
 :root[data-theme='beekeeper'] .reset-pattern:hover {
-  border-color: rgba(212, 148, 26, 0.35);
-  background: rgba(248, 232, 160, 0.95);
-  color: #2A1608;
-  box-shadow: 0 2px 6px rgba(60, 30, 0, 0.14);
+  border-color: rgba(216, 139, 0, 0.40);
+  background: #f0da90;
+  color: #1f0e00;
+  box-shadow: 0 2px 8px rgba(30, 15, 0, 0.16);
 }
 
 :root[data-theme='beekeeper'] .pattern-slot {
   border-radius: 10px;
   padding: 4px 0;
   font-size: 10px;
-  background: rgba(80, 40, 0, 0.04);
-  box-shadow: 0 1px 2px rgba(60, 30, 0, 0.06);
+  background: rgba(60, 30, 0, 0.06);
+  box-shadow: 0 1px 2px rgba(30, 15, 0, 0.08);
 }
 :root[data-theme='beekeeper'] .pattern-slot:hover {
-  background: rgba(212, 148, 26, 0.10);
+  background: rgba(216, 139, 0, 0.15);
 }
 :root[data-theme='beekeeper'] .pattern-slot.active {
-  background: rgba(212, 148, 26, 0.18);
-  border-color: rgba(212, 148, 26, 0.35);
+  background: rgba(216, 139, 0, 0.25);
+  border-color: rgba(216, 139, 0, 0.50);
+  color: #1f0e00;
 }
 
-/* Mask row */
+/* Mask row — bigger, sharper, higher contrast */
 :root[data-theme='beekeeper'] .mask-label {
-  color: #7A5729;
-  font-weight: 600;
+  color: #3a2208;
+  font-weight: 700;
+  font-size: 10px;
 }
 :root[data-theme='beekeeper'] .mask-cell {
   border-radius: 10px;
   padding: 0;
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
 }
 :root[data-theme='beekeeper'] .mask-cell.rest {
-  background: rgba(80, 40, 0, 0.03);
-  border-color: rgba(80, 40, 0, 0.06);
+  background: rgba(60, 30, 0, 0.06);
+  border-color: rgba(60, 30, 0, 0.10);
   border-width: 1px;
-  opacity: 0.55;
+  opacity: 0.70;
 }
 :root[data-theme='beekeeper'] .mask-cell.onset {
   background: var(--track-color);
@@ -8400,24 +8402,24 @@ header h1 {
   opacity: 0.55;
 }
 :root[data-theme='beekeeper'] .mask-cell.onset:hover {
-  filter: brightness(1.15);
+  filter: brightness(1.25);
 }
 :root[data-theme='beekeeper'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #F7D57A, 0 0 0 3px var(--track-color), 0 0 8px rgba(212, 148, 26, 0.15);
+  box-shadow: 0 0 0 2px #b37a14, 0 0 0 3px var(--track-color), 0 0 10px rgba(216, 139, 0, 0.25);
 }
 
 :root[data-theme='beekeeper'] .toggle {
   border-radius: 10px;
   min-width: 32px;
   padding: 4px 14px;
-  border: 1px solid rgba(80, 40, 0, 0.12);
-  background: rgba(248, 232, 160, 0.60);
-  box-shadow: 0 1px 2px rgba(60, 30, 0, 0.08);
+  border: 1px solid rgba(60, 30, 0, 0.15);
+  background: #e8d080;
+  box-shadow: 0 1px 2px rgba(30, 15, 0, 0.10);
 }
 :root[data-theme='beekeeper'] .toggle.is-on {
-  background: rgba(212, 148, 26, 0.18);
-  border-color: #D4941A;
-  box-shadow: 0 1px 3px rgba(212, 148, 26, 0.12);
+  background: rgba(216, 139, 0, 0.22);
+  border-color: #d88b00;
+  box-shadow: 0 1px 4px rgba(216, 139, 0, 0.18);
 }
 
 /* Sliders — wooden knobs inspired */
@@ -8466,117 +8468,117 @@ header h1 {
 }
 
 :root[data-theme='beekeeper'] select {
-  background: rgba(248, 232, 160, 0.90);
-  border: 1px solid rgba(80, 40, 0, 0.12);
-  color: #4A2C12;
+  background: #e8d080;
+  border: 1px solid rgba(60, 30, 0, 0.15);
+  color: #3a2208;
   border-radius: 10px;
   padding: 5px 12px;
   font-size: 12px;
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(60, 30, 0, 0.10);
+  box-shadow: 0 1px 3px rgba(30, 15, 0, 0.10);
 }
 :root[data-theme='beekeeper'] select option {
-  background: #F8E8A0;
-  color: #4A2C12;
+  background: #f0da90;
+  color: #3a2208;
   font-weight: 600;
 }
 :root[data-theme='beekeeper'] select option:checked {
-  background: rgba(212, 148, 26, 0.18);
+  background: rgba(216, 139, 0, 0.20);
 }
 
 :root[data-theme='beekeeper'] label {
-  color: #7A5729;
+  color: #5a3a10;
   font-weight: 600;
   letter-spacing: 0.3px;
   font-size: 11px;
 }
 
 :root[data-theme='beekeeper'] .control-label {
-  color: #7A5729;
+  color: #5a3a10;
   font-size: 10px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 :root[data-theme='beekeeper'] .control-label b {
-  color: #4A2C12;
+  color: #3a2208;
 }
 
 :root[data-theme='beekeeper'] .bpm b,
 :root[data-theme='beekeeper'] .swing b {
-  color: #E5A91A;
+  color: #d88b00;
   font-weight: 700;
 }
 
 :root[data-theme='beekeeper'] h1 {
-  color: #2A1608;
+  color: #1f0e00;
 }
 
 :root[data-theme='beekeeper'] .tagline {
-  color: #7A5729;
+  color: #5a3a10;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  opacity: 0.80;
+  opacity: 0.90;
   font-weight: 500;
 }
 
 :root[data-theme='beekeeper'] .track-name {
-  color: #2A1608;
-  font-weight: 650;
+  color: #1f0e00;
+  font-weight: 700;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
 
 :root[data-theme='beekeeper'] .mini-metrics b {
-  color: #2A1608;
-  font-weight: 650;
+  color: #1f0e00;
+  font-weight: 700;
 }
 :root[data-theme='beekeeper'] .mini-metrics span {
-  color: #7A5729;
-  opacity: 0.88;
+  color: #5a3a10;
+  opacity: 0.90;
   font-weight: 500;
 }
 
 :root[data-theme='beekeeper'] .playback-select select {
-  background: rgba(248, 232, 160, 0.90);
-  border: 1px solid rgba(80, 40, 0, 0.12);
+  background: #e8d080;
+  border: 1px solid rgba(60, 30, 0, 0.15);
   border-radius: 10px;
   padding: 4px 12px;
-  color: #4A2C12;
+  color: #3a2208;
   font-size: 12px;
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(60, 30, 0, 0.10);
+  box-shadow: 0 1px 3px rgba(30, 15, 0, 0.10);
 }
 :root[data-theme='beekeeper'] .playback-select span {
-  color: #7A5729;
-  opacity: 0.88;
+  color: #5a3a10;
+  opacity: 0.90;
   font-weight: 500;
 }
 
 :root[data-theme='beekeeper'] .module-lane {
-  border-top: 1px solid rgba(80, 40, 0, 0.04);
+  border-top: 1px solid rgba(60, 30, 0, 0.06);
 }
 
-/* Knobs (ghost module) — wooden control knobs */
+/* Knobs — dark track, bright pointer, readable at a glance */
 :root[data-theme='beekeeper'] .knob-ring {
   fill: none;
-  stroke: rgba(80, 40, 0, 0.10);
+  stroke: rgba(60, 30, 0, 0.18);
   stroke-width: 4px;
 }
 :root[data-theme='beekeeper'] .knob-fill {
   fill: none;
-  stroke: #F5C43D;
+  stroke: #d88b00;
   stroke-width: 4px;
   stroke-linecap: round;
 }
 :root[data-theme='beekeeper'] .knob-tick {
-  fill: #6B4217;
+  fill: #5a3a10;
 }
 :root[data-theme='beekeeper'] .knob-dot {
-  fill: #A56622;
+  fill: #f0a800;
 }
 :root[data-theme='beekeeper'] .knob-label {
-  color: #4A2C12;
+  color: #3a2208;
   font-weight: 600;
   font-size: 11px;
 }
