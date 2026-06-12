@@ -2258,7 +2258,7 @@
      value; the inline JS-set rule clamps it to [80ms, 180ms]. */
   --flash-duration: 180ms;
 
-  /* Per-voice track colours (themeable). Dark Neon = the original values. */
+  /* Per-voice track colours (themeable). Nocturne = the original values. */
   --color-kick: #c084fc;
   --color-kick-mid: #d8b4fe;
   --color-kick-light: #e9d5ff;
@@ -2279,7 +2279,7 @@
   color-scheme: dark;
 }
 
-/* Default select option styling (applies to Dark Neon and any theme without its own rule) */
+/* Default select option styling (applies to Nocturne and any theme without its own rule) */
 select option {
   background: #181a21;
   color: #c7c9d1;
@@ -2663,7 +2663,7 @@ select option:checked {
 
 /* ---------- Vintage Paper theme (light) ---------- */
 /* Warm, tactile, analog — a composer's notebook. Only CSS variables change;
-   the DOM, components and layout are identical to Dark Neon. */
+   the DOM, components and layout are identical to Nocturne. */
 :root[data-theme='paper'] {
   /* Premium notebook / sketchbook paper: warm cream, archival-feel.
      Moleskine/Midori aesthetic — warmer and more beige than bright

@@ -360,7 +360,7 @@ export default function App() {
             onChange={(e) => setTheme(e.target.value as ThemeId)}
             aria-label="Visual theme"
           >
-            <option value="dark">Dark Neon</option>
+            <option value="dark">Nocturne</option>
             <option value="paper">Vintage Paper</option>
             <option value="elements">Elements</option>
             <option value="military">Tactical</option>
