@@ -2584,39 +2584,39 @@
 /* Warm, tactile, analog — a composer's notebook. Only CSS variables change;
    the DOM, components and layout are identical to Dark Neon. */
 :root[data-theme='paper'] {
-  /* Whitepaper / engineer's notebook: warmer than pure white, cooler and more
-     neutral than the previous vintage tan — a lab journal, not parchment. */
-  --bg: #f4f0e6;
-  --panel: #f8f5ed;
-  --panel-hi: #efeadf;
-  --text: #5b554c;
-  --text-dim: #8e887d;
-  --text-hi: #2f2b25;
-  --accent: #8c6bae;
-  --accent-dim: rgba(140, 107, 174, 0.2);
-  --rest: #d9d2c3;
-  --current: #2f2b25; /* playhead is ink, not white */
-  --danger: #b5675f;
-  --warn: #c2944e;
+  /* Premium notebook / sketchbook paper: warm cream, archival-feel.
+     Moleskine/Midori aesthetic — warmer and more beige than bright
+     office paper, but still light and readable. */
+  --bg: #efe7d8;
+  --panel: #e8dfcf;
+  --panel-hi: #ddd3c2;
+  --text: #534e45;
+  --text-dim: #857f73;
+  --text-hi: #2c2822;
+  --accent: #7d5f9e;
+  --accent-dim: rgba(125, 95, 158, 0.20);
+  --rest: #ccc2ae;
+  --current: #2c2822; /* playhead is warm ink */
+  --danger: #a85f57;
+  --warn: #b58745;
 
-  /* Desaturated, paper-reinterpreted track identities. */
-  --color-kick: #8c6bae; /* dusty plum */
-  --color-kick-mid: #a88bc8;
-  --color-kick-light: #c4addb;
-  --color-snare: #c97b9f; /* muted rose */
-  --color-snare-mid: #d99bb7;
-  --color-snare-light: #e8bbcf;
-  --color-hat: #6d8fb5; /* vintage blue */
-  --color-hat-mid: #91b0d0;
-  --color-hat-light: #b5cce4;
-  --color-bass: #6fa17a; /* sage green */
-  --color-bass-mid: #8fba98;
-  --color-bass-light: #b0d2b6;
+  /* Slightly more saturated track colours for better contrast on cream bg. */
+  --color-kick: #7d5f9e; /* warm plum */
+  --color-kick-mid: #9a7cba;
+  --color-kick-light: #b99ece;
+  --color-snare: #bc7194; /* dusty rose */
+  --color-snare-mid: #d08eae;
+  --color-snare-light: #e0b0c6;
+  --color-hat: #6384aa; /* muted blue */
+  --color-hat-mid: #85a6c9;
+  --color-hat-light: #aac2de;
+  --color-bass: #659470; /* sage green */
+  --color-bass-mid: #80ae8a;
+  --color-bass-light: #a3c9ab;
 
-  /* Soft "sheet on the desk" elevation — readable, never neon. */
-  --card-shadow: 0 1px 2px rgba(40, 30, 15, 0.04), 0 8px 24px rgba(40, 30, 15, 0.05);
+  --card-shadow: 0 1px 3px rgba(40, 30, 15, 0.06), 0 8px 24px rgba(40, 30, 15, 0.06);
 
-  color-scheme: light; /* native controls (sliders, selects) render light */
+  color-scheme: light;
 }
 
 /* Procedural paper grain. SVG fractal noise inline as a data-uri — no external
@@ -2659,17 +2659,18 @@
 :root[data-theme='paper'] .reset-pattern,
 :root[data-theme='paper'] .kit-select select,
 :root[data-theme='paper'] .theme-select select {
-  background: #ece5d5;
+  background: #dcd2bf;
 }
 :root[data-theme='paper'] .toggle:hover,
 :root[data-theme='paper'] .export:hover,
 :root[data-theme='paper'] .reset:hover,
 :root[data-theme='paper'] .reset-pattern:hover {
-  background: #ddd3bc;
+  background: #cec3ae;
+  border-color: #a89980;
 }
-/* Softer borders in paper mode so cards read as sheets, not panels. */
+/* Slightly darker/warmer borders on cream paper */
 :root[data-theme='paper'] .track-card {
-  border-color: #e2dac8;
+  border-color: #d4c9b4;
 }
 
 * {
