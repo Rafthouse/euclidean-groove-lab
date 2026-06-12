@@ -1132,6 +1132,370 @@
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* ===== Liquid Diamond (Apple Glass / Titanium Synth) ===== */
+/* Pure statement theme — Apple Liquid Glass meets a $20,000 synthesizer.
+   Crystal-clear glass panels, titanium precision, diamond light. */
+:root[data-theme='liquid-diamond'] {
+  --bg: #0A0C10;
+  --panel: #10141B;
+  --panel-hi: #1A202C;
+  --text: #FFFFFF;
+  --text-dim: rgba(255, 255, 255, 0.55);
+  --text-hi: #FFFFFF;
+  --accent: #AEB7C2;
+  --accent-dim: rgba(174, 183, 194, 0.12);
+  --rest: rgba(255, 255, 255, 0.04);
+  --current: #FFFFFF;
+  --danger: #FF6B6B;
+  --warn: #D8E0EA;
+  --radius: 28px;
+  --mono: ui-monospace, 'SF Mono', Consolas, monospace;
+
+  --color-kick: #AEB7C2;
+  --color-kick-mid: #C5CCD5;
+  --color-kick-light: #D8E0EA;
+
+  --color-snare: #CFE8FF;
+  --color-snare-mid: #D8EDFF;
+  --color-snare-light: #E6F3FF;
+
+  --color-hat: #D8E0EA;
+  --color-hat-mid: #E2E8F0;
+  --color-hat-light: #EDF2F7;
+
+  --color-bass: #B8C5D0;
+  --color-bass-mid: #CCD7E0;
+  --color-bass-light: #E0E8F0;
+
+  --card-shadow: 0 0 0 0 transparent;
+  color-scheme: dark;
+}
+
+/* Background: deep graphite void with liquid light bands */
+:root[data-theme='liquid-diamond'] body {
+  background: #0A0C10;
+  overflow-x: hidden;
+}
+
+:root[data-theme='liquid-diamond'] body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 45% 35% at 30% 20%, rgba(10, 12, 16, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 25% 45% at 50% 40%, rgba(174, 183, 194, 0.035) 0%, transparent 55%),
+    radial-gradient(ellipse 20% 30% at 70% 60%, rgba(207, 232, 255, 0.025) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 20% at 20% 80%, rgba(216, 224, 234, 0.02) 0%, transparent 50%);
+  will-change: transform, opacity;
+  animation: liquid-glow 90s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+@keyframes liquid-glow {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  25%      { transform: translate3d(1%, -0.8%, 0) scale(1.01); }
+  50%      { transform: translate3d(-0.8%, 1.2%, 0) scale(0.99); opacity: 0.92; }
+  75%      { transform: translate3d(0.5%, -0.3%, 0) scale(1.005); }
+}
+
+:root[data-theme='liquid-diamond'] .app {
+  position: relative;
+  z-index: 1;
+}
+
+/* Track cards: floating glass panels — deep blur, optical depth */
+:root[data-theme='liquid-diamond'] .track-card {
+  background: rgba(16, 20, 27, 0.50);
+  backdrop-filter: blur(30px) saturate(1.15);
+  -webkit-backdrop-filter: blur(30px) saturate(1.15);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 28px;
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.30);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Internal caustic — top edge light band */
+:root[data-theme='liquid-diamond'] .track-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.10), transparent);
+  pointer-events: none;
+}
+
+:root[data-theme='liquid-diamond'] .track-card[data-voice='kick'] {
+  --track-color: var(--color-kick);
+}
+:root[data-theme='liquid-diamond'] .track-card[data-voice='kick'] .step.onset {
+  fill: var(--color-kick-mid);
+}
+:root[data-theme='liquid-diamond'] .track-card[data-voice='kick'] .shape {
+  fill: color-mix(in srgb, var(--color-kick) 18%, transparent);
+  stroke: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme='liquid-diamond'] .track-card[data-voice='snare'] {
+  --track-color: var(--color-snare);
+}
+:root[data-theme='liquid-diamond'] .track-card[data-voice='snare'] .step.onset {
+  fill: var(--color-snare-mid);
+}
+:root[data-theme='liquid-diamond'] .track-card[data-voice='snare'] .shape {
+  fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
+  stroke: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme='liquid-diamond'] .track-card[data-voice='hat'] {
+  --track-color: var(--color-hat);
+}
+:root[data-theme='liquid-diamond'] .track-card[data-voice='hat'] .step.onset {
+  fill: var(--color-hat-mid);
+}
+:root[data-theme='liquid-diamond'] .track-card[data-voice='hat'] .shape {
+  fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
+  stroke: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme='liquid-diamond'] .track-card[data-voice='bass'] {
+  --track-color: var(--color-bass);
+}
+:root[data-theme='liquid-diamond'] .track-card[data-voice='bass'] .step.onset {
+  fill: var(--color-bass-mid);
+}
+:root[data-theme='liquid-diamond'] .track-card[data-voice='bass'] .shape {
+  fill: color-mix(in srgb, var(--color-bass) 18%, transparent);
+  stroke: rgba(255, 255, 255, 0.12);
+}
+
+/* Diamond sparkle on active note — light through cut diamond */
+:root[data-theme='liquid-diamond'] .step.onset.current {
+  animation: diamond-sparkle 250ms ease-out forwards;
+}
+
+@keyframes diamond-sparkle {
+  0% {
+    fill: #FFFFFF;
+    r: 11px;
+    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  }
+  15% {
+    fill: #FFFFFF;
+    r: 15px;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.30)) drop-shadow(0 0 20px rgba(207, 232, 255, 0.08));
+  }
+  40% {
+    fill: #CFE8FF;
+    r: 13px;
+    filter: drop-shadow(0 0 5px rgba(207, 232, 255, 0.15));
+  }
+  100% {
+    fill: var(--color-kick-mid);
+    r: 11px;
+    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  }
+}
+
+/* Playhead: polished diamond indicator */
+:root[data-theme='liquid-diamond'] .step.current .step-indicator {
+  fill: #FFFFFF;
+  stroke: #CFE8FF;
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.20))
+          drop-shadow(0 0 16px rgba(207, 232, 255, 0.10));
+}
+:root[data-theme='liquid-diamond'] .step.current .visual {
+  fill: #FFFFFF;
+}
+
+/* Rest steps */
+:root[data-theme='liquid-diamond'] .step.rest .step-indicator {
+  opacity: 0.12;
+}
+
+/* Guide ring */
+:root[data-theme='liquid-diamond'] .guide {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.04);
+  stroke-width: 0.5px;
+}
+
+/* Hand: optical ray */
+:root[data-theme='liquid-diamond'] .hand {
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 0.5px;
+}
+
+/* Buttons: glass capsules — spring-responsive */
+:root[data-theme='liquid-diamond'] button {
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
+  color: #FFFFFF;
+  font-weight: 450;
+  letter-spacing: 0.3px;
+  padding: 8px 18px;
+  transition: background 0.2s cubic-bezier(0.32, 0.94, 0.6, 1), box-shadow 0.2s cubic-bezier(0.32, 0.94, 0.6, 1);
+}
+:root[data-theme='liquid-diamond'] button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.10), 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+:root[data-theme='liquid-diamond'] button:active {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+:root[data-theme='liquid-diamond'] .play {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: #FFFFFF;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.02);
+}
+:root[data-theme='liquid-diamond'] .play.is-playing {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+:root[data-theme='liquid-diamond'] .export {
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.04);
+  color: #FFFFFF;
+}
+
+/* Track toggles */
+:root[data-theme='liquid-diamond'] .toggle {
+  border-radius: 20px;
+  min-width: 32px;
+  padding: 4px 12px;
+}
+:root[data-theme='liquid-diamond'] .toggle.is-on {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Sliders: precision track */
+:root[data-theme='liquid-diamond'] input[type='range'] {
+  height: 4px;
+  cursor: pointer;
+}
+:root[data-theme='liquid-diamond'] input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+}
+:root[data-theme='liquid-diamond'] input[type='range']::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.10), 0 2px 8px rgba(0, 0, 0, 0.3);
+  margin-top: -6px;
+  transition: transform 0.15s cubic-bezier(0.32, 0.94, 0.6, 1);
+}
+:root[data-theme='liquid-diamond'] input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+:root[data-theme='liquid-diamond'] input[type='range']::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+}
+:root[data-theme='liquid-diamond'] input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.10);
+}
+
+/* Select */
+:root[data-theme='liquid-diamond'] select {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #FFFFFF;
+  border-radius: 20px;
+  padding: 6px 14px;
+  letter-spacing: 0.3px;
+}
+
+/* Labels */
+:root[data-theme='liquid-diamond'] label {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 450;
+  letter-spacing: 0.5px;
+  font-size: 11px;
+}
+
+:root[data-theme='liquid-diamond'] .control-label {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+:root[data-theme='liquid-diamond'] .control-label b {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+:root[data-theme='liquid-diamond'] .bpm b,
+:root[data-theme='liquid-diamond'] .swing b {
+  color: #CFE8FF;
+}
+
+:root[data-theme='liquid-diamond'] h1 {
+  color: #FFFFFF;
+  letter-spacing: 3px;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+:root[data-theme='liquid-diamond'] .tagline {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+:root[data-theme='liquid-diamond'] .track-name {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+:root[data-theme='liquid-diamond'] .mini-metrics b {
+  color: rgba(255, 255, 255, 0.7);
+}
+:root[data-theme='liquid-diamond'] .mini-metrics span {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+:root[data-theme='liquid-diamond'] .playback-select select {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  padding: 4px 12px;
+}
+:root[data-theme='liquid-diamond'] .playback-select span {
+  color: rgba(255, 255, 255, 0.4);
+}
+
 :root {
 
   --bg: #0f1014;
