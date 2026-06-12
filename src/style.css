@@ -3566,3 +3566,356 @@ header h1 {
   background: var(--accent);
   border-color: var(--accent);
 }
+
+/* ===== Deep Dub (Basic Channel / Berlin Underground) ===== */
+/* Graphite, concrete, fog, reverb space — a dub techno record sleeve. */
+:root[data-theme='deep-dub'] {
+  --bg: #0b0e10;
+  --panel: #15191d;
+  --panel-hi: #1c2228;
+  --text: #c7ccc7;
+  --text-dim: #6f7770;
+  --text-hi: #e6ebe6;
+  --accent: #6f8a68;
+  --accent-dim: rgba(111, 138, 104, 0.18);
+  --rest: #1c2228;
+  --current: #6f8a68;
+  --danger: #6f8a68;
+  --warn: #8c7664;
+  --radius: 4px;
+  --mono: ui-monospace, Consolas, monospace;
+
+  --color-kick: #6f8a68;
+  --color-kick-mid: #82a07a;
+  --color-kick-light: #98b490;
+  --color-snare: #8c7664;
+  --color-snare-mid: #a08c7a;
+  --color-snare-light: #b4a290;
+  --color-hat: #8ea4a7;
+  --color-hat-mid: #a6b9bc;
+  --color-hat-light: #bdcdcf;
+  --color-bass: #5f8f86;
+  --color-bass-mid: #76a69d;
+  --color-bass-light: #8fbcb3;
+
+  --card-shadow: 0 4px 32px rgba(0, 0, 0, 0.60);
+  color-scheme: dark;
+}
+
+:root[data-theme='deep-dub'] body {
+  background: #0b0e10;
+}
+
+:root[data-theme='deep-dub'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.030;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  background-size: 240px 240px;
+  animation: deep-dub-fog 120s ease-in-out infinite alternate;
+}
+
+@keyframes deep-dub-fog {
+  0% { opacity: 0.02; }
+  50% { opacity: 0.05; }
+  100% { opacity: 0.02; }
+}
+
+:root[data-theme='deep-dub'] .app {
+  position: relative;
+  z-index: 1;
+}
+
+:root[data-theme='deep-dub'] .track-card {
+  background: #15191d;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.60);
+  position: relative;
+  overflow: hidden;
+}
+
+:root[data-theme='deep-dub'] .track-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(ellipse 80% 30% at 50% 0%, rgba(111, 138, 104, 0.03) 0%, transparent 100%);
+}
+
+:root[data-theme='deep-dub'] .track-card[data-voice='kick'] {
+  --track-color: var(--color-kick);
+}
+:root[data-theme='deep-dub'] .track-card[data-voice='kick'] .step.onset {
+  fill: var(--color-kick-mid);
+}
+:root[data-theme='deep-dub'] .track-card[data-voice='kick'] .shape {
+  fill: color-mix(in srgb, var(--color-kick) 12%, transparent);
+  stroke: rgba(111, 138, 104, 0.20);
+}
+
+:root[data-theme='deep-dub'] .track-card[data-voice='snare'] {
+  --track-color: var(--color-snare);
+}
+:root[data-theme='deep-dub'] .track-card[data-voice='snare'] .step.onset {
+  fill: var(--color-snare-mid);
+}
+:root[data-theme='deep-dub'] .track-card[data-voice='snare'] .shape {
+  fill: color-mix(in srgb, var(--color-snare) 12%, transparent);
+  stroke: rgba(140, 118, 100, 0.20);
+}
+
+:root[data-theme='deep-dub'] .track-card[data-voice='hat'] {
+  --track-color: var(--color-hat);
+}
+:root[data-theme='deep-dub'] .track-card[data-voice='hat'] .step.onset {
+  fill: var(--color-hat-mid);
+}
+:root[data-theme='deep-dub'] .track-card[data-voice='hat'] .shape {
+  fill: color-mix(in srgb, var(--color-hat) 12%, transparent);
+  stroke: rgba(142, 164, 167, 0.20);
+}
+
+:root[data-theme='deep-dub'] .track-card[data-voice='bass'] {
+  --track-color: var(--color-bass);
+}
+:root[data-theme='deep-dub'] .track-card[data-voice='bass'] .step.onset {
+  fill: var(--color-bass-mid);
+}
+:root[data-theme='deep-dub'] .track-card[data-voice='bass'] .shape {
+  fill: color-mix(in srgb, var(--color-bass) 12%, transparent);
+  stroke: rgba(95, 143, 134, 0.20);
+}
+
+/* Playhead: subtle breath */
+:root[data-theme='deep-dub'] .step.current .step-indicator {
+  fill: #6f8a68;
+  stroke: #82a07a;
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 0 6px rgba(111, 138, 104, 0.15));
+}
+:root[data-theme='deep-dub'] .step.current .visual {
+  fill: #6f8a68;
+}
+:root[data-theme='deep-dub'] .step.rest .step-indicator {
+  opacity: 0.10;
+}
+
+:root[data-theme='deep-dub'] .guide {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.03);
+  stroke-width: 0.5px;
+}
+
+:root[data-theme='deep-dub'] .hand {
+  stroke: rgba(255, 255, 255, 0.04);
+  stroke-width: 0.5px;
+}
+
+:root[data-theme='deep-dub'] button {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #1c2228;
+  color: #c7ccc7;
+  font-weight: 450;
+  letter-spacing: 0.3px;
+  padding: 8px 18px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+:root[data-theme='deep-dub'] button:hover {
+  background: #22282f;
+  border-color: #6f8a68;
+}
+
+:root[data-theme='deep-dub'] .play {
+  background: #1c2228;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #c7ccc7;
+}
+:root[data-theme='deep-dub'] .play.is-playing {
+  background: rgba(111, 138, 104, 0.12);
+  border-color: #6f8a68;
+  color: #e6ebe6;
+}
+
+:root[data-theme='deep-dub'] .export,
+:root[data-theme='deep-dub'] .reset-pattern {
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #1c2228;
+  color: #c7ccc7;
+}
+:root[data-theme='deep-dub'] .export:hover,
+:root[data-theme='deep-dub'] .reset-pattern:hover {
+  border-color: #6f8a68;
+}
+
+:root[data-theme='deep-dub'] .pattern-slot {
+  border-radius: 4px;
+  padding: 5px 0;
+  font-size: 10px;
+}
+
+:root[data-theme='deep-dub'] .mask-label {
+  color: #6f7770;
+}
+:root[data-theme='deep-dub'] .mask-cell {
+  border-radius: 4px;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+}
+:root[data-theme='deep-dub'] .mask-cell.rest {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.04);
+  opacity: 1;
+}
+:root[data-theme='deep-dub'] .mask-cell.onset {
+  background: var(--track-color);
+  border-color: var(--track-color);
+  opacity: 1;
+}
+:root[data-theme='deep-dub'] .mask-cell.onset.muted {
+  background: transparent;
+  border-color: var(--track-color);
+  opacity: 0.45;
+}
+:root[data-theme='deep-dub'] .mask-cell.onset:hover {
+  filter: brightness(1.20);
+}
+:root[data-theme='deep-dub'] .mask-cell.is-current {
+  box-shadow: 0 0 0 2px #0b0e10, 0 0 0 3px #6f8a68;
+}
+
+:root[data-theme='deep-dub'] .toggle {
+  border-radius: 4px;
+  min-width: 32px;
+  padding: 4px 12px;
+}
+:root[data-theme='deep-dub'] .toggle.is-on {
+  background: rgba(111, 138, 104, 0.15);
+  border-color: #6f8a68;
+}
+
+:root[data-theme='deep-dub'] input[type='range'] {
+  height: 4px;
+  cursor: pointer;
+}
+:root[data-theme='deep-dub'] input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: #1c2228;
+}
+:root[data-theme='deep-dub'] input[type='range']::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #6f8a68;
+  border: none;
+  box-shadow: 0 0 0 2px rgba(111, 138, 104, 0.15);
+  margin-top: -5px;
+}
+:root[data-theme='deep-dub'] input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+:root[data-theme='deep-dub'] input[type='range']::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: #1c2228;
+  border: none;
+}
+:root[data-theme='deep-dub'] input[type='range']::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #6f8a68;
+  border: none;
+}
+
+:root[data-theme='deep-dub'] select {
+  background: #1c2228;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: #c7ccc7;
+  border-radius: 4px;
+  padding: 6px 14px;
+  letter-spacing: 0.3px;
+}
+:root[data-theme='deep-dub'] select option {
+  background: #15191d;
+  color: #c7ccc7;
+}
+:root[data-theme='deep-dub'] select option:checked {
+  background: rgba(111, 138, 104, 0.15);
+}
+
+:root[data-theme='deep-dub'] label {
+  color: #6f7770;
+  font-weight: 450;
+  letter-spacing: 0.5px;
+  font-size: 11px;
+}
+
+:root[data-theme='deep-dub'] .control-label {
+  color: #6f7770;
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+:root[data-theme='deep-dub'] .control-label b {
+  color: #82a07a;
+}
+
+:root[data-theme='deep-dub'] .bpm b,
+:root[data-theme='deep-dub'] .swing b {
+  color: #6f8a68;
+}
+
+:root[data-theme='deep-dub'] h1 {
+  color: #c7ccc7;
+  letter-spacing: 3px;
+  font-weight: 300;
+  font-size: 20px;
+}
+
+:root[data-theme='deep-dub'] .tagline {
+  color: #6f7770;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+:root[data-theme='deep-dub'] .track-name {
+  color: #c7ccc7;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+:root[data-theme='deep-dub'] .mini-metrics b {
+  color: #82a07a;
+}
+:root[data-theme='deep-dub'] .mini-metrics span {
+  color: #6f7770;
+}
+
+:root[data-theme='deep-dub'] .playback-select select {
+  background: #1c2228;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  padding: 4px 12px;
+  color: #c7ccc7;
+}
+:root[data-theme='deep-dub'] .playback-select span {
+  color: #6f7770;
+}
+
+:root[data-theme='deep-dub'] .module-lane {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
