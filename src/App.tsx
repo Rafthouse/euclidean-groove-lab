@@ -375,7 +375,7 @@ export default function App() {
             <option value="smoke-dub">Smoke Dub</option>
             <option value="nautilus">Nautilus</option>
             <option value="satisfaction">Satisfaction</option>
-            <option value="revelation">Revelation</option>
+            <option value="revelation">Ashes</option>
           </select>
         </label>
         {theme === 'elements' && (
