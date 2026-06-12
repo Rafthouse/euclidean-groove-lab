@@ -11,7 +11,7 @@ import type { DrumKitId } from './drumKits';
 /** How many 4/4 bars the MIDI export renders. */
 const EXPORT_BARS = 4;
 
-type ThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'cherry' | 'nostradamus' | 'big-boss' | 'university' | 'trip' | 'dark-side' | 'bauhaus' | 'deep-dub' | 'nautilus';
+type ThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'cherry' | 'nostradamus' | 'big-boss' | 'university' | 'trip' | 'dark-side' | 'bauhaus' | 'smoke-dub' | 'nautilus';
 const THEME_KEY = 'groove-theme';
 const FX_KEY = 'groove-elements-fx';
 const RESTART_KEY = 'groove-restart-on-mode-change';
@@ -19,7 +19,7 @@ const RESTART_KEY = 'groove-restart-on-mode-change';
 function initialTheme(): ThemeId {
   try {
     const t = localStorage.getItem(THEME_KEY);
-    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' || t === 'cherry' || t === 'nostradamus' || t === 'big-boss' || t === 'university' || t === 'trip' || t === 'dark-side' || t === 'bauhaus' || t === 'deep-dub' || t === 'nautilus' ? t : 'elements';
+    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' || t === 'cherry' || t === 'nostradamus' || t === 'big-boss' || t === 'university' || t === 'trip' || t === 'dark-side' || t === 'bauhaus' || t === 'smoke-dub' || t === 'nautilus' ? t : 'elements';
   } catch {
     return 'elements';
   }
@@ -372,7 +372,7 @@ export default function App() {
             <option value="trip">TRIP</option>
             <option value="dark-side">Dark Side</option>
             <option value="bauhaus">Bauhaus</option>
-            <option value="deep-dub">Deep Dub</option>
+            <option value="smoke-dub">Smoke Dub</option>
             <option value="nautilus">Nautilus</option>
           </select>
         </label>

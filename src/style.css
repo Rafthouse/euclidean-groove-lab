@@ -3567,358 +3567,405 @@ header h1 {
   border-color: var(--accent);
 }
 
-/* ===== Deep Dub (Basic Channel / Berlin Underground) ===== */
-/* Graphite, concrete, fog, reverb space — a dub techno record sleeve. */
-:root[data-theme='deep-dub'] {
-  --bg: #0b0e10;
-  --panel: #15191d;
-  --panel-hi: #1c2228;
-  --text: #c7ccc7;
-  --text-dim: #6f7770;
-  --text-hi: #e6ebe6;
-  --accent: #6f8a68;
-  --accent-dim: rgba(111, 138, 104, 0.18);
-  --rest: #1c2228;
-  --current: #6f8a68;
-  --danger: #6f8a68;
-  --warn: #8c7664;
+/* ===== Smoke Dub (warm haze / dub plate studio / vinyl culture) ===== */
+/* Warm tube equipment, cigarette smoke in light beams, late-night
+   listening sessions. Fluxion & Basic Channel at 3AM. */
+:root[data-theme='smoke-dub'] {
+  --bg: #12100d;
+  --panel: #211c16;
+  --panel-hi: #2c251d;
+  --text: #d8d0c5;
+  --text-dim: #8d8479;
+  --text-hi: #ebe4da;
+  --accent: #76805c;
+  --accent-dim: rgba(118, 128, 92, 0.18);
+  --rest: #2c251d;
+  --current: #b47a44;
+  --danger: #b47a44;
+  --warn: #a5aca4;
   --radius: 4px;
   --mono: ui-monospace, Consolas, monospace;
 
-  --color-kick: #6f8a68;
-  --color-kick-mid: #82a07a;
-  --color-kick-light: #98b490;
-  --color-snare: #8c7664;
-  --color-snare-mid: #a08c7a;
-  --color-snare-light: #b4a290;
-  --color-hat: #8ea4a7;
-  --color-hat-mid: #a6b9bc;
-  --color-hat-light: #bdcdcf;
-  --color-bass: #5f8f86;
-  --color-bass-mid: #76a69d;
-  --color-bass-light: #8fbcb3;
+  --color-kick: #76805c;
+  --color-kick-mid: #8a9470;
+  --color-kick-light: #9fa888;
+  --color-snare: #b47a44;
+  --color-snare-mid: #c89160;
+  --color-snare-light: #dba87c;
+  --color-hat: #a5aca4;
+  --color-hat-mid: #b8bfb8;
+  --color-hat-light: #ccd2cc;
+  --color-bass: #5f7762;
+  --color-bass-mid: #768f79;
+  --color-bass-light: #8ea791;
 
-  --card-shadow: 0 4px 32px rgba(0, 0, 0, 0.60);
+  --card-shadow: 0 4px 28px rgba(0, 0, 0, 0.60);
   color-scheme: dark;
 }
 
-:root[data-theme='deep-dub'] body {
-  background: #0b0e10;
+/* Warm haze background — smooth overlapping radial gradients,
+   no banding, no hard edges. Feels like angled light through smoke. */
+:root[data-theme='smoke-dub'] body {
+  background:
+    radial-gradient(ellipse 90% 50% at 70% 0%,    rgba(43, 36, 29, 0.50) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 20% 100%,   rgba(48, 38, 28, 0.35) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 40% 50%,    rgba(29, 25, 21, 0.40) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 30% at 50% 30%,    rgba(23, 20, 18, 0.60) 0%, transparent 50%),
+    #12100d;
 }
 
-:root[data-theme='deep-dub'] body::before {
+/* Grain overlay — fine analog texture */
+:root[data-theme='smoke-dub'] body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.030;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.70' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
   background-size: 240px 240px;
-  animation: deep-dub-fog 120s ease-in-out infinite alternate;
 }
 
-@keyframes deep-dub-fog {
-  0% { opacity: 0.02; }
-  50% { opacity: 0.05; }
-  100% { opacity: 0.02; }
-}
-
-:root[data-theme='deep-dub'] .app {
+:root[data-theme='smoke-dub'] .app {
   position: relative;
   z-index: 1;
 }
 
-:root[data-theme='deep-dub'] .track-card {
-  background: #15191d;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+/* Smoked glass cards — analog meter windows, studio hardware faceplates */
+:root[data-theme='smoke-dub'] .track-card {
+  background: rgba(33, 28, 22, 0.80);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(216, 208, 197, 0.05);
   border-radius: 6px;
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.60);
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(216, 208, 197, 0.04),
+    0 4px 28px rgba(0, 0, 0, 0.60);
   position: relative;
   overflow: hidden;
 }
 
-:root[data-theme='deep-dub'] .track-card::after {
+:root[data-theme='smoke-dub'] .track-card::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(216, 208, 197, 0.06), transparent);
   pointer-events: none;
-  background: radial-gradient(ellipse 80% 30% at 50% 0%, rgba(111, 138, 104, 0.03) 0%, transparent 100%);
 }
 
-:root[data-theme='deep-dub'] .track-card[data-voice='kick'] {
+:root[data-theme='smoke-dub'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
 }
-:root[data-theme='deep-dub'] .track-card[data-voice='kick'] .step.onset {
+:root[data-theme='smoke-dub'] .track-card[data-voice='kick'] .step.onset {
   fill: var(--color-kick-mid);
 }
-:root[data-theme='deep-dub'] .track-card[data-voice='kick'] .shape {
+:root[data-theme='smoke-dub'] .track-card[data-voice='kick'] .shape {
   fill: color-mix(in srgb, var(--color-kick) 12%, transparent);
-  stroke: rgba(111, 138, 104, 0.20);
+  stroke: rgba(118, 128, 92, 0.18);
 }
 
-:root[data-theme='deep-dub'] .track-card[data-voice='snare'] {
+:root[data-theme='smoke-dub'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare);
 }
-:root[data-theme='deep-dub'] .track-card[data-voice='snare'] .step.onset {
+:root[data-theme='smoke-dub'] .track-card[data-voice='snare'] .step.onset {
   fill: var(--color-snare-mid);
 }
-:root[data-theme='deep-dub'] .track-card[data-voice='snare'] .shape {
+:root[data-theme='smoke-dub'] .track-card[data-voice='snare'] .shape {
   fill: color-mix(in srgb, var(--color-snare) 12%, transparent);
-  stroke: rgba(140, 118, 100, 0.20);
+  stroke: rgba(180, 122, 68, 0.18);
 }
 
-:root[data-theme='deep-dub'] .track-card[data-voice='hat'] {
+:root[data-theme='smoke-dub'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat);
 }
-:root[data-theme='deep-dub'] .track-card[data-voice='hat'] .step.onset {
+:root[data-theme='smoke-dub'] .track-card[data-voice='hat'] .step.onset {
   fill: var(--color-hat-mid);
 }
-:root[data-theme='deep-dub'] .track-card[data-voice='hat'] .shape {
+:root[data-theme='smoke-dub'] .track-card[data-voice='hat'] .shape {
   fill: color-mix(in srgb, var(--color-hat) 12%, transparent);
-  stroke: rgba(142, 164, 167, 0.20);
+  stroke: rgba(165, 172, 164, 0.15);
 }
 
-:root[data-theme='deep-dub'] .track-card[data-voice='bass'] {
+:root[data-theme='smoke-dub'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass);
 }
-:root[data-theme='deep-dub'] .track-card[data-voice='bass'] .step.onset {
+:root[data-theme='smoke-dub'] .track-card[data-voice='bass'] .step.onset {
   fill: var(--color-bass-mid);
 }
-:root[data-theme='deep-dub'] .track-card[data-voice='bass'] .shape {
+:root[data-theme='smoke-dub'] .track-card[data-voice='bass'] .shape {
   fill: color-mix(in srgb, var(--color-bass) 12%, transparent);
-  stroke: rgba(95, 143, 134, 0.20);
+  stroke: rgba(95, 119, 98, 0.18);
 }
 
-/* Playhead: subtle breath */
-:root[data-theme='deep-dub'] .step.current .step-indicator {
-  fill: #6f8a68;
-  stroke: #82a07a;
+/* Active onsets — restrained warmth */
+/* Kick: small pressure pulse */
+@keyframes smoke-kick-pulse {
+  0% { r: 11px; fill: #8a9470; }
+  25% { r: 13px; fill: #9fa888; filter: drop-shadow(0 0 6px rgba(118, 128, 92, 0.10)); }
+  100% { r: 11px; fill: var(--color-kick-mid); filter: none; }
+}
+/* Snare: short warm flash */
+@keyframes smoke-snare-flash {
+  0% { r: 11px; fill: #c89160; }
+  20% { r: 13px; fill: #dba87c; filter: drop-shadow(0 0 8px rgba(180, 122, 68, 0.08)); }
+  100% { r: 11px; fill: var(--color-snare-mid); filter: none; }
+}
+/* Hat: tiny smoke shimmer */
+@keyframes smoke-hat-shimmer {
+  0% { r: 9px; fill: #b8bfb8; opacity: 1; }
+  25% { r: 10px; fill: #ccd2cc; filter: drop-shadow(0 0 4px rgba(165, 172, 164, 0.06)); }
+  100% { r: 9px; fill: var(--color-hat-mid); opacity: 1; filter: none; }
+}
+/* Bass: slow breathing glow */
+@keyframes smoke-bass-glow {
+  0% { r: 11px; fill: #768f79; }
+  30% { r: 14px; fill: #8ea791; filter: drop-shadow(0 0 8px rgba(95, 119, 98, 0.08)); }
+  100% { r: 11px; fill: var(--color-bass-mid); filter: none; }
+}
+
+:root[data-theme='smoke-dub'] .track-card[data-voice='kick'] .step.onset.current {
+  animation: smoke-kick-pulse 400ms ease-out forwards;
+}
+:root[data-theme='smoke-dub'] .track-card[data-voice='snare'] .step.onset.current {
+  animation: smoke-snare-flash 350ms ease-out forwards;
+}
+:root[data-theme='smoke-dub'] .track-card[data-voice='hat'] .step.onset.current {
+  animation: smoke-hat-shimmer 300ms ease-out forwards;
+}
+:root[data-theme='smoke-dub'] .track-card[data-voice='bass'] .step.onset.current {
+  animation: smoke-bass-glow 500ms ease-in-out forwards;
+}
+
+/* Playhead: warm amber line */
+:root[data-theme='smoke-dub'] .step.current .step-indicator {
+  fill: #b47a44;
+  stroke: #c89160;
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 6px rgba(111, 138, 104, 0.15));
+  filter: drop-shadow(0 0 6px rgba(180, 122, 68, 0.12));
 }
-:root[data-theme='deep-dub'] .step.current .visual {
-  fill: #6f8a68;
+:root[data-theme='smoke-dub'] .step.current .visual {
+  fill: #b47a44;
 }
-:root[data-theme='deep-dub'] .step.rest .step-indicator {
+:root[data-theme='smoke-dub'] .step.rest .step-indicator {
   opacity: 0.10;
 }
 
-:root[data-theme='deep-dub'] .guide {
+:root[data-theme='smoke-dub'] .guide {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.03);
+  stroke: rgba(216, 208, 197, 0.03);
   stroke-width: 0.5px;
 }
 
-:root[data-theme='deep-dub'] .hand {
-  stroke: rgba(255, 255, 255, 0.04);
+:root[data-theme='smoke-dub'] .hand {
+  stroke: rgba(216, 208, 197, 0.04);
   stroke-width: 0.5px;
 }
 
-:root[data-theme='deep-dub'] button {
+:root[data-theme='smoke-dub'] button {
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: #1c2228;
-  color: #c7ccc7;
+  border: 1px solid rgba(216, 208, 197, 0.06);
+  background: #2c251d;
+  color: #d8d0c5;
   font-weight: 450;
   letter-spacing: 0.3px;
   padding: 8px 18px;
-  transition: background 0.3s ease, border-color 0.3s ease;
+  transition: background 0.25s ease, border-color 0.25s ease;
 }
-:root[data-theme='deep-dub'] button:hover {
-  background: #22282f;
-  border-color: #6f8a68;
-}
-
-:root[data-theme='deep-dub'] .play {
-  background: #1c2228;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #c7ccc7;
-}
-:root[data-theme='deep-dub'] .play.is-playing {
-  background: rgba(111, 138, 104, 0.12);
-  border-color: #6f8a68;
-  color: #e6ebe6;
+:root[data-theme='smoke-dub'] button:hover {
+  background: #352d23;
+  border-color: #b47a44;
 }
 
-:root[data-theme='deep-dub'] .export,
-:root[data-theme='deep-dub'] .reset-pattern {
+:root[data-theme='smoke-dub'] .play {
+  background: #2c251d;
+  border: 1px solid rgba(216, 208, 197, 0.08);
+  color: #d8d0c5;
+}
+:root[data-theme='smoke-dub'] .play.is-playing {
+  background: rgba(118, 128, 92, 0.10);
+  border-color: #76805c;
+  color: #ebe4da;
+}
+
+:root[data-theme='smoke-dub'] .export,
+:root[data-theme='smoke-dub'] .reset-pattern {
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: #1c2228;
-  color: #c7ccc7;
+  border: 1px solid rgba(216, 208, 197, 0.06);
+  background: #2c251d;
+  color: #d8d0c5;
 }
-:root[data-theme='deep-dub'] .export:hover,
-:root[data-theme='deep-dub'] .reset-pattern:hover {
-  border-color: #6f8a68;
+:root[data-theme='smoke-dub'] .export:hover,
+:root[data-theme='smoke-dub'] .reset-pattern:hover {
+  border-color: #b47a44;
 }
 
-:root[data-theme='deep-dub'] .pattern-slot {
+:root[data-theme='smoke-dub'] .pattern-slot {
   border-radius: 4px;
   padding: 5px 0;
   font-size: 10px;
 }
 
-:root[data-theme='deep-dub'] .mask-label {
-  color: #6f7770;
+:root[data-theme='smoke-dub'] .mask-label {
+  color: #8d8479;
 }
-:root[data-theme='deep-dub'] .mask-cell {
+:root[data-theme='smoke-dub'] .mask-cell {
   border-radius: 4px;
   padding: 0;
   width: 15px;
   height: 15px;
 }
-:root[data-theme='deep-dub'] .mask-cell.rest {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.04);
+:root[data-theme='smoke-dub'] .mask-cell.rest {
+  background: rgba(216, 208, 197, 0.03);
+  border-color: rgba(216, 208, 197, 0.04);
   opacity: 1;
 }
-:root[data-theme='deep-dub'] .mask-cell.onset {
+:root[data-theme='smoke-dub'] .mask-cell.onset {
   background: var(--track-color);
   border-color: var(--track-color);
   opacity: 1;
 }
-:root[data-theme='deep-dub'] .mask-cell.onset.muted {
+:root[data-theme='smoke-dub'] .mask-cell.onset.muted {
   background: transparent;
   border-color: var(--track-color);
   opacity: 0.45;
 }
-:root[data-theme='deep-dub'] .mask-cell.onset:hover {
-  filter: brightness(1.20);
+:root[data-theme='smoke-dub'] .mask-cell.onset:hover {
+  filter: brightness(1.15);
 }
-:root[data-theme='deep-dub'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #0b0e10, 0 0 0 3px #6f8a68;
+:root[data-theme='smoke-dub'] .mask-cell.is-current {
+  box-shadow: 0 0 0 2px #12100d, 0 0 0 3px #b47a44;
 }
 
-:root[data-theme='deep-dub'] .toggle {
+:root[data-theme='smoke-dub'] .toggle {
   border-radius: 4px;
   min-width: 32px;
   padding: 4px 12px;
 }
-:root[data-theme='deep-dub'] .toggle.is-on {
-  background: rgba(111, 138, 104, 0.15);
-  border-color: #6f8a68;
+:root[data-theme='smoke-dub'] .toggle.is-on {
+  background: rgba(118, 128, 92, 0.12);
+  border-color: #76805c;
 }
 
-:root[data-theme='deep-dub'] input[type='range'] {
+:root[data-theme='smoke-dub'] input[type='range'] {
   height: 4px;
   cursor: pointer;
 }
-:root[data-theme='deep-dub'] input[type='range']::-webkit-slider-runnable-track {
+:root[data-theme='smoke-dub'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: #1c2228;
+  background: #2c251d;
 }
-:root[data-theme='deep-dub'] input[type='range']::-webkit-slider-thumb {
+:root[data-theme='smoke-dub'] input[type='range']::-webkit-slider-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #6f8a68;
+  background: #b47a44;
   border: none;
-  box-shadow: 0 0 0 2px rgba(111, 138, 104, 0.15);
+  box-shadow: 0 0 0 2px rgba(180, 122, 68, 0.12);
   margin-top: -5px;
 }
-:root[data-theme='deep-dub'] input[type='range']::-webkit-slider-thumb:hover {
+:root[data-theme='smoke-dub'] input[type='range']::-webkit-slider-thumb:hover {
   transform: scale(1.15);
 }
-:root[data-theme='deep-dub'] input[type='range']::-moz-range-track {
+:root[data-theme='smoke-dub'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
-  background: #1c2228;
+  background: #2c251d;
   border: none;
 }
-:root[data-theme='deep-dub'] input[type='range']::-moz-range-thumb {
+:root[data-theme='smoke-dub'] input[type='range']::-moz-range-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #6f8a68;
+  background: #b47a44;
   border: none;
 }
 
-:root[data-theme='deep-dub'] select {
-  background: #1c2228;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: #c7ccc7;
+:root[data-theme='smoke-dub'] select {
+  background: #2c251d;
+  border: 1px solid rgba(216, 208, 197, 0.06);
+  color: #d8d0c5;
   border-radius: 4px;
   padding: 6px 14px;
   letter-spacing: 0.3px;
 }
-:root[data-theme='deep-dub'] select option {
-  background: #15191d;
-  color: #c7ccc7;
+:root[data-theme='smoke-dub'] select option {
+  background: #211c16;
+  color: #d8d0c5;
 }
-:root[data-theme='deep-dub'] select option:checked {
-  background: rgba(111, 138, 104, 0.15);
+:root[data-theme='smoke-dub'] select option:checked {
+  background: rgba(118, 128, 92, 0.12);
 }
 
-:root[data-theme='deep-dub'] label {
-  color: #6f7770;
+:root[data-theme='smoke-dub'] label {
+  color: #8d8479;
   font-weight: 450;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
 
-:root[data-theme='deep-dub'] .control-label {
-  color: #6f7770;
+:root[data-theme='smoke-dub'] .control-label {
+  color: #8d8479;
   font-size: 10px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
-:root[data-theme='deep-dub'] .control-label b {
-  color: #82a07a;
+:root[data-theme='smoke-dub'] .control-label b {
+  color: #8a9470;
 }
 
-:root[data-theme='deep-dub'] .bpm b,
-:root[data-theme='deep-dub'] .swing b {
-  color: #6f8a68;
+:root[data-theme='smoke-dub'] .bpm b,
+:root[data-theme='smoke-dub'] .swing b {
+  color: #b47a44;
 }
 
-:root[data-theme='deep-dub'] h1 {
-  color: #c7ccc7;
+:root[data-theme='smoke-dub'] h1 {
+  color: #d8d0c5;
   letter-spacing: 3px;
   font-weight: 300;
   font-size: 20px;
 }
 
-:root[data-theme='deep-dub'] .tagline {
-  color: #6f7770;
+:root[data-theme='smoke-dub'] .tagline {
+  color: #8d8479;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-:root[data-theme='deep-dub'] .track-name {
-  color: #c7ccc7;
+:root[data-theme='smoke-dub'] .track-name {
+  color: #d8d0c5;
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
   font-size: 11px;
 }
 
-:root[data-theme='deep-dub'] .mini-metrics b {
-  color: #82a07a;
+:root[data-theme='smoke-dub'] .mini-metrics b {
+  color: #8a9470;
 }
-:root[data-theme='deep-dub'] .mini-metrics span {
-  color: #6f7770;
+:root[data-theme='smoke-dub'] .mini-metrics span {
+  color: #8d8479;
 }
 
-:root[data-theme='deep-dub'] .playback-select select {
-  background: #1c2228;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+:root[data-theme='smoke-dub'] .playback-select select {
+  background: #2c251d;
+  border: 1px solid rgba(216, 208, 197, 0.06);
   border-radius: 4px;
   padding: 4px 12px;
-  color: #c7ccc7;
+  color: #d8d0c5;
 }
-:root[data-theme='deep-dub'] .playback-select span {
-  color: #6f7770;
+:root[data-theme='smoke-dub'] .playback-select span {
+  color: #8d8479;
 }
 
-:root[data-theme='deep-dub'] .module-lane {
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+:root[data-theme='smoke-dub'] .module-lane {
+  border-top: 1px solid rgba(216, 208, 197, 0.04);
 }
+
 
 /* ===== Nautilus (Deep Sea / Oceanographic Laboratory) ===== */
 /* Jules Verne meets ambient electronic — calm, deep, meditative.
