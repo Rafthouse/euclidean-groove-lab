@@ -3699,9 +3699,10 @@ header h1 {
 }
 
 /* ---------- responsive track grid ---------- */
-/* Mobile-first: 1 column < 768px, 2 columns (2x2) 768–1023px (tablet portrait),
-   4 columns (1×4) 1024–1199px (tablet landscape), and 4 columns with wider
-   container ≥ 1200px (desktop). */
+/* Mobile-first: 1 column < 768px.
+   Tablet portrait (768–1023px): 2×2 dedicated compact cards.
+   Tablet landscape (1024–1199px): 4 columns, full-width, hardware feel.
+   Desktop (≥1200px): 4 columns with wider container. */
 
 .tracks {
   width: 100%;
@@ -3710,42 +3711,52 @@ header h1 {
   grid-template-columns: 1fr;
 }
 
-/* Tablet portrait — 2×2 grid with dedicated compact card layout */
+/* --- Tablet portrait (768–1023px) — dedicated compact card layout --- */
 @media (min-width: 768px) and (max-width: 1023px) {
+  .app {
+    max-width: 100%;
+    padding: 12px 10px 32px;
+    gap: 8px;
+  }
+  header h1 {
+    font-size: 20px;
+  }
+  header .tagline {
+    font-size: 11px;
+    margin: 2px 0 0;
+  }
+
   .tracks {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
-  }
-  .app {
-    padding: 16px 14px 40px;
-    gap: 12px;
+    gap: 6px;
   }
 
-  /* --- Dedicated compact card layout for portrait --- */
   .track-card {
-    padding: 6px;
+    padding: 5px;
   }
 
-  /* Track head: compact */
   .track-name {
-    font-size: 11px;
+    font-size: 10px;
   }
   .track-toggles .toggle {
-    font-size: 9px;
-    padding: 2px 5px;
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+  .track-toggles {
+    gap: 3px;
   }
 
-  /* Sequencer: capped height — polygon ~30% of card */
+  /* Polygon: cap height so it's ~35% of card */
   .sequencer-wrapper {
-    max-height: 100px;
+    max-height: 110px;
   }
   .sequencer-wrapper svg {
     width: 100%;
     height: auto;
-    max-height: 100px;
+    max-height: 110px;
   }
 
-  /* Knob row: compact 2×2 grid */
+  /* Knobs: 28px dial (70% of 40px), tight row */
   .knob-row {
     padding: 3px;
     gap: 2px;
@@ -3758,34 +3769,165 @@ header h1 {
     height: 28px;
   }
   .knob-row .knob-label {
-    font-size: 8px;
+    font-size: 7px;
   }
   .knob-row .knob-value {
     font-size: 8px;
   }
 
-  /* Pattern bank: compact */
+  .track-card .pattern-bank .pattern-slot {
+    width: 16px;
+    height: 16px;
+    font-size: 7px;
+  }
+  .pattern-bank {
+    gap: 2px;
+  }
+
+  .mask-lane {
+    gap: 1px;
+  }
+  .mask-label {
+    font-size: 8px;
+  }
+  .mask-row {
+    gap: 1px;
+  }
+
+  .playback-controls {
+    gap: 3px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .playback-select select {
+    font-size: 8px;
+    padding: 1px 3px;
+  }
+  .playback-select span {
+    font-size: 8px;
+  }
+  .playback-select {
+    gap: 2px;
+  }
+
+  .mini-metrics {
+    gap: 3px;
+  }
+  .mini-axis {
+    padding: 3px;
+  }
+  .mini-axis b {
+    font-size: 10px;
+  }
+  .mini-axis span {
+    font-size: 8px;
+    margin-top: 1px;
+  }
+
+  .module-lane {
+    gap: 3px;
+  }
+  .module-controls {
+    padding: 3px;
+    gap: 3px;
+  }
+
+  /* Transport: compact */
+  .transport {
+    gap: 8px;
+  }
+  .play {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  .export,
+  .reset,
+  .reset-pattern {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+  .transport-knobs .knob {
+    width: 40px;
+  }
+  .note {
+    font-size: 10px;
+  }
+}
+
+/* --- Tablet landscape (1024–1199px) — full-width hardware feel --- */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .app {
+    max-width: 100%;
+    padding: 10px 12px 24px;
+    gap: 8px;
+  }
+  header h1 {
+    font-size: 22px;
+  }
+  header .tagline {
+    font-size: 11px;
+    margin: 2px 0 0;
+  }
+
+  .tracks {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .track-card {
+    padding: 6px;
+  }
+
+  .track-name {
+    font-size: 11px;
+  }
+  .track-toggles .toggle {
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+
+  /* Polygon: larger — ~42% of card height */
+  .sequencer-wrapper {
+    max-height: 170px;
+  }
+  .sequencer-wrapper svg {
+    width: 100%;
+    height: auto;
+    max-height: 170px;
+  }
+
+  .knob-row {
+    padding: 3px;
+    gap: 3px;
+  }
+  .knob-row[data-role='params'] {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .knob-row .knob {
+    transform: scale(0.8);
+    transform-origin: center center;
+  }
+
   .track-card .pattern-bank .pattern-slot {
     width: 18px;
     height: 18px;
     font-size: 8px;
   }
-
-  /* Mask lane: tight */
-  .mask-lane {
+  .pattern-bank {
     gap: 2px;
+  }
+
+  .mask-lane {
+    gap: 1px;
   }
   .mask-label {
     font-size: 9px;
   }
   .mask-row {
-    gap: 2px;
+    gap: 1px;
   }
 
-  /* Playback controls: compact two-column */
   .playback-controls {
-    gap: 4px;
-    grid-template-columns: 1fr 1fr;
+    gap: 3px;
   }
   .playback-select select {
     font-size: 9px;
@@ -3795,119 +3937,47 @@ header h1 {
     font-size: 9px;
   }
 
-  /* Metrics: compact inline */
   .mini-metrics {
     gap: 4px;
+  }
+  .mini-axis {
+    padding: 4px;
   }
   .mini-axis b {
     font-size: 11px;
   }
   .mini-axis span {
     font-size: 9px;
+    margin-top: 1px;
   }
 
-  /* Ghost/ducking module lanes: compact */
   .module-lane {
-    gap: 4px;
+    gap: 3px;
   }
   .module-controls {
-    padding: 4px;
-    gap: 4px;
+    padding: 3px;
+    gap: 3px;
   }
-}
 
-/* Tablet landscape — all four tracks in one row */
-@media (min-width: 1024px) {
-  .tracks {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  /* Transport: compact, wraps naturally */
+  .transport {
     gap: 10px;
   }
-  .app {
-    padding: 20px 16px 48px;
-    gap: 16px;
+  .play {
+    font-size: 15px;
+    padding: 8px 20px;
   }
-
-  /* --- Compact track cards (tablet landscape) --- */
-
-  /* Reduce padding inside the card — inner-block margins give all breathing */
-  .track-card {
-    padding: 8px;
-  }
-
-  /* Sequencer: cap height so the polygon stays around 35-40% of the card.
-     The SVG is 320x320. On a ~220px wide panel, max-height 140px keeps
-     it from eating vertical space while remaining the dominant visual. */
-  .sequencer-wrapper {
-    max-height: 140px;
-  }
-  .sequencer-wrapper svg {
-    width: 100%;
-    height: auto;
-    max-height: 140px;
-  }
-
-  /* Knob row: compact */
-  .knob-row {
-    padding: 4px;
-    gap: 4px;
-  }
-  .knob-row[data-role='params'] {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  .knob-row .knob {
-    /* Slightly smaller knobs */
-    transform: scale(0.85);
-    transform-origin: center center;
-  }
-
-  /* Pattern bank: compact slots */
-  .track-card .pattern-bank .pattern-slot {
-    width: 20px;
-    height: 20px;
-    font-size: 9px;
-  }
-
-  /* Mask lane: compact */
-  .mask-lane {
-    gap: 2px;
-  }
-  .mask-label {
-    font-size: 10px;
-  }
-  .mask-row {
-    gap: 2px;
-  }
-
-  /* Playback controls: compact */
-  .playback-controls {
-    gap: 4px;
-  }
-  .playback-select select {
-    font-size: 10px;
-    padding: 2px 4px;
-  }
-  .playback-select span {
-    font-size: 10px;
-  }
-
-  /* Metrics: compact */
-  .mini-metrics {
-    gap: 4px;
-  }
-  .mini-axis b {
+  .export,
+  .reset,
+  .reset-pattern {
     font-size: 12px;
+    padding: 6px 12px;
   }
-  .mini-axis span {
-    font-size: 10px;
+  .transport-knobs .knob {
+    width: 44px;
   }
-
-  /* Track name: slightly smaller to save vertical space */
-  .track-name {
-    font-size: 12px;
-  }
-  .track-toggles .toggle {
-    font-size: 10px;
-    padding: 3px 6px;
+  .note {
+    font-size: 11px;
   }
 }
 
