@@ -109,7 +109,7 @@ export interface Track {
 
   /**
    * Pattern bank — up to {@link PATTERN_SLOT_COUNT} stored generator snapshots
-   * (slots A–P, two rows of 8). The LIVE generator fields (steps/hits/rotation/manualMute) are
+   * (slots A–V, two rows of 11). The LIVE generator fields (steps/hits/rotation/manualMute) are
    * always the working copy of `patterns[activePattern]`; switching slots saves
    * the live fields back into the current slot and loads the target slot, so
    * each slot's edits are preserved independently (see `switchTrackPattern`).
@@ -145,7 +145,7 @@ export interface PatternSlot {
 }
 
 /** Number of pattern slots per track (A–L). */
-export const PATTERN_SLOT_COUNT = 16;
+export const PATTERN_SLOT_COUNT = 22;
 
 /**
  * Ghost Delay module — duplicates the main hit on a probabilistic delayed

@@ -223,7 +223,7 @@ interface PatternBankProps {
 }
 
 /**
- * Pattern bank selector — 16 slots labelled A–P in two rows of 8. The active
+ * Pattern bank selector — 22 slots labelled A–V in two rows of 11. The active
  * slot is the live working copy; other slots show as "stored" once they hold a
  * snapshot. Clicking a slot saves the current generator state and loads the
  * target (handled by `switchTrackPattern` in the engine, via App).
