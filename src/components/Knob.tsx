@@ -17,6 +17,8 @@ interface KnobProps {
   sensitivity?: number;
   /** Render the value (e.g. "200 Hz", "50%"). Defaults to the raw number. */
   format?: (v: number) => string;
+  /** Value to restore on double-click. */
+  resetValue?: number;
   onChange: (value: number) => void;
 }
 
@@ -31,6 +33,7 @@ export default function Knob({
   step = 1,
   sensitivity = 160,
   format,
+  resetValue,
   onChange,
 }: KnobProps) {
   const dragRef = useRef<{ startY: number; startValue: number } | null>(null);
@@ -76,6 +79,20 @@ export default function Knob({
     dragRef.current = null;
   };
 
+  const handleDoubleClick = () => {
+    if (resetValue !== undefined) {
+      onChange(resetValue);
+    }
+  };
+  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const delta = e.deltaY > 0 ? -step : step;
+    let next = value + delta;
+    next = Math.round(next / step) * step;
+    next = Math.max(min, Math.min(max, next));
+    if (next !== value) onChange(next);
+  };
+
   return (
     <div
       className="knob"
@@ -83,6 +100,8 @@ export default function Knob({
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
+      onDoubleClick={handleDoubleClick}
+      onWheel={handleWheel}
       role="slider"
       aria-label={label}
       aria-valuemin={min}

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
+import Knob from './components/Knob';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
@@ -364,28 +365,30 @@ export default function App() {
         >
           ⟳ Clear
         </button>
-        <label className="bpm">
-          Tempo
-          <input
-            type="range"
-            min={40}
-            max={240}
+        <div className="transport-knobs">
+          <Knob
+            label="Tempo"
             value={bpm}
-            onChange={(e) => setTempo(Number(e.target.value))}
+            min={30}
+            max={300}
+            step={1}
+            sensitivity={100}
+            resetValue={120}
+            format={(v) => `${v} BPM`}
+            onChange={setTempo}
           />
-          <b>{bpm} BPM</b>
-        </label>
-        <label className="swing">
-          Swing
-          <input
-            type="range"
+          <Knob
+            label="Swing"
+            value={swing}
             min={0}
             max={100}
-            value={swing}
-            onChange={(e) => setSwingState(Number(e.target.value))}
+            step={1}
+            sensitivity={100}
+            resetValue={0}
+            format={(v) => `${v}%`}
+            onChange={setSwingState}
           />
-          <b>{swing}%</b>
-        </label>
+        </div>
         <DrumKitSelect value={kitId} loading={kitLoading} onChange={handleKitChange} />
         {midiPorts.length > 0 && (
           <label className="midi-out">
