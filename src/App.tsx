@@ -19,9 +19,9 @@ const RESTART_KEY = 'groove-restart-on-mode-change';
 function initialTheme(): ThemeId {
   try {
     const t = localStorage.getItem(THEME_KEY);
-    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' ? t : 'dark';
+    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' ? t : 'elements';
   } catch {
-    return 'dark';
+    return 'elements';
   }
 }
 
