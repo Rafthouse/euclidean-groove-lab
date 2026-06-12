@@ -329,7 +329,7 @@ export default function App() {
           onClick={resetPatterns}
           title="Restore all tracks to factory default patterns (steps, hits, rotation, velocity, pitch)"
         >
-          ⟳ Reset Pattern
+          ⟳ Clear
         </button>
         <label className="bpm">
           Tempo
