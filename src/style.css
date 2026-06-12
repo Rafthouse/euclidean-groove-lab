@@ -839,10 +839,9 @@
   font-style: italic;
 }
 
-/* ===== LIQUID DIAMOND (Premium Glass / Titanium) ===== */
-/* A $20,000 futuristic synthesizer carved from crystal and titanium.
-   Apple Liquid Glass design language. Independent theme. */
-:root[data-theme='liquid-diamond'] {
+/* ===== Big Boss (Premium Glass / Titanium) ===== */
+/* Crystal-clear glass, titanium precision. Independent theme. */
+:root[data-theme='big-boss'] {
   --bg: #0A0C10;
   --panel: #10141B;
   --panel-hi: #1A202C;
@@ -880,13 +879,13 @@
 }
 
 /* Background: deep graphite void */
-:root[data-theme='liquid-diamond'] body {
+:root[data-theme='big-boss'] body {
   background: #0A0C10;
   overflow-x: hidden;
 }
 
 /* Slow-moving liquid light bands */
-:root[data-theme='liquid-diamond'] body::before {
+:root[data-theme='big-boss'] body::before {
   content: '';
   position: fixed;
   top: -50%;
@@ -916,13 +915,13 @@
   75%      { transform: translate3d(0.5%, -0.5%, 0) scale(1.005); }
 }
 
-:root[data-theme='liquid-diamond'] .app {
+:root[data-theme='big-boss'] .app {
   position: relative;
   z-index: 1;
 }
 
 /* Track cards: crystal glass panels — thinner, clearer, more transparent */
-:root[data-theme='liquid-diamond'] .track-card {
+:root[data-theme='big-boss'] .track-card {
   background: rgba(16, 20, 27, 0.28);
   backdrop-filter: blur(14px) saturate(1.1);
   -webkit-backdrop-filter: blur(14px) saturate(1.1);
@@ -936,7 +935,7 @@
 }
 
 /* Crystal reflection highlight — brighter, sharper edge light */
-:root[data-theme='liquid-diamond'] .track-card::after {
+:root[data-theme='big-boss'] .track-card::after {
   content: '';
   position: absolute;
   top: 0;
@@ -947,52 +946,52 @@
   pointer-events: none;
 }
 
-:root[data-theme='liquid-diamond'] .track-card[data-voice='kick'] {
+:root[data-theme='big-boss'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
 }
-:root[data-theme='liquid-diamond'] .track-card[data-voice='kick'] .step.onset {
+:root[data-theme='big-boss'] .track-card[data-voice='kick'] .step.onset {
   fill: var(--color-kick-mid);
 }
-:root[data-theme='liquid-diamond'] .track-card[data-voice='kick'] .shape {
+:root[data-theme='big-boss'] .track-card[data-voice='kick'] .shape {
   fill: color-mix(in srgb, var(--color-kick) 18%, transparent);
   stroke: rgba(255, 255, 255, 0.15);
 }
 
-:root[data-theme='liquid-diamond'] .track-card[data-voice='snare'] {
+:root[data-theme='big-boss'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare);
 }
-:root[data-theme='liquid-diamond'] .track-card[data-voice='snare'] .step.onset {
+:root[data-theme='big-boss'] .track-card[data-voice='snare'] .step.onset {
   fill: var(--color-snare-mid);
 }
-:root[data-theme='liquid-diamond'] .track-card[data-voice='snare'] .shape {
+:root[data-theme='big-boss'] .track-card[data-voice='snare'] .shape {
   fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
   stroke: rgba(255, 255, 255, 0.15);
 }
 
-:root[data-theme='liquid-diamond'] .track-card[data-voice='hat'] {
+:root[data-theme='big-boss'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat);
 }
-:root[data-theme='liquid-diamond'] .track-card[data-voice='hat'] .step.onset {
+:root[data-theme='big-boss'] .track-card[data-voice='hat'] .step.onset {
   fill: var(--color-hat-mid);
 }
-:root[data-theme='liquid-diamond'] .track-card[data-voice='hat'] .shape {
+:root[data-theme='big-boss'] .track-card[data-voice='hat'] .shape {
   fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
   stroke: rgba(255, 255, 255, 0.15);
 }
 
-:root[data-theme='liquid-diamond'] .track-card[data-voice='bass'] {
+:root[data-theme='big-boss'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass);
 }
-:root[data-theme='liquid-diamond'] .track-card[data-voice='bass'] .step.onset {
+:root[data-theme='big-boss'] .track-card[data-voice='bass'] .step.onset {
   fill: var(--color-bass-mid);
 }
-:root[data-theme='liquid-diamond'] .track-card[data-voice='bass'] .shape {
+:root[data-theme='big-boss'] .track-card[data-voice='bass'] .shape {
   fill: color-mix(in srgb, var(--color-bass) 18%, transparent);
   stroke: rgba(255, 255, 255, 0.15);
 }
 
 /* Diamond sparkle on active note */
-:root[data-theme='liquid-diamond'] .step.onset.current {
+:root[data-theme='big-boss'] .step.onset.current {
   animation: diamond-sparkle 250ms ease-out forwards;
 }
 
@@ -1020,37 +1019,37 @@
 }
 
 /* Playhead: polished diamond */
-:root[data-theme='liquid-diamond'] .step.current .step-indicator {
+:root[data-theme='big-boss'] .step.current .step-indicator {
   fill: #FFFFFF;
   stroke: #CFE8FF;
   stroke-width: 1.5px;
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.20))
           drop-shadow(0 0 16px rgba(207, 232, 255, 0.10));
 }
-:root[data-theme='liquid-diamond'] .step.current .visual {
+:root[data-theme='big-boss'] .step.current .visual {
   fill: #FFFFFF;
 }
 
 /* Rest steps */
-:root[data-theme='liquid-diamond'] .step.rest .step-indicator {
+:root[data-theme='big-boss'] .step.rest .step-indicator {
   opacity: 0.20;
 }
 
 /* Guide ring: clearer glass ring */
-:root[data-theme='liquid-diamond'] .guide {
+:root[data-theme='big-boss'] .guide {
   fill: none;
   stroke: rgba(255, 255, 255, 0.06);
   stroke-width: 0.5px;
 }
 
 /* Hand: optical ray — brighter */
-:root[data-theme='liquid-diamond'] .hand {
+:root[data-theme='big-boss'] .hand {
   stroke: rgba(255, 255, 255, 0.08);
   stroke-width: 0.5px;
 }
 
 /* Buttons: thinner crystal capsules */
-:root[data-theme='liquid-diamond'] button {
+:root[data-theme='big-boss'] button {
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.04);
@@ -1060,29 +1059,29 @@
   padding: 8px 18px;
   transition: background 0.2s cubic-bezier(0.32, 0.94, 0.6, 1), box-shadow 0.2s cubic-bezier(0.32, 0.94, 0.6, 1);
 }
-:root[data-theme='liquid-diamond'] button:hover {
+:root[data-theme='big-boss'] button:hover {
   background: rgba(255, 255, 255, 0.09);
   box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-:root[data-theme='liquid-diamond'] button:active {
+:root[data-theme='big-boss'] button:active {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
 
-:root[data-theme='liquid-diamond'] .play {
+:root[data-theme='big-boss'] .play {
   background: rgba(255, 255, 255, 0.07);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #FFFFFF;
   box-shadow: 0 0 24px rgba(255, 255, 255, 0.04);
 }
-:root[data-theme='liquid-diamond'] .play.is-playing {
+:root[data-theme='big-boss'] .play.is-playing {
   background: rgba(16, 20, 27, 0.20);
   border: 1px solid rgba(255, 255, 255, 0.06);
   color: rgba(255, 255, 255, 0.7);
 }
 
-:root[data-theme='liquid-diamond'] .export {
+:root[data-theme='big-boss'] .export {
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.04);
@@ -1090,27 +1089,27 @@
 }
 
 /* Track toggles (M/S): crystal capsules */
-:root[data-theme='liquid-diamond'] .toggle {
+:root[data-theme='big-boss'] .toggle {
   border-radius: 20px;
   min-width: 32px;
   padding: 4px 12px;
 }
-:root[data-theme='liquid-diamond'] .toggle.is-on {
+:root[data-theme='big-boss'] .toggle.is-on {
   background: rgba(255, 255, 255, 0.10);
   border-color: rgba(255, 255, 255, 0.20);
 }
 
 /* Sliders: precision crystal tracks — more luminous */
-:root[data-theme='liquid-diamond'] input[type='range'] {
+:root[data-theme='big-boss'] input[type='range'] {
   height: 4px;
   cursor: pointer;
 }
-:root[data-theme='liquid-diamond'] input[type='range']::-webkit-slider-runnable-track {
+:root[data-theme='big-boss'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.10);
 }
-:root[data-theme='liquid-diamond'] input[type='range']::-webkit-slider-thumb {
+:root[data-theme='big-boss'] input[type='range']::-webkit-slider-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -1120,17 +1119,17 @@
   margin-top: -6px;
   transition: transform 0.15s cubic-bezier(0.32, 0.94, 0.6, 1);
 }
-:root[data-theme='liquid-diamond'] input[type='range']::-webkit-slider-thumb:hover {
+:root[data-theme='big-boss'] input[type='range']::-webkit-slider-thumb:hover {
   transform: scale(1.2);
 }
 /* Firefox */
-:root[data-theme='liquid-diamond'] input[type='range']::-moz-range-track {
+:root[data-theme='big-boss'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.10);
   border: none;
 }
-:root[data-theme='liquid-diamond'] input[type='range']::-moz-range-thumb {
+:root[data-theme='big-boss'] input[type='range']::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -1140,7 +1139,7 @@
 }
 
 /* Select */
-:root[data-theme='liquid-diamond'] select {
+:root[data-theme='big-boss'] select {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: #FFFFFF;
@@ -1150,7 +1149,7 @@
 }
 
 /* Labels — brighter for readability on clearer glass */
-:root[data-theme='liquid-diamond'] label {
+:root[data-theme='big-boss'] label {
   color: rgba(255, 255, 255, 0.6);
   font-weight: 450;
   letter-spacing: 0.5px;
@@ -1158,31 +1157,31 @@
 }
 
 /* Control labels inside cards */
-:root[data-theme='liquid-diamond'] .control-label {
+:root[data-theme='big-boss'] .control-label {
   color: rgba(255, 255, 255, 0.55);
   font-size: 10px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
-:root[data-theme='liquid-diamond'] .control-label b {
+:root[data-theme='big-boss'] .control-label b {
   color: rgba(255, 255, 255, 0.9);
 }
 
 /* BPM / Swing — brighter ice blue */
-:root[data-theme='liquid-diamond'] .bpm b,
-:root[data-theme='liquid-diamond'] .swing b {
+:root[data-theme='big-boss'] .bpm b,
+:root[data-theme='big-boss'] .swing b {
   color: #7AD0FF;
 }
 
 /* Header */
-:root[data-theme='liquid-diamond'] h1 {
+:root[data-theme='big-boss'] h1 {
   color: #FFFFFF;
   letter-spacing: 3px;
   font-weight: 300;
   font-size: 20px;
 }
 
-:root[data-theme='liquid-diamond'] .tagline {
+:root[data-theme='big-boss'] .tagline {
   color: rgba(255, 255, 255, 0.45);
   font-size: 11px;
   letter-spacing: 2px;
@@ -1190,7 +1189,7 @@
 }
 
 /* Track name */
-:root[data-theme='liquid-diamond'] .track-name {
+:root[data-theme='big-boss'] .track-name {
   color: #FFFFFF;
   font-weight: 500;
   letter-spacing: 1px;
@@ -1199,22 +1198,22 @@
 }
 
 /* Mini metrics */
-:root[data-theme='liquid-diamond'] .mini-metrics b {
+:root[data-theme='big-boss'] .mini-metrics b {
   color: rgba(255, 255, 255, 0.85);
 }
-:root[data-theme='liquid-diamond'] .mini-metrics span {
+:root[data-theme='big-boss'] .mini-metrics span {
   color: rgba(255, 255, 255, 0.45);
 }
 
 /* Playback controls select */
-:root[data-theme='liquid-diamond'] .playback-select select {
+:root[data-theme='big-boss'] .playback-select select {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   padding: 4px 12px;
 }
 
-:root[data-theme='liquid-diamond'] .playback-select span {
+:root[data-theme='big-boss'] .playback-select span {
   color: rgba(255, 255, 255, 0.5);
 }
 
