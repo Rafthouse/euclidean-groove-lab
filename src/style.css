@@ -5719,74 +5719,75 @@ header h1 {
    Translucent plastic, bokeh lights, soft party atmosphere.
    Euphoric, playful, nostalgic — not RGB, not rave, not gaming. */
 :root[data-theme='candyflip'] {
-  --bg: #e8dce6;
-  --panel: #ffffff;
-  --panel-hi: #fff0f8;
-  --text: #2b2430;
-  --text-dim: #5f5667;
-  --text-hi: #160f1e;
-  --accent: #ff7aa8;
-  --accent-dim: rgba(255, 122, 168, 0.12);
-  --rest: #e2dbe4;
-  --current: #ff7aa8;
-  --danger: #ff6b8a;
-  --warn: #ffb86c;
+  --bg: #e8a0b8;
+  --panel: #ffe0ec;
+  --panel-hi: #ffe8f0;
+  --text: #2b1824;
+  --text-dim: #5d3a50;
+  --text-hi: #160a14;
+  --accent: #ff4f92;
+  --accent-dim: rgba(255, 79, 146, 0.12);
+  --rest: #c8a0b0;
+  --current: #ff4f92;
+  --danger: #ff2f7a;
+  --warn: #ffae42;
   --radius: 16px;
   --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
 
-  --color-kick: #ff6ea8;
-  --color-kick-mid: #ff88ba;
-  --color-kick-light: #ffa4cc;
-  --color-snare: #ffb86c;
-  --color-snare-mid: #ffca8a;
-  --color-snare-light: #ffdca8;
-  --color-hat: #76d8ff;
-  --color-hat-mid: #94e2ff;
-  --color-hat-light: #b2ecff;
-  --color-bass: #7de7b8;
-  --color-bass-mid: #98edc8;
-  --color-bass-light: #b4f3d8;
+  --color-kick: #ff4f92;
+  --color-kick-mid: #ff74aa;
+  --color-kick-light: #ff99c2;
+  --color-snare: #ffae42;
+  --color-snare-mid: #ffc268;
+  --color-snare-light: #ffd68e;
+  --color-hat: #32d8ff;
+  --color-hat-mid: #60e2ff;
+  --color-hat-light: #90ecff;
+  --color-bass: #4fe88e;
+  --color-bass-mid: #76eea8;
+  --color-bass-light: #9ef4c2;
 
-  --card-shadow: 0 4px 24px rgba(255, 122, 168, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
+  --card-shadow: 0 4px 24px rgba(255, 79, 146, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03);
   color-scheme: light;
 }
 
-/* Background: slightly darker pastel — neon candy at night */
+/* Background: rich saturated layered gradients — summer festival atmosphere.
+   Raspberry, watermelon, mango, cyan, lime — Mexico City carnival energy. */
 :root[data-theme='candyflip'] body {
   background:
-    radial-gradient(ellipse 40% 30% at 18% 12%,   rgba(255, 106, 168, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse 35% 40% at 82% 18%,   rgba(118, 216, 255, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse 30% 35% at 65% 75%,   rgba(125, 231, 184, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse 25% 30% at 22% 82%,   rgba(255, 184, 108, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 35% at 50% 50%,   rgba(232, 220, 230, 0.6) 0%, transparent 60%),
-    #e8dce6;
+    radial-gradient(ellipse 45% 35% at 18% 10%,   rgba(255, 79, 146, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 40% at 80% 15%,   rgba(50, 216, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 35% at 62% 78%,   rgba(79, 232, 142, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 25% 30% at 20% 74%,   rgba(255, 174, 66, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 35% at 45% 50%,   rgba(232, 160, 184, 0.5) 0%, transparent 60%),
+    #e8a0b8;
   position: relative;
   overflow-x: hidden;
 }
 
-/* Ambient bokeh orbs — slightly more visible against darker bg */
+/* Ambient floating lights — more visible, warm drifting colours */
 :root[data-theme='candyflip'] body::before {
   content: '';
   position: fixed;
   inset: -100px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.28;
+  opacity: 0.30;
   background-image:
-    radial-gradient(circle 200px at 15% 10%, rgba(255, 122, 168, 0.07) 0%, transparent 50%),
-    radial-gradient(circle 150px at 75% 12%, rgba(118, 216, 255, 0.05) 0%, transparent 50%),
-    radial-gradient(circle 170px at 60% 82%, rgba(125, 231, 184, 0.04) 0%, transparent 50%),
-    radial-gradient(circle 130px at 30% 75%, rgba(255, 184, 108, 0.04) 0%, transparent 50%),
-    radial-gradient(circle 200px at 85% 55%, rgba(255, 122, 168, 0.04) 0%, transparent 50%);
-  animation: candyflip-bokeh-drift 30s ease-in-out infinite alternate;
+    radial-gradient(circle 200px at 15% 10%, rgba(255, 79, 146, 0.08) 0%, transparent 50%),
+    radial-gradient(circle 160px at 75% 12%, rgba(50, 216, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(circle 180px at 60% 82%, rgba(79, 232, 142, 0.05) 0%, transparent 50%),
+    radial-gradient(circle 140px at 30% 75%, rgba(255, 174, 66, 0.04) 0%, transparent 50%),
+    radial-gradient(circle 220px at 85% 50%, rgba(255, 79, 146, 0.04) 0%, transparent 50%);
+  animation: candyflip-ambient-drift 28s ease-in-out infinite alternate;
 }
 
-@keyframes candyflip-bokeh-drift {
+@keyframes candyflip-ambient-drift {
   0%   { transform: translate(0px, 0px) scale(1); opacity: 0.26; }
-  25%  { transform: translate(-20px, 12px) scale(1.03); opacity: 0.32; }
-  50%  { transform: translate(15px, -18px) scale(0.97); opacity: 0.24; }
-  75%  { transform: translate(-8px, 22px) scale(1.04); opacity: 0.30; }
-  100% { transform: translate(10px, -8px) scale(1.01); opacity: 0.27; }
+  25%  { transform: translate(-18px, 14px) scale(1.04); opacity: 0.34; }
+  50%  { transform: translate(15px, -20px) scale(0.96); opacity: 0.22; }
+  75%  { transform: translate(-10px, 18px) scale(1.03); opacity: 0.32; }
+  100% { transform: translate(12px, -10px) scale(1.01); opacity: 0.28; }
 }
 
 :root[data-theme='candyflip'] .app {
@@ -5794,88 +5795,90 @@ header h1 {
   z-index: 1;
 }
 
-/* Cards: per-voice tinted translucent candy-coloured acrylic panels.
-   From a distance: pink = kick, peach = snare, blue = hat, mint = bass. */
+/* Cards: each track has its own vibrant candy colour background.
+   Rich, saturated, instantly recognizable from a distance. */
 :root[data-theme='candyflip'] .track-card {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 122, 168, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 16px;
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.5),
-    0 4px 24px rgba(255, 122, 168, 0.06),
-    0 1px 3px rgba(0, 0, 0, 0.03);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.4),
+    0 4px 24px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.02);
   position: relative;
   transition: background 0.2s ease;
 }
 
-/* Kick card — strawberry candy tint */
+/* Kick card — Watermelon Candy */
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
-  background: rgba(255, 212, 227, 0.4);
+  background: rgba(255, 65, 130, 0.20);
+  border: 1px solid rgba(255, 65, 130, 0.12);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] .step.onset {
   fill: var(--color-kick-mid);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-kick) 20%, transparent);
-  stroke: rgba(255, 110, 168, 0.20);
+  fill: color-mix(in srgb, var(--color-kick) 25%, transparent);
+  stroke: rgba(255, 79, 146, 0.25);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] .mask-cell.rest {
-  background: rgba(255, 110, 168, 0.04);
-  border-color: rgba(255, 110, 168, 0.08);
+  background: rgba(255, 65, 130, 0.05);
+  border-color: rgba(255, 65, 130, 0.10);
 }
 
-/* Snare card — peach candy tint */
+/* Snare card — Mango Candy */
 :root[data-theme='candyflip'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare);
-  background: rgba(255, 225, 199, 0.4);
+  background: rgba(255, 174, 66, 0.18);
+  border: 1px solid rgba(255, 174, 66, 0.12);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='snare'] .step.onset {
   fill: var(--color-snare-mid);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-snare) 20%, transparent);
-  stroke: rgba(255, 184, 108, 0.20);
+  fill: color-mix(in srgb, var(--color-snare) 25%, transparent);
+  stroke: rgba(255, 174, 66, 0.25);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='snare'] .mask-cell.rest {
-  background: rgba(255, 184, 108, 0.04);
-  border-color: rgba(255, 184, 108, 0.08);
+  background: rgba(255, 174, 66, 0.05);
+  border-color: rgba(255, 174, 66, 0.10);
 }
 
-/* Hat card — blue raspberry candy tint */
+/* Hat card — Blue Raspberry Candy */
 :root[data-theme='candyflip'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat);
-  background: rgba(223, 243, 255, 0.4);
+  background: rgba(50, 216, 255, 0.15);
+  border: 1px solid rgba(50, 216, 255, 0.10);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='hat'] .step.onset {
   fill: var(--color-hat-mid);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
-  stroke: rgba(118, 216, 255, 0.20);
+  fill: color-mix(in srgb, var(--color-hat) 22%, transparent);
+  stroke: rgba(50, 216, 255, 0.22);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='hat'] .mask-cell.rest {
-  background: rgba(118, 216, 255, 0.04);
-  border-color: rgba(118, 216, 255, 0.08);
+  background: rgba(50, 216, 255, 0.04);
+  border-color: rgba(50, 216, 255, 0.08);
 }
 
-/* Bass card — mint candy tint */
+/* Bass card — Mint Lime Candy */
 :root[data-theme='candyflip'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass);
-  background: rgba(220, 248, 234, 0.4);
+  background: rgba(79, 232, 142, 0.18);
+  border: 1px solid rgba(79, 232, 142, 0.12);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='bass'] .step.onset {
   fill: var(--color-bass-mid);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-bass) 20%, transparent);
-  stroke: rgba(125, 231, 184, 0.20);
+  fill: color-mix(in srgb, var(--color-bass) 25%, transparent);
+  stroke: rgba(79, 232, 142, 0.25);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='bass'] .mask-cell.rest {
-  background: rgba(125, 231, 184, 0.04);
-  border-color: rgba(125, 231, 184, 0.08);
+  background: rgba(79, 232, 142, 0.05);
+  border-color: rgba(79, 232, 142, 0.10);
 }
 
 :root[data-theme='candyflip'] .track-card::after {
@@ -5885,32 +5888,32 @@ header h1 {
   left: 6px;
   right: 6px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 122, 168, 0.06), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
   pointer-events: none;
 }
 
-/* Kick: pink bubble pulse */
+/* Kick: watermelon pulse */
 @keyframes candyflip-kick-bubble {
-  0%   { r: 11px; fill: #ff88ba; }
-  20%  { r: 14px; fill: #ffa4cc; filter: drop-shadow(0 0 8px rgba(255, 110, 168, 0.12)); }
+  0%   { r: 11px; fill: #ff74aa; }
+  20%  { r: 14px; fill: #ff99c2; filter: drop-shadow(0 0 10px rgba(255, 79, 146, 0.14)); }
   100% { r: 11px; fill: var(--color-kick-mid); filter: none; }
 }
-/* Snare: warm peach sparkle */
+/* Snare: mango sparkle */
 @keyframes candyflip-snare-sparkle {
-  0%   { r: 11px; fill: #ffca8a; }
-  15%  { r: 14px; fill: #ffdca8; filter: drop-shadow(0 0 10px rgba(255, 184, 108, 0.10)); }
+  0%   { r: 11px; fill: #ffc268; }
+  15%  { r: 14px; fill: #ffd68e; filter: drop-shadow(0 0 10px rgba(255, 174, 66, 0.12)); }
   100% { r: 11px; fill: var(--color-snare-mid); filter: none; }
 }
-/* Hat: tiny cyan twinkle */
+/* Hat: cyan twinkle */
 @keyframes candyflip-hat-twinkle {
-  0%   { r: 9px; fill: #94e2ff; }
-  25%  { r: 11px; fill: #b2ecff; filter: drop-shadow(0 0 6px rgba(118, 216, 255, 0.08)); }
+  0%   { r: 9px; fill: #60e2ff; }
+  25%  { r: 11px; fill: #90ecff; filter: drop-shadow(0 0 6px rgba(50, 216, 255, 0.10)); }
   100% { r: 9px; fill: var(--color-hat-mid); filter: none; }
 }
-/* Bass: gentle mint liquid glow */
+/* Bass: lime mint glow */
 @keyframes candyflip-bass-glow {
-  0%   { r: 11px; fill: #98edc8; }
-  25%  { r: 14px; fill: #b4f3d8; filter: drop-shadow(0 0 10px rgba(125, 231, 184, 0.08)); }
+  0%   { r: 11px; fill: #76eea8; }
+  25%  { r: 14px; fill: #9ef4c2; filter: drop-shadow(0 0 10px rgba(79, 232, 142, 0.12)); }
   100% { r: 11px; fill: var(--color-bass-mid); filter: none; }
 }
 
@@ -5927,37 +5930,37 @@ header h1 {
   animation: candyflip-bass-glow 220ms ease-out forwards;
 }
 
-/* Playhead: pink candy dot */
+/* Playhead: bright candy dot */
 :root[data-theme='candyflip'] .step.current .step-indicator {
-  fill: #ff7aa8;
-  stroke: #ff6ea8;
+  fill: #ff4f92;
+  stroke: #ff2f7a;
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 8px rgba(255, 122, 168, 0.10));
+  filter: drop-shadow(0 0 8px rgba(255, 79, 146, 0.12));
 }
 :root[data-theme='candyflip'] .step.current .visual {
-  fill: #ff7aa8;
+  fill: #ff4f92;
 }
 :root[data-theme='candyflip'] .step.rest .step-indicator {
-  opacity: 0.06;
+  opacity: 0.05;
 }
 
 :root[data-theme='candyflip'] .guide {
   fill: none;
-  stroke: rgba(255, 122, 168, 0.04);
+  stroke: rgba(255, 79, 146, 0.04);
   stroke-width: 0.5px;
 }
 
 :root[data-theme='candyflip'] .hand {
-  stroke: rgba(255, 122, 168, 0.06);
+  stroke: rgba(255, 79, 146, 0.06);
   stroke-width: 0.5px;
 }
 
-/* Buttons: candy-like, stronger hierarchy */
+/* Buttons: glossy hard candy — clear inactive/hover/active */
 :root[data-theme='candyflip'] button {
   border-radius: 16px;
-  border: 1px solid rgba(255, 122, 168, 0.08);
-  background: rgba(255, 240, 248, 0.7);
-  color: #2b2430;
+  border: 1px solid rgba(90, 30, 60, 0.08);
+  background: rgba(255, 232, 240, 0.7);
+  color: #2b1824;
   font-weight: 500;
   letter-spacing: 0.3px;
   padding: 8px 18px;
@@ -5965,48 +5968,50 @@ header h1 {
   transition: background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
 }
 :root[data-theme='candyflip'] button:hover {
-  background: rgba(255, 240, 248, 0.95);
-  border-color: rgba(255, 122, 168, 0.15);
-  box-shadow: 0 0 12px rgba(255, 122, 168, 0.05);
+  background: rgba(255, 232, 240, 0.95);
+  border-color: rgba(255, 79, 146, 0.20);
+  box-shadow: 0 0 12px rgba(255, 79, 146, 0.06);
 }
 
 :root[data-theme='candyflip'] .play {
-  background: rgba(255, 240, 248, 0.7);
-  border: 1px solid rgba(255, 122, 168, 0.08);
-  color: #2b2430;
+  background: rgba(255, 232, 240, 0.7);
+  border: 1px solid rgba(90, 30, 60, 0.08);
+  color: #2b1824;
 }
 :root[data-theme='candyflip'] .play.is-playing {
-  background: rgba(255, 122, 168, 0.08);
-  border-color: #ff7aa8;
-  color: #2b2430;
-  box-shadow: 0 0 12px rgba(255, 122, 168, 0.06);
+  background: rgba(255, 79, 146, 0.08);
+  border-color: #ff4f92;
+  color: #2b1824;
+  box-shadow: 0 0 12px rgba(255, 79, 146, 0.08);
 }
 
 :root[data-theme='candyflip'] .export,
 :root[data-theme='candyflip'] .reset-pattern {
   border-radius: 16px;
-  border: 1px solid rgba(255, 122, 168, 0.08);
-  background: rgba(255, 240, 248, 0.7);
-  color: #2b2430;
+  border: 1px solid rgba(90, 30, 60, 0.08);
+  background: rgba(255, 232, 240, 0.7);
+  color: #2b1824;
 }
 :root[data-theme='candyflip'] .export:hover,
 :root[data-theme='candyflip'] .reset-pattern:hover {
-  border-color: rgba(255, 122, 168, 0.20);
-  background: rgba(255, 240, 248, 0.95);
+  border-color: rgba(255, 79, 146, 0.22);
+  background: rgba(255, 232, 240, 0.95);
 }
 
 :root[data-theme='candyflip'] .pattern-slot {
   border-radius: 16px;
   padding: 5px 0;
   font-size: 10px;
+  background: rgba(90, 30, 60, 0.02);
 }
 :root[data-theme='candyflip'] .pattern-slot:hover {
-  background: rgba(255, 240, 248, 0.6);
+  background: rgba(255, 232, 240, 0.7);
 }
 
-/* Mask section — improved readability */
+/* Mask controls — improved contrast */
 :root[data-theme='candyflip'] .mask-label {
-  color: #6b6272;
+  color: #5d3a50;
+  font-weight: 500;
 }
 :root[data-theme='candyflip'] .mask-cell {
   border-radius: 16px;
@@ -6015,8 +6020,9 @@ header h1 {
   height: 15px;
 }
 :root[data-theme='candyflip'] .mask-cell.rest {
-  background: rgba(0, 0, 0, 0.02);
-  border-color: rgba(0, 0, 0, 0.06);
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+  border-width: 1px;
   opacity: 1;
 }
 :root[data-theme='candyflip'] .mask-cell.onset {
@@ -6027,25 +6033,25 @@ header h1 {
 :root[data-theme='candyflip'] .mask-cell.onset.muted {
   background: transparent;
   border-color: var(--track-color);
-  opacity: 0.55;
+  opacity: 0.50;
 }
 :root[data-theme='candyflip'] .mask-cell.onset:hover {
-  filter: brightness(1.10);
+  filter: brightness(1.12);
 }
 :root[data-theme='candyflip'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #e8dce6, 0 0 0 3px #ff7aa8;
+  box-shadow: 0 0 0 2px #e8a0b8, 0 0 0 3px #ff4f92;
 }
 
 :root[data-theme='candyflip'] .toggle {
   border-radius: 16px;
   min-width: 32px;
   padding: 4px 14px;
-  border: 1px solid rgba(255, 122, 168, 0.08);
-  background: rgba(255, 240, 248, 0.5);
+  border: 1px solid rgba(90, 30, 60, 0.08);
+  background: rgba(255, 232, 240, 0.5);
 }
 :root[data-theme='candyflip'] .toggle.is-on {
-  background: rgba(255, 122, 168, 0.10);
-  border-color: #ff7aa8;
+  background: rgba(255, 79, 146, 0.10);
+  border-color: #ff4f92;
 }
 
 :root[data-theme='candyflip'] input[type='range'] {
@@ -6056,15 +6062,15 @@ header h1 {
 :root[data-theme='candyflip'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 122, 168, 0.08);
+  background: rgba(90, 30, 60, 0.08);
 }
 :root[data-theme='candyflip'] input[type='range']::-webkit-slider-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #ff7aa8;
+  background: #ff4f92;
   border: none;
-  box-shadow: 0 0 0 2px rgba(255, 122, 168, 0.12);
+  box-shadow: 0 0 0 2px rgba(255, 79, 146, 0.12);
   margin-top: -5px;
   transition: transform 0.12s ease;
 }
@@ -6074,100 +6080,100 @@ header h1 {
 :root[data-theme='candyflip'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 122, 168, 0.08);
+  background: rgba(90, 30, 60, 0.08);
   border: none;
 }
 :root[data-theme='candyflip'] input[type='range']::-moz-range-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #ff7aa8;
+  background: #ff4f92;
   border: none;
 }
 
 :root[data-theme='candyflip'] select {
-  background: rgba(255, 240, 248, 0.8);
-  border: 1px solid rgba(255, 122, 168, 0.08);
-  color: #2b2430;
+  background: rgba(255, 232, 240, 0.85);
+  border: 1px solid rgba(90, 30, 60, 0.10);
+  color: #2b1824;
   border-radius: 16px;
   padding: 6px 14px;
   font-size: 12px;
 }
 :root[data-theme='candyflip'] select option {
-  background: #ffffff;
-  color: #2b2430;
+  background: #ffe0ec;
+  color: #2b1824;
 }
 :root[data-theme='candyflip'] select option:checked {
-  background: rgba(255, 122, 168, 0.10);
+  background: rgba(255, 79, 146, 0.14);
 }
 
 :root[data-theme='candyflip'] label {
-  color: #5f5667;
+  color: #5d3a50;
   font-weight: 500;
   letter-spacing: 0.3px;
   font-size: 11px;
 }
 
 :root[data-theme='candyflip'] .control-label {
-  color: #5f5667;
+  color: #5d3a50;
   font-size: 10px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 :root[data-theme='candyflip'] .control-label b {
-  color: #2b2430;
+  color: #2b1824;
 }
 
 :root[data-theme='candyflip'] .bpm b,
 :root[data-theme='candyflip'] .swing b {
-  color: #ff7aa8;
+  color: #ff4f92;
 }
 
 :root[data-theme='candyflip'] h1 {
-  color: #2b2430;
+  color: #2b1824;
   letter-spacing: 2px;
   font-weight: 400;
   font-size: 19px;
 }
 
 :root[data-theme='candyflip'] .tagline {
-  color: #5f5667;
+  color: #5d3a50;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 :root[data-theme='candyflip'] .track-name {
-  color: #2b2430;
+  color: #2b1824;
   font-weight: 600;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
 
 :root[data-theme='candyflip'] .mini-metrics b {
-  color: #2b2430;
+  color: #2b1824;
 }
 :root[data-theme='candyflip'] .mini-metrics span {
-  color: #5f5667;
+  color: #5d3a50;
   opacity: 0.65;
 }
 
 :root[data-theme='candyflip'] .playback-select select {
-  background: rgba(255, 240, 248, 0.8);
-  border: 1px solid rgba(255, 122, 168, 0.08);
+  background: rgba(255, 232, 240, 0.85);
+  border: 1px solid rgba(90, 30, 60, 0.10);
   border-radius: 16px;
   padding: 4px 12px;
-  color: #2b2430;
+  color: #2b1824;
   font-size: 12px;
 }
 :root[data-theme='candyflip'] .playback-select span {
-  color: #5f5667;
+  color: #5d3a50;
   opacity: 0.65;
 }
 
 :root[data-theme='candyflip'] .module-lane {
-  border-top: 1px solid rgba(255, 122, 168, 0.03);
+  border-top: 1px solid rgba(255, 79, 146, 0.04);
 }
 :root[data-theme='barbie'] {
   --bg: #d680b0;
