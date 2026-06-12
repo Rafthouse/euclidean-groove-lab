@@ -3128,6 +3128,765 @@
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* ===== SATISFACTION (Beeswax / Amber / Warm Wood) ===== */
+/* A premium physical instrument — material, warm, tactile.
+   Inspired by high-end audio gear from Apple, Teenage Engineering, Elektron.
+   No flat digital surfaces. Everything feels like beeswax-coated wood,
+   amber resin controls, and soft golden sunlight. */
+
+:root[data-theme='satisfaction'] {
+  --bg: #1a1610;
+  --panel: #231f17;
+  --panel-hi: #2e281e;
+  --text: #d4cdbb;
+  --text-dim: #8f897a;
+  --text-hi: #f2ebd8;
+  --accent: #c48820;
+  --accent-dim: rgba(196, 136, 32, 0.15);
+  --rest: #423a2a;
+  --current: #f2ca5a;
+  --danger: #c45a3a;
+  --warn: #d49a20;
+  --radius: 12px;
+  --mono: ui-monospace, Consolas, monospace;
+
+  /* Warm, amber-tinted track colors — beeswax palette */
+  --color-kick: #b87a30;
+  --color-kick-mid: #d49a40;
+  --color-kick-light: #e8bc6a;
+
+  --color-snare: #b05a6a;
+  --color-snare-mid: #c87a88;
+  --color-snare-light: #da9aa6;
+
+  --color-hat: #6a8a7a;
+  --color-hat-mid: #8aaa9a;
+  --color-hat-light: #aacaba;
+
+  --color-bass: #5a7a4a;
+  --color-bass-mid: #7a9a6a;
+  --color-bass-light: #9aba8a;
+
+  --card-shadow: none;
+  color-scheme: dark;
+}
+
+/* ── Global atmospheric layer ──────────────────────────────────────── */
+/* Warm sunlight diffusion — felt, not seen. Upper-left source. */
+:root[data-theme='satisfaction'] body {
+  overflow-x: hidden;
+  background:
+    radial-gradient(ellipse 50% 55% at 22% 18%, rgba(196, 136, 32, 0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 30% at 72% 72%, rgba(218, 154, 60, 0.03) 0%, transparent 60%),
+    var(--bg);
+}
+
+/* ── Microtexture / grain overlay ─────────────────────────────────── */
+/* Breaks perfect digital flatness. Nearly invisible (1.5% opacity). */
+:root[data-theme='satisfaction'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.8'/></svg>");
+  background-size: 200px 200px;
+}
+
+:root[data-theme='satisfaction'] .app {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Elevation Hierarchy ───────────────────────────────────────────── */
+/* Level 0: body background — warm dark ambient
+   Level 1: track cards — beeswax wood panels
+   Level 2: control sections — inset control trays
+   Level 3: interactive controls — elevated with contact shadows */
+
+/* ── Track Cards (Level 1) ─────────────────────────────────────────── */
+/* Beeswax-coated wood. Directional gradient from upper-left light. */
+:root[data-theme='satisfaction'] .track-card {
+  background:
+    linear-gradient(
+      150deg,
+      rgba(255, 235, 200, 0.04) 0%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.06) 85%,
+      rgba(0, 0, 0, 0.10) 100%
+    ),
+    var(--panel);
+  border: none;
+  border-radius: var(--radius);
+  box-shadow:
+    /* Upper edge highlight — subtle catch light */
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.10),
+    /* Ambient occlusion contact shadow */
+    0 1px 2px rgba(0, 0, 0, 0.25),
+    0 3px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* Track-card bottom edge drop-shadow (contact with surface) */
+:root[data-theme='satisfaction'] .track-card::after {
+  content: '';
+  position: absolute;
+  left: 4%;
+  bottom: -3px;
+  width: 92%;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.20);
+  filter: blur(2px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Upper edge highlight line */
+:root[data-theme='satisfaction'] .track-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 8%;
+  width: 84%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 235, 200, 0.10), transparent);
+  pointer-events: none;
+}
+
+/* ── Track Colors (voice-dependent) ────────────────────────────────── */
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] {
+  --track-color: var(--color-kick-mid);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.onset {
+  fill: var(--color-kick-mid);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] .shape {
+  fill: color-mix(in srgb, var(--color-kick) 18%, transparent);
+  stroke: var(--color-kick-mid);
+}
+
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] {
+  --track-color: var(--color-snare-mid);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] .step.onset {
+  fill: var(--color-snare-mid);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] .shape {
+  fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
+  stroke: var(--color-snare-mid);
+}
+
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] {
+  --track-color: var(--color-hat-mid);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] .step.onset {
+  fill: var(--color-hat-mid);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] .shape {
+  fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
+  stroke: var(--color-hat-mid);
+}
+
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] {
+  --track-color: var(--color-bass-mid);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] .step.onset {
+  fill: var(--color-bass-mid);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] .shape {
+  fill: color-mix(in srgb, var(--color-bass) 18%, transparent);
+  stroke: var(--color-bass-mid);
+}
+
+/* ── Step (Note) Styles ────────────────────────────────────────────── */
+/* Active steps: illuminated honey cells with amber glow */
+:root[data-theme='satisfaction'] .step.onset.current {
+  animation: satisfaction-bloom 250ms ease-out forwards;
+}
+
+@keyframes satisfaction-bloom {
+  0% {
+    fill: #f2ebd8;
+    r: 11px;
+    filter: drop-shadow(0 0 0 rgba(242, 202, 90, 0));
+  }
+  20% {
+    fill: #f2ebd8;
+    r: 15px;
+    filter:
+      drop-shadow(0 0 10px rgba(242, 202, 90, 0.40))
+      drop-shadow(0 0 20px rgba(196, 136, 32, 0.12));
+  }
+  50% {
+    fill: #f2ca5a;
+    r: 12px;
+    filter:
+      drop-shadow(0 0 6px rgba(242, 202, 90, 0.25));
+  }
+  100% {
+    fill: var(--track-color);
+    r: 11px;
+    filter: drop-shadow(0 0 0 rgba(242, 202, 90, 0));
+  }
+}
+
+:root[data-theme='satisfaction'] .step.current .step-indicator {
+  fill: #f2ebd8;
+  stroke: #f2ca5a;
+  stroke-width: 1.5px;
+  filter:
+    drop-shadow(0 0 8px rgba(242, 202, 90, 0.30))
+    drop-shadow(0 0 16px rgba(196, 136, 32, 0.08));
+}
+:root[data-theme='satisfaction'] .step.current .visual {
+  fill: #f2ebd8;
+}
+
+:root[data-theme='satisfaction'] .sequencer .step.rest {
+  fill: rgba(255, 235, 200, 0.06);
+}
+:root[data-theme='satisfaction'] .sequencer .step.onset {
+  fill: var(--track-color);
+}
+
+:root[data-theme='satisfaction'] .guide {
+  fill: none;
+  stroke: rgba(255, 235, 200, 0.05);
+  stroke-width: 0.5px;
+}
+
+:root[data-theme='satisfaction'] .hand {
+  stroke: rgba(242, 202, 90, 0.12);
+  stroke-width: 0.5px;
+}
+
+/* ── Shapes (polygons) with materiality ────────────────────────────── */
+/* Faint internal gradient + drop-shadow for illuminated appearance */
+:root[data-theme='satisfaction'] .sequencer .shape {
+  fill: color-mix(in srgb, var(--track-color) 14%, transparent);
+  stroke: var(--track-color);
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+}
+
+/* ── Controls (Level 2: control sections / control trays) ─────────── */
+/* Inset recessed areas suggesting wall thickness */
+:root[data-theme='satisfaction'] .module-controls,
+:root[data-theme='satisfaction'] .knob-row,
+:root[data-theme='satisfaction'] .velocity-bars,
+:root[data-theme='satisfaction'] .pitch-contour,
+:root[data-theme='satisfaction'] .mini-axis {
+  background:
+    linear-gradient(
+      150deg,
+      rgba(255, 235, 200, 0.02) 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.04) 100%
+    ),
+    var(--panel-hi);
+  border: none;
+  border-radius: 8px;
+  box-shadow:
+    /* Inset walls — perceived depth */
+    inset 0 1px 2px rgba(255, 235, 200, 0.06),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.10);
+}
+
+/* ── Buttons (Level 3: interactive controls) ────────────────────────── */
+/* Machined, beveled, with directional highlights */
+:root[data-theme='satisfaction'] button:not(.play):not(.preset-browser-close):not(.pattern-slot):not(.toggle):not(.mask-cell):not(.velocity-step) {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 235, 200, 0.06) 0%,
+      rgba(46, 40, 30, 0.80) 50%,
+      rgba(30, 25, 18, 0.90) 100%
+    ),
+    var(--panel-hi);
+  border: none;
+  border-radius: 10px;
+  color: var(--text);
+  font-weight: 450;
+  letter-spacing: 0.3px;
+  padding: 8px 18px;
+  box-shadow:
+    /* Upper edge highlight */
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.08),
+    /* Contact shadow */
+    0 1px 2px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.10);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+:root[data-theme='satisfaction'] button:not(.play):not(.preset-browser-close):not(.pattern-slot):not(.toggle):not(.mask-cell):not(.velocity-step):hover {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 235, 200, 0.10) 0%,
+      rgba(60, 52, 38, 0.80) 50%,
+      rgba(46, 40, 30, 0.90) 100%
+    ),
+    var(--panel-hi);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.12),
+    0 1px 3px rgba(0, 0, 0, 0.20),
+    0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Toggle buttons ───────────────────────────────────────────────── */
+:root[data-theme='satisfaction'] .toggle {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 235, 200, 0.04) 0%,
+      rgba(40, 35, 24, 0.80) 100%
+    ),
+    transparent;
+  border: 1px solid rgba(255, 235, 200, 0.08);
+  border-radius: 8px;
+  color: var(--text-dim);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.06),
+    0 1px 1px rgba(0, 0, 0, 0.08);
+  font: 600 11px/1 var(--mono);
+  letter-spacing: 1px;
+  padding: 5px 9px;
+}
+:root[data-theme='satisfaction'] .toggle:hover {
+  color: var(--text);
+  border-color: rgba(255, 235, 200, 0.15);
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 235, 200, 0.07) 0%,
+      rgba(50, 44, 30, 0.80) 100%
+    ),
+    transparent;
+}
+:root[data-theme='satisfaction'] .toggle.is-on[data-kind='mute'] {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: var(--bg);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.15);
+}
+:root[data-theme='satisfaction'] .toggle.is-on[data-kind='solo'] {
+  background: var(--warn);
+  border-color: var(--warn);
+  color: var(--bg);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Transport / Play button (machined feel) ────────────────────────── */
+:root[data-theme='satisfaction'] .play {
+  background:
+    linear-gradient(
+      150deg,
+      rgba(196, 136, 32, 0.70) 0%,
+      rgba(180, 120, 25, 0.90) 40%,
+      rgba(140, 90, 15, 0.95) 100%
+    ),
+    var(--accent);
+  border: none;
+  border-radius: 999px;
+  color: #1a1610;
+  font: 600 16px/1 var(--mono);
+  padding: 12px 28px;
+  box-shadow:
+    /* Upper edge catch light */
+    inset 0 1px 1px 0 rgba(255, 235, 200, 0.20),
+    /* Specular highlight on amber resin surface */
+    inset 0 0 0 1px rgba(255, 235, 200, 0.08),
+    /* Contact shadow */
+    0 2px 4px rgba(0, 0, 0, 0.20),
+    0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: filter 0.12s ease, box-shadow 0.12s ease;
+}
+:root[data-theme='satisfaction'] .play:hover {
+  filter: brightness(1.05);
+  box-shadow:
+    inset 0 1px 1px 0 rgba(255, 235, 200, 0.25),
+    inset 0 0 0 1px rgba(255, 235, 200, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    0 4px 14px rgba(0, 0, 0, 0.15);
+}
+:root[data-theme='satisfaction'] .play:active {
+  transform: scale(0.97);
+}
+:root[data-theme='satisfaction'] .play.is-playing {
+  background:
+    linear-gradient(
+      150deg,
+      rgba(50, 44, 32, 0.80) 0%,
+      rgba(35, 30, 20, 0.95) 100%
+    ),
+    var(--panel);
+  color: var(--text-hi);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.06),
+    0 0 0 1px rgba(242, 202, 90, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Export / Reset buttons ───────────────────────────────────────── */
+:root[data-theme='satisfaction'] .export,
+:root[data-theme='satisfaction'] .reset,
+:root[data-theme='satisfaction'] .reset-pattern {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 235, 200, 0.04) 0%,
+      rgba(46, 40, 30, 0.80) 50%,
+      rgba(30, 25, 18, 0.90) 100%
+    ),
+    var(--panel-hi);
+  border: none;
+  border-radius: 999px;
+  color: var(--text);
+  font: 600 13px/1 var(--mono);
+  padding: 9px 16px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.12);
+  transition: background 0.12s ease, box-shadow 0.12s ease;
+}
+:root[data-theme='satisfaction'] .export:hover,
+:root[data-theme='satisfaction'] .reset:hover,
+:root[data-theme='satisfaction'] .reset-pattern:hover {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 235, 200, 0.08) 0%,
+      rgba(60, 52, 38, 0.80) 50%,
+      rgba(46, 40, 30, 0.90) 100%
+    ),
+    var(--panel-hi);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.10),
+    0 1px 3px rgba(0, 0, 0, 0.18);
+}
+
+/* ── Knobs ───────────────────────────────────────────────────────────── */
+/* Polished amber resin with specular reflection */
+:root[data-theme='satisfaction'] .knob-dial {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.20));
+}
+:root[data-theme='satisfaction'] .knob-fill {
+  stroke: var(--accent);
+}
+:root[data-theme='satisfaction'] .knob-track {
+  stroke: rgba(255, 235, 200, 0.08);
+}
+:root[data-theme='satisfaction'] .knob-dot {
+  fill: var(--accent);
+}
+:root[data-theme='satisfaction'] .knob-label {
+  color: var(--text-dim);
+}
+:root[data-theme='satisfaction'] .knob-value {
+  color: var(--text-hi);
+}
+
+/* ── Transport knobs ──────────────────────────────────────────────── */
+:root[data-theme='satisfaction'] .transport-knobs .knob .knob-fill,
+:root[data-theme='satisfaction'] .transport-knobs .knob .knob-dot {
+  stroke: var(--accent);
+}
+:root[data-theme='satisfaction'] .transport-knobs .knob .knob-dot {
+  fill: var(--accent);
+}
+:root[data-theme='satisfaction'] .transport-knobs .knob .knob-value {
+  font: 600 11px/1 var(--mono);
+  letter-spacing: 0.3px;
+}
+
+/* ── Dropdowns (Level 3) ──────────────────────────────────────────── */
+:root[data-theme='satisfaction'] select {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 235, 200, 0.04) 0%,
+      rgba(46, 40, 30, 0.80) 100%
+    ),
+    var(--panel-hi);
+  border: none;
+  border-radius: 20px;
+  color: var(--text);
+  padding: 6px 14px;
+  letter-spacing: 0.3px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.06),
+    0 1px 1px rgba(0, 0, 0, 0.08);
+}
+:root[data-theme='satisfaction'] select option {
+  background: #231f17;
+  color: var(--text);
+}
+:root[data-theme='satisfaction'] select option:checked {
+  background: rgba(196, 136, 32, 0.15);
+}
+
+/* ── Pattern Slots ─────────────────────────────────────────────────── */
+:root[data-theme='satisfaction'] .pattern-slot {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 235, 200, 0.02) 0%,
+      rgba(40, 35, 24, 0.60) 100%
+    ),
+    transparent;
+  border: 1px solid rgba(255, 235, 200, 0.06);
+  border-radius: 4px;
+  color: var(--text-dim);
+  font: 600 10px/1 var(--mono);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.04),
+    0 1px 1px rgba(0, 0, 0, 0.06);
+}
+:root[data-theme='satisfaction'] .pattern-slot:hover {
+  color: var(--text);
+  border-color: rgba(255, 235, 200, 0.12);
+}
+:root[data-theme='satisfaction'] .pattern-slot.is-stored {
+  color: var(--text);
+  border-color: var(--accent);
+}
+:root[data-theme='satisfaction'] .pattern-slot.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.20),
+    0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Slider / Range ─────────────────────────────────────────────────── */
+:root[data-theme='satisfaction'] input[type='range'] {
+  height: 4px;
+  cursor: pointer;
+}
+:root[data-theme='satisfaction'] input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 235, 200, 0.06);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.10);
+}
+:root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 235, 200, 0.15) 0%, transparent 60%),
+    var(--accent);
+  border: none;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.20);
+  margin-top: -6px;
+  transition: transform 0.10s ease;
+}
+:root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+:root[data-theme='satisfaction'] input[type='range']::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 235, 200, 0.06);
+  border: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.10);
+}
+:root[data-theme='satisfaction'] input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255, 235, 200, 0.15) 0%, transparent 60%),
+    var(--accent);
+  border: none;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.20);
+}
+
+/* ── Labels & Typography ────────────────────────────────────────────── */
+:root[data-theme='satisfaction'] label {
+  color: var(--text-dim);
+  font-weight: 450;
+  letter-spacing: 0.5px;
+  font-size: 11px;
+}
+:root[data-theme='satisfaction'] .control-label {
+  color: var(--text-dim);
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+:root[data-theme='satisfaction'] .control-label b {
+  color: var(--text);
+}
+:root[data-theme='satisfaction'] .bpm b,
+:root[data-theme='satisfaction'] .swing b {
+  color: var(--accent);
+}
+:root[data-theme='satisfaction'] h1 {
+  color: var(--text-hi);
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+:root[data-theme='satisfaction'] .tagline {
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+:root[data-theme='satisfaction'] .track-name {
+  color: var(--text-hi);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+:root[data-theme='satisfaction'] .mini-metrics b {
+  color: var(--accent);
+}
+:root[data-theme='satisfaction'] .mini-metrics span {
+  color: var(--text-dim);
+}
+:root[data-theme='satisfaction'] .playback-select select {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 235, 200, 0.04) 0%,
+      rgba(46, 40, 30, 0.80) 100%
+    ),
+    var(--panel-hi);
+  border: none;
+  border-radius: 18px;
+  padding: 4px 12px;
+  color: var(--text);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.06),
+    0 1px 1px rgba(0, 0, 0, 0.08);
+}
+:root[data-theme='satisfaction'] .playback-select span {
+  color: var(--text-dim);
+}
+
+/* ── Mask controls ──────────────────────────────────────────────────── */
+:root[data-theme='satisfaction'] .mask-label {
+  color: var(--text-dim);
+}
+:root[data-theme='satisfaction'] .mask-cell {
+  border-radius: 4px;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+  border: none;
+  background: rgba(255, 235, 200, 0.04);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.04),
+    0 1px 1px rgba(0, 0, 0, 0.06);
+}
+:root[data-theme='satisfaction'] .mask-cell.rest {
+  background: rgba(255, 235, 200, 0.02);
+  opacity: 1;
+  cursor: default;
+}
+:root[data-theme='satisfaction'] .mask-cell.onset {
+  background: var(--track-color);
+  opacity: 1;
+}
+:root[data-theme='satisfaction'] .mask-cell.onset.muted {
+  background: transparent;
+  border: 1px solid var(--track-color);
+  opacity: 0.50;
+}
+:root[data-theme='satisfaction'] .mask-cell.onset:hover {
+  filter: brightness(1.2);
+}
+:root[data-theme='satisfaction'] .mask-cell.is-current {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--current);
+}
+
+/* ── Module lanes ──────────────────────────────────────────────────── */
+:root[data-theme='satisfaction'] .module-lane {
+  border-top: 1px solid rgba(255, 235, 200, 0.04);
+}
+
+/* ── MIDI OUT ──────────────────────────────────────────────────────── */
+:root[data-theme='satisfaction'] .midi-out select {
+  background:
+    linear-gradient(
+      160deg,
+      rgba(255, 235, 200, 0.04) 0%,
+      rgba(46, 40, 30, 0.80) 100%
+    ),
+    var(--panel-hi);
+  border: none;
+  border-radius: 6px;
+  color: var(--text);
+  padding: 4px 8px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.06),
+    0 1px 1px rgba(0, 0, 0, 0.08);
+}
+:root[data-theme='satisfaction'] .midi-out .toggle {
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+:root[data-theme='satisfaction'] .midi-out .toggle.is-on {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(196, 136, 32, 0.10);
+}
+
+/* ── FX Toggle ─────────────────────────────────────────────────────── */
+:root[data-theme='satisfaction'] .fx-toggle {
+  background: rgba(255, 235, 200, 0.04);
+  border: 1px solid rgba(255, 235, 200, 0.08);
+  border-radius: 999px;
+  padding: 5px 12px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 235, 200, 0.04),
+    0 1px 1px rgba(0, 0, 0, 0.06);
+}
+:root[data-theme='satisfaction'] .fx-toggle:hover {
+  background: rgba(255, 235, 200, 0.08);
+  border-color: rgba(255, 235, 200, 0.15);
+}
+
+/* ── Master scope ──────────────────────────────────────────────────── */
+:root[data-theme='satisfaction'] .master-scope {
+  background:
+    linear-gradient(
+      150deg,
+      rgba(255, 235, 200, 0.02) 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.04) 100%
+    ),
+    var(--panel-hi);
+  border: none;
+  border-radius: var(--radius);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 235, 200, 0.04),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.15),
+    0 3px 8px rgba(0, 0, 0, 0.10);
+}
+:root[data-theme='satisfaction'] .master-scope .oscilloscope-canvas {
+  opacity: 0.85;
+}
+
 :root {
 
   --bg: #0f1014;
