@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
-import { defaultTracks, renderMidi, serializeMidi, computePhaseOffsetForChange, switchTrackPattern } from './engine';
+import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading, resetClock } from './audio';
@@ -276,6 +276,15 @@ export default function App() {
     downloadBytes(bytes, 'groove.mid', 'audio/midi');
   };
 
+  const handleExportStems = () => {
+    const stems = renderMidiStems(tracks, EXPORT_BARS, bpm);
+    for (const stem of stems) {
+      const bytes = serializeMidi(stem.data);
+      const safeName = stem.name.replace(/[<>:"/\\|?*]/g, '_').replace(/\s+/g, '_');
+      downloadBytes(bytes, `${safeName}.mid`, 'audio/midi');
+    }
+  };
+
   return (
     <main className="app">
       <header>
@@ -351,7 +360,15 @@ export default function App() {
           onClick={handleExportMidi}
           title={`Export ${EXPORT_BARS} bars as a Standard MIDI File`}
         >
-          ⤓ MIDI
+          ⤓ Mixdown
+        </button>
+        <button
+          type="button"
+          className="export"
+          onClick={handleExportStems}
+          title={`Export per-track MIDI stems (Kick, Snare, Ghost, Hat, Bass)`}
+        >
+          ⤓ Stems
         </button>
         <label className="theme-select">
           Theme

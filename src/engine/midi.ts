@@ -52,6 +52,13 @@ export interface MidiProject {
   tracks: MidiTrackData[];
 }
 
+/** A single rendered stem — a MidiProject plus the stem's display name and voice. */
+export interface MidiStem {
+  name: string;       // e.g. "Kick", "Snare", "Ghost", "Hat", "Bass"
+  voiceId: string;
+  data: MidiProject;
+}
+
 /** Map our 0–100 velocity onto MIDI 1–127. */
 function toMidiVelocity(v: number): number {
   return Math.max(1, Math.min(127, Math.round((v / 100) * 127)));
@@ -194,6 +201,109 @@ function buildNoteTrackChunk(track: MidiTrackData): number[] {
  * is intentionally NOT used — every event carries its status byte, which is the
  * most compatible (and most debuggable) encoding.
  */
+/**
+ * Build a one-track MidiProject from a single track's notes. Allocates a
+ * melodic channel (for bass) or percussion channel 10 (for drums). Used by
+ * stem export so each instrument gets its own download.
+ */
+function renderTrackMidi(track: Track, bars: number, _bpm: number, channel: number): MidiTrackData {
+  const totalSteps = bars * STEPS_PER_BAR;
+  const tp = trackPattern(track);
+  const pitched = isPitchedVoice(track.voiceId);
+  const notes: MidiNoteEvent[] = [];
+
+  for (let step = 0; step < totalSteps; step++) {
+    if (tp.mutedStepMask[step % track.steps]) continue;
+    if (pitched) {
+      const onset = resolveOnset(track, tp, step);
+      if (!onset || onset.velocity <= 0) continue;
+      notes.push({
+        startTick: step * TICKS_PER_SIXTEENTH,
+        durationTicks: (onset.durationSteps || 1) * TICKS_PER_SIXTEENTH,
+        channel,
+        note: onset.midi ?? DEFAULT_PITCHED_NOTE,
+        velocity: toMidiVelocity(onset.velocity),
+      });
+    } else {
+      const localStep = step % track.steps;
+      if (!tp.pulses[localStep]) continue;
+      const vel = tp.velocities ? tp.velocities[localStep] ?? 100 : 100;
+      if (vel <= 0) continue;
+      notes.push({
+        startTick: step * TICKS_PER_SIXTEENTH,
+        durationTicks: TICKS_PER_SIXTEENTH,
+        channel,
+        note: GM_DRUM_MAP[track.voiceId],
+        velocity: toMidiVelocity(vel),
+      });
+    }
+  }
+
+  return { name: track.name, channel, notes };
+}
+
+/**
+ * Generate per-track stems for export. Each stem is a complete MidiProject so
+ * it can be serialised independently.
+ *
+ * Rules:
+ *  - Muted tracks are skipped.
+ *  - Tracks with no events are skipped.
+ *  - Ghost (if enabled and the track is snare) gets its OWN stem, separate
+ *    from the snare stem. Ghost events are the same note at `delaySteps`
+ *    offset, at `amount` velocity. Since ghost is probabilistic at playback,
+ *    the exported ghost stem represents the theoretical grid (probability=1)
+ *    so the user can edit it in their DAW.
+ */
+export function renderMidiStems(tracks: Track[], bars: number, bpm: number): MidiStem[] {
+  const totalSteps = bars * STEPS_PER_BAR;
+  const stems: MidiStem[] = [];
+
+  let nextMelodic = 0;
+  const allocMelodic = (): number => {
+    if (nextMelodic === 9) nextMelodic++;
+    return nextMelodic++;
+  };
+
+  for (const track of tracks) {
+    if (track.mute) continue;
+    const pitched = isPitchedVoice(track.voiceId);
+    const ch = pitched ? allocMelodic() : 9;
+    const data = renderTrackMidi(track, bars, bpm, ch);
+    const project: MidiProject = { format: 1, ticksPerQuarter: TICKS_PER_QUARTER, bpm, tracks: [data] };
+    if (data.notes.length > 0) {
+      stems.push({ name: track.name, voiceId: track.voiceId, data: project });
+    }
+
+    // Ghost stem: separate from snare, same note at delaySteps offset
+    if (track.voiceId === 'snare' && track.ghost?.enabled) {
+      const ghostNotes: MidiNoteEvent[] = [];
+      const tp = trackPattern(track);
+      for (let step = 0; step < totalSteps; step++) {
+        if (tp.mutedStepMask[step % track.steps]) continue;
+        const localStep = step % track.steps;
+        if (!tp.pulses[localStep]) continue;
+        const ghostTick = (step + Math.max(1, track.ghost.delaySteps)) * TICKS_PER_SIXTEENTH;
+        const vel = toMidiVelocity(track.ghost.amount);
+        ghostNotes.push({
+          startTick: ghostTick,
+          durationTicks: TICKS_PER_SIXTEENTH,
+          channel: ch,
+          note: GM_DRUM_MAP.snare,
+          velocity: vel,
+        });
+      }
+      if (ghostNotes.length > 0) {
+        const ghostData: MidiTrackData = { name: 'Ghost', channel: ch, notes: ghostNotes };
+        const ghostProject: MidiProject = { format: 1, ticksPerQuarter: TICKS_PER_QUARTER, bpm, tracks: [ghostData] };
+        stems.push({ name: 'Ghost', voiceId: 'ghost', data: ghostProject });
+      }
+    }
+  }
+
+  return stems;
+}
+
 export function serializeMidi(project: MidiProject): Uint8Array {
   const ntrks = project.tracks.length + 1; // + conductor track 0
   const header = chunk('MThd', [
