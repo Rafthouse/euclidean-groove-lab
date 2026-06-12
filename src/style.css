@@ -479,62 +479,84 @@
   color: #ffb8e8;
 }
 
-/* ---------- Nostradamus Theme (Prophetic / Divination) ---------- */
-/* Mystical, esoteric — deep violet-gold, celestial symbols.
-   Independent from all other themes. */
+/* ---------- Nostradamus Theme (Renaissance Astrologer) ---------- */
+/* A prophetic astronomical engine — aged brass, celestial void,
+   alchemical manuscript aesthetic. Independent theme. */
 :root[data-theme='nostradamus'] {
-  --bg: #0a0510;
-  --panel: rgba(88, 40, 180, 0.12);
-  --panel-hi: rgba(88, 40, 180, 0.20);
-  --text: #d4c0e8;
-  --text-dim: rgba(180, 160, 200, 0.55);
-  --text-hi: #f0e8ff;
-  --accent: #d4a017;
-  --accent-dim: rgba(212, 160, 23, 0.18);
-  --rest: rgba(88, 40, 180, 0.10);
-  --current: #d4a017;
-  --danger: #ff6b6b;
-  --warn: #e8c840;
-  --radius: 10px;
+  --bg: #0D1117;
+  --panel: #161B22;
+  --panel-hi: #1F2937;
+  --text: #E8DCC2;
+  --text-dim: rgba(184, 170, 140, 0.65);
+  --text-hi: #F5EDD6;
+  --accent: #C9A227;
+  --accent-dim: rgba(201, 162, 39, 0.15);
+  --rest: rgba(31, 41, 55, 0.5);
+  --current: #C9A227;
+  --danger: #8B2E2E;
+  --warn: #B87333;
+  --radius: 6px;
   --mono: ui-monospace, Consolas, monospace;
 
-  /* Track colors — celestial / alchemical */
-  --color-kick: #6a3de8;
-  --color-kick-mid: #8b5cf6;
-  --color-kick-light: #a78bfa;
+  /* Track colors — inspired by celestial bodies */
+  --color-kick: #B87333;      /* Copper — Mars/masculine */
+  --color-kick-mid: #C98A4A;
+  --color-kick-light: #DCA86A;
 
-  --color-snare: #d4a017;
-  --color-snare-mid: #e0b832;
-  --color-snare-light: #f0d060;
+  --color-snare: #C9A227;     /* Gold — Jupiter/regal */
+  --color-snare-mid: #D8B43E;
+  --color-snare-light: #E8C85A;
 
-  --color-hat: #2dd4bf;
-  --color-hat-mid: #5eead4;
-  --color-hat-light: #99f6e4;
+  --color-hat: #5B8FA8;      /* Mercury/steel blue */
+  --color-hat-mid: #7AADC4;
+  --color-hat-light: #A0C8D8;
 
-  --color-bass: #e84d8a;
-  --color-bass-mid: #f06292;
-  --color-bass-light: #f48fb1;
+  --color-bass: #4E6E58;      /* Viridian — Saturn/earthy */
+  --color-bass-mid: #6A8C74;
+  --color-bass-light: #8CAC94;
 
-  --card-shadow: 0 4px 24px rgba(88, 40, 180, 0.20);
+  --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
 }
 
-/* Background: deep celestial void with starry suggestion */
+/* Background: deep observatory void with aged warmth */
 :root[data-theme='nostradamus'] body {
   background:
-    radial-gradient(ellipse 120% 70% at 30% 0%, rgba(88, 40, 180, 0.15) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 80% at 70% 100%, rgba(212, 160, 23, 0.06) 0%, transparent 60%),
-    #0a0510;
+    radial-gradient(ellipse 100% 60% at 30% 0%, rgba(201, 162, 39, 0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 70% 100%, rgba(184, 115, 51, 0.03) 0%, transparent 60%),
+    #0D1117;
 }
 
-/* Track cards: dark violet panels with gold trim */
+/* Track cards: aged parchment-like panels with thin gold borders */
 :root[data-theme='nostradamus'] .track-card {
-  background: rgba(88, 40, 180, 0.08);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(212, 160, 23, 0.08);
-  border-radius: 10px;
-  box-shadow: 0 4px 24px rgba(88, 40, 180, 0.20);
+  background: #161B22;
+  border: 1px solid rgba(201, 162, 39, 0.10);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 0 1px rgba(201, 162, 39, 0.03),
+    0 2px 16px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+/* Decorative corner ornaments via pseudo-element */
+:root[data-theme='nostradamus'] .track-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background:
+    /* top-left corner */
+    conic-gradient(from 135deg at 12px 12px, rgba(201, 162, 39, 0.12) 0deg, transparent 90deg) 0 0 / 24px 24px,
+    /* top-right corner */
+    conic-gradient(from 225deg at calc(100% - 12px) 12px, rgba(201, 162, 39, 0.12) 0deg, transparent 90deg) 100% 0 / 24px 24px,
+    /* bottom-left corner */
+    conic-gradient(from 45deg at 12px calc(100% - 12px), rgba(201, 162, 39, 0.12) 0deg, transparent 90deg) 0 100% / 24px 24px,
+    /* bottom-right corner */
+    conic-gradient(from 315deg at calc(100% - 12px) calc(100% - 12px), rgba(201, 162, 39, 0.12) 0deg, transparent 90deg) 100% 100% / 24px 24px;
+  background-repeat: no-repeat;
 }
 
 :root[data-theme='nostradamus'] .track-card[data-voice='kick'] {
@@ -581,91 +603,110 @@
   stroke: var(--color-bass-mid);
 }
 
-/* Playhead: gold beam */
+/* Playhead: warm golden glow */
 :root[data-theme='nostradamus'] .step.current .step-indicator {
-  fill: #d4a017;
-  stroke: #e0b832;
+  fill: #C9A227;
+  stroke: #D8B43E;
   stroke-width: 2px;
+  filter: drop-shadow(0 0 4px rgba(201, 162, 39, 0.3));
 }
 :root[data-theme='nostradamus'] .step.current .visual {
-  fill: #d4a017;
+  fill: #C9A227;
 }
 
 /* Rest steps */
 :root[data-theme='nostradamus'] .step.rest .step-indicator {
-  opacity: 0.25;
+  opacity: 0.20;
 }
 
-/* Controls */
+/* Controls: dark brass with gold borders */
 :root[data-theme='nostradamus'] button {
-  border-radius: 8px;
-  border: 1px solid rgba(212, 160, 23, 0.15);
-  background: rgba(88, 40, 180, 0.15);
-  color: #d4c0e8;
-  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 162, 39, 0.15);
+  background: rgba(31, 41, 55, 0.6);
+  color: #E8DCC2;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   padding: 6px 14px;
-  transition: background 0.15s;
+  transition: background 0.25s, box-shadow 0.25s;
 }
 :root[data-theme='nostradamus'] button:hover {
-  background: rgba(88, 40, 180, 0.28);
+  background: rgba(31, 41, 55, 0.9);
+  box-shadow: inset 0 0 12px rgba(201, 162, 39, 0.06), 0 0 8px rgba(201, 162, 39, 0.08);
 }
 
 :root[data-theme='nostradamus'] .play {
-  background: linear-gradient(135deg, #6a3de8, #8b5cf6);
-  color: #ffffff;
-  border: none;
-  box-shadow: 0 4px 14px rgba(106, 61, 232, 0.35);
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid rgba(201, 162, 39, 0.25);
+  color: #E8DCC2;
+  box-shadow: 0 0 12px rgba(201, 162, 39, 0.04);
 }
 :root[data-theme='nostradamus'] .play.is-playing {
-  background: rgba(88, 40, 180, 0.20);
-  border: 1px solid rgba(212, 160, 23, 0.15);
+  background: rgba(31, 41, 55, 0.5);
+  border: 1px solid rgba(201, 162, 39, 0.12);
 }
 
 :root[data-theme='nostradamus'] .export {
-  border-radius: 8px;
-  border: 1px solid rgba(212, 160, 23, 0.15);
-  background: rgba(88, 40, 180, 0.15);
-  color: #d4c0e8;
+  border-radius: 6px;
+  border: 1px solid rgba(201, 162, 39, 0.15);
+  background: rgba(31, 41, 55, 0.6);
+  color: #E8DCC2;
 }
 
-/* Sliders */
+/* Sliders: engraved brass */
 :root[data-theme='nostradamus'] input[type='range'] {
-  height: 4px;
+  height: 3px;
 }
 :root[data-theme='nostradamus'] input[type='range']::-webkit-slider-runnable-track {
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(88, 40, 180, 0.20);
+  height: 3px;
+  border-radius: 1px;
+  background: rgba(201, 162, 39, 0.08);
 }
 :root[data-theme='nostradamus'] input[type='range']::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  background: #d4a017;
-  border: none;
-  box-shadow: none;
+  background: #C9A227;
+  border: 1px solid rgba(232, 220, 194, 0.3);
+  box-shadow: 0 0 6px rgba(201, 162, 39, 0.15);
   margin-top: -5px;
 }
 
 /* Select */
 :root[data-theme='nostradamus'] select {
-  background: rgba(88, 40, 180, 0.10);
-  border: 1px solid rgba(212, 160, 23, 0.12);
-  color: #d4c0e8;
-  border-radius: 6px;
+  background: #161B22;
+  border: 1px solid rgba(201, 162, 39, 0.10);
+  color: #E8DCC2;
+  border-radius: 4px;
   padding: 4px 10px;
+  letter-spacing: 0.3px;
 }
 
-/* Labels */
+/* Labels: manuscript-style */
 :root[data-theme='nostradamus'] label {
-  color: rgba(180, 160, 200, 0.7);
-  font-weight: 500;
+  color: rgba(184, 170, 140, 0.7);
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-size: 10px;
 }
 
 /* BPM / Swing values */
 :root[data-theme='nostradamus'] .bpm b,
 :root[data-theme='nostradamus'] .swing b {
-  color: #a78bfa;
+  color: #C9A227;
+}
+
+/* Header */
+:root[data-theme='nostradamus'] h1 {
+  color: #E8DCC2;
+  letter-spacing: 2px;
+  font-weight: 300;
+}
+
+:root[data-theme='nostradamus'] .tagline {
+  color: rgba(184, 170, 140, 0.5);
+  font-style: italic;
 }
 
 :root {
