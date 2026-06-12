@@ -7998,34 +7998,34 @@ header h1 {
    ======================================================================== */
 :root[data-theme='beekeeper'] {
   --bg: #F7D57A;
-  --panel: #FFF3D4;
-  --panel-hi: #FCEFBF;
+  --panel: #F8E8A0;
+  --panel-hi: #F0DA90;
   --text: #4A2C12;
-  --text-dim: #7A5729;
+  --text-dim: #6B4620;
   --text-hi: #2A1608;
-  --accent: #E5A91A;
-  --accent-dim: rgba(229, 169, 26, 0.12);
-  --rest: rgba(80, 40, 0, 0.10);
-  --current: #F5C43D;
-  --danger: #B36A1A;
-  --warn: #D89A1C;
+  --accent: #D4941A;
+  --accent-dim: rgba(212, 148, 26, 0.15);
+  --rest: rgba(80, 40, 0, 0.12);
+  --current: #E8B830;
+  --danger: #A06018;
+  --warn: #C88420;
   --radius: 12px;
   --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
 
-  --color-honey-raw:       #E5A91A;
-  --color-honey-raw-mid:   #F0C040;
-  --color-honey-raw-light: #F8DA80;
-  --color-pollen:          #F4C842;
-  --color-pollen-mid:      #F8DC70;
-  --color-pollen-light:    #FCEAA0;
-  --color-beeswax:         #FFF1A6;
-  --color-beeswax-mid:     #FFF5C0;
-  --color-beeswax-light:   #FFFADE;
-  --color-forest-honey:    #B36A1A;
-  --color-forest-mid:      #C88430;
-  --color-forest-light:    #DAA050;
+  --color-honey-raw:       #D4941A;
+  --color-honey-raw-mid:   #E0A830;
+  --color-honey-raw-light: #ECC060;
+  --color-pollen:          #E8B830;
+  --color-pollen-mid:      #F0C850;
+  --color-pollen-light:    #F8DC80;
+  --color-beeswax:         #F0D870;
+  --color-beeswax-mid:     #F4E088;
+  --color-beeswax-light:   #F8EAA0;
+  --color-forest-honey:    #A06818;
+  --color-forest-mid:      #B88028;
+  --color-forest-light:    #D09840;
 
-  --card-shadow: 0 4px 10px rgba(80, 40, 0, 0.15), 0 12px 30px rgba(255, 180, 0, 0.12);
+  --card-shadow: 0 4px 12px rgba(60, 30, 0, 0.20), 0 12px 35px rgba(120, 60, 0, 0.18);
   color-scheme: light;
 }
 
@@ -8082,12 +8082,13 @@ header h1 {
 
 /* ===== TRACK CARDS — beeswax panels with warm amber glow ===== */
 :root[data-theme='beekeeper'] .track-card {
-  background: #FFF3D4;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: #F8E8A0;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border-radius: 12px;
   position: relative;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  filter: drop-shadow(0 2px 4px rgba(60, 30, 0, 0.12)) drop-shadow(0 6px 12px rgba(80, 40, 0, 0.08));
 }
 
 /* ===== KICK — Raw Honey: deep golden amber ===== */
@@ -8096,15 +8097,15 @@ header h1 {
   border: 1px solid rgba(218, 154, 28, 0.40);
   box-shadow:
     var(--card-shadow),
-    0 0 15px rgba(255, 190, 60, 0.25),
-    0 0 35px rgba(255, 170, 0, 0.15);
+    0 0 15px rgba(212, 148, 26, 0.30),
+    0 0 35px rgba(200, 130, 20, 0.18);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='kick']:hover {
-  border-color: rgba(218, 154, 28, 0.65);
+  border-color: rgba(212, 148, 26, 0.70);
   box-shadow:
     var(--card-shadow),
-    0 0 20px rgba(255, 190, 60, 0.35),
-    0 0 45px rgba(255, 170, 0, 0.20);
+    0 0 20px rgba(212, 148, 26, 0.40),
+    0 0 45px rgba(200, 130, 20, 0.25);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='kick'] .step.onset {
   fill: var(--color-honey-raw);
@@ -8122,15 +8123,15 @@ header h1 {
   border: 1px solid rgba(244, 200, 66, 0.45);
   box-shadow:
     var(--card-shadow),
-    0 0 15px rgba(255, 210, 80, 0.25),
-    0 0 35px rgba(255, 200, 60, 0.15);
+    0 0 15px rgba(232, 184, 48, 0.30),
+    0 0 35px rgba(220, 170, 40, 0.18);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='snare']:hover {
-  border-color: rgba(244, 200, 66, 0.70);
+  border-color: rgba(232, 184, 48, 0.70);
   box-shadow:
     var(--card-shadow),
-    0 0 20px rgba(255, 210, 80, 0.35),
-    0 0 45px rgba(255, 200, 60, 0.20);
+    0 0 20px rgba(232, 184, 48, 0.40),
+    0 0 45px rgba(220, 170, 40, 0.25);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='snare'] .step.onset {
   fill: var(--color-pollen);
@@ -8148,15 +8149,15 @@ header h1 {
   border: 1px solid rgba(255, 241, 166, 0.40);
   box-shadow:
     var(--card-shadow),
-    0 0 12px rgba(255, 240, 170, 0.20),
-    0 0 30px rgba(255, 235, 140, 0.12);
+    0 0 12px rgba(240, 216, 112, 0.25),
+    0 0 30px rgba(230, 200, 90, 0.15);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='hat']:hover {
-  border-color: rgba(255, 241, 166, 0.65);
+  border-color: rgba(240, 216, 112, 0.65);
   box-shadow:
     var(--card-shadow),
-    0 0 18px rgba(255, 240, 170, 0.30),
-    0 0 40px rgba(255, 235, 140, 0.18);
+    0 0 18px rgba(240, 216, 112, 0.35),
+    0 0 40px rgba(230, 200, 90, 0.22);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='hat'] .step.onset {
   fill: var(--color-beeswax);
@@ -8174,15 +8175,15 @@ header h1 {
   border: 1px solid rgba(179, 106, 26, 0.40);
   box-shadow:
     var(--card-shadow),
-    0 0 15px rgba(200, 130, 50, 0.25),
-    0 0 35px rgba(180, 110, 30, 0.15);
+    0 0 15px rgba(160, 104, 24, 0.30),
+    0 0 35px rgba(140, 80, 20, 0.18);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='bass']:hover {
-  border-color: rgba(179, 106, 26, 0.65);
+  border-color: rgba(160, 104, 24, 0.70);
   box-shadow:
     var(--card-shadow),
-    0 0 20px rgba(200, 130, 50, 0.35),
-    0 0 45px rgba(180, 110, 30, 0.20);
+    0 0 20px rgba(160, 104, 24, 0.40),
+    0 0 45px rgba(140, 80, 20, 0.25);
 }
 :root[data-theme='beekeeper'] .track-card[data-voice='bass'] .step.onset {
   fill: var(--color-forest-honey);
@@ -8288,32 +8289,34 @@ header h1 {
 /* ===== CONTROLS — warm wooden knobs, honey-glazed ===== */
 :root[data-theme='beekeeper'] button {
   border-radius: 10px;
-  border: 1px solid rgba(80, 40, 0, 0.10);
-  background: rgba(255, 243, 212, 0.70);
+  border: 1px solid rgba(80, 40, 0, 0.12);
+  background: rgba(248, 232, 160, 0.85);
   color: #4A2C12;
   font-weight: 600;
   letter-spacing: 0.3px;
   padding: 7px 16px;
   font-size: 12px;
   transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 1px 3px rgba(60, 30, 0, 0.10);
 }
 :root[data-theme='beekeeper'] button:hover {
-  background: rgba(255, 243, 212, 0.90);
-  border-color: rgba(218, 154, 28, 0.30);
-  box-shadow: 0 0 8px rgba(229, 169, 26, 0.10);
+  background: rgba(248, 232, 160, 0.95);
+  border-color: rgba(212, 148, 26, 0.35);
+  box-shadow: 0 2px 6px rgba(60, 30, 0, 0.14);
 }
 
 :root[data-theme='beekeeper'] .play {
-  background: rgba(229, 169, 26, 0.12);
-  border: 1px solid rgba(218, 154, 28, 0.25);
+  background: rgba(212, 148, 26, 0.15);
+  border: 1px solid rgba(212, 148, 26, 0.28);
   color: #4A2C12;
   font-weight: 600;
+  box-shadow: 0 1px 3px rgba(60, 30, 0, 0.10);
 }
 :root[data-theme='beekeeper'] .play.is-playing {
-  background: rgba(229, 169, 26, 0.18);
-  border-color: #E5A91A;
+  background: rgba(212, 148, 26, 0.22);
+  border-color: #D4941A;
   color: #2A1608;
-  box-shadow: 0 0 12px rgba(229, 169, 26, 0.15);
+  box-shadow: 0 0 14px rgba(212, 148, 26, 0.20), 0 1px 3px rgba(60, 30, 0, 0.10);
   font-weight: 700;
 }
 
@@ -8321,31 +8324,34 @@ header h1 {
 :root[data-theme='beekeeper'] .reset,
 :root[data-theme='beekeeper'] .reset-pattern {
   border-radius: 10px;
-  border: 1px solid rgba(80, 40, 0, 0.10);
-  background: rgba(255, 243, 212, 0.70);
+  border: 1px solid rgba(80, 40, 0, 0.12);
+  background: rgba(248, 232, 160, 0.85);
   color: #4A2C12;
   font-weight: 600;
+  box-shadow: 0 1px 3px rgba(60, 30, 0, 0.10);
 }
 :root[data-theme='beekeeper'] .export:hover,
 :root[data-theme='beekeeper'] .reset:hover,
 :root[data-theme='beekeeper'] .reset-pattern:hover {
-  border-color: rgba(218, 154, 28, 0.30);
-  background: rgba(255, 243, 212, 0.90);
+  border-color: rgba(212, 148, 26, 0.35);
+  background: rgba(248, 232, 160, 0.95);
   color: #2A1608;
+  box-shadow: 0 2px 6px rgba(60, 30, 0, 0.14);
 }
 
 :root[data-theme='beekeeper'] .pattern-slot {
   border-radius: 10px;
   padding: 4px 0;
   font-size: 10px;
-  background: rgba(80, 40, 0, 0.03);
+  background: rgba(80, 40, 0, 0.04);
+  box-shadow: 0 1px 2px rgba(60, 30, 0, 0.06);
 }
 :root[data-theme='beekeeper'] .pattern-slot:hover {
-  background: rgba(218, 154, 28, 0.08);
+  background: rgba(212, 148, 26, 0.10);
 }
 :root[data-theme='beekeeper'] .pattern-slot.active {
-  background: rgba(229, 169, 26, 0.15);
-  border-color: rgba(218, 154, 28, 0.30);
+  background: rgba(212, 148, 26, 0.18);
+  border-color: rgba(212, 148, 26, 0.35);
 }
 
 /* Mask row */
@@ -8376,22 +8382,24 @@ header h1 {
   opacity: 0.55;
 }
 :root[data-theme='beekeeper'] .mask-cell.onset:hover {
-  filter: brightness(1.10);
+  filter: brightness(1.15);
 }
 :root[data-theme='beekeeper'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #F7D57A, 0 0 0 3px var(--track-color), 0 0 8px rgba(229, 169, 26, 0.15);
+  box-shadow: 0 0 0 2px #F7D57A, 0 0 0 3px var(--track-color), 0 0 8px rgba(212, 148, 26, 0.15);
 }
 
 :root[data-theme='beekeeper'] .toggle {
   border-radius: 10px;
   min-width: 32px;
   padding: 4px 14px;
-  border: 1px solid rgba(80, 40, 0, 0.10);
-  background: rgba(255, 243, 212, 0.50);
+  border: 1px solid rgba(80, 40, 0, 0.12);
+  background: rgba(248, 232, 160, 0.60);
+  box-shadow: 0 1px 2px rgba(60, 30, 0, 0.08);
 }
 :root[data-theme='beekeeper'] .toggle.is-on {
-  background: rgba(229, 169, 26, 0.14);
-  border-color: #E5A91A;
+  background: rgba(212, 148, 26, 0.18);
+  border-color: #D4941A;
+  box-shadow: 0 1px 3px rgba(212, 148, 26, 0.12);
 }
 
 /* Sliders — wooden knobs inspired */
@@ -8440,21 +8448,22 @@ header h1 {
 }
 
 :root[data-theme='beekeeper'] select {
-  background: rgba(255, 243, 212, 0.80);
-  border: 1px solid rgba(80, 40, 0, 0.10);
+  background: rgba(248, 232, 160, 0.90);
+  border: 1px solid rgba(80, 40, 0, 0.12);
   color: #4A2C12;
   border-radius: 10px;
   padding: 5px 12px;
   font-size: 12px;
   font-weight: 600;
+  box-shadow: 0 1px 3px rgba(60, 30, 0, 0.10);
 }
 :root[data-theme='beekeeper'] select option {
-  background: #FFF3D4;
+  background: #F8E8A0;
   color: #4A2C12;
   font-weight: 600;
 }
 :root[data-theme='beekeeper'] select option:checked {
-  background: rgba(229, 169, 26, 0.15);
+  background: rgba(212, 148, 26, 0.18);
 }
 
 :root[data-theme='beekeeper'] label {
@@ -8511,13 +8520,14 @@ header h1 {
 }
 
 :root[data-theme='beekeeper'] .playback-select select {
-  background: rgba(255, 243, 212, 0.80);
-  border: 1px solid rgba(80, 40, 0, 0.10);
+  background: rgba(248, 232, 160, 0.90);
+  border: 1px solid rgba(80, 40, 0, 0.12);
   border-radius: 10px;
   padding: 4px 12px;
   color: #4A2C12;
   font-size: 12px;
   font-weight: 600;
+  box-shadow: 0 1px 3px rgba(60, 30, 0, 0.10);
 }
 :root[data-theme='beekeeper'] .playback-select span {
   color: #7A5729;
