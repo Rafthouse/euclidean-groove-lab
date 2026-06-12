@@ -3727,6 +3727,102 @@ header h1 {
     padding: 20px 16px 48px;
     gap: 16px;
   }
+
+  /* --- Compact track cards (tablet landscape) --- */
+
+  /* Reduce padding inside the card — inner-block margins give all breathing */
+  .track-card {
+    padding: 8px;
+  }
+
+  /* Sequencer: cap height so the polygon stays around 35-40% of the card.
+     The SVG is 320x320. On a ~220px wide panel, max-height 140px keeps
+     it from eating vertical space while remaining the dominant visual. */
+  .sequencer-wrapper {
+    max-height: 140px;
+  }
+  .sequencer-wrapper svg {
+    width: 100%;
+    height: auto;
+    max-height: 140px;
+  }
+
+  /* Knob row: compact */
+  .knob-row {
+    padding: 4px;
+    gap: 4px;
+  }
+  .knob-row[data-role='params'] {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .knob-row .knob {
+    /* Slightly smaller knobs */
+    transform: scale(0.85);
+    transform-origin: center center;
+  }
+
+  /* Pattern bank: compact slots */
+  .track-card .pattern-bank .pattern-slot {
+    width: 20px;
+    height: 20px;
+    font-size: 9px;
+  }
+
+  /* Mask lane: compact */
+  .mask-lane {
+    gap: 2px;
+  }
+  .mask-label {
+    font-size: 10px;
+  }
+  .mask-row {
+    gap: 2px;
+  }
+
+  /* Playback controls: compact */
+  .playback-controls {
+    gap: 4px;
+  }
+  .playback-select select {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+  .playback-select span {
+    font-size: 10px;
+  }
+
+  /* Metrics: compact */
+  .mini-metrics {
+    gap: 4px;
+  }
+  .mini-axis b {
+    font-size: 12px;
+  }
+  .mini-axis span {
+    font-size: 10px;
+  }
+
+  /* Track name: slightly smaller to save vertical space */
+  .track-name {
+    font-size: 12px;
+  }
+  .track-toggles .toggle {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+}
+
+/* Desktop — wider container, original spacing */
+@media (min-width: 1200px) {
+  .app {
+    max-width: 1440px;
+    padding: 28px 20px 64px;
+    gap: 24px;
+  }
+  .tracks {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
 }
 
 /* Desktop — wider container, original spacing */
