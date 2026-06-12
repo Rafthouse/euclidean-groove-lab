@@ -286,12 +286,28 @@
   opacity: 0.3;
 }
 
+/* Military: select option styling */
+:root[data-theme='military'] select option {
+  background: #131913;
+  color: #b3c9b3;
+}
+:root[data-theme='military'] select option:checked {
+  background: rgba(163, 207, 163, 0.20);
+}
+
 /* Select / dropdown styling */
 :root[data-theme='old-school'] select {
   background: var(--panel);
   border: 1px solid #3A3A3A;
   color: var(--text);
   border-radius: 2px;
+}
+:root[data-theme='old-school'] select option {
+  background: #2A2A2A;
+  color: #CCCCCC;
+}
+:root[data-theme='old-school'] select option:checked {
+  background: rgba(255, 107, 0, 0.15);
 }
 
 /* Labels */
@@ -478,6 +494,13 @@
   color: #f0d8e8;
   border-radius: 6px;
   padding: 4px 10px;
+}
+:root[data-theme='cherry'] select option {
+  background: #2a0f1f;
+  color: #f0d8e8;
+}
+:root[data-theme='cherry'] select option:checked {
+  background: rgba(255, 46, 147, 0.20);
 }
 
 /* Labels */
@@ -742,6 +765,13 @@
   border-radius: 4px;
   padding: 4px 10px;
   letter-spacing: 0.3px;
+}
+:root[data-theme='nostradamus'] select option {
+  background: #14110f;
+  color: #D7C7A2;
+}
+:root[data-theme='nostradamus'] select option:checked {
+  background: rgba(231, 197, 145, 0.15);
 }
 
 :root[data-theme='nostradamus'] label {
@@ -1043,6 +1073,13 @@
   border-radius: 20px;
   padding: 6px 14px;
   letter-spacing: 0.3px;
+}
+:root[data-theme='big-boss'] select option {
+  background: #1a2436;
+  color: #FFFFFF;
+}
+:root[data-theme='big-boss'] select option:checked {
+  background: rgba(90, 180, 255, 0.20);
 }
 
 /* Labels — brighter for readability on clearer glass */
@@ -1387,6 +1424,13 @@
   border-radius: 20px;
   padding: 6px 14px;
   letter-spacing: 0.3px;
+}
+:root[data-theme='university'] select option {
+  background: #1A1D24;
+  color: #EBEDF0;
+}
+:root[data-theme='university'] select option:checked {
+  background: rgba(0, 113, 227, 0.25);
 }
 
 :root[data-theme='university'] label {
@@ -1739,6 +1783,13 @@
   border-radius: 16px;
   padding: 6px 14px;
   letter-spacing: 0.3px;
+}
+:root[data-theme='trip'] select option {
+  background: #0d0518;
+  color: #E8D8FF;
+}
+:root[data-theme='trip'] select option:checked {
+  background: rgba(212, 138, 255, 0.20);
 }
 
 :root[data-theme='trip'] label {
@@ -2215,6 +2266,15 @@
   color-scheme: dark;
 }
 
+/* Default select option styling (applies to Dark Neon and any theme without its own rule) */
+select option {
+  background: #181a21;
+  color: #c7c9d1;
+}
+select option:checked {
+  background: rgba(192, 132, 252, 0.22);
+}
+
 /* ---------- Elements Theme (Alchemical 4 Elements) ---------- */
 :root[data-theme='elements'] {
   --bg: #0f1218;
@@ -2556,6 +2616,14 @@
   border-color: rgba(255, 255, 255, 0.2);
   color: #fff;
 }
+:root[data-theme='elements'] select option {
+  background: #1f2630;
+  color: #ccd2e0;
+}
+:root[data-theme='elements'] select option:checked {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 :root[data-theme='elements'] .toggle.is-on[data-kind='mute'] {
   background: var(--danger);
   border-color: var(--danger);
@@ -2669,6 +2737,19 @@
   border-color: #a89980;
 }
 /* Slightly darker/warmer borders on cream paper */
+:root[data-theme='paper'] .theme-select select,
+:root[data-theme='paper'] .kit-select select {
+  /* Explicit color needed for <option> to inherit properly */
+  color: #534e45;
+}
+:root[data-theme='paper'] select option {
+  background: #efe7d8;
+  color: #534e45;
+}
+:root[data-theme='paper'] select option:checked {
+  background: #e0d5c2;
+}
+
 :root[data-theme='paper'] .track-card {
   border-color: #d4c9b4;
 }
@@ -3553,6 +3634,13 @@ header h1 {
   border: 1.5px solid #1a1a1a;
   background: var(--panel);
   color: #1a1a1a;
+}
+:root[data-theme='bauhaus'] select option {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+:root[data-theme='bauhaus'] select option:checked {
+  background: #d4d4d4;
 }
 
 /* Knob fill in track colour — inherited via --track-color, no override needed */
