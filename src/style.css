@@ -324,23 +324,23 @@
 
 /* Orbit dots — tiny neon LEDs */
 :root[data-theme='neon-void'] .step.rest .step-indicator {
-  fill: rgba(255, 255, 255, 0.06);
+  fill: rgba(255, 255, 255, 0.08);
 }
 :root[data-theme='neon-void'] .track-card[data-voice='kick'] .step.rest .step-indicator {
-  fill: rgba(40, 255, 106, 0.30);
-  filter: drop-shadow(0 0 2px rgba(40, 255, 106, 0.08));
+  fill: rgba(40, 255, 106, 0.48);
+  filter: drop-shadow(0 0 4px rgba(40, 255, 106, 0.15));
 }
 :root[data-theme='neon-void'] .track-card[data-voice='snare'] .step.rest .step-indicator {
-  fill: rgba(255, 122, 0, 0.30);
-  filter: drop-shadow(0 0 2px rgba(255, 122, 0, 0.08));
+  fill: rgba(255, 122, 0, 0.48);
+  filter: drop-shadow(0 0 4px rgba(255, 122, 0, 0.15));
 }
 :root[data-theme='neon-void'] .track-card[data-voice='hat'] .step.rest .step-indicator {
-  fill: rgba(255, 0, 200, 0.30);
-  filter: drop-shadow(0 0 2px rgba(255, 0, 200, 0.08));
+  fill: rgba(255, 0, 200, 0.48);
+  filter: drop-shadow(0 0 4px rgba(255, 0, 200, 0.15));
 }
 :root[data-theme='neon-void'] .track-card[data-voice='bass'] .step.rest .step-indicator {
-  fill: rgba(0, 170, 255, 0.30);
-  filter: drop-shadow(0 0 2px rgba(0, 170, 255, 0.08));
+  fill: rgba(0, 170, 255, 0.48);
+  filter: drop-shadow(0 0 4px rgba(0, 170, 255, 0.15));
 }
 
 :root[data-theme='neon-void'] .guide {
