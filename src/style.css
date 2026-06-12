@@ -4668,23 +4668,7 @@ header h1 {
   border-color: var(--accent);
 }
 
-.preset-select {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--text-dim);
-}
-.preset-select select {
-  background: var(--panel);
-  color: var(--text-hi);
-  border: 1px solid var(--rest);
-  border-radius: 6px;
-  padding: 4px 8px;
-  font: inherit;
-  cursor: pointer;
-  max-width: 160px;
-}
+
 
 /* ---------- drum kit selector ---------- */
 

@@ -6,7 +6,6 @@ import PresetBrowser from './components/PresetBrowser';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import type { GrooveSnapshot } from './engine/preset';
-import { rhythmPresets, getRhythmPreset } from './presets';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading, resetClock, setMidiOut } from './audio';
 import { downloadBytes } from './download';
@@ -71,7 +70,6 @@ export default function App() {
   const [midiSelected, setMidiSelected] = useState<string | null>(null);
   const [midiEnabled, setMidiEnabled] = useState(false);
 
-  const [presetId, setPresetId] = useState<string>('');
   const [presetBrowserOpen, setPresetBrowserOpen] = useState(false);
   const [devMode, setDevMode] = useState(() => {
     try { return localStorage.getItem('groove-dev-mode') === 'true'; }
@@ -100,13 +98,6 @@ export default function App() {
     tracks: tracks.map((t) => ({ ...t })),
     theme,
   }), [bpm, swing, tracks, theme]);
-
-  const handlePresetLoad = useCallback((id: string) => {
-    const preset = getRhythmPreset(id);
-    if (!preset) return;
-    setPresetId(id);
-    setTracksState(preset.tracks);
-  }, []);
 
   const handleLoadGroove = useCallback((groove: GrooveSnapshot) => {
     setBpm(groove.bpm);
@@ -437,21 +428,6 @@ export default function App() {
           />
         </div>
         <DrumKitSelect value={kitId} loading={kitLoading} onChange={handleKitChange} />
-        <label className="preset-select">
-          Preset
-          <select
-            value={presetId}
-            onChange={(e) => handlePresetLoad(e.target.value)}
-            aria-label="Load rhythm preset"
-          >
-            <option value="">—</option>
-            {rhythmPresets.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.name}{'★'.repeat(p.authenticity ?? 0)}
-              </option>
-            ))}
-          </select>
-        </label>
         {midiPorts.length > 0 && (
           <label className="midi-out">
             MIDI
