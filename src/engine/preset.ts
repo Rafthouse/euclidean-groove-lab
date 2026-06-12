@@ -42,6 +42,10 @@ export type PresetCategory =
   | 'Breakbeat'
   | 'Experimental'
   | 'Euclidean Studies'
+  | 'Pure Euclidean'
+  | 'Clave Rotations'
+  | 'African Timelines'
+  | 'Arabic Rhythms'
   | 'User'
   | 'Uncategorised';
 
@@ -52,6 +56,10 @@ export const FACTORY_CATEGORIES: PresetCategory[] = [
   'Breakbeat',
   'Experimental',
   'Euclidean Studies',
+  'Pure Euclidean',
+  'Clave Rotations',
+  'African Timelines',
+  'Arabic Rhythms',
 ];
 
 /** Core preset data — shared by factory and user presets. */
@@ -276,6 +284,133 @@ function hydrateHistoricalPresets(): void {
         swing: 0,
         tracks: h.tracks.map((t) => histTrack(t.vi, t.s, t.h, t.r, t.v)),
         theme: h.theme,
+      },
+      version: 1,
+    });
+  }
+
+  /* ── Pure Euclidean pulse collection ── */
+  const pureEuclidean: { id: string; name: string; desc: string; tags: string[]; s: number; h: number; r: number }[] = [
+    { id: 'euclid-2-5',  name: 'E(2,5)',  desc: 'x . x . .',          tags: ['pure-euclidean', '5-step'],        s: 5,  h: 2, r: 0 },
+    { id: 'euclid-2-7',  name: 'E(2,7)',  desc: 'x . . x . . .',      tags: ['pure-euclidean', '7-step'],        s: 7,  h: 2, r: 0 },
+    { id: 'euclid-3-7',  name: 'E(3,7)',  desc: 'x . x . x . .',      tags: ['pure-euclidean', '7-step'],        s: 7,  h: 3, r: 0 },
+    { id: 'euclid-3-8',  name: 'Tresillo', desc: 'E(3,8) — tresillo foundation: x . . x . . x .',    tags: ['pure-euclidean', 'tresillo', '8-step'],   s: 8,  h: 3, r: 0 },
+    { id: 'euclid-3-10', name: 'E(3,10)', desc: 'x . . x . . x . . .', tags: ['pure-euclidean', '10-step'],       s: 10, h: 3, r: 0 },
+    { id: 'euclid-3-11', name: 'E(3,11)', desc: 'x . . . x . . . x . .', tags: ['pure-euclidean', '11-step'],     s: 11, h: 3, r: 0 },
+    { id: 'euclid-3-14', name: 'E(3,14)', desc: 'x . . . . x . . . . x . . .', tags: ['pure-euclidean', '14-step'], s: 14, h: 3, r: 0 },
+    { id: 'euclid-5-16', name: 'E(5,16)', desc: 'Son Clave prototype — x . . x . . x . . x . . x . . .', tags: ['pure-euclidean', '16-step', 'son-clave-family'], s: 16, h: 5, r: 0 },
+    { id: 'euclid-5-12', name: 'E(5,12)', desc: 'Fume-Fume prototype — x . x . x . . x . x . .',      tags: ['pure-euclidean', '12-step'],       s: 12, h: 5, r: 0 },
+    { id: 'euclid-7-12', name: 'E(7,12)', desc: 'Bembé prototype — x . x . x x . x . x x .',           tags: ['pure-euclidean', '12-step'],       s: 12, h: 7, r: 0 },
+  ];
+  for (const e of pureEuclidean) {
+    if (factoryPresets.find((p) => p.id === e.id)) continue;
+    factoryPresets.push({
+      id: e.id,
+      kind: 'factory',
+      name: e.name,
+      category: 'Pure Euclidean',
+      description: e.desc,
+      tags: e.tags,
+      groove: {
+        bpm: 120,
+        swing: 0,
+        tracks: [
+          histTrack(0, e.s, e.h, e.r),
+          histTrack(1, 1, 0, 0),
+          histTrack(2, 1, 0, 0),
+          histTrack(3, 1, 0, 0),
+        ],
+        theme: 'dark' as ThemeId,
+      },
+      version: 1,
+    });
+  }
+
+  /* ── Clave Rotations — Son Clave 3-2 and 2-3 ── */
+  const claveRotations: { id: string; name: string; desc: string; s: number; h: number; r: number; theme: ThemeId }[] = [
+    { id: 'clave-son-3-2', name: 'Son Clave 3-2', desc: 'E(5,16) R0 — the standard son clave, 3-side first.', s: 16, h: 5, r: 0, theme: 'paper' },
+    { id: 'clave-son-2-3', name: 'Son Clave 2-3', desc: 'E(5,16) R8 — son clave reversed, 2-side first.',    s: 16, h: 5, r: 8, theme: 'paper' },
+  ];
+  for (const c of claveRotations) {
+    if (factoryPresets.find((p) => p.id === c.id)) continue;
+    factoryPresets.push({
+      id: c.id,
+      kind: 'factory',
+      name: c.name,
+      category: 'Clave Rotations',
+      description: c.desc,
+      tags: ['clave', 'rotation', 'son-clave'],
+      groove: {
+        bpm: 120,
+        swing: 0,
+        tracks: [
+          histTrack(0, c.s, c.h, c.r),
+          histTrack(1, c.s, c.h, c.r ^ (c.r === 0 ? 8 : 0)), // inverse rotation on snare
+          histTrack(2, c.s, Math.floor(c.h * 1.6), 0),
+          histTrack(3, c.s, Math.ceil(c.h * 0.6), 0),
+        ],
+        theme: c.theme,
+      },
+      version: 1,
+    });
+  }
+
+  /* ── African Timelines ── */
+  /* ── African Timelines ── */
+  // Each track entry can optionally carry a velocity array.
+  type AfrTrack = { vi: number; s: number; h: number; r: number; v?: number[] };
+  const africanTimelines: { id: string; name: string; desc: string; tags: string[]; tracks: AfrTrack[]; theme: ThemeId }[] = [
+    { id: 'african-fume-fume', name: 'Fume-Fume', desc: 'West African timeline [2-2-3-2-3] — E(5,12) R0', tags: ['african', 'timeline', 'fume-fume', '12-step'],
+      tracks: [{vi:0,s:12,h:5,r:0},{vi:1,s:12,h:2,r:6},{vi:2,s:12,h:4,r:0},{vi:3,s:12,h:3,r:3}], theme: 'military' },
+    { id: 'african-bembe', name: 'Bembe', desc: 'West African timeline [2-2-1-2-2-2-1] — E(7,12) R0', tags: ['african', 'timeline', 'bembe', '12-step'],
+      tracks: [{vi:0,s:12,h:7,r:0},{vi:1,s:12,h:2,r:0},{vi:2,s:12,h:4,r:0,v:[100,85]},{vi:3,s:12,h:3,r:2}], theme: 'elements' },
+    { id: 'african-nandon-bawaa', name: 'Nandon Bawaa', desc: 'Tresillo rotation — E(3,8) R2', tags: ['african', 'timeline', 'tresillo-rotation', '8-step'],
+      tracks: [{vi:0,s:8,h:3,r:2},{vi:1,s:8,h:3,r:0},{vi:2,s:8,h:2,r:0},{vi:3,s:8,h:1,r:1}], theme: 'old-school' },
+    { id: 'african-adowa', name: 'Adowa', desc: 'Akan people — two Tresillo layers: E(3,8) R0 + E(3,8) R1', tags: ['african', 'timeline', 'adowa', 'akan', '8-step'],
+      tracks: [{vi:0,s:8,h:3,r:0},{vi:1,s:8,h:3,r:1},{vi:2,s:8,h:2,r:0},{vi:3,s:8,h:2,r:2}], theme: 'military' },
+  ];
+  for (const a of africanTimelines) {
+    if (factoryPresets.find((p) => p.id === a.id)) continue;
+    factoryPresets.push({
+      id: a.id,
+      kind: 'factory',
+      name: a.name,
+      category: 'African Timelines',
+      description: a.desc,
+      tags: a.tags,
+      groove: {
+        bpm: 120,
+        swing: 0,
+        tracks: a.tracks.map((t) => histTrack(t.vi, t.s, t.h, t.r, t.v)),
+        theme: a.theme,
+      },
+      version: 1,
+    });
+  }
+
+  /* ── Arabic Rhythms ── */
+  const arabic: { id: string; name: string; desc: string; s: number; h: number; r: number; theme: ThemeId }[] = [
+    { id: 'arabic-al-thaqil-al-awwal', name: 'Al-Thaqīl al-Awwal', desc: 'Classical Arabic meter — 5 notes in 16, heavy feel. Described via Safi al-Din mnemonic system.', s: 16, h: 5, r: 0, theme: 'revelation' },
+  ];
+  for (const ar of arabic) {
+    if (factoryPresets.find((p) => p.id === ar.id)) continue;
+    factoryPresets.push({
+      id: ar.id,
+      kind: 'factory',
+      name: ar.name,
+      category: 'Arabic Rhythms',
+      description: ar.desc,
+      tags: ['arabic', 'classical', 'al-thaqil'],
+      groove: {
+        bpm: 90,
+        swing: 0,
+        tracks: [
+          histTrack(0, ar.s, ar.h, ar.r),
+          histTrack(1, ar.s, Math.floor(ar.h * 0.4), 0),
+          histTrack(2, ar.s, Math.ceil(ar.h * 1.4), 0),
+          histTrack(3, ar.s, Math.ceil(ar.h * 0.6), 2),
+        ],
+        theme: ar.theme,
       },
       version: 1,
     });
