@@ -8,7 +8,7 @@
  */
 export type { Pattern } from './types';
 export type { OnsetTime } from './phase';
-export type { Track, TrackPattern, VoiceId, VelocityPattern, GhostModule, DuckingModule } from './track';
+export type { Track, TrackPattern, VoiceId, VelocityPattern, GhostModule, DuckingModule, PatternSlot } from './track';
 export type { PlaybackMode, PlaybackSpeed } from './playback';
 export {
   divider,
@@ -37,6 +37,9 @@ export {
   militaryPreset,
   computeVelocities,
   isStepMuted,
+  snapshotPattern,
+  switchTrackPattern,
+  PATTERN_SLOT_COUNT,
   VELOCITY_PRESETS,
 } from './track';
 

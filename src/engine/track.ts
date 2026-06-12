@@ -1,6 +1,7 @@
 import type { Pattern } from './types';
 import type { PitchSequence } from './pitch';
 import type { PlaybackMode, PlaybackSpeed } from './playback';
+import { computePhaseOffsetForChange } from './playback';
 import { euclid } from './euclidean';
 import { rotate } from './rotate';
 
@@ -105,7 +106,35 @@ export interface Track {
   playbackMode?: PlaybackMode;
   playbackSpeed?: PlaybackSpeed;
   phaseOffset?: number;
+
+  /**
+   * Pattern bank — up to {@link PATTERN_SLOT_COUNT} stored generator snapshots
+   * (slots A–L). The LIVE generator fields (steps/hits/rotation/manualMute) are
+   * always the working copy of `patterns[activePattern]`; switching slots saves
+   * the live fields back into the current slot and loads the target slot, so
+   * each slot's edits are preserved independently (see `switchTrackPattern`).
+   * Sound-design modules (velocity/pitch/ghost) and playback config are NOT part
+   * of a slot — they persist across pattern switches.
+   */
+  patterns?: PatternSlot[];
+  activePattern?: number;
 }
+
+/**
+ * One stored pattern in a track's bank. Captures only the Euclidean GENERATOR
+ * state — the four authoritative inputs to `trackPattern` plus the mask overlay.
+ * Modules are intentionally excluded (they live on the Track and persist across
+ * slot switches).
+ */
+export interface PatternSlot {
+  steps: number;
+  hits: number;
+  rotation: number;
+  manualMute?: boolean[];
+}
+
+/** Number of pattern slots per track (A–L). */
+export const PATTERN_SLOT_COUNT = 12;
 
 /**
  * Ghost Delay module — duplicates the main hit on a probabilistic delayed
@@ -198,6 +227,99 @@ export function isStepMuted(track: Track, globalStep: number): boolean {
   if (!mask || mask.length === 0 || track.steps <= 0) return false;
   const i = ((globalStep % track.steps) + track.steps) % track.steps;
   return mask[i] === true;
+}
+
+/**
+ * Snapshot a track's LIVE generator state into a {@link PatternSlot}. Only the
+ * Euclidean inputs + mask are captured; an all-false mask collapses to
+ * `undefined` so "no overrides" stays the clean default.
+ */
+export function snapshotPattern(track: Track): PatternSlot {
+  const mask =
+    track.manualMute && track.manualMute.some(Boolean)
+      ? track.manualMute.slice()
+      : undefined;
+  return {
+    steps: track.steps,
+    hits: track.hits,
+    rotation: track.rotation,
+    manualMute: mask,
+  };
+}
+
+/**
+ * Switch a track to pattern slot `slot` (0-based), returning a NEW track.
+ *
+ * Contract:
+ *  - The live generator fields are first snapshotted back into the current slot
+ *    (`activePattern`), so the slot you leave keeps its latest edits.
+ *  - The target slot is then loaded into the live fields. An EMPTY target slot
+ *    is materialised as a copy of the snapshot (duplicate-and-diverge), so
+ *    switching never lands on a silent/blank pattern.
+ *  - Generator fields are clamped exactly as `updateTrack` would (hits ≤ steps,
+ *    rotation wrapped, mask length-matched).
+ *  - Musical position is preserved across the (possible) steps change via
+ *    `computePhaseOffsetForChange`, honouring the single-clock invariant — no
+ *    new timing source is introduced; only `phaseOffset` is recomputed.
+ *  - Modules (velocity/pitch/ghost/ducking), volume, mute/solo and playback
+ *    mode/speed are untouched: a slot is a RHYTHM, not a full channel preset.
+ *
+ * `globalStep` is the current clock value (`-1` when stopped) used only for
+ * phase preservation; pass `-1` to skip it.
+ */
+export function switchTrackPattern(
+  track: Track,
+  slot: number,
+  globalStep: number,
+): Track {
+  if (!Number.isInteger(slot) || slot < 0 || slot >= PATTERN_SLOT_COUNT) {
+    return track;
+  }
+  const current = track.activePattern ?? 0;
+  const slots: PatternSlot[] = track.patterns ? track.patterns.slice() : [];
+  const snapshot = snapshotPattern(track);
+  slots[current] = snapshot;
+
+  if (slot === current) {
+    // No movement — just persist the snapshot so the bank reflects live edits.
+    return { ...track, patterns: slots, activePattern: current };
+  }
+
+  const target = slots[slot] ?? snapshot; // empty slot = duplicate current
+  slots[slot] = target; // materialise the loaded slot
+
+  const steps = target.steps;
+  const hits = Math.min(target.hits, steps);
+  const rotation =
+    steps > 0 ? ((target.rotation % steps) + steps) % steps : 0;
+  const mask =
+    target.manualMute &&
+    target.manualMute.length === steps &&
+    target.manualMute.some(Boolean)
+      ? target.manualMute.slice()
+      : undefined;
+
+  const mode: PlaybackMode = track.playbackMode ?? 'forward';
+  const speed: PlaybackSpeed = track.playbackSpeed ?? 1;
+  let phaseOffset = track.phaseOffset ?? 0;
+  if (globalStep >= 0 && track.steps > 0 && steps > 0 && track.steps !== steps) {
+    phaseOffset = computePhaseOffsetForChange(
+      globalStep,
+      mode, speed, track.phaseOffset ?? 0, track.steps,
+      mode, speed, steps,
+    );
+  }
+
+  return {
+    ...track,
+    steps,
+    hits,
+    rotation,
+    manualMute: mask,
+    patterns: slots,
+    activePattern: slot,
+    phaseOffset,
+  };
 }
 
 /**

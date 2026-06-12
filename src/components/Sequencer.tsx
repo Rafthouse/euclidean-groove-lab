@@ -5,8 +5,6 @@ interface SequencerProps {
   mutedSteps?: boolean[];
   /** Currently sounding step while playing, or -1 when stopped. */
   currentStep: number;
-  /** Toggle the manual mute of a generated onset (only onsets are clickable). */
-  onToggleStep?: (step: number) => void;
 }
 
 // Coordinates live in the SVG's own units; visible size is driven entirely
@@ -23,11 +21,18 @@ function coord(index: number, steps: number): { x: number; y: number } {
   };
 }
 
+/**
+ * Pure VISUALISATION of a track's generated Euclidean pattern. It draws what
+ * the engine produced — onsets, rests, the Toussaint polygon, the mute overlay
+ * and the playhead — and is intentionally NON-interactive: there is no manual
+ * step editing here. The rhythm is owned entirely by the generator params
+ * (steps/hits/rotation) and the mask is edited via the dedicated Mask control,
+ * so the ring only ever reflects state, never authors it.
+ */
 export default function Sequencer({
   pattern,
   mutedSteps,
   currentStep,
-  onToggleStep,
 }: SequencerProps) {
   const steps = pattern.length;
   const onsets = pattern.filter(Boolean).length;
@@ -60,23 +65,10 @@ export default function Sequencer({
           'step ' +
           (on ? 'onset' : 'rest') +
           (muted ? ' muted' : '') +
-          (i === localStep ? ' current' : '') +
-          (on && onToggleStep ? ' clickable' : '');
+          (i === localStep ? ' current' : '');
         return (
           <g key={i}>
-            <circle
-              className={classes}
-              cx={x}
-              cy={y}
-              r={on ? 11 : 5}
-              onClick={on && onToggleStep ? () => onToggleStep(i) : undefined}
-              role={on && onToggleStep ? 'button' : undefined}
-              aria-label={
-                on && onToggleStep
-                  ? `${muted ? 'Unmute' : 'Mute'} onset at step ${i}`
-                  : undefined
-              }
-            />
+            <circle className={classes} cx={x} cy={y} r={on ? 11 : 5} />
             {muted && (
               <g className="mute-cross" pointerEvents="none">
                 <line x1={x - 6} y1={y - 6} x2={x + 6} y2={y + 6} />

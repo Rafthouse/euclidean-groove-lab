@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
-import { defaultTracks, renderMidi, serializeMidi, computePhaseOffsetForChange } from './engine';
+import { defaultTracks, renderMidi, serializeMidi, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading, resetClock } from './audio';
@@ -201,6 +201,16 @@ export default function App() {
     );
   }, []);
 
+  // Pattern-bank switch. The heavy lifting (snapshot current slot, load target,
+  // clamp, preserve phase across a steps change) is the pure `switchTrackPattern`
+  // in the engine — App only routes it through state. Single-clock invariant is
+  // untouched: no timing source is created, only `phaseOffset` is recomputed.
+  const switchPattern = useCallback((id: string, slot: number) => {
+    setTracksState((prev) =>
+      prev.map((t) => (t.id === id ? switchTrackPattern(t, slot, gRef.current) : t))
+    );
+  }, []);
+
   const toggleMute = useCallback((id: string) => {
     setTracksState((prev) =>
       prev.map((t) => (t.id === id ? { ...t, mute: !t.mute } : t))
@@ -252,6 +262,7 @@ export default function App() {
             track={track}
             currentStep={currentSteps[track.id] ?? -1}
             onChange={(patch) => updateTrack(track.id, patch)}
+            onSwitchPattern={(slot) => switchPattern(track.id, slot)}
             onToggleMute={() => toggleMute(track.id)}
             onToggleSolo={() => toggleSolo(track.id)}
           />

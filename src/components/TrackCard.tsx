@@ -3,7 +3,8 @@ import PitchLane from './PitchLane';
 import VelocityLane from './VelocityLane';
 import GhostLane from './GhostLane';
 import DuckingLane from './DuckingLane';
-import { trackPattern, onsetCount, density } from '../engine';
+import Knob from './Knob';
+import { trackPattern, onsetCount, density, PATTERN_SLOT_COUNT } from '../engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from '../engine';
 
 // Per-voice module assignment. Adding a module to another voice is a one-line
@@ -20,6 +21,7 @@ interface TrackCardProps {
   track: Track;
   currentStep: number; // -1 when stopped; otherwise the GLOBAL step
   onChange: (patch: Partial<Track>) => void;
+  onSwitchPattern: (slot: number) => void;
   onToggleMute: () => void;
   onToggleSolo: () => void;
 }
@@ -28,12 +30,18 @@ export default function TrackCard({
   track,
   currentStep,
   onChange,
+  onSwitchPattern,
   onToggleMute,
   onToggleSolo,
 }: TrackCardProps) {
   const pattern = trackPattern(track).pulses;
   // --track-color is sourced from CSS by voice (`[data-voice]`), so it follows
   // the active theme (dark neon vs vintage paper) instead of a fixed data color.
+
+  // Local step (for the mask row's playhead echo). The grid below is purely
+  // generated — there is NO manual step authoring; the rhythm comes from the
+  // Euclidean params, and the mask is a mute overlay edited via the Mask row.
+  const localStep = currentStep >= 0 && track.steps > 0 ? currentStep % track.steps : -1;
 
   // Toggle the manual mute overlay for a single generated onset. The mask is
   // step-indexed and kept the same length as the pattern; an all-false mask
@@ -46,6 +54,8 @@ export default function TrackCard({
     mask[step] = !mask[step];
     onChange({ manualMute: mask.some(Boolean) ? mask : undefined });
   };
+
+  const activeSlot = track.activePattern ?? 0;
 
   const cardClass =
     'track-card' +
@@ -80,11 +90,16 @@ export default function TrackCard({
         </div>
       </div>
 
+      <PatternBank
+        track={track}
+        activeSlot={activeSlot}
+        onSwitchPattern={onSwitchPattern}
+      />
+
       <Sequencer
         pattern={pattern}
         mutedSteps={track.manualMute}
         currentStep={currentStep}
-        onToggleStep={toggleStep}
       />
 
       {PITCH_EDITOR_VOICES.includes(track.voiceId) && (
@@ -119,13 +134,6 @@ export default function TrackCard({
           onChange={(v) => onChange({ hits: v })}
         />
         <Slider
-          label="Rotation"
-          value={track.rotation}
-          min={0}
-          max={Math.max(0, track.steps - 1)}
-          onChange={(v) => onChange({ rotation: v })}
-        />
-        <Slider
           label="Volume"
           value={track.volume ?? 100}
           min={0}
@@ -133,6 +141,24 @@ export default function TrackCard({
           onChange={(v) => onChange({ volume: v })}
         />
       </div>
+
+      <div className="knob-row" data-role="rotation">
+        <Knob
+          label="Rotation"
+          value={track.rotation}
+          min={0}
+          max={Math.max(1, track.steps - 1)}
+          step={1}
+          onChange={(v) => onChange({ rotation: v })}
+        />
+      </div>
+
+      <MaskRow
+        pattern={pattern}
+        mutedSteps={track.manualMute}
+        localStep={localStep}
+        onToggleStep={toggleStep}
+      />
 
       <div className="playback-controls">
         <label className="playback-select">
@@ -172,6 +198,93 @@ export default function TrackCard({
           <b>{Math.round(density(pattern) * 100)}%</b>
           <span>Density</span>
         </div>
+      </div>
+    </div>
+  );
+}
+
+interface PatternBankProps {
+  track: Track;
+  activeSlot: number;
+  onSwitchPattern: (slot: number) => void;
+}
+
+/**
+ * Pattern bank selector — 12 slots labelled A–L. The active slot is the live
+ * working copy; other slots show as "stored" once they hold a snapshot. Clicking
+ * a slot saves the current generator state and loads the target (handled by the
+ * pure `switchTrackPattern` in the engine, via App).
+ */
+function PatternBank({ track, activeSlot, onSwitchPattern }: PatternBankProps) {
+  return (
+    <div className="pattern-bank" role="tablist" aria-label={`${track.name} pattern bank`}>
+      {Array.from({ length: PATTERN_SLOT_COUNT }, (_, i) => {
+        const letter = String.fromCharCode(65 + i);
+        const isActive = i === activeSlot;
+        const stored = isActive || !!track.patterns?.[i];
+        return (
+          <button
+            key={i}
+            type="button"
+            role="tab"
+            className={
+              'pattern-slot' +
+              (isActive ? ' is-active' : '') +
+              (stored ? ' is-stored' : '')
+            }
+            aria-selected={isActive}
+            aria-label={`Pattern ${letter}${isActive ? ' (active)' : ''}`}
+            onClick={() => onSwitchPattern(i)}
+          >
+            {letter}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+interface MaskRowProps {
+  pattern: boolean[];
+  mutedSteps?: boolean[];
+  localStep: number;
+  onToggleStep: (step: number) => void;
+}
+
+/**
+ * Mask step toggles — one cell per step. Onset cells are clickable to mute /
+ * unmute the generated hit; rest cells are inert positional markers (there is
+ * nothing to mute). This is the ONLY place the mask is authored — the ring is
+ * pure visualisation. The mask never changes generation, only suppresses output.
+ */
+function MaskRow({ pattern, mutedSteps, localStep, onToggleStep }: MaskRowProps) {
+  return (
+    <div className="mask-lane">
+      <span className="mask-label">Mask</span>
+      <div className="mask-row" role="group" aria-label="Step mask">
+        {pattern.map((on, i) => {
+          const muted = on && !!mutedSteps?.[i];
+          const classes =
+            'mask-cell ' +
+            (on ? 'onset' : 'rest') +
+            (muted ? ' muted' : '') +
+            (i === localStep ? ' is-current' : '');
+          return (
+            <button
+              key={i}
+              type="button"
+              className={classes}
+              disabled={!on}
+              aria-pressed={on ? muted : undefined}
+              aria-label={
+                on
+                  ? `${muted ? 'Unmute' : 'Mute'} step ${i + 1}`
+                  : `Step ${i + 1} (rest)`
+              }
+              onClick={on ? () => onToggleStep(i) : undefined}
+            />
+          );
+        })}
       </div>
     </div>
   );

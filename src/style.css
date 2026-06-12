@@ -2869,6 +2869,91 @@ header h1 {
   font: 500 10px var(--mono);
   color: var(--text-hi);
 }
+/* A lone Rotation knob shouldn't stretch like the ghost knob grid — centre it. */
+.knob-row[data-role='rotation'] {
+  grid-template-columns: auto;
+  justify-content: center;
+}
+
+/* ---------- pattern bank (A–L slots) ---------- */
+.pattern-bank {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3px;
+}
+.pattern-slot {
+  font: 600 10px/1 var(--mono);
+  padding: 5px 0;
+  border-radius: 4px;
+  border: 1px solid var(--rest);
+  background: transparent;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+.pattern-slot:hover {
+  color: var(--text-hi);
+  border-color: var(--text-dim);
+}
+.pattern-slot.is-stored {
+  color: var(--text-hi);
+  border-color: var(--track-color);
+}
+.pattern-slot.is-active {
+  background: var(--track-color);
+  border-color: var(--track-color);
+  color: var(--bg);
+}
+
+/* ---------- mask step toggles ---------- */
+.mask-lane {
+  display: grid;
+  gap: 4px;
+}
+.mask-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+}
+.mask-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+.mask-cell {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  padding: 0;
+  border-radius: 4px;
+  border: 1px solid var(--rest);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, opacity 0.12s ease;
+}
+/* An audible generated onset — filled with the track colour. Click to mute. */
+.mask-cell.onset {
+  background: var(--track-color);
+  border-color: var(--track-color);
+}
+.mask-cell.onset:hover {
+  filter: brightness(1.15);
+}
+/* A muted onset — hollow + dim so it reads as "won't sound". Click to unmute. */
+.mask-cell.onset.muted {
+  background: transparent;
+  border-color: var(--track-color);
+  opacity: 0.45;
+}
+/* A rest — inert positional marker, nothing to mute. */
+.mask-cell.rest {
+  opacity: 0.3;
+  cursor: default;
+}
+.mask-cell.is-current {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--text-hi);
+}
 
 /* ---------- pitch lane (Variant B) ---------- */
 
