@@ -4886,59 +4886,59 @@ header h1 {
   border-top: 1px solid rgba(196, 122, 58, 0.04);
 }
 
-/* ===== Revelation (Medieval Astronomy / Sacred Geometry / Cosmic Manuscript) ===== */
-/* Illuminated manuscript plates, ancient astronomical instruments.
-   Engraved brass and parchment observing signs in the heavens. */
+/* ===== Revelation → Ashen (Cold Observatory / Weathered Silver / Lunar Parchment) ===== */
+/* Ancient astronomical manuscript discovered in a forgotten observatory.
+   Cold parchment, weathered silver, moonlit dust. */
 :root[data-theme='revelation'] {
-  --bg: #171311;
-  --panel: #221c18;
-  --panel-hi: #302721;
-  --text: #e2d7c5;
-  --text-dim: #9c8f7c;
-  --text-hi: #efe7da;
-  --accent: #b08d57;
-  --accent-dim: rgba(176, 141, 87, 0.18);
-  --rest: #3a3026;
-  --current: #b08d57;
-  --danger: #9c2f2f;
-  --warn: #b08d57;
+  --bg: #17191c;
+  --panel: #22262a;
+  --panel-hi: #2f353b;
+  --text: #dde2e6;
+  --text-dim: #8f969d;
+  --text-hi: #eef2f5;
+  --accent: #b4b7ba;
+  --accent-dim: rgba(180, 183, 186, 0.12);
+  --rest: #384046;
+  --current: #b4b7ba;
+  --danger: #8f6f6f;
+  --warn: #b4b7ba;
   --radius: 4px;
   --mono: ui-monospace, Consolas, monospace;
 
-  --color-kick: #9c2f2f;
-  --color-kick-mid: #b84a4a;
-  --color-kick-light: #d46a6a;
-  --color-snare: #b08d57;
-  --color-snare-mid: #c8a86e;
-  --color-snare-light: #dcc48a;
-  --color-hat: #6d8a6b;
-  --color-hat-mid: #86a684;
-  --color-hat-light: #a0c09e;
-  --color-bass: #8a8d96;
-  --color-bass-mid: #a4a7b0;
-  --color-bass-light: #bec1ca;
+  --color-kick: #8f6f6f;
+  --color-kick-mid: #a88484;
+  --color-kick-light: #c09c9c;
+  --color-snare: #b4b7ba;
+  --color-snare-mid: #c8cbce;
+  --color-snare-light: #dcdfe2;
+  --color-hat: #8c969e;
+  --color-hat-mid: #a2acb4;
+  --color-hat-light: #b8c2ca;
+  --color-bass: #6f8590;
+  --color-bass-mid: #859ba6;
+  --color-bass-light: #9bb1bc;
 
-  --card-shadow: 0 0 0 1px rgba(176, 141, 87, 0.05), 0 2px 16px rgba(0, 0, 0, 0.5);
+  --card-shadow: 0 0 0 1px rgba(180, 183, 186, 0.05), 0 2px 16px rgba(0, 0, 0, 0.5);
   color-scheme: dark;
 }
 
-/* Dark parchment — layered warm radials with manuscript grain */
+/* Cold parchment — grey, stone-dusted, moonlit radials with manuscript grain */
 :root[data-theme='revelation'] body {
   background:
-    radial-gradient(ellipse 60% 40% at 25% 15%,   rgba(156, 47, 47, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 35% at 75% 25%,   rgba(176, 141, 87, 0.02) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 30% at 50% 75%,   rgba(138, 141, 150, 0.01) 0%, transparent 50%),
-    #171311;
+    radial-gradient(ellipse 60% 40% at 25% 15%,   rgba(180, 183, 186, 0.02) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 35% at 75% 25%,   rgba(143, 111, 111, 0.015) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 30% at 50% 75%,   rgba(108, 133, 144, 0.01) 0%, transparent 50%),
+    #17191c;
 }
 
-/* Manuscript grain — fine parchment texture */
+/* Manuscript grain — ash-dusted parchment texture (same SVG, reduced tint) */
 :root[data-theme='revelation'] body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.018;
+  opacity: 0.015;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
   background-size: 240px 240px;
 }
@@ -4948,15 +4948,15 @@ header h1 {
   z-index: 1;
 }
 
-/* Cards: illuminated manuscript plates. Engraved brass, parchment.
-   Soft highlights, subtle depth, no glossy modern UI. */
+/* Cards: engraved silver plates. Old observatory instruments.
+   Cold metallic parchment. No brass warmth. */
 :root[data-theme='revelation'] .track-card {
-  background: #221c18;
-  border: 1px solid rgba(176, 141, 87, 0.06);
+  background: #22262a;
+  border: 1px solid rgba(180, 183, 186, 0.06);
   border-radius: 4px;
   box-shadow:
-    inset 0 0.5px 0 0 rgba(176, 141, 87, 0.04),
-    0 0 0 1px rgba(176, 141, 87, 0.05),
+    inset 0 0.5px 0 0 rgba(220, 226, 230, 0.03),
+    0 0 0 1px rgba(180, 183, 186, 0.04),
     0 2px 16px rgba(0, 0, 0, 0.5);
   position: relative;
 }
@@ -4968,7 +4968,7 @@ header h1 {
   left: 4px;
   right: 4px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(176, 141, 87, 0.06), transparent);
+  background: linear-gradient(90deg, transparent, rgba(220, 226, 230, 0.04), transparent);
   pointer-events: none;
 }
 
@@ -4980,7 +4980,7 @@ header h1 {
 }
 :root[data-theme='revelation'] .track-card[data-voice='kick'] .shape {
   fill: color-mix(in srgb, var(--color-kick) 15%, transparent);
-  stroke: rgba(156, 47, 47, 0.18);
+  stroke: rgba(143, 111, 111, 0.15);
 }
 
 :root[data-theme='revelation'] .track-card[data-voice='snare'] {
@@ -4991,7 +4991,7 @@ header h1 {
 }
 :root[data-theme='revelation'] .track-card[data-voice='snare'] .shape {
   fill: color-mix(in srgb, var(--color-snare) 15%, transparent);
-  stroke: rgba(176, 141, 87, 0.18);
+  stroke: rgba(180, 183, 186, 0.15);
 }
 
 :root[data-theme='revelation'] .track-card[data-voice='hat'] {
@@ -5002,7 +5002,7 @@ header h1 {
 }
 :root[data-theme='revelation'] .track-card[data-voice='hat'] .shape {
   fill: color-mix(in srgb, var(--color-hat) 15%, transparent);
-  stroke: rgba(109, 138, 107, 0.15);
+  stroke: rgba(140, 150, 158, 0.15);
 }
 
 :root[data-theme='revelation'] .track-card[data-voice='bass'] {
@@ -5013,31 +5013,31 @@ header h1 {
 }
 :root[data-theme='revelation'] .track-card[data-voice='bass'] .shape {
   fill: color-mix(in srgb, var(--color-bass) 15%, transparent);
-  stroke: rgba(138, 141, 150, 0.15);
+  stroke: rgba(111, 133, 144, 0.15);
 }
 
-/* Kick: short crimson pulse */
+/* Kick: muted blood-ash crimson pulse */
 @keyframes revelation-kick-pulse {
-  0% { r: 11px; fill: #b84a4a; }
-  20% { r: 13px; fill: #d46a6a; filter: drop-shadow(0 0 6px rgba(156, 47, 47, 0.10)); }
+  0% { r: 11px; fill: #a88484; }
+  20% { r: 13px; fill: #c09c9c; filter: drop-shadow(0 0 6px rgba(143, 111, 111, 0.06)); }
   100% { r: 11px; fill: var(--color-kick-mid); filter: none; }
 }
-/* Snare: warm golden flash */
+/* Snare: pale celestial silver flash */
 @keyframes revelation-snare-flash {
-  0% { r: 11px; fill: #c8a86e; }
-  15% { r: 13px; fill: #dcc48a; filter: drop-shadow(0 0 8px rgba(176, 141, 87, 0.08)); }
+  0% { r: 11px; fill: #c8cbce; }
+  15% { r: 13px; fill: #dcdfe2; filter: drop-shadow(0 0 8px rgba(180, 183, 186, 0.06)); }
   100% { r: 11px; fill: var(--color-snare-mid); filter: none; }
 }
-/* Hat: soft olive haze */
+/* Hat: storm grey haze */
 @keyframes revelation-hat-haze {
-  0% { r: 9px; fill: #86a684; }
-  25% { r: 10px; fill: #a0c09e; filter: drop-shadow(0 0 4px rgba(109, 138, 107, 0.05)); }
+  0% { r: 9px; fill: #a2acb4; }
+  25% { r: 10px; fill: #b8c2ca; filter: drop-shadow(0 0 4px rgba(140, 150, 158, 0.04)); }
   100% { r: 9px; fill: var(--color-hat-mid); filter: none; }
 }
-/* Bass: silver shimmer */
+/* Bass: cold blue-grey shimmer */
 @keyframes revelation-bass-shimmer {
-  0% { r: 11px; fill: #a4a7b0; }
-  25% { r: 13px; fill: #bec1ca; filter: drop-shadow(0 0 6px rgba(138, 141, 150, 0.06)); }
+  0% { r: 11px; fill: #859ba6; }
+  25% { r: 13px; fill: #9bb1bc; filter: drop-shadow(0 0 6px rgba(111, 133, 144, 0.05)); }
   100% { r: 11px; fill: var(--color-bass-mid); filter: none; }
 }
 
@@ -5054,15 +5054,15 @@ header h1 {
   animation: revelation-bass-shimmer 400ms ease-in-out forwards;
 }
 
-/* Playhead: aged gold */
+/* Playhead: aged silver */
 :root[data-theme='revelation'] .step.current .step-indicator {
-  fill: #b08d57;
-  stroke: #c8a86e;
+  fill: #b4b7ba;
+  stroke: #c8cbce;
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 6px rgba(176, 141, 87, 0.12));
+  filter: drop-shadow(0 0 6px rgba(180, 183, 186, 0.08));
 }
 :root[data-theme='revelation'] .step.current .visual {
-  fill: #b08d57;
+  fill: #b4b7ba;
 }
 :root[data-theme='revelation'] .step.rest .step-indicator {
   opacity: 0.10;
@@ -5070,51 +5070,51 @@ header h1 {
 
 :root[data-theme='revelation'] .guide {
   fill: none;
-  stroke: rgba(176, 141, 87, 0.03);
+  stroke: rgba(180, 183, 186, 0.03);
   stroke-width: 0.5px;
 }
 
 :root[data-theme='revelation'] .hand {
-  stroke: rgba(176, 141, 87, 0.04);
+  stroke: rgba(180, 183, 186, 0.04);
   stroke-width: 0.5px;
 }
 
 :root[data-theme='revelation'] button {
   border-radius: 4px;
-  border: 1px solid rgba(176, 141, 87, 0.06);
-  background: #302721;
-  color: #e2d7c5;
-  font-weight: 450;
+  border: 1px solid rgba(180, 183, 186, 0.06);
+  background: #2f353b;
+  color: #dde2e6;
+  font-weight: 400;
   letter-spacing: 0.5px;
   padding: 8px 18px;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 :root[data-theme='revelation'] button:hover {
-  background: #3d3229;
-  border-color: #b08d57;
+  background: #3a4249;
+  border-color: #b4b7ba;
 }
 
 :root[data-theme='revelation'] .play {
-  background: #302721;
-  border: 1px solid rgba(176, 141, 87, 0.08);
-  color: #e2d7c5;
+  background: #2f353b;
+  border: 1px solid rgba(180, 183, 186, 0.08);
+  color: #dde2e6;
 }
 :root[data-theme='revelation'] .play.is-playing {
-  background: rgba(176, 141, 87, 0.08);
-  border-color: #b08d57;
-  color: #efe7da;
+  background: rgba(180, 183, 186, 0.06);
+  border-color: #b4b7ba;
+  color: #eef2f5;
 }
 
 :root[data-theme='revelation'] .export,
 :root[data-theme='revelation'] .reset-pattern {
   border-radius: 4px;
-  border: 1px solid rgba(176, 141, 87, 0.06);
-  background: #302721;
-  color: #e2d7c5;
+  border: 1px solid rgba(180, 183, 186, 0.06);
+  background: #2f353b;
+  color: #dde2e6;
 }
 :root[data-theme='revelation'] .export:hover,
 :root[data-theme='revelation'] .reset-pattern:hover {
-  border-color: #b08d57;
+  border-color: #b4b7ba;
 }
 
 :root[data-theme='revelation'] .pattern-slot {
@@ -5124,7 +5124,7 @@ header h1 {
 }
 
 :root[data-theme='revelation'] .mask-label {
-  color: #9c8f7c;
+  color: #8f969d;
 }
 :root[data-theme='revelation'] .mask-cell {
   border-radius: 4px;
@@ -5133,8 +5133,8 @@ header h1 {
   height: 15px;
 }
 :root[data-theme='revelation'] .mask-cell.rest {
-  background: rgba(176, 141, 87, 0.03);
-  border-color: rgba(176, 141, 87, 0.04);
+  background: rgba(180, 183, 186, 0.03);
+  border-color: rgba(180, 183, 186, 0.04);
   opacity: 1;
 }
 :root[data-theme='revelation'] .mask-cell.onset {
@@ -5148,10 +5148,10 @@ header h1 {
   opacity: 0.45;
 }
 :root[data-theme='revelation'] .mask-cell.onset:hover {
-  filter: brightness(1.15);
+  filter: brightness(1.18);
 }
 :root[data-theme='revelation'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #171311, 0 0 0 3px #b08d57;
+  box-shadow: 0 0 0 2px #17191c, 0 0 0 3px #b4b7ba;
 }
 
 :root[data-theme='revelation'] .toggle {
@@ -5160,8 +5160,8 @@ header h1 {
   padding: 4px 12px;
 }
 :root[data-theme='revelation'] .toggle.is-on {
-  background: rgba(176, 141, 87, 0.10);
-  border-color: #b08d57;
+  background: rgba(180, 183, 186, 0.08);
+  border-color: #b4b7ba;
 }
 
 :root[data-theme='revelation'] input[type='range'] {
@@ -5171,15 +5171,15 @@ header h1 {
 :root[data-theme='revelation'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: #302721;
+  background: #2f353b;
 }
 :root[data-theme='revelation'] input[type='range']::-webkit-slider-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #b08d57;
+  background: #b4b7ba;
   border: none;
-  box-shadow: 0 0 0 2px rgba(176, 141, 87, 0.12);
+  box-shadow: 0 0 0 2px rgba(180, 183, 186, 0.10);
   margin-top: -5px;
   transition: transform 0.15s ease;
 }
@@ -5189,71 +5189,71 @@ header h1 {
 :root[data-theme='revelation'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
-  background: #302721;
+  background: #2f353b;
   border: none;
 }
 :root[data-theme='revelation'] input[type='range']::-moz-range-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #b08d57;
+  background: #b4b7ba;
   border: none;
 }
 
 :root[data-theme='revelation'] select {
-  background: #302721;
-  border: 1px solid rgba(176, 141, 87, 0.06);
-  color: #e2d7c5;
+  background: #2f353b;
+  border: 1px solid rgba(180, 183, 186, 0.06);
+  color: #dde2e6;
   border-radius: 4px;
   padding: 6px 14px;
   letter-spacing: 0.5px;
 }
 :root[data-theme='revelation'] select option {
-  background: #221c18;
-  color: #e2d7c5;
+  background: #22262a;
+  color: #dde2e6;
 }
 :root[data-theme='revelation'] select option:checked {
-  background: rgba(176, 141, 87, 0.12);
+  background: rgba(180, 183, 186, 0.10);
 }
 
 :root[data-theme='revelation'] label {
-  color: #9c8f7c;
-  font-weight: 450;
+  color: #8f969d;
+  font-weight: 400;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
 
 :root[data-theme='revelation'] .control-label {
-  color: #9c8f7c;
+  color: #8f969d;
   font-size: 10px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 :root[data-theme='revelation'] .control-label b {
-  color: #c8a86e;
+  color: #c8cbce;
 }
 
 :root[data-theme='revelation'] .bpm b,
 :root[data-theme='revelation'] .swing b {
-  color: #b08d57;
+  color: #b4b7ba;
 }
 
 :root[data-theme='revelation'] h1 {
-  color: #e2d7c5;
+  color: #dde2e6;
   letter-spacing: 4px;
-  font-weight: 350;
+  font-weight: 300;
   font-size: 19px;
 }
 
 :root[data-theme='revelation'] .tagline {
-  color: #9c8f7c;
+  color: #8f969d;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 :root[data-theme='revelation'] .track-name {
-  color: #e2d7c5;
+  color: #dde2e6;
   font-weight: 500;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -5261,24 +5261,24 @@ header h1 {
 }
 
 :root[data-theme='revelation'] .mini-metrics b {
-  color: #c8a86e;
+  color: #c8cbce;
 }
 :root[data-theme='revelation'] .mini-metrics span {
-  color: #9c8f7c;
+  color: #8f969d;
 }
 
 :root[data-theme='revelation'] .playback-select select {
-  background: #302721;
-  border: 1px solid rgba(176, 141, 87, 0.06);
+  background: #2f353b;
+  border: 1px solid rgba(180, 183, 186, 0.06);
   border-radius: 4px;
   padding: 4px 12px;
-  color: #e2d7c5;
+  color: #dde2e6;
 }
 :root[data-theme='revelation'] .playback-select span {
-  color: #9c8f7c;
+  color: #8f969d;
 }
 
 :root[data-theme='revelation'] .module-lane {
-  border-top: 1px solid rgba(176, 141, 87, 0.04);
+  border-top: 1px solid rgba(180, 183, 186, 0.04);
 }
 
