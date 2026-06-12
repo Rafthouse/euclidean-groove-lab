@@ -3128,7 +3128,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* ===== SATISFACTION (Beeswax / Amber / Warm Wood) ===== */
+/* ===== SATISFACTION (Ivory / Cream / Warm Minimal) ===== */
 /* A premium physical instrument — material, warm, tactile.
    Inspired by high-end audio gear from Apple, Teenage Engineering, Elektron.
    No flat digital surfaces. Everything feels like beeswax-coated wood,
@@ -6755,46 +6755,54 @@ header h1 {
   border-top: 1px solid rgba(143, 212, 216, 0.04);
 }
 
-/* ===== Satisfaction (Retro Instrument / Braun / Warm Amber Faceplate) ===== */
-/* Vintage electronic instrument panel ΓÇö printed into the machine.
-   Orange monochrome display, Dieter Rams industrial design.
-   No black backgrounds, no club, no neon. Warm amber on cream. */
+/* ===== Satisfaction (Light Ivory / Braun Minimal / Clean Precision) ===== */
+/* Premium industrial design — Dieter Rams / Apple / Braun / Muji.
+   Warm ivory surfaces, soft cream tones, light beige materials.
+   Clean, airy, precise, elegant. NOT vintage. NOT dark. NOT rustic.
+   Like a precision instrument in a bright sunlit room. */
 :root[data-theme='satisfaction'] {
-  --bg: #ece4d8;
-  --panel: #e0d5c4;
-  --panel-hi: #d4c6b0;
-  --text: #4a3f35;
-  --text-dim: #8a7a66;
-  --text-hi: #2c2420;
-  --accent: #c47a3a;
-  --accent-dim: rgba(196, 122, 58, 0.18);
-  --rest: #c7b8a2;
-  --current: #c47a3a;
-  --danger: #b05030;
-  --warn: #c47a3a;
-  --radius: 3px;
+  --bg: #f5f0e8;
+  --panel: #ece6dc;
+  --panel-hi: #e4dcd0;
+  --text: #3d3832;
+  --text-dim: #9a9082;
+  --text-hi: #25221e;
+  --accent: #c4864a;
+  --accent-dim: rgba(196, 134, 74, 0.14);
+  --rest: #d8cfc0;
+  --current: #c4864a;
+  --danger: #b06048;
+  --warn: #c4864a;
+  --radius: 8px;
   --mono: ui-monospace, 'SF Mono', Consolas, monospace;
 
-  --color-kick: #6b4c30;
-  --color-kick-mid: #8a6638;
-  --color-kick-light: #b08850;
-  --color-snare: #b07040;
-  --color-snare-mid: #c88a4e;
-  --color-snare-light: #d8a468;
-  --color-hat: #9a9068;
-  --color-hat-mid: #b0a678;
-  --color-hat-light: #c8be8e;
-  --color-bass: #7a6a58;
-  --color-bass-mid: #968470;
-  --color-bass-light: #b09e88;
+  /* Track colors — muted, tonal, not brown */
+  --color-kick: #7a6a5a;
+  --color-kick-mid: #9a8876;
+  --color-kick-light: #b8a898;
 
-  --card-shadow: 0 0 0 1px rgba(196, 122, 58, 0.06), 0 1px 4px rgba(0, 0, 0, 0.06);
+  --color-snare: #b08068;
+  --color-snare-mid: #c89a7e;
+  --color-snare-light: #d8b09a;
+
+  --color-hat: #9a9a88;
+  --color-hat-mid: #b0b09c;
+  --color-hat-light: #c8c8b4;
+
+  --color-bass: #8a7a6a;
+  --color-bass-mid: #a09080;
+  --color-bass-light: #b8aa9a;
+
+  --card-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    0 6px 12px rgba(0, 0, 0, 0.05),
+    0 12px 24px rgba(0, 0, 0, 0.03);
   color-scheme: light;
 }
 
-/* Warm cream background ΓÇö clean instrument workbench */
+/* Warm ivory background — like premium paper in sunlight */
 :root[data-theme='satisfaction'] body {
-  background: #ece4d8;
+  background: var(--bg);
 }
 
 :root[data-theme='satisfaction'] .app {
@@ -6802,28 +6810,32 @@ header h1 {
   z-index: 1;
 }
 
-/* Instrument faceplates ΓÇö printed into the panel, not floating.
-   Warm cream cards with subtle amber-toned borders.
-   Think: machine printed interface, not glass UI. */
+/* Panels — manufactured from same warm ivory material.
+   Separation through shadow + ambient occlusion, not borders.
+   Think: precision-machined plastic, not painted metal. */
 :root[data-theme='satisfaction'] .track-card {
-  background: #e0d5c4;
-  border: 1px solid rgba(196, 122, 58, 0.06);
-  border-radius: 3px;
+  background: var(--panel);
+  border: none;
+  border-radius: var(--radius);
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.4),
-    0 0 0 1px rgba(196, 122, 58, 0.06),
-    0 1px 4px rgba(0, 0, 0, 0.06);
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.50),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    0 6px 12px rgba(0, 0, 0, 0.05),
+    0 12px 24px rgba(0, 0, 0, 0.03);
   position: relative;
 }
 
+/* Contact shadow — weighted against surface */
 :root[data-theme='satisfaction'] .track-card::after {
   content: '';
   position: absolute;
-  top: 0;
-  left: 4px;
-  right: 4px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(196, 122, 58, 0.06), transparent);
+  left: 8%;
+  bottom: -4px;
+  width: 84%;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.04);
+  filter: blur(4px);
+  border-radius: 50%;
   pointer-events: none;
 }
 
@@ -6834,8 +6846,9 @@ header h1 {
   fill: var(--color-kick-mid);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-kick) 18%, transparent);
-  stroke: rgba(107, 76, 48, 0.18);
+  fill: color-mix(in srgb, var(--color-kick) 14%, transparent);
+  stroke: var(--color-kick-mid);
+  stroke-opacity: 0.25;
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] {
@@ -6845,8 +6858,9 @@ header h1 {
   fill: var(--color-snare-mid);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
-  stroke: rgba(176, 112, 64, 0.18);
+  fill: color-mix(in srgb, var(--color-snare) 14%, transparent);
+  stroke: var(--color-snare-mid);
+  stroke-opacity: 0.25;
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] {
@@ -6856,8 +6870,9 @@ header h1 {
   fill: var(--color-hat-mid);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
-  stroke: rgba(154, 144, 104, 0.15);
+  fill: color-mix(in srgb, var(--color-hat) 14%, transparent);
+  stroke: var(--color-hat-mid);
+  stroke-opacity: 0.20;
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] {
@@ -6867,33 +6882,30 @@ header h1 {
   fill: var(--color-bass-mid);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-bass) 18%, transparent);
-  stroke: rgba(122, 106, 88, 0.15);
+  fill: color-mix(in srgb, var(--color-bass) 14%, transparent);
+  stroke: var(--color-bass-mid);
+  stroke-opacity: 0.22;
 }
 
-/* Kick: warm impulse on the panel */
 @keyframes satisfaction-kick-pulse {
-  0% { r: 11px; fill: #8a6638; }
-  20% { r: 13px; fill: #b08850; filter: drop-shadow(0 0 4px rgba(107, 76, 48, 0.06)); }
-  100% { r: 11px; fill: var(--color-kick-mid); filter: none; }
+  0%   { r: 10px; fill: var(--color-kick-mid); }
+  20%  { r: 12px; fill: var(--color-kick-light); filter: drop-shadow(0 0 6px rgba(122, 106, 90, 0.06)); }
+  100% { r: 10px; fill: var(--color-kick-mid); filter: none; }
 }
-/* Snare: amber highlight */
 @keyframes satisfaction-snare-flash {
-  0% { r: 11px; fill: #c88a4e; }
-  15% { r: 13px; fill: #d8a468; filter: drop-shadow(0 0 6px rgba(176, 112, 64, 0.05)); }
-  100% { r: 11px; fill: var(--color-snare-mid); filter: none; }
+  0%   { r: 10px; fill: var(--color-snare-mid); }
+  15%  { r: 12px; fill: var(--color-snare-light); filter: drop-shadow(0 0 6px rgba(176, 128, 104, 0.05)); }
+  100% { r: 10px; fill: var(--color-snare-mid); filter: none; }
 }
-/* Hat: soft dusty shimmer */
 @keyframes satisfaction-hat-shimmer {
-  0% { r: 9px; fill: #b0a678; }
-  25% { r: 10px; fill: #c8be8e; filter: drop-shadow(0 0 3px rgba(154, 144, 104, 0.04)); }
+  0%   { r: 9px; fill: var(--color-hat-mid); }
+  25%  { r: 11px; fill: var(--color-hat-light); filter: drop-shadow(0 0 4px rgba(154, 154, 136, 0.04)); }
   100% { r: 9px; fill: var(--color-hat-mid); filter: none; }
 }
-/* Bass: warm brown glow */
 @keyframes satisfaction-bass-glow {
-  0% { r: 11px; fill: #968470; }
-  25% { r: 13px; fill: #b09e88; filter: drop-shadow(0 0 6px rgba(122, 106, 88, 0.05)); }
-  100% { r: 11px; fill: var(--color-bass-mid); filter: none; }
+  0%   { r: 10px; fill: var(--color-bass-mid); }
+  25%  { r: 12px; fill: var(--color-bass-light); filter: drop-shadow(0 0 6px rgba(138, 122, 106, 0.05)); }
+  100% { r: 10px; fill: var(--color-bass-mid); filter: none; }
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.onset.current {
@@ -6909,92 +6921,116 @@ header h1 {
   animation: satisfaction-bass-glow 350ms ease-out forwards;
 }
 
-/* Playhead: warm amber indicator */
+/* Playhead — warm accent, not amber-brown */
 :root[data-theme='satisfaction'] .step.current .step-indicator {
-  fill: #c47a3a;
-  stroke: #c88a4e;
+  fill: var(--accent);
+  stroke: color-mix(in srgb, var(--accent) 60%, #fff);
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 4px rgba(196, 122, 58, 0.10));
+  filter: drop-shadow(0 0 6px rgba(196, 134, 74, 0.10));
 }
 :root[data-theme='satisfaction'] .step.current .visual {
-  fill: #c47a3a;
+  fill: var(--accent);
 }
 :root[data-theme='satisfaction'] .step.rest .step-indicator {
-  opacity: 0.12;
+  opacity: 0.10;
 }
 
 :root[data-theme='satisfaction'] .guide {
   fill: none;
-  stroke: rgba(196, 122, 58, 0.04);
+  stroke: rgba(196, 134, 74, 0.04);
   stroke-width: 0.5px;
 }
 
 :root[data-theme='satisfaction'] .hand {
-  stroke: rgba(196, 122, 58, 0.05);
+  stroke: rgba(196, 134, 74, 0.04);
   stroke-width: 0.5px;
 }
 
+/* Buttons — machined ivory plastic, slightly darker than surface.
+   NOT dark, NOT capsules, NOT guitar-pedal. */
 :root[data-theme='satisfaction'] button {
-  border-radius: 3px;
-  border: 1px solid rgba(196, 122, 58, 0.08);
-  background: #d4c6b0;
-  color: #4a3f35;
+  border-radius: 6px;
+  border: none;
+  background: var(--panel-hi);
+  color: var(--text);
   font-weight: 500;
   letter-spacing: 0.3px;
   padding: 8px 18px;
   font-family: var(--mono);
   font-size: 11px;
-  transition: background 0.12s ease, border-color 0.12s ease;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.40),
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: background 0.12s ease, box-shadow 0.12s ease;
 }
 :root[data-theme='satisfaction'] button:hover {
-  background: #cabb9e;
-  border-color: #c47a3a;
+  background: #ded4c6;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
+/* Play — elevated but not dark */
 :root[data-theme='satisfaction'] .play {
-  background: #d4c6b0;
-  border: 1px solid rgba(196, 122, 58, 0.10);
-  color: #4a3f35;
+  background: var(--panel-hi);
+  border: none;
+  color: var(--text);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.40),
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 4px 8px rgba(0, 0, 0, 0.05);
 }
 :root[data-theme='satisfaction'] .play.is-playing {
-  background: rgba(196, 122, 58, 0.08);
-  border-color: #c47a3a;
-  color: #2c2420;
+  background: color-mix(in srgb, var(--accent) 10%, var(--panel));
+  color: var(--text-hi);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
+/* Export / Reset — same material */
 :root[data-theme='satisfaction'] .export,
 :root[data-theme='satisfaction'] .reset-pattern {
-  border-radius: 3px;
-  border: 1px solid rgba(196, 122, 58, 0.08);
-  background: #d4c6b0;
-  color: #4a3f35;
+  border-radius: 6px;
+  border: none;
+  background: var(--panel-hi);
+  color: var(--text);
   font-family: var(--mono);
   font-size: 11px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.40),
+    0 1px 2px rgba(0, 0, 0, 0.06);
 }
 :root[data-theme='satisfaction'] .export:hover,
 :root[data-theme='satisfaction'] .reset-pattern:hover {
-  border-color: #c47a3a;
+  background: #ded4c6;
 }
 
 :root[data-theme='satisfaction'] .pattern-slot {
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 5px 0;
   font-size: 10px;
 }
 
+/* Mask controls — light, tonal */
 :root[data-theme='satisfaction'] .mask-label {
-  color: #8a7a66;
+  color: var(--text-dim);
 }
 :root[data-theme='satisfaction'] .mask-cell {
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 0;
   width: 15px;
   height: 15px;
+  border: none;
+  background: rgba(196, 134, 74, 0.04);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 :root[data-theme='satisfaction'] .mask-cell.rest {
-  background: rgba(196, 122, 58, 0.03);
-  border-color: rgba(196, 122, 58, 0.05);
+  background: rgba(196, 134, 74, 0.02);
   opacity: 1;
+  cursor: default;
 }
 :root[data-theme='satisfaction'] .mask-cell.onset {
   background: var(--track-color);
@@ -7003,83 +7039,114 @@ header h1 {
 }
 :root[data-theme='satisfaction'] .mask-cell.onset.muted {
   background: transparent;
-  border-color: var(--track-color);
-  opacity: 0.50;
+  border: 1px solid var(--track-color);
+  opacity: 0.45;
 }
 :root[data-theme='satisfaction'] .mask-cell.onset:hover {
-  filter: brightness(0.95);
+  filter: brightness(1.08);
 }
 :root[data-theme='satisfaction'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #ece4d8, 0 0 0 3px #c47a3a;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--accent);
 }
 
+/* Toggles — same material language */
 :root[data-theme='satisfaction'] .toggle {
-  border-radius: 3px;
+  border-radius: 6px;
   min-width: 32px;
   padding: 4px 12px;
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.5px;
+  background: var(--panel-hi);
+  border: none;
+  color: var(--text-dim);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+    0 1px 1px rgba(0, 0, 0, 0.04);
+}
+:root[data-theme='satisfaction'] .toggle:hover {
+  color: var(--text);
+  background: #ded4c6;
 }
 :root[data-theme='satisfaction'] .toggle.is-on {
-  background: rgba(196, 122, 58, 0.10);
-  border-color: #c47a3a;
+  background: color-mix(in srgb, var(--accent) 12%, var(--panel-hi));
+  color: var(--text-hi);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.30),
+    0 1px 1px rgba(0, 0, 0, 0.06);
 }
 
+/* Sliders */
 :root[data-theme='satisfaction'] input[type='range'] {
-  height: 3px;
+  height: 4px;
   cursor: pointer;
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-runnable-track {
-  height: 3px;
-  border-radius: 1.5px;
-  background: #c7b8a2;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(196, 134, 74, 0.08);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb {
-  width: 13px;
-  height: 13px;
-  border-radius: 0;
-  background: #c47a3a;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
   border: none;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.20),
+    0 1px 2px rgba(0, 0, 0, 0.10);
   margin-top: -5px;
-  transition: transform 0.10s ease;
+  transition: transform 0.10s ease, box-shadow 0.10s ease;
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb:hover {
-  transform: scale(1.10);
+  transform: scale(1.12);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
+    0 1px 3px rgba(0, 0, 0, 0.12);
 }
 :root[data-theme='satisfaction'] input[type='range']::-moz-range-track {
-  height: 3px;
-  border-radius: 1.5px;
-  background: #c7b8a2;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(196, 134, 74, 0.08);
   border: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 :root[data-theme='satisfaction'] input[type='range']::-moz-range-thumb {
-  width: 13px;
-  height: 13px;
-  border-radius: 0;
-  background: #c47a3a;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
   border: none;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.20),
+    0 1px 2px rgba(0, 0, 0, 0.10);
 }
 
+/* Select/dropdowns — light, same material family */
 :root[data-theme='satisfaction'] select {
-  background: #d4c6b0;
-  border: 1px solid rgba(196, 122, 58, 0.08);
-  color: #4a3f35;
-  border-radius: 3px;
+  background: var(--panel-hi);
+  border: none;
+  color: var(--text);
+  border-radius: 6px;
   padding: 6px 14px;
   font-family: var(--mono);
   font-size: 11px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.05);
 }
 :root[data-theme='satisfaction'] select option {
-  background: #e0d5c4;
-  color: #4a3f35;
+  background: var(--panel);
+  color: var(--text);
 }
 :root[data-theme='satisfaction'] select option:checked {
-  background: rgba(196, 122, 58, 0.12);
+  background: rgba(196, 134, 74, 0.10);
 }
 
+/* Typography — clean, warm, restrained */
 :root[data-theme='satisfaction'] label {
-  color: #8a7a66;
+  color: var(--text-dim);
   font-weight: 450;
   letter-spacing: 0.3px;
   font-family: var(--mono);
@@ -7087,33 +7154,35 @@ header h1 {
 }
 
 :root[data-theme='satisfaction'] .control-label {
-  color: #8a7a66;
+  color: var(--text-dim);
   font-size: 10px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 :root[data-theme='satisfaction'] .control-label b {
-  color: #8a6638;
+  color: var(--accent);
 }
 
 :root[data-theme='satisfaction'] .bpm b,
 :root[data-theme='satisfaction'] .swing b {
-  color: #c47a3a;
+  color: var(--accent);
 }
 
 :root[data-theme='satisfaction'] h1 {
-  color: #4a3f35;
+  color: var(--text);
+  font-weight: 400;
+  letter-spacing: 2px;
 }
 
 :root[data-theme='satisfaction'] .tagline {
-  color: #8a7a66;
+  color: var(--text-dim);
   font-size: 11px;
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
 
 :root[data-theme='satisfaction'] .track-name {
-  color: #4a3f35;
+  color: var(--text);
   font-weight: 500;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -7122,29 +7191,46 @@ header h1 {
 }
 
 :root[data-theme='satisfaction'] .mini-metrics b {
-  color: #8a6638;
+  color: var(--accent);
 }
 :root[data-theme='satisfaction'] .mini-metrics span {
-  color: #8a7a66;
+  color: var(--text-dim);
 }
 
 :root[data-theme='satisfaction'] .playback-select select {
-  background: #d4c6b0;
-  border: 1px solid rgba(196, 122, 58, 0.08);
-  border-radius: 3px;
+  background: var(--panel-hi);
+  border: none;
+  border-radius: 6px;
   padding: 4px 12px;
-  color: #4a3f35;
+  color: var(--text);
   font-family: var(--mono);
   font-size: 11px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.05);
 }
 :root[data-theme='satisfaction'] .playback-select span {
-  color: #8a7a66;
+  color: var(--text-dim);
 }
 
 :root[data-theme='satisfaction'] .module-lane {
-  border-top: 1px solid rgba(196, 122, 58, 0.04);
+  border-top: 1px solid rgba(196, 134, 74, 0.05);
 }
 
+/* Master scope — clean panel, same material */
+:root[data-theme='satisfaction'] .master-scope {
+  background: var(--panel-hi);
+  border: none;
+  border-radius: var(--radius);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.40),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.03),
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    0 6px 12px rgba(0, 0, 0, 0.04);
+}
+:root[data-theme='satisfaction'] .master-scope .oscilloscope-canvas {
+  opacity: 0.85;
+}
 /* ===== Ashes (Cold Observatory / Weathered Silver / Lunar Parchment) ===== */
 /* Ancient astronomical manuscript discovered in a forgotten observatory.
    Cold parchment, weathered silver, moonlit dust. */
