@@ -293,9 +293,9 @@
 :root[data-theme='old-school'] * {
   box-shadow: none;
 }
-/* ---------- Barbie Theme (High-contrast synth-pop) ---------- */
+/* ---------- Cherry Theme (High-contrast synth-pop) ---------- */
 /* Dark deep base with controlled pink accents for readability. */
-:root[data-theme='barbie'] {
+:root[data-theme='cherry'] {
   --bg: #1a0b14;
   --panel: rgba(255, 79, 163, 0.08);
   --panel-hi: rgba(255, 79, 163, 0.14);
@@ -333,7 +333,7 @@
 }
 
 /* Background: dark wine base with subtle gradient overlay */
-:root[data-theme='barbie'] body {
+:root[data-theme='cherry'] body {
   background:
     radial-gradient(ellipse 100% 60% at 30% 0%, rgba(58, 18, 48, 0.6) 0%, transparent 70%),
     radial-gradient(ellipse 80% 50% at 70% 100%, rgba(42, 15, 31, 0.4) 0%, transparent 60%),
@@ -341,7 +341,7 @@
 }
 
 /* Track cards: structured panels on dark background */
-:root[data-theme='barbie'] .track-card {
+:root[data-theme='cherry'] .track-card {
   background: rgba(255, 79, 163, 0.08);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
@@ -350,67 +350,67 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
-:root[data-theme='barbie'] .track-card[data-voice='kick'] {
+:root[data-theme='cherry'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
 }
-:root[data-theme='barbie'] .track-card[data-voice='kick'] .step.onset {
+:root[data-theme='cherry'] .track-card[data-voice='kick'] .step.onset {
   fill: var(--color-kick-mid);
 }
-:root[data-theme='barbie'] .track-card[data-voice='kick'] .shape {
+:root[data-theme='cherry'] .track-card[data-voice='kick'] .shape {
   fill: color-mix(in srgb, var(--color-kick) 22%, transparent);
   stroke: var(--color-kick-mid);
 }
 
-:root[data-theme='barbie'] .track-card[data-voice='snare'] {
+:root[data-theme='cherry'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare);
 }
-:root[data-theme='barbie'] .track-card[data-voice='snare'] .step.onset {
+:root[data-theme='cherry'] .track-card[data-voice='snare'] .step.onset {
   fill: var(--color-snare-mid);
 }
-:root[data-theme='barbie'] .track-card[data-voice='snare'] .shape {
+:root[data-theme='cherry'] .track-card[data-voice='snare'] .shape {
   fill: color-mix(in srgb, var(--color-snare) 22%, transparent);
   stroke: var(--color-snare-mid);
 }
 
-:root[data-theme='barbie'] .track-card[data-voice='hat'] {
+:root[data-theme='cherry'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat);
 }
-:root[data-theme='barbie'] .track-card[data-voice='hat'] .step.onset {
+:root[data-theme='cherry'] .track-card[data-voice='hat'] .step.onset {
   fill: var(--color-hat-mid);
 }
-:root[data-theme='barbie'] .track-card[data-voice='hat'] .shape {
+:root[data-theme='cherry'] .track-card[data-voice='hat'] .shape {
   fill: color-mix(in srgb, var(--color-hat) 25%, transparent);
   stroke: var(--color-hat-mid);
 }
 
-:root[data-theme='barbie'] .track-card[data-voice='bass'] {
+:root[data-theme='cherry'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass);
 }
-:root[data-theme='barbie'] .track-card[data-voice='bass'] .step.onset {
+:root[data-theme='cherry'] .track-card[data-voice='bass'] .step.onset {
   fill: var(--color-bass-mid);
 }
-:root[data-theme='barbie'] .track-card[data-voice='bass'] .shape {
+:root[data-theme='cherry'] .track-card[data-voice='bass'] .shape {
   fill: color-mix(in srgb, var(--color-bass) 22%, transparent);
   stroke: var(--color-bass-mid);
 }
 
 /* Playhead: pink beam, no heavy glow */
-:root[data-theme='barbie'] .step.current .step-indicator {
+:root[data-theme='cherry'] .step.current .step-indicator {
   fill: #ff2e93;
   stroke: #ff6bd6;
   stroke-width: 2px;
 }
-:root[data-theme='barbie'] .step.current .visual {
+:root[data-theme='cherry'] .step.current .visual {
   fill: #ff2e93;
 }
 
 /* Rest steps: dim but visible */
-:root[data-theme='barbie'] .step.rest .step-indicator {
+:root[data-theme='cherry'] .step.rest .step-indicator {
   opacity: 0.30;
 }
 
 /* Controls: rounded UI */
-:root[data-theme='barbie'] button {
+:root[data-theme='cherry'] button {
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 79, 163, 0.10);
@@ -419,36 +419,36 @@
   padding: 6px 14px;
   transition: background 0.15s;
 }
-:root[data-theme='barbie'] button:hover {
+:root[data-theme='cherry'] button:hover {
   background: rgba(255, 79, 163, 0.22);
 }
 
-:root[data-theme='barbie'] .play {
+:root[data-theme='cherry'] .play {
   background: #ff2e93;
   color: #ffffff;
   border: none;
 }
-:root[data-theme='barbie'] .play.is-playing {
+:root[data-theme='cherry'] .play.is-playing {
   background: rgba(255, 79, 163, 0.14);
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-:root[data-theme='barbie'] .export {
+:root[data-theme='cherry'] .export {
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 79, 163, 0.10);
 }
 
 /* Sliders */
-:root[data-theme='barbie'] input[type='range'] {
+:root[data-theme='cherry'] input[type='range'] {
   height: 4px;
 }
-:root[data-theme='barbie'] input[type='range']::-webkit-slider-runnable-track {
+:root[data-theme='cherry'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.12);
 }
-:root[data-theme='barbie'] input[type='range']::-webkit-slider-thumb {
+:root[data-theme='cherry'] input[type='range']::-webkit-slider-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
@@ -459,7 +459,7 @@
 }
 
 /* Select */
-:root[data-theme='barbie'] select {
+:root[data-theme='cherry'] select {
   background: rgba(255, 79, 163, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.10);
   color: #f0d8e8;
@@ -468,14 +468,14 @@
 }
 
 /* Labels */
-:root[data-theme='barbie'] label {
+:root[data-theme='cherry'] label {
   color: rgba(240, 216, 232, 0.7);
   font-weight: 500;
 }
 
 /* Brightness labels on play button */
-:root[data-theme='barbie'] .bpm b,
-:root[data-theme='barbie'] .swing b {
+:root[data-theme='cherry'] .bpm b,
+:root[data-theme='cherry'] .swing b {
   color: #ffb8e8;
 }
 
