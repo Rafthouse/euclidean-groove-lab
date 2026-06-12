@@ -794,17 +794,9 @@
   color-scheme: dark;
 }
 
-/* Background: compressed graphite — dark, matte, extremely fine grain */
+/* Background: clean premium anthracite — flat, matte, nothing more */
 :root[data-theme='big-boss'] body {
-  background:
-    /* Base: layered charcoal tones for depth */
-    radial-gradient(ellipse 60% 40% at 25% 15%, #1C1C1C 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 75% 80%, #161616 0%, transparent 55%),
-    /* Subtle graphite grain — tiny dots like pencil lead particles */
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E"),
-    #111111;
-  background-size: 200px 200px;
-  background-repeat: repeat;
+  background: #171717;
 }
 
 :root[data-theme='big-boss'] .app {
