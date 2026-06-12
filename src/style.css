@@ -293,61 +293,62 @@
 :root[data-theme='old-school'] * {
   box-shadow: none;
 }
-/* ---------- Cherry Theme (High-contrast synth-pop) ---------- */
-/* Dark deep base with controlled pink accents for readability. */
+/* ---------- Cherry Theme (Premium luxury Barbie) ---------- */
+/* Vibrant pink background with deep raspberry/dark rose UI.
+   Fashion-magazine / luxury cosmetics aesthetic. */
 :root[data-theme='cherry'] {
-  --bg: #1a0b14;
-  --panel: rgba(255, 79, 163, 0.08);
-  --panel-hi: rgba(255, 79, 163, 0.14);
-  --text: #f0d8e8;
-  --text-dim: rgba(240, 216, 232, 0.55);
-  --text-hi: #ffffff;
-  --accent: #ff2e93;
-  --accent-dim: rgba(255, 46, 147, 0.20);
-  --rest: rgba(255, 150, 200, 0.12);
-  --current: #ff2e93;
-  --danger: #ff6bd6;
-  --warn: #ffe1f2;
+  --bg: #FF5FA2;
+  --panel: rgba(194, 24, 91, 0.25);
+  --panel-hi: rgba(173, 20, 87, 0.30);
+  --text: #2D0A18;
+  --text-dim: rgba(45, 10, 24, 0.55);
+  --text-hi: #FFFFFF;
+  --accent: #880E4F;
+  --accent-dim: rgba(136, 14, 79, 0.20);
+  --rest: rgba(136, 14, 79, 0.15);
+  --current: #FFFFFF;
+  --danger: #C2185B;
+  --warn: #AD1457;
   --radius: 8px;
   --mono: ui-monospace, Consolas, monospace;
 
-  /* Track colors — readable pastels on dark */
-  --color-kick: #ff6bd6;
-  --color-kick-mid: #ff90df;
-  --color-kick-light: #ffb8e8;
+  /* Track colors — dark rose / wine tones on pink bg */
+  --color-kick: #880E4F;
+  --color-kick-mid: #C2185B;
+  --color-kick-light: #E0407A;
 
-  --color-snare: #ff2e93;
-  --color-snare-mid: #ff5aaa;
-  --color-snare-light: #ff86c4;
+  --color-snare: #AD1457;
+  --color-snare-mid: #D63670;
+  --color-snare-light: #EC7DA0;
 
-  --color-hat: #b0d0ff;
-  --color-hat-mid: #c8e0ff;
-  --color-hat-light: #e0f0ff;
+  --color-hat: #4A148C;
+  --color-hat-mid: #7B1FA2;
+  --color-hat-light: #B39DDB;
 
-  --color-bass: #ff6bd6;
-  --color-bass-mid: #ff90df;
-  --color-bass-light: #ffb8e8;
+  --color-bass: #880E4F;
+  --color-bass-mid: #C2185B;
+  --color-bass-light: #E0407A;
 
-  --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-  color-scheme: dark;
+  --card-shadow: 0 4px 20px rgba(136, 14, 79, 0.25);
+  color-scheme: light;
 }
 
-/* Background: dark wine base with subtle gradient overlay */
+/* Background: solid vibrant Barbie pink with subtle luxury sheen */
 :root[data-theme='cherry'] body {
   background:
-    radial-gradient(ellipse 100% 60% at 30% 0%, rgba(58, 18, 48, 0.6) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 50% at 70% 100%, rgba(42, 15, 31, 0.4) 0%, transparent 60%),
-    linear-gradient(180deg, #2a0f1f 0%, #3a1230 30%, #1a0b14 100%);
+    radial-gradient(ellipse 140% 60% at 20% 0%, rgba(255, 107, 170, 0.3) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 40% at 80% 100%, rgba(194, 24, 91, 0.15) 0%, transparent 60%),
+    #FF5FA2;
 }
 
-/* Track cards: structured panels on dark background */
+/* Track cards: deep raspberry panels, not white */
 :root[data-theme='cherry'] .track-card {
-  background: rgba(255, 79, 163, 0.08);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  background: rgba(194, 24, 91, 0.20);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(136, 14, 79, 0.15);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(136, 14, 79, 0.25);
 }
 
 :root[data-theme='cherry'] .track-card[data-voice='kick'] {
@@ -357,7 +358,7 @@
   fill: var(--color-kick-mid);
 }
 :root[data-theme='cherry'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-kick) 22%, transparent);
+  fill: color-mix(in srgb, var(--color-kick) 25%, transparent);
   stroke: var(--color-kick-mid);
 }
 
@@ -368,7 +369,7 @@
   fill: var(--color-snare-mid);
 }
 :root[data-theme='cherry'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-snare) 22%, transparent);
+  fill: color-mix(in srgb, var(--color-snare) 25%, transparent);
   stroke: var(--color-snare-mid);
 }
 
@@ -390,93 +391,116 @@
   fill: var(--color-bass-mid);
 }
 :root[data-theme='cherry'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-bass) 22%, transparent);
+  fill: color-mix(in srgb, var(--color-bass) 25%, transparent);
   stroke: var(--color-bass-mid);
 }
 
-/* Playhead: pink beam, no heavy glow */
+/* Playhead: white on dark rose steps */
 :root[data-theme='cherry'] .step.current .step-indicator {
-  fill: #ff2e93;
-  stroke: #ff6bd6;
+  fill: #FFFFFF;
+  stroke: #FFFFFF;
   stroke-width: 2px;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
 }
 :root[data-theme='cherry'] .step.current .visual {
-  fill: #ff2e93;
+  fill: #FFFFFF;
 }
 
-/* Rest steps: dim but visible */
+/* Rest steps: dim dark rose */
 :root[data-theme='cherry'] .step.rest .step-indicator {
-  opacity: 0.30;
+  opacity: 0.25;
 }
 
-/* Controls: rounded UI */
+/* Controls: deep rose / raspberry buttons */
 :root[data-theme='cherry'] button {
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 79, 163, 0.10);
-  color: #f0d8e8;
-  font-weight: 500;
-  padding: 6px 14px;
-  transition: background 0.15s;
+  border-radius: 20px;
+  border: 1px solid rgba(136, 14, 79, 0.20);
+  background: rgba(194, 24, 91, 0.30);
+  color: #FFFFFF;
+  font-weight: 600;
+  padding: 6px 16px;
+  letter-spacing: 0.3px;
+  transition: background 0.15s, box-shadow 0.15s;
 }
 :root[data-theme='cherry'] button:hover {
-  background: rgba(255, 79, 163, 0.22);
+  background: rgba(194, 24, 91, 0.50);
+  box-shadow: 0 2px 10px rgba(136, 14, 79, 0.20);
 }
 
 :root[data-theme='cherry'] .play {
-  background: #ff2e93;
-  color: #ffffff;
+  background: linear-gradient(135deg, #C2185B, #AD1457);
+  color: #FFFFFF;
   border: none;
+  box-shadow: 0 4px 14px rgba(136, 14, 79, 0.35);
 }
 :root[data-theme='cherry'] .play.is-playing {
-  background: rgba(255, 79, 163, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(173, 20, 87, 0.40);
+  border: 1px solid rgba(255, 255, 255, 0.20);
 }
 
 :root[data-theme='cherry'] .export {
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 79, 163, 0.10);
+  border-radius: 20px;
+  border: 1px solid rgba(136, 14, 79, 0.20);
+  background: rgba(194, 24, 91, 0.30);
+  color: #FFFFFF;
 }
 
-/* Sliders */
+/* Sliders: dark rose tracks, white thumbs */
 :root[data-theme='cherry'] input[type='range'] {
   height: 4px;
 }
 :root[data-theme='cherry'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(136, 14, 79, 0.25);
 }
 :root[data-theme='cherry'] input[type='range']::-webkit-slider-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #ff2e93;
-  border: none;
+  background: #FFFFFF;
+  border: 2px solid #C2185B;
   box-shadow: none;
   margin-top: -5px;
 }
 
-/* Select */
+/* Select: deep rose dropdown */
 :root[data-theme='cherry'] select {
-  background: rgba(255, 79, 163, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  color: #f0d8e8;
-  border-radius: 6px;
+  background: rgba(194, 24, 91, 0.25);
+  border: 1px solid rgba(136, 14, 79, 0.20);
+  color: #FFFFFF;
+  border-radius: 8px;
   padding: 4px 10px;
-}
-
-/* Labels */
-:root[data-theme='cherry'] label {
-  color: rgba(240, 216, 232, 0.7);
   font-weight: 500;
 }
 
-/* Brightness labels on play button */
+/* Labels: dark burgundy */
+:root[data-theme='cherry'] label {
+  color: rgba(45, 10, 24, 0.8);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+/* BPM / Swing values */
 :root[data-theme='cherry'] .bpm b,
 :root[data-theme='cherry'] .swing b {
-  color: #ffb8e8;
+  color: #880E4F;
+}
+
+/* Header */
+:root[data-theme='cherry'] h1 {
+  color: #FFFFFF;
+  text-shadow: 0 2px 8px rgba(136, 14, 79, 0.3);
+}
+
+:root[data-theme='cherry'] .tagline {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:root[data-theme='cherry'] .note {
+  color: rgba(45, 10, 24, 0.6);
 }
 
 :root {
