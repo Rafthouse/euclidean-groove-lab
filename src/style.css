@@ -1804,16 +1804,16 @@
 
 /* ===== Dark Side (Forbidden Ritual Instrument / Obsidian Cathedral) ===== */
 :root[data-theme='dark-side'] {
-  --bg: #050505;
-  --panel: rgba(5, 5, 5, 0.55);
-  --panel-hi: rgba(10, 5, 5, 0.35);
-  --text: #D9D3CC;
-  --text-dim: rgba(180, 175, 165, 0.50);
-  --text-hi: #F0EDE8;
+  --bg: #121212;
+  --panel: #1E1E1E;
+  --panel-hi: #262626;
+  --text: #F0F0F0;
+  --text-dim: #BDBDBD;
+  --text-hi: #FFFFFF;
   --accent: #B31217;
-  --accent-dim: rgba(179, 18, 23, 0.12);
-  --rest: rgba(10, 5, 5, 0.25);
-  --current: rgba(217, 28, 28, 0.90);
+  --accent-dim: rgba(179, 18, 23, 0.25);
+  --rest: #303030;
+  --current: rgba(179, 18, 23, 0.60);
   --danger: #D91C1C;
   --warn: #8B0000;
   --radius: 12px;
@@ -1835,13 +1835,12 @@
   --color-bass-mid: #B31217;
   --color-bass-light: #D91C1C;
 
-  --card-shadow: 0 0 0 0 transparent;
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.60);
   color-scheme: dark;
 }
 
-/* Background: absolute black — nothing else */
 :root[data-theme='dark-side'] body {
-  background: #050505;
+  background: #121212;
 }
 
 :root[data-theme='dark-side'] .app {
@@ -1849,16 +1848,13 @@
   z-index: 1;
 }
 
-/* Panels: obsidian glass — dark, barely there, subtle red glow at edge */
 :root[data-theme='dark-side'] .track-card {
-  background: rgba(5, 5, 5, 0.55);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(139, 0, 0, 0.06);
+  background: #1E1E1E;
+  border: 1px solid rgba(179, 18, 23, 0.10);
   border-radius: 12px;
   box-shadow:
-    inset 0 0.5px 0 0 rgba(179, 18, 23, 0.06),
-    0 8px 32px rgba(0, 0, 0, 0.50);
+    inset 0 0.5px 0 0 rgba(179, 18, 23, 0.08),
+    0 4px 24px rgba(0, 0, 0, 0.60);
   position: relative;
   overflow: hidden;
 }
@@ -1870,7 +1866,7 @@
   left: 5%;
   width: 90%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(217, 28, 28, 0.08), transparent);
+  background: linear-gradient(90deg, transparent, rgba(179, 18, 23, 0.15), transparent);
   pointer-events: none;
 }
 
@@ -1881,8 +1877,8 @@
   fill: var(--color-kick-mid);
 }
 :root[data-theme='dark-side'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-kick) 15%, transparent);
-  stroke: rgba(179, 18, 23, 0.15);
+  fill: color-mix(in srgb, var(--color-kick) 20%, transparent);
+  stroke: rgba(179, 18, 23, 0.25);
 }
 
 :root[data-theme='dark-side'] .track-card[data-voice='snare'] {
@@ -1892,8 +1888,8 @@
   fill: var(--color-snare-mid);
 }
 :root[data-theme='dark-side'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-snare) 15%, transparent);
-  stroke: rgba(217, 28, 28, 0.15);
+  fill: color-mix(in srgb, var(--color-snare) 20%, transparent);
+  stroke: rgba(217, 28, 28, 0.25);
 }
 
 :root[data-theme='dark-side'] .track-card[data-voice='hat'] {
@@ -1903,8 +1899,8 @@
   fill: var(--color-hat-mid);
 }
 :root[data-theme='dark-side'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-hat) 15%, transparent);
-  stroke: rgba(109, 7, 26, 0.12);
+  fill: color-mix(in srgb, var(--color-hat) 20%, transparent);
+  stroke: rgba(109, 7, 26, 0.25);
 }
 
 :root[data-theme='dark-side'] .track-card[data-voice='bass'] {
@@ -1914,11 +1910,10 @@
   fill: var(--color-bass-mid);
 }
 :root[data-theme='dark-side'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-bass) 15%, transparent);
-  stroke: rgba(139, 0, 0, 0.12);
+  fill: color-mix(in srgb, var(--color-bass) 20%, transparent);
+  stroke: rgba(139, 0, 0, 0.25);
 }
 
-/* Active note: coal becoming incandescent — brief crimson ignition */
 :root[data-theme='dark-side'] .step.onset.current {
   animation: dark-side-ignite 350ms ease-out forwards;
 }
@@ -1947,66 +1942,69 @@
   }
 }
 
-/* Playhead: ember point */
 :root[data-theme='dark-side'] .step.current .step-indicator {
   fill: #D91C1C;
-  stroke: #8B0000;
+  stroke: #FF2A2A;
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 8px rgba(217, 28, 28, 0.20));
+  filter: drop-shadow(0 0 8px rgba(217, 28, 28, 0.25));
 }
 :root[data-theme='dark-side'] .step.current .visual {
   fill: #D91C1C;
 }
 
 :root[data-theme='dark-side'] .step.rest .step-indicator {
-  opacity: 0.08;
+  opacity: 0.12;
 }
 
 :root[data-theme='dark-side'] .guide {
   fill: none;
-  stroke: rgba(139, 0, 0, 0.03);
+  stroke: rgba(179, 18, 23, 0.06);
   stroke-width: 0.5px;
 }
 
 :root[data-theme='dark-side'] .hand {
-  stroke: rgba(139, 0, 0, 0.04);
+  stroke: rgba(179, 18, 23, 0.08);
   stroke-width: 0.5px;
 }
 
-/* Buttons: carved obsidian */
 :root[data-theme='dark-side'] button {
   border-radius: 12px;
-  border: 1px solid rgba(139, 0, 0, 0.06);
-  background: rgba(10, 5, 5, 0.60);
-  color: #D9D3CC;
+  border: 1px solid #3A3A3A;
+  background: #303030;
+  color: #F0F0F0;
   font-weight: 450;
   letter-spacing: 0.3px;
   padding: 8px 18px;
-  transition: background 0.2s cubic-bezier(0.32, 0.94, 0.6, 1);
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 :root[data-theme='dark-side'] button:hover {
-  background: rgba(20, 8, 8, 0.70);
-  box-shadow: inset 0 0 0 0.5px rgba(179, 18, 23, 0.08);
+  background: #3A3A3A;
+  border-color: #B31217;
 }
 
 :root[data-theme='dark-side'] .play {
-  background: rgba(10, 5, 5, 0.70);
-  border: 1px solid rgba(179, 18, 23, 0.12);
-  color: #D9D3CC;
+  background: #303030;
+  border: 1px solid #4A4A4A;
+  color: #F0F0F0;
 }
 :root[data-theme='dark-side'] .play.is-playing {
-  background: rgba(10, 5, 5, 0.50);
-  border: 1px solid rgba(139, 0, 0, 0.06);
+  background: rgba(179, 18, 23, 0.15);
+  border: 1px solid #B31217;
+  color: #FFFFFF;
 }
 
 :root[data-theme='dark-side'] .export,
 :root[data-theme='dark-side'] .reset-pattern {
   border-radius: 12px;
-  border: 1px solid rgba(139, 0, 0, 0.06);
-  background: rgba(10, 5, 5, 0.60);
-  color: #D9D3CC;
+  border: 1px solid #3A3A3A;
+  background: #303030;
+  color: #F0F0F0;
 }
-/* Restore compact size for tiny slot/mask buttons that the global `button` rule overrides */
+:root[data-theme='dark-side'] .export:hover,
+:root[data-theme='dark-side'] .reset-pattern:hover {
+  border-color: #B31217;
+}
+
 :root[data-theme='dark-side'] .pattern-slot {
   border-radius: 4px;
   padding: 5px 0;
@@ -2019,14 +2017,39 @@
   height: 15px;
 }
 
+:root[data-theme='dark-side'] .mask-label {
+  color: #BDBDBD;
+}
+:root[data-theme='dark-side'] .mask-cell.rest {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.06);
+  opacity: 1;
+}
+:root[data-theme='dark-side'] .mask-cell.onset {
+  background: var(--track-color);
+  border-color: var(--track-color);
+  opacity: 1;
+}
+:root[data-theme='dark-side'] .mask-cell.onset.muted {
+  background: transparent;
+  border-color: var(--track-color);
+  opacity: 0.60;
+}
+:root[data-theme='dark-side'] .mask-cell.onset:hover {
+  filter: brightness(1.30);
+}
+:root[data-theme='dark-side'] .mask-cell.is-current {
+  box-shadow: 0 0 0 2px #121212, 0 0 0 3px #B31217;
+}
+
 :root[data-theme='dark-side'] .toggle {
   border-radius: 10px;
   min-width: 32px;
   padding: 4px 12px;
 }
 :root[data-theme='dark-side'] .toggle.is-on {
-  background: rgba(179, 18, 23, 0.08);
-  border-color: rgba(179, 18, 23, 0.12);
+  background: rgba(179, 18, 23, 0.18);
+  border-color: #B31217;
 }
 
 :root[data-theme='dark-side'] input[type='range'] {
@@ -2036,7 +2059,7 @@
 :root[data-theme='dark-side'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(139, 0, 0, 0.06);
+  background: #303030;
 }
 :root[data-theme='dark-side'] input[type='range']::-webkit-slider-thumb {
   width: 16px;
@@ -2044,9 +2067,9 @@
   border-radius: 50%;
   background: #B31217;
   border: none;
-  box-shadow: 0 0 0 2px rgba(179, 18, 23, 0.08), 0 0 6px rgba(217, 28, 28, 0.08);
+  box-shadow: 0 0 0 2px rgba(179, 18, 23, 0.20), 0 0 8px rgba(217, 28, 28, 0.15);
   margin-top: -6px;
-  transition: transform 0.15s cubic-bezier(0.32, 0.94, 0.6, 1);
+  transition: transform 0.15s ease;
 }
 :root[data-theme='dark-side'] input[type='range']::-webkit-slider-thumb:hover {
   transform: scale(1.2);
@@ -2054,7 +2077,7 @@
 :root[data-theme='dark-side'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(139, 0, 0, 0.06);
+  background: #303030;
   border: none;
 }
 :root[data-theme='dark-side'] input[type='range']::-moz-range-thumb {
@@ -2063,56 +2086,63 @@
   border-radius: 50%;
   background: #B31217;
   border: none;
-  box-shadow: 0 0 0 2px rgba(179, 18, 23, 0.08);
+  box-shadow: 0 0 0 2px rgba(179, 18, 23, 0.20);
 }
 
 :root[data-theme='dark-side'] select {
-  background: rgba(10, 5, 5, 0.70);
-  border: 1px solid rgba(139, 0, 0, 0.06);
-  color: #D9D3CC;
+  background: #303030;
+  border: 1px solid #3A3A3A;
+  color: #F0F0F0;
   border-radius: 12px;
   padding: 6px 14px;
   letter-spacing: 0.3px;
 }
+:root[data-theme='dark-side'] select option {
+  background: #1E1E1E;
+  color: #F0F0F0;
+}
+:root[data-theme='dark-side'] select option:checked {
+  background: rgba(179, 18, 23, 0.20);
+}
 
 :root[data-theme='dark-side'] label {
-  color: rgba(180, 175, 165, 0.55);
+  color: #BDBDBD;
   font-weight: 450;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
 
 :root[data-theme='dark-side'] .control-label {
-  color: rgba(180, 175, 165, 0.45);
+  color: #BDBDBD;
   font-size: 10px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 :root[data-theme='dark-side'] .control-label b {
-  color: rgba(217, 28, 28, 0.70);
+  color: #D91C1C;
 }
 
 :root[data-theme='dark-side'] .bpm b,
 :root[data-theme='dark-side'] .swing b {
-  color: #B31217;
+  color: #D91C1C;
 }
 
 :root[data-theme='dark-side'] h1 {
-  color: #D9D3CC;
+  color: #F0F0F0;
   letter-spacing: 3px;
   font-weight: 300;
   font-size: 20px;
 }
 
 :root[data-theme='dark-side'] .tagline {
-  color: rgba(180, 175, 165, 0.25);
+  color: #7A7A7A;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 :root[data-theme='dark-side'] .track-name {
-  color: rgba(217, 211, 204, 0.75);
+  color: #F0F0F0;
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -2120,20 +2150,25 @@
 }
 
 :root[data-theme='dark-side'] .mini-metrics b {
-  color: rgba(179, 18, 23, 0.55);
+  color: #D91C1C;
 }
 :root[data-theme='dark-side'] .mini-metrics span {
-  color: rgba(180, 175, 165, 0.25);
+  color: #7A7A7A;
 }
 
 :root[data-theme='dark-side'] .playback-select select {
-  background: rgba(10, 5, 5, 0.70);
-  border: 1px solid rgba(139, 0, 0, 0.06);
+  background: #303030;
+  border: 1px solid #3A3A3A;
   border-radius: 10px;
   padding: 4px 12px;
+  color: #F0F0F0;
 }
 :root[data-theme='dark-side'] .playback-select span {
-  color: rgba(180, 175, 165, 0.35);
+  color: #7A7A7A;
+}
+
+:root[data-theme='dark-side'] .module-lane {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 :root {
