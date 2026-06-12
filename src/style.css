@@ -854,28 +854,28 @@
   --rest: rgba(255, 255, 255, 0.04);
   --current: #FFFFFF;
   --danger: #FF6B6B;
-  --warn: #D8E0EA;
+  --warn: #4FC3FF;
   --radius: 24px;
   --mono: ui-monospace, 'SF Mono', Consolas, monospace;
 
-  --color-kick: #AEB7C2;
-  --color-kick-mid: #C5CCD5;
-  --color-kick-light: #D8E0EA;
+  --color-kick: #D8E0EA;
+  --color-kick-mid: #E8EDF5;
+  --color-kick-light: #F0F5FF;
 
-  --color-snare: #CFE8FF;
-  --color-snare-mid: #D8EDFF;
-  --color-snare-light: #E6F3FF;
+  --color-snare: #7AD0FF;
+  --color-snare-mid: #A0DFFF;
+  --color-snare-light: #C0EBFF;
 
-  --color-hat: #D8E0EA;
-  --color-hat-mid: #E2E8F0;
-  --color-hat-light: #EDF2F7;
+  --color-hat: #E2E8F0;
+  --color-hat-mid: #EEF2F8;
+  --color-hat-light: #F7F9FC;
 
-  --color-bass: #B8C5D0;
-  --color-bass-mid: #CCD7E0;
-  --color-bass-light: #E0E8F0;
+  --color-bass: #C8D8E8;
+  --color-bass-mid: #DCE8F5;
+  --color-bass-light: #EDF5FC;
 
   --card-shadow: 0 0 0 0 transparent;
-  --panel-bg: rgba(16, 20, 27, 0.65);
+  --panel-bg: rgba(16, 20, 27, 0.40);
   color-scheme: dark;
 }
 
@@ -921,29 +921,29 @@
   z-index: 1;
 }
 
-/* Track cards: floating glass panels with deep blur */
+/* Track cards: crystal glass panels — thinner, clearer, more transparent */
 :root[data-theme='liquid-diamond'] .track-card {
-  background: rgba(16, 20, 27, 0.55);
-  backdrop-filter: blur(30px) saturate(1.2);
-  -webkit-backdrop-filter: blur(30px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(16, 20, 27, 0.28);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 28px;
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08),
-    0 8px 32px rgba(0, 0, 0, 0.35);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.12),
+    0 8px 32px rgba(0, 0, 0, 0.30);
   position: relative;
   overflow: hidden;
 }
 
-/* Internal reflection highlight (top edge light band) */
+/* Crystal reflection highlight — brighter, sharper edge light */
 :root[data-theme='liquid-diamond'] .track-card::after {
   content: '';
   position: absolute;
   top: 0;
-  left: 5%;
-  width: 90%;
+  left: 3%;
+  width: 94%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.10), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
   pointer-events: none;
 }
 
@@ -1033,26 +1033,26 @@
 
 /* Rest steps */
 :root[data-theme='liquid-diamond'] .step.rest .step-indicator {
-  opacity: 0.15;
+  opacity: 0.20;
 }
 
-/* Guide ring: subtle glass ring */
+/* Guide ring: clearer glass ring */
 :root[data-theme='liquid-diamond'] .guide {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.04);
-  stroke-width: 0.5px;
-}
-
-/* Hand: optical ray */
-:root[data-theme='liquid-diamond'] .hand {
   stroke: rgba(255, 255, 255, 0.06);
   stroke-width: 0.5px;
 }
 
-/* Buttons: glass capsules */
+/* Hand: optical ray — brighter */
+:root[data-theme='liquid-diamond'] .hand {
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 0.5px;
+}
+
+/* Buttons: thinner crystal capsules */
 :root[data-theme='liquid-diamond'] button {
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.04);
   color: #FFFFFF;
   font-weight: 450;
@@ -1061,45 +1061,46 @@
   transition: background 0.2s cubic-bezier(0.32, 0.94, 0.6, 1), box-shadow 0.2s cubic-bezier(0.32, 0.94, 0.6, 1);
 }
 :root[data-theme='liquid-diamond'] button:hover {
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.10), 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 :root[data-theme='liquid-diamond'] button:active {
-  background: rgba(255, 255, 255, 0.10);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 :root[data-theme='liquid-diamond'] .play {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   color: #FFFFFF;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.02);
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.04);
 }
 :root[data-theme='liquid-diamond'] .play.is-playing {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(16, 20, 27, 0.20);
   border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 :root[data-theme='liquid-diamond'] .export {
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.04);
   color: #FFFFFF;
 }
 
-/* Track toggles (M/S): glass capsules */
+/* Track toggles (M/S): crystal capsules */
 :root[data-theme='liquid-diamond'] .toggle {
   border-radius: 20px;
   min-width: 32px;
   padding: 4px 12px;
 }
 :root[data-theme='liquid-diamond'] .toggle.is-on {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.20);
 }
 
-/* Sliders: precision-engineered tracks */
+/* Sliders: precision crystal tracks — more luminous */
 :root[data-theme='liquid-diamond'] input[type='range'] {
   height: 4px;
   cursor: pointer;
@@ -1107,7 +1108,7 @@
 :root[data-theme='liquid-diamond'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.10);
 }
 :root[data-theme='liquid-diamond'] input[type='range']::-webkit-slider-thumb {
   width: 16px;
@@ -1115,7 +1116,7 @@
   border-radius: 50%;
   background: #FFFFFF;
   border: none;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.10), 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15), 0 2px 8px rgba(0, 0, 0, 0.25);
   margin-top: -6px;
   transition: transform 0.15s cubic-bezier(0.32, 0.94, 0.6, 1);
 }
@@ -1126,7 +1127,7 @@
 :root[data-theme='liquid-diamond'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.10);
   border: none;
 }
 :root[data-theme='liquid-diamond'] input[type='range']::-moz-range-thumb {
@@ -1135,22 +1136,22 @@
   border-radius: 50%;
   background: #FFFFFF;
   border: none;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.10);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
 }
 
 /* Select */
 :root[data-theme='liquid-diamond'] select {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: #FFFFFF;
   border-radius: 20px;
   padding: 6px 14px;
   letter-spacing: 0.3px;
 }
 
-/* Labels */
+/* Labels — brighter for readability on clearer glass */
 :root[data-theme='liquid-diamond'] label {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 450;
   letter-spacing: 0.5px;
   font-size: 11px;
@@ -1158,19 +1159,19 @@
 
 /* Control labels inside cards */
 :root[data-theme='liquid-diamond'] .control-label {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.55);
   font-size: 10px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 :root[data-theme='liquid-diamond'] .control-label b {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
 }
 
-/* BPM / Swing */
+/* BPM / Swing — brighter ice blue */
 :root[data-theme='liquid-diamond'] .bpm b,
 :root[data-theme='liquid-diamond'] .swing b {
-  color: #CFE8FF;
+  color: #7AD0FF;
 }
 
 /* Header */
@@ -1182,7 +1183,7 @@
 }
 
 :root[data-theme='liquid-diamond'] .tagline {
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.45);
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -1190,7 +1191,7 @@
 
 /* Track name */
 :root[data-theme='liquid-diamond'] .track-name {
-  color: rgba(255, 255, 255, 0.9);
+  color: #FFFFFF;
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -1199,22 +1200,22 @@
 
 /* Mini metrics */
 :root[data-theme='liquid-diamond'] .mini-metrics b {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.85);
 }
 :root[data-theme='liquid-diamond'] .mini-metrics span {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 /* Playback controls select */
 :root[data-theme='liquid-diamond'] .playback-select select {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   padding: 4px 12px;
 }
 
 :root[data-theme='liquid-diamond'] .playback-select span {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 :root {
