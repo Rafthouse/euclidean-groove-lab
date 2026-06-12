@@ -111,6 +111,189 @@
   background: linear-gradient(90deg, var(--color-bass) 0%, var(--accent) 100%);
 }
 
+/* ---------- Old-school Theme (Ableton Live flat DAW) ---------- */
+/* Pure flat, no gradients, no glow, no blur, no glassmorphism. */
+:root[data-theme='old-school'] {
+  --bg: #1E1E1E;
+  --panel: #2A2A2A;
+  --panel-hi: #333333;
+  --text: #CCCCCC;
+  --text-dim: #888888;
+  --text-hi: #FFFFFF;
+  --accent: #FF6B00;
+  --accent-dim: rgba(255, 107, 0, 0.15);
+  --rest: #3A3A3A;
+  --current: #FF6B00;
+  --danger: #FF3B3B;
+  --warn: #FFC107;
+  --radius: 2px;
+  --mono: ui-monospace, Consolas, monospace;
+
+  /* Track colors — muted, flat DAW palette */
+  --color-kick: #B87C4B;
+  --color-kick-mid: #D4955A;
+  --color-kick-light: #E8B078;
+
+  --color-snare: #C0A060;
+  --color-snare-mid: #D8B878;
+  --color-snare-light: #E8D098;
+
+  --color-hat: #7090B0;
+  --color-hat-mid: #88A8C8;
+  --color-hat-light: #A0C0E0;
+
+  --color-bass: #5A8F5A;
+  --color-bass-mid: #70A870;
+  --color-bass-light: #88C088;
+
+  --card-shadow: none;
+  color-scheme: dark;
+}
+
+/* Background: flat dark workspace */
+:root[data-theme='old-school'] body {
+  background: var(--bg);
+}
+
+/* Track cards: flat panels, no glass, no backdrop-filter */
+:root[data-theme='old-school'] .track-card {
+  background: var(--panel);
+  border: 1px solid #3A3A3A;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Each voice */
+:root[data-theme='old-school'] .track-card[data-voice='kick'] {
+  --track-color: var(--color-kick);
+}
+:root[data-theme='old-school'] .track-card[data-voice='kick'] .step.onset {
+  fill: var(--color-kick-mid);
+}
+:root[data-theme='old-school'] .track-card[data-voice='kick'] .shape {
+  fill: color-mix(in srgb, var(--color-kick) 30%, transparent);
+  stroke: var(--color-kick-mid);
+}
+
+:root[data-theme='old-school'] .track-card[data-voice='snare'] {
+  --track-color: var(--color-snare);
+}
+:root[data-theme='old-school'] .track-card[data-voice='snare'] .step.onset {
+  fill: var(--color-snare-mid);
+}
+:root[data-theme='old-school'] .track-card[data-voice='snare'] .shape {
+  fill: color-mix(in srgb, var(--color-snare) 30%, transparent);
+  stroke: var(--color-snare-mid);
+}
+
+:root[data-theme='old-school'] .track-card[data-voice='hat'] {
+  --track-color: var(--color-hat);
+}
+:root[data-theme='old-school'] .track-card[data-voice='hat'] .step.onset {
+  fill: var(--color-hat-mid);
+}
+:root[data-theme='old-school'] .track-card[data-voice='hat'] .shape {
+  fill: color-mix(in srgb, var(--color-hat) 30%, transparent);
+  stroke: var(--color-hat-mid);
+}
+
+:root[data-theme='old-school'] .track-card[data-voice='bass'] {
+  --track-color: var(--color-bass);
+}
+:root[data-theme='old-school'] .track-card[data-voice='bass'] .step.onset {
+  fill: var(--color-bass-mid);
+}
+:root[data-theme='old-school'] .track-card[data-voice='bass'] .shape {
+  fill: color-mix(in srgb, var(--color-bass) 30%, transparent);
+  stroke: var(--color-bass-mid);
+}
+
+/* Playhead: thin orange line */
+:root[data-theme='old-school'] .step.current .step-indicator {
+  fill: #FF6B00;
+  stroke: #FF6B00;
+  stroke-width: 2px;
+}
+
+:root[data-theme='old-school'] .step.current .visual {
+  fill: #FF6B00;
+}
+
+/* Controls — Ableton flat style */
+:root[data-theme='old-school'] button {
+  border-radius: 2px;
+  border: 1px solid #3A3A3A;
+  background: var(--panel-hi);
+  color: var(--text);
+}
+:root[data-theme='old-school'] button:hover {
+  background: #444444;
+}
+
+:root[data-theme='old-school'] .play {
+  background: #FF6B00;
+  color: #FFFFFF;
+  border: none;
+}
+:root[data-theme='old-school'] .play.is-playing {
+  background: var(--panel-hi);
+  border: 1px solid #FF6B00;
+}
+
+:root[data-theme='old-school'] .export {
+  border-radius: 2px;
+  border: 1px solid #3A3A3A;
+  background: var(--panel-hi);
+}
+
+/* Sliders — flat */
+:root[data-theme='old-school'] input[type='range'] {
+  height: 4px;
+}
+:root[data-theme='old-school'] input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #3A3A3A;
+}
+:root[data-theme='old-school'] input[type='range']::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #FF6B00;
+  border: none;
+  box-shadow: none;
+  margin-top: -4px;
+}
+
+/* Step indicators — flat */
+:root[data-theme='old-school'] .step {
+  border: none;
+}
+:root[data-theme='old-school'] .step.rest {
+  opacity: 0.3;
+}
+
+/* Select / dropdown styling */
+:root[data-theme='old-school'] select {
+  background: var(--panel);
+  border: 1px solid #3A3A3A;
+  color: var(--text);
+  border-radius: 2px;
+}
+
+/* Labels */
+:root[data-theme='old-school'] label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+}
+
+/* No shadows anywhere */
+:root[data-theme='old-school'] * {
+  box-shadow: none;
+}
+
 :root {
 
   --bg: #0f1014;
