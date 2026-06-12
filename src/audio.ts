@@ -14,6 +14,7 @@ import type { Track, VoiceId, MidiNote, PlaybackMode, PlaybackSpeed } from './en
 import { DRUM_KITS } from './drumKits';
 import type { DrumKitId } from './drumKits';
 import { sendNoteOn, sendNoteOff } from './midiOut';
+import { feedChannelStep } from './engine/oscilloscope';
 
 // The audio layer is a *consumer* of the engine: it never generates rhythm,
 // it only plays whatever tracks the app feeds it.
@@ -427,6 +428,20 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
           const ghostNote = GM_DRUM_MAP.snare;
           const ghostVel = clamp01(track.ghost.amount / 100) * ((track.volume ?? 100) / 100);
           fireMidiNote(ghostTime, ghostNote, ghostVel, 9, 1);
+        }
+      }
+    }
+    // Feed oscilloscope: for each audible track, log hit value
+    for (const track of currentTracks) {
+      const step = perTrack[track.id];
+      if (step !== undefined && step >= 0) {
+        // Voice is active on this step — compute hit value from the local step
+        const tp = trackPattern(track);
+        if (tp && step < tp.pulses.length) {
+          const hit = tp.pulses[step];
+          const stepVel = tp.velocities ? (tp.velocities[step] ?? 100) / 100 : 1;
+          const vol = (track.volume ?? 100) / 100;
+          feedChannelStep(track.id, hit ? stepVel * vol : 0, g);
         }
       }
     }

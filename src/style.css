@@ -9253,3 +9253,71 @@ header h1 {
   font-weight: 600;
   font-size: 11px;
 }
+
+/* ===== Oscilloscope ======================================= */
+
+.oscilloscope-canvas {
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+  background: rgba(0,0,0,0.15);
+  margin-top: 4px;
+}
+
+.scope-toggle-btn {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.scope-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.scope-toggle input[type="checkbox"] {
+  accent-color: var(--accent, #88cc88);
+}
+
+.master-scope {
+  margin-top: 12px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--panel, rgba(0,0,0,0.3));
+}
+
+.master-scope-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.master-scope-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-hi, #eee);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.master-scope-modes {
+  display: flex;
+  gap: 8px;
+}
+
+.scope-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--text-dim, #888);
+  cursor: pointer;
+}
+
+.scope-mode-toggle input[type="radio"] {
+  accent-color: var(--accent, #88cc88);
+}

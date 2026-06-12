@@ -3,6 +3,7 @@ import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
 import Knob from './components/Knob';
 import PresetBrowser from './components/PresetBrowser';
+import Oscilloscope from './components/Oscilloscope';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import type { GrooveSnapshot } from './engine/preset';
@@ -75,6 +76,39 @@ export default function App() {
     try { return localStorage.getItem('groove-dev-mode') === 'true'; }
     catch { return false; }
   });
+
+  // ── Oscilloscope state (all OFF by default) ────────────────
+  const [scopeMaster, setScopeMaster] = useState(false);
+  const [scopeChannels, setScopeChannels] = useState<Record<string, boolean>>({});
+
+  const toggleScopeChannel = useCallback((trackId: string) => {
+    setScopeChannels((prev) => {
+      const next = { ...prev };
+      next[trackId] = !next[trackId];
+      return next;
+    });
+  }, []);
+
+  // Activate/deactivate master analyser
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    import('./engine/oscilloscope').then((osc) => {
+      osc.setMasterScopeEnabled(scopeMaster);
+      if (!scopeMaster) {
+        osc.clearChannelHistory();
+      }
+    });
+  }, [scopeMaster]);
+
+  const getTrackColor = useCallback((trackId: string): string => {
+    const map: Record<string, string> = {
+      kick: '#e8a040',
+      snare: '#e08040',
+      hat: '#80b0d0',
+      bass: '#40b0b0',
+    };
+    return map[trackId] ?? '#88cc88';
+  }, []);
 
   // Ctrl+Shift+D toggles developer mode
   useEffect(() => {
@@ -376,6 +410,10 @@ export default function App() {
             onSwitchPattern={(slot) => switchPattern(track.id, slot)}
             onToggleMute={() => toggleMute(track.id)}
             onToggleSolo={() => toggleSolo(track.id)}
+            scopeEnabled={!!scopeChannels[track.id]}
+            onToggleScope={() => toggleScopeChannel(track.id)}
+            scopeColor={getTrackColor(track.id)}
+            scopePlaying={playing}
           />
         ))}
       </section>
@@ -495,6 +533,14 @@ export default function App() {
             <option value="beekeeper">Beekeeper</option>
           </select>
         </label>
+        <label className="scope-toggle">
+          <input
+            type="checkbox"
+            checked={scopeMaster}
+            onChange={() => setScopeMaster(!scopeMaster)}
+          />
+          <span>Master OSC</span>
+        </label>
         <button
           type="button"
           className="export"
@@ -535,6 +581,38 @@ export default function App() {
           <span>Restart cycle on mode change</span>
         </label>
       </section>
+
+      {scopeMaster && (
+        <section className="master-scope" aria-label="Master oscilloscope">
+          <div className="master-scope-header">
+            <span className="master-scope-label">Master</span>
+            <div className="master-scope-modes">
+              <label className="scope-mode-toggle">
+                <input
+                  type="radio"
+                  name="scope-mode"
+                  value="waveform"
+                  defaultChecked
+                />
+                Wave
+              </label>
+              <label className="scope-mode-toggle">
+                <input
+                  type="radio"
+                  name="scope-mode"
+                  value="spectrum"
+                />
+                Spectrum
+              </label>
+            </div>
+          </div>
+          <Oscilloscope
+            active={scopeMaster && playing}
+            color="#88cc88"
+            height={140}
+          />
+        </section>
+      )}
 
       <PresetBrowser
         open={presetBrowserOpen}
