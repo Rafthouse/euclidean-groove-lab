@@ -2899,10 +2899,10 @@ header h1 {
   font: 500 10px var(--mono);
   color: var(--text-hi);
 }
-/* A lone Rotation knob shouldn't stretch like the ghost knob grid — centre it. */
-.knob-row[data-role='rotation'] {
-  grid-template-columns: auto;
-  justify-content: center;
+/* Main params row: Steps / Hits / Vol / Rot — four equal columns. */
+.knob-row[data-role='params'] {
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
 }
 
 /* ---------- pattern bank (A–L slots) ---------- */
@@ -3318,4 +3318,157 @@ header h1 {
   max-width: 56ch;
   line-height: 1.5;
   text-align: center;
+}
+
+/* ---------- Bauhaus Theme ---------- */
+/* Primary geometry, bold reds / blues / yellows, cream ground. Zero ornament. */
+:root[data-theme='bauhaus'] {
+  --bg: #f5f1e8;
+  --panel: #ffffff;
+  --panel-hi: #f0ebe0;
+  --text: #1a1a1a;
+  --text-dim: #666666;
+  --text-hi: #000000;
+  --accent: #f44336;
+  --accent-dim: rgba(244,67,54,0.12);
+  --rest: rgba(0,0,0,0.15);
+  --current: #f44336;
+  --danger: #f44336;
+  --warn: #ff9800;
+  --radius: 2px;
+  --mono: ui-monospace, 'Consolas', monospace;
+  --card-shadow: none;
+  color-scheme: light;
+
+  --color-kick:        #1a1a1a;
+  --color-kick-mid:    #333333;
+  --color-kick-light:  #555555;
+  --color-snare:       #f44336;
+  --color-snare-mid:   #e53935;
+  --color-snare-light: #ef9a9a;
+  --color-hat:         #1565c0;
+  --color-hat-mid:     #1976d2;
+  --color-hat-light:   #90caf9;
+  --color-bass:        #f9a825;
+  --color-bass-mid:    #fbc02d;
+  --color-bass-light:  #fff176;
+}
+
+:root[data-theme='bauhaus'] body {
+  background: var(--bg);
+}
+
+/* Cards: white panels with bold left border in the track colour */
+:root[data-theme='bauhaus'] .track-card {
+  background: var(--panel);
+  border: 1.5px solid #1a1a1a;
+  border-left: 5px solid var(--track-color, #1a1a1a);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+:root[data-theme='bauhaus'] .track-card[data-voice='kick']  { --track-color: var(--color-kick); }
+:root[data-theme='bauhaus'] .track-card[data-voice='snare'] { --track-color: var(--color-snare); }
+:root[data-theme='bauhaus'] .track-card[data-voice='hat']   { --track-color: var(--color-hat); }
+:root[data-theme='bauhaus'] .track-card[data-voice='bass']  { --track-color: var(--color-bass); }
+
+/* Onsets: solid fill in voice colour */
+:root[data-theme='bauhaus'] .track-card[data-voice='kick']  .step.onset { fill: var(--color-kick-mid); }
+:root[data-theme='bauhaus'] .track-card[data-voice='snare'] .step.onset { fill: var(--color-snare-mid); }
+:root[data-theme='bauhaus'] .track-card[data-voice='hat']   .step.onset { fill: var(--color-hat-mid); }
+:root[data-theme='bauhaus'] .track-card[data-voice='bass']  .step.onset { fill: var(--color-bass-mid); }
+
+/* Shape polygon: flat fill, black stroke */
+:root[data-theme='bauhaus'] .track-card[data-voice='kick']  .shape { fill: rgba(26,26,26,0.08); stroke: #1a1a1a; }
+:root[data-theme='bauhaus'] .track-card[data-voice='snare'] .shape { fill: rgba(244,67,54,0.08); stroke: #f44336; }
+:root[data-theme='bauhaus'] .track-card[data-voice='hat']   .shape { fill: rgba(21,101,192,0.08); stroke: #1565c0; }
+:root[data-theme='bauhaus'] .track-card[data-voice='bass']  .shape { fill: rgba(249,168,37,0.12); stroke: #f9a825; }
+
+/* Guide ring: thin black */
+:root[data-theme='bauhaus'] .guide {
+  fill: none;
+  stroke: rgba(0,0,0,0.12);
+  stroke-width: 0.8px;
+}
+
+/* Playhead hand */
+:root[data-theme='bauhaus'] .hand {
+  stroke: #1a1a1a;
+  stroke-width: 1px;
+  opacity: 0.4;
+}
+
+/* Buttons: flat, sharp corners, black border */
+:root[data-theme='bauhaus'] button {
+  border-radius: 2px;
+  border: 1.5px solid #1a1a1a;
+  background: var(--panel);
+  color: #1a1a1a;
+}
+:root[data-theme='bauhaus'] button:hover {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+:root[data-theme='bauhaus'] .play {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+}
+:root[data-theme='bauhaus'] .play.is-playing {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Compact buttons — restore small size; global `button` doesn't override padding here */
+:root[data-theme='bauhaus'] .pattern-slot {
+  border-radius: 2px;
+  padding: 5px 0;
+  font-size: 10px;
+  border: 1px solid #1a1a1a;
+}
+:root[data-theme='bauhaus'] .mask-cell {
+  border-radius: 2px;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #1a1a1a;
+}
+
+/* Sliders */
+:root[data-theme='bauhaus'] input[type='range'] { height: 4px; }
+:root[data-theme='bauhaus'] input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #cccccc;
+}
+:root[data-theme='bauhaus'] input[type='range']::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 0;
+  background: #f44336;
+  border: none;
+  box-shadow: none;
+  margin-top: -5px;
+}
+
+/* Selects */
+:root[data-theme='bauhaus'] select {
+  border-radius: 2px;
+  border: 1.5px solid #1a1a1a;
+  background: var(--panel);
+  color: #1a1a1a;
+}
+
+/* Knob fill in track colour — inherited via --track-color, no override needed */
+/* Toggle buttons */
+:root[data-theme='bauhaus'] .toggle.is-on {
+  background: #1a1a1a;
+  color: #ffffff;
+  border-color: #1a1a1a;
+}
+:root[data-theme='bauhaus'] .toggle.is-on[data-kind='solo'] {
+  background: var(--accent);
+  border-color: var(--accent);
 }

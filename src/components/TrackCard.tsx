@@ -128,33 +128,34 @@ export default function TrackCard({
         <DuckingLane track={track} onChange={onChange} />
       )}
 
-      <div className="controls">
-        <Slider
+      <div className="knob-row" data-role="params">
+        <Knob
           label="Steps"
           value={track.steps}
           min={2}
           max={32}
+          step={1}
           onChange={(v) => onChange({ steps: v })}
         />
-        <Slider
+        <Knob
           label="Hits"
           value={track.hits}
           min={0}
           max={track.steps}
+          step={1}
           onChange={(v) => onChange({ hits: v })}
         />
-        <Slider
-          label="Volume"
+        <Knob
+          label="Vol"
           value={track.volume ?? 100}
           min={0}
           max={100}
+          step={1}
+          format={(v) => `${v}%`}
           onChange={(v) => onChange({ volume: v })}
         />
-      </div>
-
-      <div className="knob-row" data-role="rotation">
         <Knob
-          label="Rotation"
+          label="Rot"
           value={track.rotation}
           min={0}
           max={Math.max(1, track.steps - 1)}
@@ -300,28 +301,3 @@ function MaskRow({ pattern, mutedSteps, localStep, onToggleStep }: MaskRowProps)
   );
 }
 
-interface SliderProps {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  onChange: (value: number) => void;
-}
-
-function Slider({ label, value, min, max, onChange }: SliderProps) {
-  return (
-    <label className="control">
-      <span className="control-label">
-        {label}
-        <b>{value}</b>
-      </span>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-      />
-    </label>
-  );
-}

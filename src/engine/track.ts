@@ -121,16 +121,27 @@ export interface Track {
 }
 
 /**
- * One stored pattern in a track's bank. Captures only the Euclidean GENERATOR
- * state — the four authoritative inputs to `trackPattern` plus the mask overlay.
- * Modules are intentionally excluded (they live on the Track and persist across
- * slot switches).
+ * One stored pattern in a track's bank. Captures Euclidean generator state
+ * plus the voice-specific module state, so each slot carries its own rhythm
+ * AND its own sound design. Voice fields are optional — only present when the
+ * voice exposes the module in the UI.
+ *
+ * When switching slots: if a field is present in the target it overrides the
+ * live track; if absent, the live track's field is left unchanged (backward
+ * compatibility with pre-module slots).
  */
 export interface PatternSlot {
   steps: number;
   hits: number;
   rotation: number;
   manualMute?: boolean[];
+  // Module state — voice-specific; stored alongside the rhythm so different
+  // pattern slots can carry different sounds, not just different rhythms.
+  velocity?: VelocityPattern;     // Hat: per-onset velocity cycle
+  velocityEnabled?: boolean;      // Hat: module gate
+  pitches?: PitchSequence;        // Bass: isorhythm pitch sequence
+  pitchEnabled?: boolean;         // Bass: module gate
+  ghost?: GhostModule;            // Snare: ghost delay params + enabled flag
 }
 
 /** Number of pattern slots per track (A–L). */
@@ -301,12 +312,22 @@ export function snapshotPattern(track: Track): PatternSlot {
     track.manualMute && track.manualMute.some(Boolean)
       ? track.manualMute.slice()
       : undefined;
-  return {
+  const slot: PatternSlot = {
     steps: track.steps,
     hits: track.hits,
     rotation: track.rotation,
     manualMute: mask,
   };
+  // Capture module state — only fields the track has (undefined = not present,
+  // which means "don't override" when loading this slot back).
+  if (track.velocity !== undefined) slot.velocity = track.velocity.slice();
+  if (track.velocityEnabled !== undefined) slot.velocityEnabled = track.velocityEnabled;
+  if (track.pitches !== undefined) {
+    slot.pitches = { ...track.pitches, slots: track.pitches.slots.slice() };
+  }
+  if (track.pitchEnabled !== undefined) slot.pitchEnabled = track.pitchEnabled;
+  if (track.ghost !== undefined) slot.ghost = { ...track.ghost };
+  return slot;
 }
 
 /**
@@ -388,6 +409,15 @@ export function switchTrackPattern(
     patterns: slots,
     activePattern: slot,
     phaseOffset,
+    // Restore module state only when the target slot stored it. If absent the
+    // spread-from-track above already provides the current live value.
+    ...(target.velocity !== undefined && { velocity: target.velocity.slice() }),
+    ...(target.velocityEnabled !== undefined && { velocityEnabled: target.velocityEnabled }),
+    ...(target.pitches !== undefined && {
+      pitches: { ...target.pitches, slots: target.pitches.slots.slice() },
+    }),
+    ...(target.pitchEnabled !== undefined && { pitchEnabled: target.pitchEnabled }),
+    ...(target.ghost !== undefined && { ghost: { ...target.ghost } }),
   };
 }
 

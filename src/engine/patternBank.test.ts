@@ -27,12 +27,35 @@ function baseTrack(over: Partial<Track> = {}): Track {
 describe('snapshotPattern', () => {
   it('captures the four generator fields', () => {
     const t = baseTrack({ steps: 12, hits: 5, rotation: 3 });
-    expect(snapshotPattern(t)).toEqual({
-      steps: 12,
-      hits: 5,
-      rotation: 3,
-      manualMute: undefined,
-    });
+    const snap = snapshotPattern(t);
+    expect(snap.steps).toBe(12);
+    expect(snap.hits).toBe(5);
+    expect(snap.rotation).toBe(3);
+    expect(snap.manualMute).toBeUndefined();
+  });
+
+  it('captures velocity module state when present', () => {
+    const t = baseTrack({ velocity: [100, 80], velocityEnabled: true });
+    const snap = snapshotPattern(t);
+    expect(snap.velocity).toEqual([100, 80]);
+    expect(snap.velocityEnabled).toBe(true);
+    expect(snap.velocity).not.toBe(t.velocity); // defensive copy
+  });
+
+  it('captures ghost module state when present', () => {
+    const ghost = { enabled: true, amount: 40, delaySteps: 2, probability: 0.5, hpHz: 200, lpHz: 6000 };
+    const t = baseTrack({ ghost });
+    const snap = snapshotPattern(t);
+    expect(snap.ghost).toEqual(ghost);
+    expect(snap.ghost).not.toBe(ghost); // defensive copy
+  });
+
+  it('does not include module fields that are not set on the track', () => {
+    const t = baseTrack(); // no velocity / pitches / ghost
+    const snap = snapshotPattern(t);
+    expect('velocity' in snap).toBe(false);
+    expect('pitches' in snap).toBe(false);
+    expect('ghost' in snap).toBe(false);
   });
 
   it('collapses an all-false mask to undefined', () => {
@@ -116,6 +139,52 @@ describe('switchTrackPattern', () => {
     const next = switchTrackPattern(t, 1, -1);
     expect(next.steps).toBe(8);          // steps DID change
     expect(next.phaseOffset).toBe(5);    // but phase preserved-as-is when stopped
+  });
+
+  it('restores velocity module state from the target slot', () => {
+    // Slot 1 was stored with velocity [100, 80]. Switching to it should load that.
+    const t = baseTrack({
+      activePattern: 0,
+      velocity: [90],
+      velocityEnabled: false,
+      patterns: [
+        undefined as never,
+        { steps: 16, hits: 4, rotation: 0, velocity: [100, 80], velocityEnabled: true },
+      ],
+    });
+    const next = switchTrackPattern(t, 1, -1);
+    expect(next.velocity).toEqual([100, 80]);
+    expect(next.velocityEnabled).toBe(true);
+  });
+
+  it('restores ghost module state from the target slot', () => {
+    const ghost = { enabled: true, amount: 50, delaySteps: 1, probability: 0.7, hpHz: 200, lpHz: 6000 };
+    const t = baseTrack({
+      activePattern: 0,
+      patterns: [
+        undefined as never,
+        { steps: 16, hits: 4, rotation: 0, ghost },
+      ],
+    });
+    const next = switchTrackPattern(t, 1, -1);
+    expect(next.ghost).toEqual(ghost);
+    expect(next.ghost).not.toBe(ghost); // defensive copy
+  });
+
+  it('leaves module state unchanged when the target slot has no module fields', () => {
+    // Slot 1 has only rhythm fields — module state should be inherited from track.
+    const t = baseTrack({
+      velocity: [100, 80],
+      velocityEnabled: true,
+      activePattern: 0,
+      patterns: [
+        undefined as never,
+        { steps: 8, hits: 3, rotation: 0 }, // no velocity / ghost / pitches
+      ],
+    });
+    const next = switchTrackPattern(t, 1, -1);
+    expect(next.velocity).toEqual([100, 80]); // preserved from track
+    expect(next.velocityEnabled).toBe(true);
   });
 
   it('does not mutate the input track or its pattern array', () => {
