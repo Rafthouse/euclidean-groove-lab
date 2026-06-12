@@ -2949,16 +2949,16 @@ header h1 {
   cursor: pointer;
   transition: all 0.12s ease;
 }
-.pattern-slot:hover {
+.pattern-bank .pattern-slot:hover {
   color: var(--text-hi);
   border-color: var(--text-dim);
 }
-.pattern-slot.is-stored {
+.pattern-bank .pattern-slot.is-stored {
   color: var(--text-hi);
   border-color: var(--track-color);
 }
-.pattern-slot.is-active {
-  background: var(--track-color);
+.track-card .pattern-bank .pattern-slot.is-active {
+  background: var(--track-color) !important;
   border-color: var(--track-color);
   color: var(--bg);
 }
