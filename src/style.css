@@ -6679,16 +6679,35 @@ header h1 {
     0 4px 24px rgba(60, 10, 30, 0.06),
     0 1px 4px rgba(0, 0, 0, 0.03);
   position: relative;
-  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Kick card ΓÇö Watermelon Candy. Brighter card, richer border. */
+/* Candy glow overlay — each panel gets its own pastel candy colour.
+   The ::before layer sits UNDER the content (cards have position:relative;
+   content has z-index context), creating translucent candy depth. */
+:root[data-theme='candyflip'] .track-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 16px;
+}
+
+/* ===== KICK — Strawberry hard candy ===== */
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] {
   --track-color: #ff1a7a;
   border: 2px solid rgba(255, 26, 122, 0.35);
   box-shadow:
     var(--card-shadow),
     0 0 14px rgba(255, 47, 143, 0.10);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='kick']::before {
+  background:
+    radial-gradient(ellipse 70% 60% at 40% 35%, rgba(255, 140, 200, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 65% 70%, rgba(255, 60, 140, 0.10) 0%, transparent 50%),
+    linear-gradient(140deg, rgba(255, 200, 225, 0.12) 0%, rgba(255, 40, 120, 0.06) 50%, transparent 100%);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='kick']:hover {
   border-color: rgba(255, 26, 122, 0.55);
@@ -6708,13 +6727,19 @@ header h1 {
   border-color: rgba(255, 26, 122, 0.20);
 }
 
-/* Snare card ΓÇö Mango Candy */
+/* ===== SNARE — Peach / Apricot hard candy ===== */
 :root[data-theme='candyflip'] .track-card[data-voice='snare'] {
   --track-color: #ff8c00;
   border: 2px solid rgba(255, 140, 0, 0.35);
   box-shadow:
     var(--card-shadow),
     0 0 14px rgba(255, 140, 0, 0.10);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='snare']::before {
+  background:
+    radial-gradient(ellipse 70% 60% at 35% 30%, rgba(255, 200, 150, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 60% 70%, rgba(255, 160, 80, 0.10) 0%, transparent 50%),
+    linear-gradient(140deg, rgba(255, 220, 180, 0.12) 0%, rgba(255, 140, 60, 0.06) 50%, transparent 100%);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='snare']:hover {
   border-color: rgba(255, 140, 0, 0.55);
@@ -6734,13 +6759,19 @@ header h1 {
   border-color: rgba(255, 140, 0, 0.20);
 }
 
-/* Hat card ΓÇö Blue Raspberry Candy. Higher opacity, bigger presence. */
+/* ===== HAT — Lavender / Violet hard candy ===== */
 :root[data-theme='candyflip'] .track-card[data-voice='hat'] {
   --track-color: #14b8f0;
   border: 2px solid rgba(20, 184, 240, 0.35);
   box-shadow:
     var(--card-shadow),
     0 0 14px rgba(20, 184, 240, 0.10);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='hat']::before {
+  background:
+    radial-gradient(ellipse 70% 60% at 45% 30%, rgba(200, 180, 240, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 55% 70%, rgba(160, 120, 230, 0.10) 0%, transparent 50%),
+    linear-gradient(140deg, rgba(220, 200, 250, 0.12) 0%, rgba(140, 100, 220, 0.06) 50%, transparent 100%);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='hat']:hover {
   border-color: rgba(20, 184, 240, 0.55);
@@ -6760,13 +6791,19 @@ header h1 {
   border-color: rgba(20, 184, 240, 0.20);
 }
 
-/* Bass card ΓÇö Mint Lime Candy. More presence. */
+/* ===== BASS — Mint / Pistachio hard candy ===== */
 :root[data-theme='candyflip'] .track-card[data-voice='bass'] {
   --track-color: #1ac868;
   border: 2px solid rgba(26, 200, 104, 0.35);
   box-shadow:
     var(--card-shadow),
     0 0 14px rgba(26, 200, 104, 0.10);
+}
+:root[data-theme='candyflip'] .track-card[data-voice='bass']::before {
+  background:
+    radial-gradient(ellipse 70% 60% at 40% 35%, rgba(180, 240, 200, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 65% 65%, rgba(100, 220, 140, 0.10) 0%, transparent 50%),
+    linear-gradient(140deg, rgba(200, 250, 220, 0.12) 0%, rgba(80, 210, 120, 0.06) 50%, transparent 100%);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='bass']:hover {
   border-color: rgba(26, 200, 104, 0.55);
@@ -6786,15 +6823,22 @@ header h1 {
   border-color: rgba(26, 200, 104, 0.20);
 }
 
+/* Gloss highlight — diagonal candy sheen across all panels */
 :root[data-theme='candyflip'] .track-card::after {
   content: '';
   position: absolute;
-  top: 1px;
-  left: 8px;
-  right: 8px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.30), transparent);
+  inset: 0;
   pointer-events: none;
+  z-index: 1;
+  border-radius: 16px;
+  background:
+    linear-gradient(160deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      rgba(255, 255, 255, 0.06) 20%,
+      transparent 40%,
+      transparent 70%,
+      rgba(255, 255, 255, 0.03) 100%
+    );
 }
 
 /* Kick: watermelon pop */
