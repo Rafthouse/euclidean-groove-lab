@@ -11,7 +11,7 @@ import type { DrumKitId } from './drumKits';
 /** How many 4/4 bars the MIDI export renders. */
 const EXPORT_BARS = 4;
 
-type ThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school';
+type ThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'barbie';
 const THEME_KEY = 'groove-theme';
 const FX_KEY = 'groove-elements-fx';
 const RESTART_KEY = 'groove-restart-on-mode-change';
@@ -19,7 +19,7 @@ const RESTART_KEY = 'groove-restart-on-mode-change';
 function initialTheme(): ThemeId {
   try {
     const t = localStorage.getItem(THEME_KEY);
-    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' ? t : 'elements';
+    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' || t === 'barbie' ? t : 'elements';
   } catch {
     return 'elements';
   }
@@ -316,6 +316,7 @@ export default function App() {
             <option value="elements">Elements</option>
             <option value="military">Tactical</option>
             <option value="old-school">Old-school</option>
+            <option value="barbie">Barbie</option>
           </select>
         </label>
         {theme === 'elements' && (

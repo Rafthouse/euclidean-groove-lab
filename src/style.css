@@ -293,6 +293,196 @@
 :root[data-theme='old-school'] * {
   box-shadow: none;
 }
+/* ---------- Barbie Theme (Pink candy plastic DAW) ---------- */
+:root[data-theme='barbie'] {
+  --bg: #ff4fa3;
+  --panel: rgba(255, 79, 163, 0.18);
+  --panel-hi: rgba(255, 255, 255, 0.12);
+  --text: #ffffff;
+  --text-dim: rgba(255, 255, 255, 0.65);
+  --text-hi: #ffffff;
+  --accent: #ff2e93;
+  --accent-dim: rgba(255, 46, 147, 0.25);
+  --rest: rgba(255, 200, 220, 0.25);
+  --current: #ff2e93;
+  --danger: #ff6bd6;
+  --warn: #ffe1f2;
+  --radius: 12px;
+  --mono: ui-monospace, Consolas, monospace;
+
+  --color-kick: #ff6bd6;
+  --color-kick-mid: #ff8ee0;
+  --color-kick-light: #ffb0ea;
+
+  --color-snare: #ff2e93;
+  --color-snare-mid: #ff5aaa;
+  --color-snare-light: #ff86c4;
+
+  --color-hat: #ffb0ea;
+  --color-hat-mid: #ffc8f0;
+  --color-hat-light: #ffe0f5;
+
+  --color-bass: #ff6bd6;
+  --color-bass-mid: #ff8ee0;
+  --color-bass-light: #ffb0ea;
+
+  --card-shadow: 0 8px 32px rgba(255, 46, 147, 0.15);
+  color-scheme: dark;
+}
+
+/* Background: soft pink gradient with subtle radial glow */
+:root[data-theme='barbie'] body {
+  background:
+    radial-gradient(ellipse 120% 80% at 30% 20%, rgba(255, 139, 212, 0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 100% at 80% 80%, rgba(255, 209, 236, 0.3) 0%, transparent 50%),
+    linear-gradient(180deg, #ff4fa3, #ff8bd4, #ffd1ec);
+}
+
+/* Track cards: glassy plastic */
+:root[data-theme='barbie'] .track-card {
+  background: linear-gradient(135deg, rgba(255, 79, 163, 0.18) 0%, rgba(255, 255, 255, 0.06) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    0 8px 32px rgba(255, 46, 147, 0.15);
+}
+
+:root[data-theme='barbie'] .track-card[data-voice='kick'] {
+  --track-color: var(--color-kick);
+}
+:root[data-theme='barbie'] .track-card[data-voice='kick'] .step.onset {
+  fill: var(--color-kick-mid);
+}
+:root[data-theme='barbie'] .track-card[data-voice='kick'] .shape {
+  fill: color-mix(in srgb, var(--color-kick) 25%, transparent);
+  stroke: var(--color-kick-mid);
+}
+
+:root[data-theme='barbie'] .track-card[data-voice='snare'] {
+  --track-color: var(--color-snare);
+}
+:root[data-theme='barbie'] .track-card[data-voice='snare'] .step.onset {
+  fill: var(--color-snare-mid);
+}
+:root[data-theme='barbie'] .track-card[data-voice='snare'] .shape {
+  fill: color-mix(in srgb, var(--color-snare) 25%, transparent);
+  stroke: var(--color-snare-mid);
+}
+
+:root[data-theme='barbie'] .track-card[data-voice='hat'] {
+  --track-color: var(--color-hat);
+}
+:root[data-theme='barbie'] .track-card[data-voice='hat'] .step.onset {
+  fill: var(--color-hat-mid);
+}
+:root[data-theme='barbie'] .track-card[data-voice='hat'] .shape {
+  fill: color-mix(in srgb, var(--color-hat) 30%, transparent);
+  stroke: var(--color-hat-mid);
+}
+
+:root[data-theme='barbie'] .track-card[data-voice='bass'] {
+  --track-color: var(--color-bass);
+}
+:root[data-theme='barbie'] .track-card[data-voice='bass'] .step.onset {
+  fill: var(--color-bass-mid);
+}
+:root[data-theme='barbie'] .track-card[data-voice='bass'] .shape {
+  fill: color-mix(in srgb, var(--color-bass) 25%, transparent);
+  stroke: var(--color-bass-mid);
+}
+
+/* Playhead: thick soft pink beam */
+:root[data-theme='barbie'] .step.current .step-indicator {
+  fill: #ff2e93;
+  stroke: #ff6bd6;
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 4px rgba(255, 46, 147, 0.3));
+}
+:root[data-theme='barbie'] .step.current .visual {
+  fill: #ff2e93;
+}
+
+/* Active step gentle pink pulse */
+:root[data-theme='barbie'] .step.current {
+  r: 1.2;
+}
+
+/* Rest steps: pastel grey-pink */
+:root[data-theme='barbie'] .step.rest .step-indicator {
+  opacity: 0.35;
+}
+
+/* Controls: rounded pill style */
+:root[data-theme='barbie'] button {
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 6px 16px;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+:root[data-theme='barbie'] button:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+:root[data-theme='barbie'] .play {
+  background: #ff2e93;
+  border: none;
+  box-shadow: 0 4px 14px rgba(255, 46, 147, 0.3);
+}
+:root[data-theme='barbie'] .play.is-playing {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+:root[data-theme='barbie'] .export {
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Sliders */
+:root[data-theme='barbie'] input[type='range'] {
+  height: 6px;
+}
+:root[data-theme='barbie'] input[type='range']::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+}
+:root[data-theme='barbie'] input[type='range']::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ff2e93;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 8px rgba(255, 46, 147, 0.3);
+  margin-top: -5px;
+}
+
+/* Step indicators */
+:root[data-theme='barbie'] .step {
+  border: none;
+}
+
+/* Select */
+:root[data-theme='barbie'] select {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 4px 10px;
+}
+
+/* Labels */
+:root[data-theme='barbie'] label {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
 
 :root {
 
