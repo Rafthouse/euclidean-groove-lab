@@ -5,7 +5,6 @@ import {
   adjustedTick,
   localStep,
   computePhaseOffsetForChange,
-  playbackPeriodLocalTicks,
 } from './playback';
 
 describe('divider — how many 32n master ticks per step', () => {
@@ -59,7 +58,6 @@ describe('localStep — forward', () => {
 
 describe('localStep — reverse', () => {
   it('walks N-1..0 and wraps', () => {
-    // N=4, speed=1, offset=0 → t = g/2 → 0,1,2,3,4,5 → step 3,2,1,0,3,2
     expect(localStep(0, 'reverse', 1, 0, 4)).toBe(3);
     expect(localStep(2, 'reverse', 1, 0, 4)).toBe(2);
     expect(localStep(4, 'reverse', 1, 0, 4)).toBe(1);
@@ -70,7 +68,6 @@ describe('localStep — reverse', () => {
 
 describe('localStep — pendulum (endpoints play ONCE, Reich convention)', () => {
   it('N=4 → 0,1,2,3,2,1,0,1', () => {
-    // speed=2 so g==t for simplicity
     const seq = [0, 1, 2, 3, 4, 5, 6, 7].map((g) => localStep(g, 'pendulum', 2, 0, 4));
     expect(seq).toEqual([0, 1, 2, 3, 2, 1, 0, 1]);
   });
@@ -84,23 +81,7 @@ describe('localStep — pendulum (endpoints play ONCE, Reich convention)', () =>
   });
 });
 
-describe('playbackPeriodLocalTicks', () => {
-  it('forward/reverse period == N', () => {
-    expect(playbackPeriodLocalTicks('forward', 16)).toBe(16);
-    expect(playbackPeriodLocalTicks('reverse', 16)).toBe(16);
-  });
-  it('pendulum period == 2(N-1)', () => {
-    expect(playbackPeriodLocalTicks('pendulum', 4)).toBe(6);
-    expect(playbackPeriodLocalTicks('pendulum', 16)).toBe(30);
-  });
-  it('degenerate N=1 returns 1', () => {
-    expect(playbackPeriodLocalTicks('pendulum', 1)).toBe(1);
-  });
-});
-
 describe('computePhaseOffsetForChange — phase preservation', () => {
-  // Helper: assert that after the change, the resolver lands on the SAME step
-  // for the same g_now.
   const expectPreserved = (
     g: number,
     oldM: 'forward' | 'reverse' | 'pendulum',
@@ -114,7 +95,6 @@ describe('computePhaseOffsetForChange — phase preservation', () => {
     const sBefore = localStep(g, oldM, oldS, oldOff, oldN);
     const newOff = computePhaseOffsetForChange(g, oldM, oldS, oldOff, oldN, newM, newS, newN);
     const sAfter = localStep(g, newM, newS, newOff, newN);
-    // Within the new pattern length, the step must match modulo newN.
     expect(sAfter).toBe(sBefore % newN);
   };
 
@@ -137,7 +117,6 @@ describe('computePhaseOffsetForChange — phase preservation', () => {
     expectPreserved(15, 'forward', 1, 0, 16, 'reverse', 2, 16);
   });
   it('successive changes accumulate cleanly (no drift)', () => {
-    // forward 1× → reverse 1× → pendulum 2× → forward 0.5×; localStep preserved at each step
     let g = 10;
     let mode: 'forward' | 'reverse' | 'pendulum' = 'forward';
     let speed: 0.5 | 1 | 2 = 1;
@@ -155,7 +134,6 @@ describe('computePhaseOffsetForChange — phase preservation', () => {
       speed = newSpeed;
       const sAfter = localStep(g, mode, speed, offset, N);
       expect(sAfter).toBe(sBefore);
-      // simulate some time passing between user changes
       g += 5;
     }
   });
@@ -176,7 +154,6 @@ describe('no drift: two tracks always read the same g', () => {
       if (isActive(g, 1)) seenA.add(localStep(g, 'forward', 1, 0, N));
       if (isActive(g, 2)) seenB.add(localStep(g, 'forward', 2, 0, N));
     }
-    // Both tracks must visit every step in their range.
     expect(seenA.size).toBe(N);
     expect(seenB.size).toBe(N);
   });

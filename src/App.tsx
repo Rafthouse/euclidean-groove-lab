@@ -5,6 +5,7 @@ import Knob from './components/Knob';
 import PresetBrowser from './components/PresetBrowser';
 import Oscilloscope from './components/Oscilloscope';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
+import { setMasterScopeEnabled, clearChannelHistory } from './engine/oscilloscope';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import type { GrooveSnapshot } from './engine/preset';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
@@ -91,13 +92,10 @@ export default function App() {
 
   // Activate/deactivate master analyser
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    import('./engine/oscilloscope').then((osc) => {
-      osc.setMasterScopeEnabled(scopeMaster);
-      if (!scopeMaster) {
-        osc.clearChannelHistory();
-      }
-    });
+    setMasterScopeEnabled(scopeMaster);
+    if (!scopeMaster) {
+      clearChannelHistory();
+    }
   }, [scopeMaster]);
 
   const getTrackColor = useCallback((trackId: string): string => {

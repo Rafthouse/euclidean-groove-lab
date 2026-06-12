@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { trackPattern, audibleTracks, defaultTracks, computeVelocities, isStepMuted, VELOCITY_PRESETS } from './track';
-import type { Track, VoiceId, VelocityPattern } from './track';
+import { trackPattern, audibleTracks, defaultTracks, computeVelocities, isStepMuted } from './track';
+import type { Track, VoiceId } from './track';
 import { euclid } from './euclidean';
 import { rotate } from './rotate';
 import { density, onsetCount } from './metrics';
@@ -79,36 +79,9 @@ describe('computeVelocities', () => {
     expect(result).toEqual([100, 100, 100]);
   });
 
-  it('works with all built-in presets without throwing', () => {
-    const pulses = [true, false, true, false, true, false, true, false, true, false, true, false];
-    for (const key of [1, 2, 3, 4, 5]) {
-      const pattern = VELOCITY_PRESETS[key];
-      const result = computeVelocities(pulses, pattern);
-      expect(result).toHaveLength(pulses.length);
-      expect(result.filter(v => v > 0).length).toBe(6); // 6 onsets
-    }
-  });
 });
 
-describe('VELOCITY_PRESETS', () => {
-  it('has five modes (1 through 5)', () => {
-    expect(Object.keys(VELOCITY_PRESETS)).toEqual(['1', '2', '3', '4', '5']);
-  });
 
-  it('mode 1 is flat 100', () => {
-    expect(VELOCITY_PRESETS[1]).toEqual([100]);
-  });
-
-  it('mode 3 is ascending 80→90→100', () => {
-    expect(VELOCITY_PRESETS[3]).toEqual([80, 90, 100]);
-  });
-
-  it('mode 5 is 5-step linear ramp', () => {
-    expect(VELOCITY_PRESETS[5]).toHaveLength(5);
-    expect(VELOCITY_PRESETS[5][0]).toBe(80);
-    expect(VELOCITY_PRESETS[5][4]).toBe(100);
-  });
-});
 
 describe('audibleTracks (solo-takes-priority)', () => {
   it('with no solo, returns every non-muted track', () => {

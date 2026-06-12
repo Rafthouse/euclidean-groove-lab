@@ -20,14 +20,6 @@ export type VelocityPattern = number[];
  * Standard velocity ramp patterns (0–100 scale).
  * Indexed by mode number (1-based).
  */
-export const VELOCITY_PRESETS: Record<number, VelocityPattern> = {
-  1: [100],
-  2: [100, 80],
-  3: [80, 90, 100],
-  4: [80, 86, 94, 100],
-  5: [80, 85, 90, 95, 100],
-};
-
 /**
  * A track's identity and rhythmic configuration. The pattern itself is
  * derived (see `trackPattern`), never stored: groove is emergent, never a
@@ -303,11 +295,9 @@ export function isStepMuted(track: Track, globalStep: number): boolean {
 }
 
 /**
- * Snapshot a track's LIVE generator state into a {@link PatternSlot}. Only the
- * Euclidean inputs + mask are captured; an all-false mask collapses to
- * `undefined` so "no overrides" stays the clean default.
+ * Snapshot a track's LIVE generator state into a PatternSlot.
  */
-export function snapshotPattern(track: Track): PatternSlot {
+function snapshotPattern(track: Track): PatternSlot {
   const mask =
     track.manualMute && track.manualMute.some(Boolean)
       ? track.manualMute.slice()
@@ -318,8 +308,6 @@ export function snapshotPattern(track: Track): PatternSlot {
     rotation: track.rotation,
     manualMute: mask,
   };
-  // Capture module state — only fields the track has (undefined = not present,
-  // which means "don't override" when loading this slot back).
   if (track.velocity !== undefined) slot.velocity = track.velocity.slice();
   if (track.velocityEnabled !== undefined) slot.velocityEnabled = track.velocityEnabled;
   if (track.pitches !== undefined) {
@@ -444,79 +432,6 @@ export function audibleTracks(tracks: readonly Track[]): Track[] {
  * playback starts as pure rhythm and the user opts into each module
  * deliberately via its UI toggle.
  */
-/**
- * Military tactical preset — staccato, percussive, grid-like.
- * Each voice tuned for a march / strut feel.
- */
-export function militaryPreset(): Track[] {
-  return [
-    {
-      id: 'kick',
-      name: 'Kick',
-      color: '#6d8a6d',
-      steps: 16,
-      hits: 5,
-      rotation: 0,
-      mute: false,
-      solo: false,
-      voiceId: 'kick',
-      volume: 100,
-      velocityEnabled: true,
-      velocity: [100, 90, 100, 85, 95],
-      playbackMode: 'forward',
-      playbackSpeed: 1,
-    },
-    {
-      id: 'snare',
-      name: 'Snare',
-      color: '#b0a070',
-      steps: 16,
-      hits: 4,
-      rotation: 4,
-      mute: false,
-      solo: false,
-      voiceId: 'snare',
-      volume: 100,
-      velocityEnabled: true,
-      velocity: [100, 85, 90, 80],
-      playbackMode: 'forward',
-      playbackSpeed: 1,
-    },
-    {
-      id: 'hat',
-      name: 'Hat',
-      color: '#7090b0',
-      steps: 16,
-      hits: 11,
-      rotation: 0,
-      mute: false,
-      solo: false,
-      voiceId: 'hat',
-      volume: 80,
-      velocityEnabled: true,
-      velocity: [70, 80, 65, 85, 75, 90, 60, 88, 72, 82, 68],
-      playbackMode: 'forward',
-      playbackSpeed: 1,
-    },
-    {
-      id: 'bass',
-      name: 'Bass',
-      color: '#3d6b3d',
-      steps: 16,
-      hits: 4,
-      rotation: 2,
-      mute: false,
-      solo: false,
-      voiceId: 'bass',
-      volume: 100,
-      velocityEnabled: true,
-      velocity: [100, 80, 90, 75],
-      playbackMode: 'forward',
-      playbackSpeed: 1,
-    },
-  ];
-}
-
 export function defaultTracks(): Track[] {
   return [
     {

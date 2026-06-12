@@ -136,12 +136,3 @@ export function computePhaseOffsetForChange(
   return offsetForStep(newMode, newN, targetStep, newBasic);
 }
 
-/**
- * Length in 32n master ticks of one full playback cycle for this config.
- * Useful for O(1)-amortized analytics (e.g. how many onsets per period) and
- * for sanity tests. Pendulum's cycle is 2(N-1) local ticks.
- */
-export function playbackPeriodLocalTicks(mode: PlaybackMode, N: number): number {
-  if (N <= 1) return 1;
-  return mode === 'pendulum' ? 2 * (N - 1) : N;
-}

@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import {
-  snapshotPattern,
   switchTrackPattern,
   PATTERN_SLOT_COUNT,
 } from './track';
@@ -23,54 +22,6 @@ function baseTrack(over: Partial<Track> = {}): Track {
     ...over,
   };
 }
-
-describe('snapshotPattern', () => {
-  it('captures the four generator fields', () => {
-    const t = baseTrack({ steps: 12, hits: 5, rotation: 3 });
-    const snap = snapshotPattern(t);
-    expect(snap.steps).toBe(12);
-    expect(snap.hits).toBe(5);
-    expect(snap.rotation).toBe(3);
-    expect(snap.manualMute).toBeUndefined();
-  });
-
-  it('captures velocity module state when present', () => {
-    const t = baseTrack({ velocity: [100, 80], velocityEnabled: true });
-    const snap = snapshotPattern(t);
-    expect(snap.velocity).toEqual([100, 80]);
-    expect(snap.velocityEnabled).toBe(true);
-    expect(snap.velocity).not.toBe(t.velocity); // defensive copy
-  });
-
-  it('captures ghost module state when present', () => {
-    const ghost = { enabled: true, amount: 40, delaySteps: 2, probability: 0.5, hpHz: 200, lpHz: 6000 };
-    const t = baseTrack({ ghost });
-    const snap = snapshotPattern(t);
-    expect(snap.ghost).toEqual(ghost);
-    expect(snap.ghost).not.toBe(ghost); // defensive copy
-  });
-
-  it('does not include module fields that are not set on the track', () => {
-    const t = baseTrack(); // no velocity / pitches / ghost
-    const snap = snapshotPattern(t);
-    expect('velocity' in snap).toBe(false);
-    expect('pitches' in snap).toBe(false);
-    expect('ghost' in snap).toBe(false);
-  });
-
-  it('collapses an all-false mask to undefined', () => {
-    const t = baseTrack({ manualMute: [false, false, false] });
-    expect(snapshotPattern(t).manualMute).toBeUndefined();
-  });
-
-  it('clones a populated mask (no aliasing)', () => {
-    const mask = [false, true, false, false];
-    const t = baseTrack({ steps: 4, manualMute: mask });
-    const snap = snapshotPattern(t);
-    expect(snap.manualMute).toEqual(mask);
-    expect(snap.manualMute).not.toBe(mask); // defensive copy
-  });
-});
 
 describe('switchTrackPattern', () => {
   it('materialises an empty target slot as a duplicate of the current pattern', () => {

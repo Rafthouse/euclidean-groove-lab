@@ -15,17 +15,6 @@
 import { Tone } from './toneShim';
 
 // ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
-
-export interface ScopeState {
-  master: boolean;
-  channels: Record<string, boolean>;  // track.id → enabled
-}
-
-export type ScopeMode = 'waveform' | 'spectrum';
-
-// ---------------------------------------------------------------------------
 // Master analyser — real Audio AnalyserNode on master output
 // ---------------------------------------------------------------------------
 
@@ -180,10 +169,6 @@ export function getMasterFrequencyData(): Float32Array | null {
   return buf;
 }
 
-export function isMasterScopeEnabled(): boolean {
-  return masterEnabled;
-}
-
 // ---------------------------------------------------------------------------
 // Per-channel scope — step-data driven "rhythm waveform"
 //
@@ -265,16 +250,4 @@ export function clearChannelHistory(): void {
   }
 }
 
-/** Get the list of track IDs that have history data. */
-export function getTrackedChannels(): string[] {
-  return Object.keys(channelHistory);
-}
 
-// ---------------------------------------------------------------------------
-// Auto-cleanup on stop
-// ---------------------------------------------------------------------------
-
-export function resetAllScopes(): void {
-  clearChannelHistory();
-  teardownMaster();
-}

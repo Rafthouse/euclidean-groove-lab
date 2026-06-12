@@ -52,7 +52,7 @@ export interface PitchSequence {
  * accidental gate on a drum (one layer, one responsibility). Today only the
  * bass is pitched; melodic voices added later join this set.
  */
-export const PITCHED_VOICES: ReadonlySet<VoiceId> = new Set<VoiceId>(['bass']);
+const PITCHED_VOICES: ReadonlySet<VoiceId> = new Set<VoiceId>(['bass']);
 
 export function isPitchedVoice(voiceId: VoiceId): boolean {
   return PITCHED_VOICES.has(voiceId);

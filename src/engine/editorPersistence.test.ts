@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { pitchesFromText } from '../components/pitchLaneState';
-import { paintBar, VELOCITY_STARTER } from '../components/velocityLaneState';
+import { paintBar } from '../components/velocityLaneState';
 import { trackPattern } from '../engine';
 import type { Track } from '../engine';
 

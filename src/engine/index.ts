@@ -16,7 +16,6 @@ export {
   adjustedTick,
   localStep,
   computePhaseOffsetForChange,
-  playbackPeriodLocalTicks,
 } from './playback';
 export type {
   MidiNote,
@@ -34,13 +33,10 @@ export {
   trackPattern,
   audibleTracks,
   defaultTracks,
-  militaryPreset,
   computeVelocities,
   isStepMuted,
-  snapshotPattern,
   switchTrackPattern,
   PATTERN_SLOT_COUNT,
-  VELOCITY_PRESETS,
 } from './track';
 
 export {
@@ -52,7 +48,6 @@ export {
   midiToNoteName,
   pitchSequenceToText,
   isPitchedVoice,
-  PITCHED_VOICES,
 } from './pitch';
 
 export type { MidiNoteEvent, MidiTrackData, MidiProject, MidiStem } from './midi';
@@ -65,9 +60,4 @@ export { phase } from './phase';
 export {
   onsetCount,
   density,
-  interOnsetIntervals,
-  isMaximallyEven,
-  balance,
-  metricWeights,
-  syncopation,
 } from './metrics';
