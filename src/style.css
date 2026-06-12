@@ -6865,75 +6865,77 @@ header h1 {
 /* Four classical elements form a single modern instrument.
    Earth · Fire · Air · Water — merged into a premium vector UI.
    Clean, dark, glass-like, color-coded elemental atmosphere. */
+/* An elemental reactor — four energy chambers radiating coloured light.
+   Earth (toxic green) · Fire (molten orange) · Air (silver-white) · Water (deep cyan)
+   Clean, sharp, geometric, luminous. No fantasy artwork. */
 :root[data-theme='alchemy'] {
-  --bg: #0F0E0D;
-  --panel: rgba(18, 17, 16, 0.60);
-  --panel-hi: rgba(28, 26, 24, 0.50);
-  --text: #E0DDD8;
-  --text-dim: rgba(190, 186, 178, 0.55);
-  --text-hi: #F0EEE8;
-  --accent: #D4AF37;
-  --accent-dim: rgba(212, 175, 55, 0.10);
-  --rest: rgba(24, 22, 20, 0.35);
-  --current: #D4AF37;
-  --danger: #C04020;
-  --warn: #E09040;
-  --radius: 6px;
+  --bg: #080C10;
+  --panel: rgba(10, 15, 20, 0.75);
+  --panel-hi: rgba(16, 22, 28, 0.65);
+  --text: #E8ECF0;
+  --text-dim: rgba(180, 190, 200, 0.60);
+  --text-hi: #F4F8FF;
+  --accent: #00B4FF;
+  --accent-dim: rgba(0, 180, 255, 0.10);
+  --rest: rgba(10, 15, 20, 0.30);
+  --current: #FFFFFF;
+  --danger: #FF3A20;
+  --warn: #FF9A00;
+  --radius: 8px;
   --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
 
-  --color-earth: #5A7A40;
-  --color-earth-mid: #7A9A60;
-  --color-earth-light: #9ABA80;
-  --color-fire: #D08030;
-  --color-fire-mid: #E0A060;
-  --color-fire-light: #F0C080;
-  --color-air: #90A8B8;
-  --color-air-mid: #B0C4D0;
-  --color-air-light: #D0DCE8;
-  --color-water: #3080A0;
-  --color-water-mid: #50A0C0;
-  --color-water-light: #70C0E0;
+  --color-earth: #A8FF2A;
+  --color-earth-mid: #C0FF66;
+  --color-earth-light: #D8FFA0;
+  --color-fire: #FF9A00;
+  --color-fire-mid: #FFB840;
+  --color-fire-light: #FFD480;
+  --color-air: #FFFFFF;
+  --color-air-mid: #E8EEF8;
+  --color-air-light: #F0F4FF;
+  --color-water: #1CC8FF;
+  --color-water-mid: #50D8FF;
+  --color-water-light: #88E8FF;
 
-  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.5), 0 0 1px rgba(212, 175, 55, 0.04);
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
   color-scheme: dark;
 }
 
-/* Background: cinematic four-element gradient.
-   Deep moss green → warm amber → soft silver → deep cyan.
-   Smooth, no textures, pure atmospheric colour. */
+/* Background: elemental ambient fog bleeding from each panel position.
+   Green → orange → silver → cyan. No hard transitions. */
 :root[data-theme='alchemy'] body {
   background:
-    radial-gradient(ellipse 60% 50% at 10% 50%,   rgba(60, 100, 40, 0.25) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 50% at 35% 50%,   rgba(208, 128, 48, 0.20) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 50% at 60% 50%,   rgba(144, 168, 184, 0.12) 0%, transparent 55%),
-    radial-gradient(ellipse 50% 50% at 85% 50%,   rgba(48, 128, 160, 0.22) 0%, transparent 55%),
-    linear-gradient(180deg, #11100E 0%, #181715 30%, #1A1916 70%, #151412 100%);
+    radial-gradient(ellipse 50% 45% at 12% 50%,   rgba(168, 255, 42, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 40% at 35% 50%,   rgba(255, 154, 0, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 35% at 62% 50%,   rgba(255, 255, 255, 0.04) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 40% at 85% 50%,   rgba(28, 200, 255, 0.12) 0%, transparent 55%),
+    linear-gradient(180deg, #080C10 0%, #0A1016 50%, #080C10 100%);
   position: relative;
   overflow-x: hidden;
 }
 
-/* Ambient elemental drifting — slow, subtle colour shift */
+/* Ambient drifting elemental light */
 :root[data-theme='alchemy'] body::before {
   content: '';
   position: fixed;
-  inset: -100px;
+  inset: -120px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.25;
+  opacity: 0.30;
   background-image:
-    radial-gradient(circle 240px at 12% 20%, rgba(90, 122, 64, 0.08) 0%, transparent 50%),
-    radial-gradient(circle 200px at 38% 60%, rgba(208, 128, 48, 0.06) 0%, transparent 50%),
-    radial-gradient(circle 180px at 62% 25%, rgba(144, 168, 184, 0.04) 0%, transparent 50%),
-    radial-gradient(circle 220px at 82% 70%, rgba(48, 128, 160, 0.07) 0%, transparent 50%);
+    radial-gradient(circle 300px at 15% 25%, rgba(168, 255, 42, 0.08) 0%, transparent 50%),
+    radial-gradient(circle 260px at 38% 60%, rgba(255, 154, 0, 0.06) 0%, transparent 50%),
+    radial-gradient(circle 220px at 62% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(circle 280px at 82% 70%, rgba(28, 200, 255, 0.08) 0%, transparent 50%);
   animation: alchemy-ambient 35s ease-in-out infinite alternate;
 }
 
 @keyframes alchemy-ambient {
-  0%   { transform: translate(0px, 0px) scale(1); opacity: 0.20; }
-  25%  { transform: translate(-15px, 10px) scale(1.02); opacity: 0.28; }
-  50%  { transform: translate(12px, -15px) scale(0.97); opacity: 0.18; }
-  75%  { transform: translate(-8px, 18px) scale(1.03); opacity: 0.26; }
-  100% { transform: translate(10px, -8px) scale(1.01); opacity: 0.22; }
+  0%   { transform: translate(0px, 0px) scale(1); opacity: 0.26; }
+  25%  { transform: translate(-12px, 8px) scale(1.02); opacity: 0.34; }
+  50%  { transform: translate(10px, -12px) scale(0.97); opacity: 0.22; }
+  75%  { transform: translate(-6px, 14px) scale(1.03); opacity: 0.32; }
+  100% { transform: translate(8px, -6px) scale(1.01); opacity: 0.28; }
 }
 
 :root[data-theme='alchemy'] .app {
@@ -6941,172 +6943,186 @@ header h1 {
   z-index: 1;
 }
 
-/* ===== TRACK CARDS — dark glass, floating above the elemental gradient ===== */
+/* ===== TRACK CARDS — energy containment chambers with visible outer glow ===== */
 :root[data-theme='alchemy'] .track-card {
-  background: rgba(18, 17, 16, 0.60);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 6px;
+  background: rgba(10, 15, 20, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 8px;
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.04),
-    0 4px 24px rgba(0, 0, 0, 0.5),
-    0 0 1px rgba(212, 175, 55, 0.04);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.03),
+    0 4px 24px rgba(0, 0, 0, 0.6);
   position: relative;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ===== EARTH — moss green, stable, grounded ===== */
+/* ===== EARTH — toxic green, radioactive moss energy ===== */
 :root[data-theme='alchemy'] .track-card[data-voice='kick'] {
   --track-color: var(--color-earth);
+  border: 1px solid rgba(168, 255, 42, 0.55);
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.04),
-    0 4px 24px rgba(0, 0, 0, 0.5),
-    0 0 2px rgba(90, 122, 64, 0.08);
-  border-color: rgba(90, 122, 64, 0.10);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.03),
+    0 0 30px rgba(168, 255, 42, 0.20),
+    0 0 60px rgba(168, 255, 42, 0.10),
+    0 4px 24px rgba(0, 0, 0, 0.6);
 }
 :root[data-theme='alchemy'] .track-card[data-voice='kick']:hover {
-  border-color: rgba(90, 122, 64, 0.18);
+  border-color: rgba(168, 255, 42, 0.75);
   box-shadow:
-    0 4px 28px rgba(0, 0, 0, 0.55),
-    0 0 4px rgba(90, 122, 64, 0.12);
+    0 0 40px rgba(168, 255, 42, 0.28),
+    0 0 80px rgba(168, 255, 42, 0.14),
+    0 4px 28px rgba(0, 0, 0, 0.65);
 }
 :root[data-theme='alchemy'] .track-card[data-voice='kick'] .step.onset {
   fill: var(--color-earth);
+  filter: drop-shadow(0 0 8px rgba(168, 255, 42, 0.30));
 }
 :root[data-theme='alchemy'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-earth) 25%, transparent);
-  stroke: rgba(90, 122, 64, 0.30);
+  fill: color-mix(in srgb, var(--color-earth) 18%, transparent);
+  stroke: rgba(168, 255, 42, 0.40);
+  filter: drop-shadow(0 0 4px rgba(168, 255, 42, 0.12));
 }
 
-/* ===== FIRE — amber-orange, energetic, warm ===== */
+/* ===== FIRE — molten plasma, strongest glow ===== */
 :root[data-theme='alchemy'] .track-card[data-voice='snare'] {
   --track-color: var(--color-fire);
+  border: 1px solid rgba(255, 154, 0, 0.60);
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.04),
-    0 4px 24px rgba(0, 0, 0, 0.5),
-    0 0 2px rgba(208, 128, 48, 0.10);
-  border-color: rgba(208, 128, 48, 0.12);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.03),
+    0 0 35px rgba(255, 154, 0, 0.25),
+    0 0 70px rgba(255, 154, 0, 0.12),
+    0 4px 24px rgba(0, 0, 0, 0.6);
 }
 :root[data-theme='alchemy'] .track-card[data-voice='snare']:hover {
-  border-color: rgba(208, 128, 48, 0.22);
+  border-color: rgba(255, 154, 0, 0.80);
   box-shadow:
-    0 4px 28px rgba(0, 0, 0, 0.55),
-    0 0 6px rgba(208, 128, 48, 0.15);
+    0 0 45px rgba(255, 154, 0, 0.32),
+    0 0 90px rgba(255, 154, 0, 0.16),
+    0 4px 28px rgba(0, 0, 0, 0.65);
 }
 :root[data-theme='alchemy'] .track-card[data-voice='snare'] .step.onset {
   fill: var(--color-fire);
+  filter: drop-shadow(0 0 10px rgba(255, 154, 0, 0.40));
 }
 :root[data-theme='alchemy'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-fire) 28%, transparent);
-  stroke: rgba(208, 128, 48, 0.35);
+  fill: color-mix(in srgb, var(--color-fire) 20%, transparent);
+  stroke: rgba(255, 154, 0, 0.45);
+  filter: drop-shadow(0 0 6px rgba(255, 154, 0, 0.15));
 }
 
-/* ===== AIR — silver-platinum, light, precise ===== */
+/* ===== AIR — silver-white, ionized atmosphere ===== */
 :root[data-theme='alchemy'] .track-card[data-voice='hat'] {
   --track-color: var(--color-air);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.04),
-    0 4px 24px rgba(0, 0, 0, 0.5),
-    0 0 2px rgba(144, 168, 184, 0.06);
-  border-color: rgba(144, 168, 184, 0.08);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.03),
+    0 0 25px rgba(255, 255, 255, 0.12),
+    0 0 50px rgba(255, 255, 255, 0.06),
+    0 4px 24px rgba(0, 0, 0, 0.6);
 }
 :root[data-theme='alchemy'] .track-card[data-voice='hat']:hover {
-  border-color: rgba(144, 168, 184, 0.16);
+  border-color: rgba(255, 255, 255, 0.65);
   box-shadow:
-    0 4px 28px rgba(0, 0, 0, 0.55),
-    0 0 4px rgba(144, 168, 184, 0.10);
+    0 0 35px rgba(255, 255, 255, 0.18),
+    0 0 70px rgba(255, 255, 255, 0.09),
+    0 4px 28px rgba(0, 0, 0, 0.65);
 }
 :root[data-theme='alchemy'] .track-card[data-voice='hat'] .step.onset {
   fill: var(--color-air);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
 }
 :root[data-theme='alchemy'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-air) 25%, transparent);
-  stroke: rgba(144, 168, 184, 0.25);
+  fill: color-mix(in srgb, var(--color-air) 16%, transparent);
+  stroke: rgba(255, 255, 255, 0.35);
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.10));
 }
 
-/* ===== WATER — cyan-teal, fluid, deep ===== */
+/* ===== WATER — deep cyan, liquid electricity ===== */
 :root[data-theme='alchemy'] .track-card[data-voice='bass'] {
   --track-color: var(--color-water);
+  border: 1px solid rgba(28, 200, 255, 0.55);
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.04),
-    0 4px 24px rgba(0, 0, 0, 0.5),
-    0 0 2px rgba(48, 128, 160, 0.08);
-  border-color: rgba(48, 128, 160, 0.10);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.03),
+    0 0 30px rgba(28, 200, 255, 0.22),
+    0 0 60px rgba(28, 200, 255, 0.10),
+    0 4px 24px rgba(0, 0, 0, 0.6);
 }
 :root[data-theme='alchemy'] .track-card[data-voice='bass']:hover {
-  border-color: rgba(48, 128, 160, 0.18);
+  border-color: rgba(28, 200, 255, 0.75);
   box-shadow:
-    0 4px 28px rgba(0, 0, 0, 0.55),
-    0 0 4px rgba(48, 128, 160, 0.12);
+    0 0 40px rgba(28, 200, 255, 0.30),
+    0 0 80px rgba(28, 200, 255, 0.14),
+    0 4px 28px rgba(0, 0, 0, 0.65);
 }
 :root[data-theme='alchemy'] .track-card[data-voice='bass'] .step.onset {
   fill: var(--color-water);
+  filter: drop-shadow(0 0 8px rgba(28, 200, 255, 0.35));
 }
 :root[data-theme='alchemy'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-water) 25%, transparent);
-  stroke: rgba(48, 128, 160, 0.30);
+  fill: color-mix(in srgb, var(--color-water) 18%, transparent);
+  stroke: rgba(28, 200, 255, 0.40);
+  filter: drop-shadow(0 0 4px rgba(28, 200, 255, 0.12));
 }
 
-/* ===== ACTIVE NODE ANIMATIONS ===== */
+/* ===== ENERGY NODE ANIMATIONS ===== */
 
-/* Earth: heavy, solid pulse */
+/* Earth: toxic green pulse */
 @keyframes alchemy-earth-pulse {
-  0%   { r: 11px; fill: #7A9A60; filter: none; }
-  15%  { r: 14px; fill: #9ABA80; filter: drop-shadow(0 0 10px rgba(90, 122, 64, 0.20)); }
-  50%  { r: 12px; }
-  100% { r: 11px; fill: var(--color-earth); filter: none; }
+  0%   { r: 11px; fill: #C0FF66; filter: drop-shadow(0 0 8px rgba(168, 255, 42, 0.30)); }
+  15%  { r: 14px; fill: #D8FFA0; filter: drop-shadow(0 0 16px rgba(168, 255, 42, 0.50)); }
+  50%  { r: 12px; filter: drop-shadow(0 0 10px rgba(168, 255, 42, 0.25)); }
+  100% { r: 11px; fill: var(--color-earth); filter: drop-shadow(0 0 8px rgba(168, 255, 42, 0.30)); }
 }
 :root[data-theme='alchemy'] .track-card[data-voice='kick'] .step.onset.current {
   animation: alchemy-earth-pulse 350ms ease-out forwards;
 }
 
-/* Fire: strongest glow, orange bloom */
+/* Fire: molten bloom — strongest glow */
 @keyframes alchemy-fire-bloom {
-  0%   { r: 11px; fill: #E0A060; filter: none; }
-  12%  { r: 15px; fill: #F0C080; filter: drop-shadow(0 0 14px rgba(208, 128, 48, 0.28)); }
-  40%  { r: 13px; filter: drop-shadow(0 0 8px rgba(208, 128, 48, 0.12)); }
-  100% { r: 11px; fill: var(--color-fire); filter: none; }
+  0%   { r: 11px; fill: #FFB840; filter: drop-shadow(0 0 10px rgba(255, 154, 0, 0.40)); }
+  12%  { r: 15px; fill: #FFD480; filter: drop-shadow(0 0 20px rgba(255, 154, 0, 0.60)); }
+  40%  { r: 13px; filter: drop-shadow(0 0 12px rgba(255, 154, 0, 0.30)); }
+  100% { r: 11px; fill: var(--color-fire); filter: drop-shadow(0 0 10px rgba(255, 154, 0, 0.40)); }
 }
 :root[data-theme='alchemy'] .track-card[data-voice='snare'] .step.onset.current {
   animation: alchemy-fire-bloom 300ms ease-out forwards;
 }
 
-/* Air: cool silver shimmer */
+/* Air: silver shimmer */
 @keyframes alchemy-air-shimmer {
-  0%   { r: 9px; fill: #B0C4D0; filter: none; }
-  20%  { r: 12px; fill: #D0DCE8; filter: drop-shadow(0 0 8px rgba(144, 168, 184, 0.14)); }
-  60%  { r: 10px; }
-  100% { r: 9px; fill: var(--color-air); filter: none; }
+  0%   { r: 9px; fill: #E8EEF8; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35)); }
+  20%  { r: 12px; fill: #F0F4FF; filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.50)); }
+  60%  { r: 10px; filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.25)); }
+  100% { r: 9px; fill: var(--color-air); filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35)); }
 }
 :root[data-theme='alchemy'] .track-card[data-voice='hat'] .step.onset.current {
   animation: alchemy-air-shimmer 320ms ease-out forwards;
 }
 
-/* Water: deep blue luminous */
+/* Water: deep cyan luminous */
 @keyframes alchemy-water-luminous {
-  0%   { r: 11px; fill: #50A0C0; filter: none; }
-  20%  { r: 14px; fill: #70C0E0; filter: drop-shadow(0 0 12px rgba(48, 128, 160, 0.20)); }
-  55%  { r: 12px; }
-  100% { r: 11px; fill: var(--color-water); filter: none; }
+  0%   { r: 11px; fill: #50D8FF; filter: drop-shadow(0 0 8px rgba(28, 200, 255, 0.35)); }
+  20%  { r: 14px; fill: #88E8FF; filter: drop-shadow(0 0 18px rgba(28, 200, 255, 0.55)); }
+  55%  { r: 12px; filter: drop-shadow(0 0 10px rgba(28, 200, 255, 0.25)); }
+  100% { r: 11px; fill: var(--color-water); filter: drop-shadow(0 0 8px rgba(28, 200, 255, 0.35)); }
 }
 :root[data-theme='alchemy'] .track-card[data-voice='bass'] .step.onset.current {
   animation: alchemy-water-luminous 350ms ease-out forwards;
 }
 
-/* ===== PLAYHEAD — bright neutral marker ===== */
+/* ===== PLAYHEAD — bright white marker ===== */
 :root[data-theme='alchemy'] .step.current .step-indicator {
-  fill: #E0DDD8;
-  stroke: #D4AF37;
+  fill: #FFFFFF;
+  stroke: rgba(255, 255, 255, 0.50);
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.15));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
 }
 :root[data-theme='alchemy'] .step.current .visual {
-  fill: #E0DDD8;
+  fill: #FFFFFF;
 }
 
 :root[data-theme='alchemy'] .step.rest .step-indicator {
-  opacity: 0.12;
+  opacity: 0.15;
 }
 
 :root[data-theme='alchemy'] .guide {
@@ -7125,12 +7141,12 @@ header h1 {
   opacity: 1;
 }
 
-/* ===== CONTROLS — dark glass buttons ===== */
+/* ===== CONTROLS — dark glass ===== */
 :root[data-theme='alchemy'] button {
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(28, 26, 24, 0.7);
-  color: #E0DDD8;
+  background: rgba(16, 22, 28, 0.7);
+  color: #E8ECF0;
   font-weight: 500;
   letter-spacing: 0.3px;
   padding: 7px 16px;
@@ -7138,62 +7154,63 @@ header h1 {
   transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 :root[data-theme='alchemy'] button:hover {
-  background: rgba(38, 36, 34, 0.8);
+  background: rgba(24, 32, 40, 0.8);
   border-color: rgba(255, 255, 255, 0.10);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.03);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.03);
 }
 
 :root[data-theme='alchemy'] .play {
-  background: rgba(28, 26, 24, 0.7);
+  background: rgba(16, 22, 28, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  color: #E0DDD8;
+  color: #E8ECF0;
 }
 :root[data-theme='alchemy'] .play.is-playing {
-  background: rgba(212, 175, 55, 0.08);
-  border-color: #D4AF37;
-  color: #E0DDD8;
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.08);
+  background: rgba(0, 180, 255, 0.08);
+  border-color: #00B4FF;
+  color: #E8ECF0;
+  box-shadow: 0 0 12px rgba(0, 180, 255, 0.10);
+  font-weight: 600;
 }
 
 :root[data-theme='alchemy'] .export,
 :root[data-theme='alchemy'] .reset-pattern {
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(28, 26, 24, 0.7);
-  color: #E0DDD8;
+  background: rgba(16, 22, 28, 0.7);
+  color: #E8ECF0;
 }
 :root[data-theme='alchemy'] .export:hover,
 :root[data-theme='alchemy'] .reset-pattern:hover {
   border-color: rgba(255, 255, 255, 0.10);
-  background: rgba(38, 36, 34, 0.8);
+  background: rgba(24, 32, 40, 0.8);
 }
 
 :root[data-theme='alchemy'] .pattern-slot {
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 4px 0;
   font-size: 10px;
   background: rgba(255, 255, 255, 0.02);
 }
 :root[data-theme='alchemy'] .pattern-slot:hover {
-  background: rgba(38, 36, 34, 0.7);
+  background: rgba(24, 32, 40, 0.7);
 }
 
-/* Mask controls */
+/* Mask row — strongest coloured accent */
 :root[data-theme='alchemy'] .mask-label {
-  color: rgba(190, 186, 178, 0.7);
+  color: rgba(180, 190, 200, 0.75);
   font-weight: 600;
 }
 :root[data-theme='alchemy'] .mask-cell {
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 0;
   width: 15px;
   height: 15px;
 }
 :root[data-theme='alchemy'] .mask-cell.rest {
-  background: rgba(255, 255, 255, 0.03);
-  border-color: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.04);
   border-width: 1px;
-  opacity: 1;
+  opacity: 0.5;
 }
 :root[data-theme='alchemy'] .mask-cell.onset {
   background: var(--track-color);
@@ -7203,28 +7220,28 @@ header h1 {
 :root[data-theme='alchemy'] .mask-cell.onset.muted {
   background: transparent;
   border-color: var(--track-color);
-  opacity: 0.50;
+  opacity: 0.55;
 }
 :root[data-theme='alchemy'] .mask-cell.onset:hover {
-  filter: brightness(1.15);
+  filter: brightness(1.2);
 }
 :root[data-theme='alchemy'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px rgba(18, 17, 16, 0.8), 0 0 0 3px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 0 2px #080C10, 0 0 0 3px var(--track-color), 0 0 8px var(--track-color);
 }
 
 :root[data-theme='alchemy'] .toggle {
-  border-radius: 6px;
+  border-radius: 8px;
   min-width: 32px;
   padding: 4px 14px;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(28, 26, 24, 0.5);
+  background: rgba(16, 22, 28, 0.5);
 }
 :root[data-theme='alchemy'] .toggle.is-on {
-  background: rgba(212, 175, 55, 0.08);
-  border-color: #D4AF37;
+  background: rgba(0, 180, 255, 0.10);
+  border-color: #00B4FF;
 }
 
-/* Sliders */
+/* Sliders — energized knobs */
 :root[data-theme='alchemy'] input[type='range'] {
   height: 4px;
   cursor: pointer;
@@ -7239,14 +7256,15 @@ header h1 {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #D4AF37;
-  border: none;
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.12);
-  margin-top: -5px;
-  transition: transform 0.12s ease;
+  background: #FFFFFF;
+  border: 2px solid #00B4FF;
+  box-shadow: 0 0 0 2px rgba(0, 180, 255, 0.12), 0 0 6px rgba(0, 180, 255, 0.08);
+  margin-top: -6px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 :root[data-theme='alchemy'] input[type='range']::-webkit-slider-thumb:hover {
   transform: scale(1.2);
+  box-shadow: 0 0 0 2px rgba(0, 180, 255, 0.20), 0 0 10px rgba(0, 180, 255, 0.12);
 }
 :root[data-theme='alchemy'] input[type='range']::-moz-range-track {
   height: 4px;
@@ -7258,58 +7276,58 @@ header h1 {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #D4AF37;
-  border: none;
+  background: #FFFFFF;
+  border: 2px solid #00B4FF;
+  box-shadow: 0 0 6px rgba(0, 180, 255, 0.08);
 }
 
-/* Dropdowns */
 :root[data-theme='alchemy'] select {
-  background: rgba(28, 26, 24, 0.8);
+  background: rgba(16, 22, 28, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  color: #E0DDD8;
-  border-radius: 6px;
+  color: #E8ECF0;
+  border-radius: 8px;
   padding: 5px 12px;
   font-size: 12px;
 }
 :root[data-theme='alchemy'] select option {
-  background: #181716;
-  color: #E0DDD8;
+  background: #0A1016;
+  color: #E8ECF0;
 }
 :root[data-theme='alchemy'] select option:checked {
-  background: rgba(212, 175, 55, 0.12);
+  background: rgba(0, 180, 255, 0.12);
 }
 
 :root[data-theme='alchemy'] label {
-  color: rgba(190, 186, 178, 0.7);
+  color: rgba(180, 190, 200, 0.7);
   font-weight: 500;
   letter-spacing: 0.4px;
   font-size: 11px;
 }
 
 :root[data-theme='alchemy'] .control-label {
-  color: rgba(190, 186, 178, 0.7);
+  color: rgba(180, 190, 200, 0.7);
   font-size: 10px;
   letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 :root[data-theme='alchemy'] .control-label b {
-  color: #E0DDD8;
+  color: #E8ECF0;
 }
 
 :root[data-theme='alchemy'] .bpm b,
 :root[data-theme='alchemy'] .swing b {
-  color: #D4AF37;
+  color: #00B4FF;
 }
 
 :root[data-theme='alchemy'] h1 {
-  color: #E0DDD8;
+  color: #E8ECF0;
   letter-spacing: 2px;
   font-weight: 400;
   font-size: 18px;
 }
 
 :root[data-theme='alchemy'] .tagline {
-  color: rgba(190, 186, 178, 0.55);
+  color: rgba(180, 190, 200, 0.55);
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -7317,30 +7335,30 @@ header h1 {
 }
 
 :root[data-theme='alchemy'] .track-name {
-  color: #E0DDD8;
+  color: #E8ECF0;
   font-weight: 600;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
 
 :root[data-theme='alchemy'] .mini-metrics b {
-  color: #E0DDD8;
+  color: #E8ECF0;
 }
 :root[data-theme='alchemy'] .mini-metrics span {
-  color: rgba(190, 186, 178, 0.7);
+  color: rgba(180, 190, 200, 0.7);
   opacity: 0.75;
 }
 
 :root[data-theme='alchemy'] .playback-select select {
-  background: rgba(28, 26, 24, 0.8);
+  background: rgba(16, 22, 28, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 4px 12px;
-  color: #E0DDD8;
+  color: #E8ECF0;
   font-size: 12px;
 }
 :root[data-theme='alchemy'] .playback-select span {
-  color: rgba(190, 186, 178, 0.7);
+  color: rgba(180, 190, 200, 0.7);
   opacity: 0.75;
 }
 
