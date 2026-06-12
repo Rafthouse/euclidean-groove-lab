@@ -2,8 +2,10 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
 import Knob from './components/Knob';
+import PresetBrowser from './components/PresetBrowser';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
+import type { GrooveSnapshot } from './engine/preset';
 import { rhythmPresets, getRhythmPreset } from './presets';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading, resetClock, setMidiOut } from './audio';
@@ -70,12 +72,47 @@ export default function App() {
   const [midiEnabled, setMidiEnabled] = useState(false);
 
   const [presetId, setPresetId] = useState<string>('');
+  const [presetBrowserOpen, setPresetBrowserOpen] = useState(false);
+  const [devMode, setDevMode] = useState(() => {
+    try { return localStorage.getItem('groove-dev-mode') === 'true'; }
+    catch { return false; }
+  });
+
+  // Ctrl+Shift+D toggles developer mode
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+        e.preventDefault();
+        setDevMode((prev) => {
+          const next = !prev;
+          try { localStorage.setItem('groove-dev-mode', next ? 'true' : 'false'); } catch {}
+          return next;
+        });
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, []);
+
+  const currentGroove = useCallback((): GrooveSnapshot => ({
+    bpm,
+    swing,
+    tracks: tracks.map((t) => ({ ...t })),
+    theme,
+  }), [bpm, swing, tracks, theme]);
 
   const handlePresetLoad = useCallback((id: string) => {
     const preset = getRhythmPreset(id);
     if (!preset) return;
     setPresetId(id);
     setTracksState(preset.tracks);
+  }, []);
+
+  const handleLoadGroove = useCallback((groove: GrooveSnapshot) => {
+    setBpm(groove.bpm);
+    setSwingState(groove.swing);
+    setTracksState(groove.tracks);
+    setTheme(groove.theme);
   }, []);
 
   // Initialise Web MIDI on mount
@@ -482,6 +519,27 @@ export default function App() {
             <option value="beekeeper">Beekeeper</option>
           </select>
         </label>
+        <button
+          type="button"
+          className="export"
+          onClick={() => setPresetBrowserOpen(true)}
+          title="Browse and manage presets (Ctrl+Shift+D for Developer Mode)"
+        >
+          Presets
+        </button>
+        {devMode && (
+          <label className="preference dev-mode-indicator">
+            <input
+              type="checkbox"
+              checked={devMode}
+              onChange={() => {
+                setDevMode(false);
+                try { localStorage.setItem('groove-dev-mode', 'false'); } catch {}
+              }}
+            />
+            <span>Dev Mode</span>
+          </label>
+        )}
         {theme === 'elements' && (
           <label className="preference fx-toggle">
             <input
@@ -502,6 +560,13 @@ export default function App() {
         </label>
       </section>
 
+      <PresetBrowser
+        open={presetBrowserOpen}
+        onClose={() => setPresetBrowserOpen(false)}
+        onLoadPreset={handleLoadGroove}
+        currentGroove={currentGroove()}
+        developerMode={devMode}
+      />
       <p className="note">
         Sample-based drums (CR-78, Kit-8, KPR-77) with a sawtooth pick-bass
         synth. Swing shuffles the off-beat 8ths. Switch kits live — Transport
