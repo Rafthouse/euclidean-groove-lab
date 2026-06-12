@@ -4028,8 +4028,8 @@ header h1 {
   color: var(--text-dim);
 }
 .mask-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(8, auto);
   gap: 3px;
 }
 .mask-cell {
