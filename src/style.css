@@ -519,69 +519,201 @@
 /* An alchemical machine for transmuting harmony into gold.
    Sacred geometry, brass instruments, occult engineering.
    Completely rebuilt from scratch — no astronomy. */
+/* An ancient celestial observatory — Nostradamus meets Kepler.
+   Zodiac wheels, astrolabe markings, drifting star dust.
+   Alchemical gold on midnight parchment. Sacred geometry alive. */
 :root[data-theme='nostradamus'] {
-  --bg: #0D0B0A;
-  --panel: rgba(20, 17, 15, 0.65);
-  --panel-hi: rgba(30, 26, 22, 0.55);
+  --bg: #0A0807;
+  --panel: rgba(16, 13, 12, 0.60);
+  --panel-hi: rgba(26, 22, 20, 0.50);
   --text: #D7C7A2;
-  --text-dim: rgba(174, 160, 130, 0.55);
+  --text-dim: rgba(174, 160, 130, 0.65);
   --text-hi: #E8DFC8;
-  --accent: #C7A44A;
-  --accent-dim: rgba(199, 164, 74, 0.12);
-  --rest: rgba(20, 17, 15, 0.4);
-  --current: #C7A44A;
-  --danger: #6A1F1F;
-  --warn: #B87333;
-  --radius: 4px;
+  --accent: #D4AF37;
+  --accent-dim: rgba(212, 175, 55, 0.12);
+  --rest: rgba(16, 13, 12, 0.35);
+  --current: #D4AF37;
+  --danger: #5A1A1A;
+  --warn: #C08040;
+  --radius: 2px;
   --mono: ui-monospace, Consolas, monospace;
 
-  --color-kick: #B87333;
-  --color-kick-mid: #C98A4A;
-  --color-kick-light: #DCA86A;
+  --color-kick: #C08040;
+  --color-kick-mid: #D4A060;
+  --color-kick-light: #E8C080;
 
-  --color-snare: #a84848;
-  --color-snare-mid: #c06060;
-  --color-snare-light: #d48080;
+  --color-snare: #A04040;
+  --color-snare-mid: #C06060;
+  --color-snare-light: #D88888;
 
-  --color-hat: #7faed8;
-  --color-hat-mid: #8db8e0;
-  --color-hat-light: #a0c8e8;
+  --color-hat: #6090C0;
+  --color-hat-mid: #78A8D8;
+  --color-hat-light: #90C0E8;
 
-  --color-bass: #5f8f86;
-  --color-bass-mid: #6b9b90;
-  --color-bass-light: #80ada2;
+  --color-bass: #508078;
+  --color-bass-mid: #609890;
+  --color-bass-light: #78B0A8;
 
-  --card-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 1px rgba(212, 175, 55, 0.06);
   color-scheme: dark;
 }
 
-/* Background: dark aged parchment with faint alchemical diagrams */
+/* Layer 1: Dark cosmic void.
+   Layer 2: Astrological diagrams — zodiac wheels, astrolabe rings.
+   Layer 3: Star field — tiny points of light.
+   Layer 4: Grid lines — manuscript ruling.
+   All layers animated at their own imperceptible pace. */
 :root[data-theme='nostradamus'] body {
   background:
-    /* Faint sacred geometry circles — barely visible */
-    radial-gradient(circle 30% at 15% 10%, rgba(199, 164, 74, 0.02) 0%, transparent 50%),
-    radial-gradient(circle 25% at 85% 20%, rgba(138, 106, 43, 0.015) 0%, transparent 50%),
-    radial-gradient(circle 20% at 50% 80%, rgba(199, 164, 74, 0.015) 0%, transparent 50%),
-    /* Subtle cross-grid like manuscript ruling */
-    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(199, 164, 74, 0.008) 40px, rgba(199, 164, 74, 0.008) 41px),
-    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(199, 164, 74, 0.008) 40px, rgba(199, 164, 74, 0.008) 41px),
-    #0D0B0A;
-}
-
-/* ===== TRACK CARDS — engraved alchemical apparatus ===== */
-:root[data-theme='nostradamus'] .track-card {
-  background: rgba(20, 17, 15, 0.65);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(138, 106, 43, 0.15);
-  border-radius: 4px;
-  box-shadow:
-    inset 0 0.5px 0 0 rgba(199, 164, 74, 0.04),
-    0 2px 12px rgba(0, 0, 0, 0.5);
+    /* Zodiac ring 1 — large ecliptic circle */
+    radial-gradient(ellipse 55% 45% at 22% 8%,  transparent 40%, rgba(212, 175, 55, 0.012) 42%, transparent 44%),
+    radial-gradient(ellipse 55% 45% at 22% 8%,  transparent 46%, rgba(212, 175, 55, 0.006) 48%, transparent 50%),
+    /* Zodiac ring 2 — smaller astrolabe circle */
+    radial-gradient(ellipse 40% 35% at 75% 15%, transparent 30%, rgba(212, 175, 55, 0.010) 32%, transparent 34%),
+    radial-gradient(ellipse 40% 35% at 75% 15%, transparent 36%, rgba(212, 175, 55, 0.005) 38%, transparent 40%),
+    /* Zodiac ring 3 — deep celestial ring */
+    radial-gradient(ellipse 35% 30% at 50% 82%, transparent 25%, rgba(96, 144, 192, 0.008) 27%, transparent 29%),
+    /* Alchemical cross-diagram */
+    radial-gradient(ellipse 20% 100% at 50% 50%, transparent 45%, rgba(212, 175, 55, 0.004) 46%, transparent 47%),
+    radial-gradient(ellipse 100% 20% at 50% 50%, transparent 45%, rgba(212, 175, 55, 0.004) 46%, transparent 47%),
+    /* Manuscript ruling */
+    repeating-linear-gradient(0deg, transparent, transparent 38px, rgba(212, 175, 55, 0.008) 38px, rgba(212, 175, 55, 0.008) 39px),
+    repeating-linear-gradient(90deg, transparent, transparent 38px, rgba(212, 175, 55, 0.008) 38px, rgba(212, 175, 55, 0.008) 39px),
+    /* Base cosmic darkness */
+    #0A0807;
   position: relative;
+  overflow-x: hidden;
 }
 
-/* Engraved inner border — like a brass plate */
+/* Layer 3: Star field — tiny scattered points twinkling slowly.
+   Also the ::before houses the animated celestial diagrams. */
+:root[data-theme='nostradamus'] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.40;
+  background-image:
+    /* Bright stars */
+    radial-gradient(1px 1px at 3% 7%,  rgba(232, 223, 200, 0.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 12% 3%, rgba(232, 223, 200, 0.30) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 12%, rgba(212, 175, 55, 0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 42% 5%, rgba(232, 223, 200, 0.28) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 8%, rgba(232, 223, 200, 0.20) 0%, transparent 100%),
+    radial-gradient(1px 1px at 78% 3%, rgba(212, 175, 55, 0.22) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 9%, rgba(232, 223, 200, 0.18) 0%, transparent 100%),
+    /* Dim stars */
+    radial-gradient(0.5px 0.5px at 8% 15%,  rgba(200, 200, 220, 0.12) 0%, transparent 100%),
+    radial-gradient(0.5px 0.5px at 18% 22%, rgba(200, 200, 220, 0.10) 0%, transparent 100%),
+    radial-gradient(0.5px 0.5px at 32% 18%, rgba(212, 175, 55, 0.08) 0%, transparent 100%),
+    radial-gradient(0.5px 0.5px at 48% 25%, rgba(200, 200, 220, 0.10) 0%, transparent 100%),
+    radial-gradient(0.5px 0.5px at 65% 14%, rgba(200, 200, 220, 0.08) 0%, transparent 100%),
+    radial-gradient(0.5px 0.5px at 82% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 100%),
+    radial-gradient(0.5px 0.5px at 95% 16%, rgba(200, 200, 220, 0.10) 0%, transparent 100%),
+    /* Faint background stars */
+    radial-gradient(0.3px 0.3px at 5% 30%, rgba(180, 180, 200, 0.04) 0%, transparent 100%),
+    radial-gradient(0.3px 0.3px at 20% 35%, rgba(180, 180, 200, 0.03) 0%, transparent 100%),
+    radial-gradient(0.3px 0.3px at 38% 40%, rgba(212, 175, 55, 0.03) 0%, transparent 100%),
+    radial-gradient(0.3px 0.3px at 55% 28%, rgba(180, 180, 200, 0.04) 0%, transparent 100%),
+    radial-gradient(0.3px 0.3px at 70% 35%, rgba(180, 180, 200, 0.03) 0%, transparent 100%),
+    radial-gradient(0.3px 0.3px at 88% 30%, rgba(212, 175, 55, 0.02) 0%, transparent 100%);
+  animation: nos-star-twinkle 8s ease-in-out infinite alternate;
+}
+
+/* Twinkle animation for stars — gradual shimmer */
+@keyframes nos-star-twinkle {
+  0%   { opacity: 0.32; }
+  25%  { opacity: 0.48; }
+  45%  { opacity: 0.30; }
+  65%  { opacity: 0.50; }
+  85%  { opacity: 0.34; }
+  100% { opacity: 0.42; }
+}
+
+/* Layer 2a: Rotating zodiac / astrolabe ring animation.
+   Very slow — one full rotation in ~90 seconds. */
+:root[data-theme='nostradamus'] body::after {
+  content: '';
+  position: fixed;
+  inset: -120px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.10;
+  background-image:
+    radial-gradient(ellipse 50% 48% at 50% 50%, transparent 38%, rgba(212, 175, 55, 0.04) 39%, transparent 40%),
+    radial-gradient(ellipse 50% 48% at 50% 50%, transparent 42%, rgba(96, 144, 192, 0.025) 43%, transparent 44%),
+    radial-gradient(ellipse 50% 48% at 50% 50%, transparent 46%, rgba(212, 175, 55, 0.015) 47%, transparent 48%),
+    /* Astrolabe cross */
+    conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(212, 175, 55, 0.01) 10deg, transparent 20deg, transparent 50deg, rgba(212, 175, 55, 0.01) 55deg, transparent 65deg, transparent 110deg, rgba(96, 144, 192, 0.01) 120deg, transparent 130deg),
+    /* Planetary orbit ellipses */
+    radial-gradient(ellipse 42% 38% at 25% 20%, transparent 20%, rgba(212, 175, 55, 0.015) 21%, transparent 22%),
+    radial-gradient(ellipse 35% 30% at 75% 75%, transparent 25%, rgba(96, 144, 192, 0.012) 26%, transparent 27%);
+  animation: nos-zodiac-rotate 90s linear infinite;
+}
+
+@keyframes nos-zodiac-rotate {
+  0%   { transform: rotate(0deg) scale(1); }
+  25%  { transform: rotate(90deg) scale(1.02); }
+  50%  { transform: rotate(180deg) scale(0.98); }
+  75%  { transform: rotate(270deg) scale(1.01); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Occasional celestial event: faint shooting star */
+@keyframes nos-shooting-star {
+  0%   { opacity: 0; transform: translate(-100px, -50px) rotate(-25deg) scale(0.3); }
+  2%   { opacity: 0.35; }
+  5%   { opacity: 0; transform: translate(100vw, 50vh) rotate(-25deg) scale(0.6); }
+  100% { opacity: 0; }
+}
+
+/* A single shooting star element */
+:root[data-theme='nostradamus'] .app::before {
+  content: '';
+  position: fixed;
+  top: 8%;
+  left: -100px;
+  width: 2px;
+  height: 2px;
+  background: rgba(232, 223, 200, 0.6);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(232, 223, 200, 0.3), 30px 15px 0 0 rgba(232, 223, 200, 0.2);
+  pointer-events: none;
+  z-index: 0;
+  animation: nos-shooting-star 25s linear infinite;
+  animation-delay: 10s;
+}
+
+:root[data-theme='nostradamus'] .app {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== TRACK CARDS — engraved brass plates on velvet ===== */
+:root[data-theme='nostradamus'] .track-card {
+  background: rgba(16, 13, 12, 0.60);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(160, 130, 70, 0.12);
+  border-radius: 2px;
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(212, 175, 55, 0.03),
+    0 4px 24px rgba(0, 0, 0, 0.6),
+    0 0 1px rgba(212, 175, 55, 0.06);
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+:root[data-theme='nostradamus'] .track-card:hover {
+  border-color: rgba(212, 175, 55, 0.18);
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(212, 175, 55, 0.06),
+    0 4px 28px rgba(0, 0, 0, 0.65),
+    0 0 2px rgba(212, 175, 55, 0.10);
+}
+
+/* Inner engraved border — celestial ring */
 :root[data-theme='nostradamus'] .track-card::after {
   content: '';
   position: absolute;
@@ -589,202 +721,284 @@
   left: 2px;
   right: 2px;
   bottom: 2px;
-  border: 1px solid rgba(199, 164, 74, 0.03);
-  border-radius: 2px;
+  border: 1px solid rgba(212, 175, 55, 0.03);
+  border-radius: 1px;
   pointer-events: none;
 }
 
+/* ===== TRACK ASTRAL IDENTITIES ===== */
+
+/* Kick — Solar / Sun Wheel / Leonine Gold */
 :root[data-theme='nostradamus'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
 }
+:root[data-theme='nostradamus'] .track-card[data-voice='kick']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+  background:
+    radial-gradient(circle 20px at 12px 12px, rgba(212, 175, 55, 0.12) 0%, transparent 70%),
+    radial-gradient(circle 15px at 12px 12px, rgba(212, 175, 55, 0.08) 0%, transparent 70%),
+    radial-gradient(circle 10px at 12px 12px, transparent 50%, rgba(212, 175, 55, 0.04) 52%, transparent 54%);
+}
 :root[data-theme='nostradamus'] .track-card[data-voice='kick'] .step.onset {
-  fill: var(--color-kick-mid);
+  fill: var(--color-kick);
 }
 :root[data-theme='nostradamus'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-kick) 20%, transparent);
-  stroke: rgba(199, 164, 74, 0.20);
+  fill: color-mix(in srgb, var(--color-kick) 22%, transparent);
+  stroke: rgba(212, 175, 55, 0.25);
 }
 
+/* Snare — Lunar / Crescent Moon / Silver-Red */
 :root[data-theme='nostradamus'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare);
 }
+:root[data-theme='nostradamus'] .track-card[data-voice='snare']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.05;
+  background:
+    radial-gradient(circle 16px at 14px 10px, rgba(200, 200, 210, 0.10) 0%, transparent 60%),
+    radial-gradient(circle 10px at 18px 10px, transparent 40%, rgba(160, 64, 64, 0.06) 42%, transparent 44%);
+}
 :root[data-theme='nostradamus'] .track-card[data-voice='snare'] .step.onset {
-  fill: var(--color-snare-mid);
+  fill: var(--color-snare);
 }
 :root[data-theme='nostradamus'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-snare) 20%, transparent);
-  stroke: rgba(168, 72, 72, 0.20);
+  fill: color-mix(in srgb, var(--color-snare) 22%, transparent);
+  stroke: rgba(160, 64, 64, 0.25);
 }
 
+/* Hat — Mercury / Sacred Geometry / Celestial Blue */
 :root[data-theme='nostradamus'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat);
 }
+:root[data-theme='nostradamus'] .track-card[data-voice='hat']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.05;
+  background:
+    radial-gradient(circle 12px at 8px 8px, rgba(96, 144, 192, 0.10) 0%, transparent 60%),
+    radial-gradient(circle 8px at 12px 12px, transparent 30%, rgba(96, 144, 192, 0.05) 32%, transparent 34%);
+}
 :root[data-theme='nostradamus'] .track-card[data-voice='hat'] .step.onset {
-  fill: var(--color-hat-mid);
+  fill: var(--color-hat);
 }
 :root[data-theme='nostradamus'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-hat) 20%, transparent);
-  stroke: rgba(127, 174, 216, 0.15);
+  fill: color-mix(in srgb, var(--color-hat) 22%, transparent);
+  stroke: rgba(96, 144, 192, 0.22);
 }
 
+/* Bass — Saturn / Rings / Ancient Diagrams / Green-Bronze */
 :root[data-theme='nostradamus'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass);
 }
+:root[data-theme='nostradamus'] .track-card[data-voice='bass']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.05;
+  background:
+    radial-gradient(ellipse 80% 30% at 50% 14px, rgba(80, 128, 120, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 20% at 50% 14px, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+}
 :root[data-theme='nostradamus'] .track-card[data-voice='bass'] .step.onset {
-  fill: var(--color-bass-mid);
+  fill: var(--color-bass);
 }
 :root[data-theme='nostradamus'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-bass) 20%, transparent);
-  stroke: rgba(95, 143, 134, 0.15);
+  fill: color-mix(in srgb, var(--color-bass) 22%, transparent);
+  stroke: rgba(80, 128, 120, 0.22);
 }
 
-/* ===== PER-VOICE ALCHEMICAL IGNITION ===== */
-/* Each voice resonates in its own prophetic color. */
-/* Kick: warm copper pulse (unchanged) */
-@keyframes nostradamus-kick-ignite {
-  0% { r: 11px; fill: #C98A4A; }
-  15% { r: 16px; fill: #DCA86A; filter: drop-shadow(0 0 10px rgba(184, 115, 51, 0.25)); }
-  35% { r: 14px; fill: #C98A4A; filter: drop-shadow(0 0 6px rgba(184, 115, 51, 0.12)); }
-  100% { r: 11px; fill: var(--color-kick-mid); filter: none; }
+/* ===== PER-VOICE ALCHEMICAL IGNITION — mystical glow ===== */
+/* Kick: sun-gold pulse with faint radial energy ring */
+@keyframes nos-kick-ignite {
+  0%   { r: 11px; fill: #D4A060; filter: none; }
+  12%  { r: 16px; fill: #E8C080; filter: drop-shadow(0 0 14px rgba(212, 175, 55, 0.25)); }
+  25%  { r: 15px; filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.12)); }
+  60%  { r: 12px; fill: #D4A060; filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.05)); }
+  100% { r: 11px; fill: var(--color-kick); filter: none; }
 }
 :root[data-theme='nostradamus'] .track-card[data-voice='kick'] .step.onset.current {
-  animation: nostradamus-kick-ignite 350ms ease-out forwards;
+  animation: nos-kick-ignite 400ms ease-out forwards;
 }
 
-/* Snare: deep crimson — prophetic warning */
-@keyframes nostradamus-snare-ignite {
-  0% { r: 11px; fill: #c06060; }
-  15% { r: 16px; fill: #d48080; filter: drop-shadow(0 0 10px rgba(168, 72, 72, 0.20)); }
-  35% { r: 14px; fill: #c06060; filter: drop-shadow(0 0 6px rgba(168, 72, 72, 0.10)); }
-  100% { r: 11px; fill: var(--color-snare-mid); filter: none; }
+/* Snare: lunar crimson — eclipse glow */
+@keyframes nos-snare-ignite {
+  0%   { r: 11px; fill: #C06060; filter: none; }
+  15%  { r: 16px; fill: #D88888; filter: drop-shadow(0 0 12px rgba(160, 64, 64, 0.20)); }
+  30%  { r: 14px; filter: drop-shadow(0 0 6px rgba(160, 64, 64, 0.10)); }
+  70%  { r: 12px; fill: #C06060; }
+  100% { r: 11px; fill: var(--color-snare); filter: none; }
 }
 :root[data-theme='nostradamus'] .track-card[data-voice='snare'] .step.onset.current {
-  animation: nostradamus-snare-ignite 350ms ease-out forwards;
+  animation: nos-snare-ignite 400ms ease-out forwards;
 }
 
-/* Hat: pale mystical blue — celestial whisper */
-@keyframes nostradamus-hat-ignite {
-  0% { r: 9px; fill: #8db8e0; }
-  20% { r: 12px; fill: #a0c8e8; filter: drop-shadow(0 0 8px rgba(127, 174, 216, 0.15)); }
-  100% { r: 9px; fill: var(--color-hat-mid); filter: none; }
+/* Hat: mercury blue — celestial glyph shimmer */
+@keyframes nos-hat-ignite {
+  0%   { r: 9px; fill: #78A8D8; }
+  20%  { r: 12px; fill: #90C0E8; filter: drop-shadow(0 0 10px rgba(96, 144, 192, 0.15)); }
+  50%  { r: 10px; filter: drop-shadow(0 0 5px rgba(96, 144, 192, 0.06)); }
+  100% { r: 9px; fill: var(--color-hat); filter: none; }
 }
 :root[data-theme='nostradamus'] .track-card[data-voice='hat'] .step.onset.current {
-  animation: nostradamus-hat-ignite 300ms ease-out forwards;
+  animation: nos-hat-ignite 350ms ease-out forwards;
 }
 
-/* Bass: teal-olive — deep abyss shimmer */
-@keyframes nostradamus-bass-ignite {
-  0% { r: 11px; fill: #6b9b90; }
-  25% { r: 15px; fill: #80ada2; filter: drop-shadow(0 0 10px rgba(95, 143, 134, 0.15)); }
-  100% { r: 11px; fill: var(--color-bass-mid); filter: none; }
+/* Bass: saturn ring — green-bronze abyss glow */
+@keyframes nos-bass-ignite {
+  0%   { r: 11px; fill: #609890; }
+  20%  { r: 15px; fill: #78B0A8; filter: drop-shadow(0 0 12px rgba(80, 128, 120, 0.18)); }
+  55%  { r: 12px; filter: drop-shadow(0 0 5px rgba(80, 128, 120, 0.06)); }
+  100% { r: 11px; fill: var(--color-bass); filter: none; }
 }
 :root[data-theme='nostradamus'] .track-card[data-voice='bass'] .step.onset.current {
-  animation: nostradamus-bass-ignite 400ms ease-out forwards;
+  animation: nos-bass-ignite 450ms ease-out forwards;
 }
 
 /* ===== SACRED GEOMETRY LINES ===== */
-/* Thin golden geometric lines — like transmutation circles */
 :root[data-theme='nostradamus'] .hand {
-  stroke: rgba(199, 164, 74, 0.10);
+  stroke: rgba(212, 175, 55, 0.08);
   stroke-width: 0.5px;
   opacity: 0;
   transition: opacity 0.3s;
 }
-
 :root[data-theme='nostradamus'] .sequencer:has(.step.current) .hand {
   opacity: 1;
 }
 
 :root[data-theme='nostradamus'] .guide {
   fill: none;
-  stroke: rgba(138, 106, 43, 0.06);
+  stroke: rgba(160, 130, 70, 0.05);
   stroke-width: 0.5px;
 }
 
-/* ===== PLAYHEAD — incandescent ember ===== */
+/* ===== PLAYHEAD — glowing ember ===== */
 :root[data-theme='nostradamus'] .step.current .step-indicator {
-  fill: #D7C7A2;
-  stroke: #C7A44A;
+  fill: #E8DFC8;
+  stroke: #D4AF37;
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 6px rgba(199, 164, 74, 0.20));
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.20));
 }
 :root[data-theme='nostradamus'] .step.current .visual {
-  fill: #D7C7A2;
+  fill: #E8DFC8;
 }
 
-/* Rest steps */
 :root[data-theme='nostradamus'] .step.rest .step-indicator {
-  opacity: 0.15;
+  opacity: 0.14;
 }
 
-/* ===== CONTROLS — brass/copper buttons, engraved ===== */
+/* ===== CONTROLS — aged brass ===== */
 :root[data-theme='nostradamus'] button {
-  border-radius: 4px;
-  border: 1px solid rgba(138, 106, 43, 0.20);
-  background: rgba(20, 17, 15, 0.6);
+  border-radius: 2px;
+  border: 1px solid rgba(160, 130, 70, 0.18);
+  background: rgba(16, 13, 12, 0.6);
   color: #D7C7A2;
   font-weight: 400;
   letter-spacing: 0.5px;
   padding: 6px 14px;
-  transition: background 0.25s, border-color 0.25s;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
 }
 :root[data-theme='nostradamus'] button:hover {
-  background: rgba(30, 26, 22, 0.7);
-  border-color: rgba(199, 164, 74, 0.30);
-  box-shadow: inset 0 0 8px rgba(199, 164, 74, 0.04);
+  background: rgba(26, 22, 20, 0.7);
+  border-color: rgba(212, 175, 55, 0.30);
+  box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.06), 0 0 6px rgba(212, 175, 55, 0.03);
 }
 
 :root[data-theme='nostradamus'] .play {
-  background: rgba(20, 17, 15, 0.7);
-  border: 1px solid rgba(199, 164, 74, 0.25);
+  background: rgba(16, 13, 12, 0.7);
+  border: 1px solid rgba(212, 175, 55, 0.22);
   color: #D7C7A2;
-  box-shadow: 0 0 8px rgba(199, 164, 74, 0.03);
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.03);
 }
 :root[data-theme='nostradamus'] .play.is-playing {
-  background: rgba(20, 17, 15, 0.4);
-  border: 1px solid rgba(199, 164, 74, 0.12);
+  background: rgba(16, 13, 12, 0.35);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.10);
+  color: #E8DFC8;
 }
 
 :root[data-theme='nostradamus'] .export {
-  border-radius: 4px;
-  border: 1px solid rgba(138, 106, 43, 0.20);
-  background: rgba(20, 17, 15, 0.6);
+  border-radius: 2px;
+  border: 1px solid rgba(160, 130, 70, 0.18);
+  background: rgba(16, 13, 12, 0.6);
   color: #D7C7A2;
 }
 
-/* Sliders — engraved brass */
+/* Sliders — engraved brass ring */
 :root[data-theme='nostradamus'] input[type='range'] {
   height: 3px;
 }
 :root[data-theme='nostradamus'] input[type='range']::-webkit-slider-runnable-track {
   height: 3px;
   border-radius: 1px;
-  background: rgba(138, 106, 43, 0.10);
+  background: rgba(160, 130, 70, 0.10);
 }
 :root[data-theme='nostradamus'] input[type='range']::-webkit-slider-thumb {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #C7A44A;
+  background: #D4AF37;
   border: none;
-  box-shadow: 0 0 0 2px rgba(199, 164, 74, 0.15);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.18), 0 0 6px rgba(212, 175, 55, 0.06);
   margin-top: -5px;
+  transition: transform 0.2s ease;
+}
+:root[data-theme='nostradamus'] input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+:root[data-theme='nostradamus'] input[type='range']::-moz-range-track {
+  height: 3px;
+  border-radius: 1px;
+  background: rgba(160, 130, 70, 0.10);
+  border: none;
+}
+:root[data-theme='nostradamus'] input[type='range']::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #D4AF37;
+  border: none;
 }
 
 :root[data-theme='nostradamus'] select {
-  background: rgba(20, 17, 15, 0.6);
-  border: 1px solid rgba(138, 106, 43, 0.15);
+  background: rgba(16, 13, 12, 0.6);
+  border: 1px solid rgba(160, 130, 70, 0.14);
   color: #D7C7A2;
-  border-radius: 4px;
+  border-radius: 2px;
   padding: 4px 10px;
   letter-spacing: 0.3px;
 }
 :root[data-theme='nostradamus'] select option {
-  background: #14110f;
+  background: #0A0807;
   color: #D7C7A2;
 }
 :root[data-theme='nostradamus'] select option:checked {
-  background: rgba(231, 197, 145, 0.15);
+  background: rgba(212, 175, 55, 0.15);
 }
 
 :root[data-theme='nostradamus'] label {
@@ -797,7 +1011,7 @@
 
 :root[data-theme='nostradamus'] .bpm b,
 :root[data-theme='nostradamus'] .swing b {
-  color: #C7A44A;
+  color: #D4AF37;
 }
 
 :root[data-theme='nostradamus'] h1 {
@@ -811,6 +1025,29 @@
   font-style: italic;
 }
 
+/* Ornamental corner flourish — alchemical manuscript detail */
+:root[data-theme='nostradamus'] .app::after {
+  content: '';
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(135deg, transparent 45%, rgba(212, 175, 55, 0.5) 46%, rgba(212, 175, 55, 0.5) 48%, transparent 49%),
+    linear-gradient(45deg, transparent 45%, rgba(212, 175, 55, 0.3) 46%, rgba(212, 175, 55, 0.3) 48%, transparent 49%);
+  background-size: 12px 12px;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+}
+
+/* Constellation shimmer on hover — celestial layer reacts */
+:root[data-theme='nostradamus'] .track-card:hover body::before {
+  opacity: 0.50;
+}
 /* ===== Big Boss (Premium Glass / Titanium) ===== */
 /* Crystal-clear glass, titanium precision. Independent theme. */
 :root[data-theme='big-boss'] {
