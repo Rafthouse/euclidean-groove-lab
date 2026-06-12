@@ -56,7 +56,7 @@
   font-size: 0;
 }
 :root[data-theme='neon-void'] h1::after {
-  content: 'Euclidean Rhythm Reactor';
+  content: 'Euclidean Groove Spielzeug';
   display: block;
   font-size: 12px;
   font-weight: 400;
@@ -1624,8 +1624,6 @@
 
 :root[data-theme='nostradamus'] h1 {
   color: #D7C7A2;
-  letter-spacing: 2px;
-  font-weight: 300;
 }
 
 :root[data-theme='nostradamus'] .tagline {
@@ -1968,9 +1966,6 @@
 /* Header */
 :root[data-theme='big-boss'] h1 {
   color: #FFFFFF;
-  letter-spacing: 3px;
-  font-weight: 300;
-  font-size: 20px;
 }
 
 :root[data-theme='big-boss'] .tagline {
@@ -2315,9 +2310,6 @@
 
 :root[data-theme='university'] h1 {
   color: #1A1D24;
-  letter-spacing: 3px;
-  font-weight: 300;
-  font-size: 20px;
 }
 
 :root[data-theme='university'] .tagline {
@@ -3097,9 +3089,6 @@
 
 :root[data-theme='dark-side'] h1 {
   color: #F0F0F0;
-  letter-spacing: 3px;
-  font-weight: 300;
-  font-size: 20px;
 }
 
 :root[data-theme='dark-side'] .tagline {
@@ -4929,9 +4918,6 @@ header h1 {
 
 :root[data-theme='smoke-dub'] h1 {
   color: #d8d0c5;
-  letter-spacing: 3px;
-  font-weight: 300;
-  font-size: 20px;
 }
 
 :root[data-theme='smoke-dub'] .tagline {
@@ -5354,9 +5340,6 @@ header h1 {
 
 :root[data-theme='nautilus'] h1 {
   color: #d6ecef;
-  letter-spacing: 3px;
-  font-weight: 300;
-  font-size: 20px;
 }
 
 :root[data-theme='nautilus'] .tagline {
@@ -5744,10 +5727,6 @@ header h1 {
 
 :root[data-theme='satisfaction'] h1 {
   color: #4a3f35;
-  letter-spacing: 2px;
-  font-weight: 400;
-  font-family: var(--mono);
-  font-size: 18px;
 }
 
 :root[data-theme='satisfaction'] .tagline {
@@ -6144,9 +6123,6 @@ header h1 {
 
 :root[data-theme='revelation'] h1 {
   color: #dde2e6;
-  letter-spacing: 4px;
-  font-weight: 300;
-  font-size: 19px;
 }
 
 :root[data-theme='revelation'] .tagline {
@@ -6517,9 +6493,6 @@ header h1 {
 
 :root[data-theme='high-contrast'] h1 {
   color: #ffffff;
-  letter-spacing: 2px;
-  font-weight: 400;
-  font-size: 18px;
 }
 
 :root[data-theme='high-contrast'] .tagline {
@@ -6980,9 +6953,6 @@ header h1 {
 
 :root[data-theme='candyflip'] h1 {
   color: #2b1824;
-  letter-spacing: 2px;
-  font-weight: 400;
-  font-size: 19px;
 }
 
 :root[data-theme='candyflip'] .tagline {
@@ -7421,9 +7391,6 @@ header h1 {
 
 :root[data-theme='barbie'] h1 {
   color: #180610;
-  letter-spacing: 2px;
-  font-weight: 500;
-  font-size: 19px;
 }
 
 :root[data-theme='barbie'] .tagline {
@@ -7943,9 +7910,6 @@ header h1 {
 
 :root[data-theme='alchemy'] h1 {
   color: #E8ECF0;
-  letter-spacing: 2px;
-  font-weight: 400;
-  font-size: 18px;
 }
 
 :root[data-theme='alchemy'] .tagline {
