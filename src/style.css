@@ -1137,44 +1137,44 @@
 /* Pure statement theme — Apple Liquid Glass meets a $20,000 synthesizer.
    Crystal-clear glass panels, titanium precision, diamond light. */
 :root[data-theme='liquid-diamond'] {
-  --bg: #0A0C10;
-  --panel: #10141B;
-  --panel-hi: #1A202C;
-  --text: #FFFFFF;
-  --text-dim: rgba(255, 255, 255, 0.55);
-  --text-hi: #FFFFFF;
-  --accent: #AEB7C2;
-  --accent-dim: rgba(174, 183, 194, 0.12);
-  --rest: rgba(255, 255, 255, 0.04);
-  --current: #FFFFFF;
-  --danger: #FF6B6B;
-  --warn: #D8E0EA;
+  --bg: #F5F7FA;
+  --panel: #FFFFFF;
+  --panel-hi: #EDF0F5;
+  --text: #1A1D24;
+  --text-dim: rgba(26, 29, 36, 0.50);
+  --text-hi: #0A0C10;
+  --accent: #5A6A80;
+  --accent-dim: rgba(90, 106, 128, 0.10);
+  --rest: rgba(0, 0, 0, 0.04);
+  --current: #0A0C10;
+  --danger: #D94A4A;
+  --warn: #6A8BAA;
   --radius: 28px;
   --mono: ui-monospace, 'SF Mono', Consolas, monospace;
 
-  --color-kick: #AEB7C2;
-  --color-kick-mid: #C5CCD5;
-  --color-kick-light: #D8E0EA;
+  --color-kick: #5A6A80;
+  --color-kick-mid: #6A7A90;
+  --color-kick-light: #8A9AB0;
 
-  --color-snare: #CFE8FF;
-  --color-snare-mid: #D8EDFF;
-  --color-snare-light: #E6F3FF;
+  --color-snare: #5B8FC0;
+  --color-snare-mid: #70A8D8;
+  --color-snare-light: #90C0E8;
 
-  --color-hat: #D8E0EA;
-  --color-hat-mid: #E2E8F0;
-  --color-hat-light: #EDF2F7;
+  --color-hat: #6A7A90;
+  --color-hat-mid: #7A8AA0;
+  --color-hat-light: #9AAAB8;
 
-  --color-bass: #B8C5D0;
-  --color-bass-mid: #CCD7E0;
-  --color-bass-light: #E0E8F0;
+  --color-bass: #5A6A80;
+  --color-bass-mid: #6A7A90;
+  --color-bass-light: #8A9AB0;
 
   --card-shadow: 0 0 0 0 transparent;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-/* Background: deep graphite void with liquid light bands */
+/* Background: bright silver-white void with liquid light bands */
 :root[data-theme='liquid-diamond'] body {
-  background: #0A0C10;
+  background: #F5F7FA;
   overflow-x: hidden;
 }
 
@@ -1188,10 +1188,10 @@
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse 45% 35% at 30% 20%, rgba(10, 12, 16, 0.4) 0%, transparent 60%),
-    radial-gradient(ellipse 25% 45% at 50% 40%, rgba(174, 183, 194, 0.035) 0%, transparent 55%),
-    radial-gradient(ellipse 20% 30% at 70% 60%, rgba(207, 232, 255, 0.025) 0%, transparent 50%),
-    radial-gradient(ellipse 35% 20% at 20% 80%, rgba(216, 224, 234, 0.02) 0%, transparent 50%);
+    radial-gradient(ellipse 45% 35% at 30% 20%, rgba(245, 247, 250, 0.6) 0%, transparent 60%),
+    radial-gradient(ellipse 25% 45% at 50% 40%, rgba(90, 106, 128, 0.025) 0%, transparent 55%),
+    radial-gradient(ellipse 20% 30% at 70% 60%, rgba(91, 143, 192, 0.02) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 20% at 20% 80%, rgba(200, 210, 220, 0.015) 0%, transparent 50%);
   will-change: transform, opacity;
   animation: liquid-glow 90s ease-in-out infinite;
   transform-origin: center center;
@@ -1211,14 +1211,14 @@
 
 /* Track cards: floating glass panels — deep blur, optical depth */
 :root[data-theme='liquid-diamond'] .track-card {
-  background: rgba(16, 20, 27, 0.50);
+  background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(30px) saturate(1.15);
   -webkit-backdrop-filter: blur(30px) saturate(1.15);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
   border-radius: 28px;
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08),
-    0 8px 32px rgba(0, 0, 0, 0.30);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.80),
+    0 8px 32px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
 }
@@ -1231,7 +1231,7 @@
   left: 5%;
   width: 90%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.10), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.50), transparent);
   pointer-events: none;
 }
 
@@ -1243,7 +1243,7 @@
 }
 :root[data-theme='liquid-diamond'] .track-card[data-voice='kick'] .shape {
   fill: color-mix(in srgb, var(--color-kick) 18%, transparent);
-  stroke: rgba(255, 255, 255, 0.12);
+  stroke: rgba(0, 0, 0, 0.08);
 }
 
 :root[data-theme='liquid-diamond'] .track-card[data-voice='snare'] {
@@ -1254,7 +1254,7 @@
 }
 :root[data-theme='liquid-diamond'] .track-card[data-voice='snare'] .shape {
   fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
-  stroke: rgba(255, 255, 255, 0.12);
+  stroke: rgba(0, 0, 0, 0.08);
 }
 
 :root[data-theme='liquid-diamond'] .track-card[data-voice='hat'] {
@@ -1265,7 +1265,7 @@
 }
 :root[data-theme='liquid-diamond'] .track-card[data-voice='hat'] .shape {
   fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
-  stroke: rgba(255, 255, 255, 0.12);
+  stroke: rgba(0, 0, 0, 0.08);
 }
 
 :root[data-theme='liquid-diamond'] .track-card[data-voice='bass'] {
@@ -1276,7 +1276,7 @@
 }
 :root[data-theme='liquid-diamond'] .track-card[data-voice='bass'] .shape {
   fill: color-mix(in srgb, var(--color-bass) 18%, transparent);
-  stroke: rgba(255, 255, 255, 0.12);
+  stroke: rgba(0, 0, 0, 0.08);
 }
 
 /* Diamond sparkle on active note — light through cut diamond */
@@ -1286,108 +1286,102 @@
 
 @keyframes diamond-sparkle {
   0% {
-    fill: #FFFFFF;
+    fill: #5A6A80;
     r: 11px;
-    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+    filter: drop-shadow(0 0 0 rgba(90, 106, 128, 0));
   }
   15% {
-    fill: #FFFFFF;
+    fill: #0A0C10;
     r: 15px;
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.30)) drop-shadow(0 0 20px rgba(207, 232, 255, 0.08));
+    filter: drop-shadow(0 0 10px rgba(90, 106, 128, 0.25)) drop-shadow(0 0 20px rgba(91, 143, 192, 0.08));
   }
   40% {
-    fill: #CFE8FF;
+    fill: #5B8FC0;
     r: 13px;
-    filter: drop-shadow(0 0 5px rgba(207, 232, 255, 0.15));
+    filter: drop-shadow(0 0 5px rgba(91, 143, 192, 0.15));
   }
   100% {
     fill: var(--color-kick-mid);
     r: 11px;
-    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+    filter: drop-shadow(0 0 0 rgba(90, 106, 128, 0));
   }
 }
 
 /* Playhead: polished diamond indicator */
 :root[data-theme='liquid-diamond'] .step.current .step-indicator {
-  fill: #FFFFFF;
-  stroke: #CFE8FF;
+  fill: #0A0C10;
+  stroke: #5B8FC0;
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.20))
-          drop-shadow(0 0 16px rgba(207, 232, 255, 0.10));
+  filter: drop-shadow(0 0 8px rgba(91, 143, 192, 0.20));
 }
 :root[data-theme='liquid-diamond'] .step.current .visual {
-  fill: #FFFFFF;
+  fill: #0A0C10;
 }
 
-/* Rest steps */
 :root[data-theme='liquid-diamond'] .step.rest .step-indicator {
   opacity: 0.12;
 }
 
-/* Guide ring */
 :root[data-theme='liquid-diamond'] .guide {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.04);
+  stroke: rgba(0, 0, 0, 0.04);
   stroke-width: 0.5px;
 }
 
-/* Hand: optical ray */
 :root[data-theme='liquid-diamond'] .hand {
-  stroke: rgba(255, 255, 255, 0.05);
+  stroke: rgba(0, 0, 0, 0.05);
   stroke-width: 0.5px;
 }
 
 /* Buttons: glass capsules — spring-responsive */
 :root[data-theme='liquid-diamond'] button {
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.04);
-  color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.85);
+  color: #1A1D24;
   font-weight: 450;
   letter-spacing: 0.3px;
   padding: 8px 18px;
-  transition: background 0.2s cubic-bezier(0.32, 0.94, 0.6, 1), box-shadow 0.2s cubic-bezier(0.32, 0.94, 0.6, 1);
+  transition: background 0.2s cubic-bezier(0.32, 0.94, 0.6, 1);
 }
 :root[data-theme='liquid-diamond'] button:hover {
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.10), 0 4px 12px rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 :root[data-theme='liquid-diamond'] button:active {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.70);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
 }
 
 :root[data-theme='liquid-diamond'] .play {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  color: #FFFFFF;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: #1A1D24;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.02);
 }
 :root[data-theme='liquid-diamond'] .play.is-playing {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(245, 247, 250, 0.50);
+  border: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 :root[data-theme='liquid-diamond'] .export {
   border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.04);
-  color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.85);
+  color: #1A1D24;
 }
 
-/* Track toggles */
 :root[data-theme='liquid-diamond'] .toggle {
   border-radius: 20px;
   min-width: 32px;
   padding: 4px 12px;
 }
 :root[data-theme='liquid-diamond'] .toggle.is-on {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.10);
 }
 
-/* Sliders: precision track */
 :root[data-theme='liquid-diamond'] input[type='range'] {
   height: 4px;
   cursor: pointer;
@@ -1395,15 +1389,15 @@
 :root[data-theme='liquid-diamond'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.06);
 }
 :root[data-theme='liquid-diamond'] input[type='range']::-webkit-slider-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #FFFFFF;
+  background: #5A6A80;
   border: none;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.10), 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 2px rgba(90, 106, 128, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
   margin-top: -6px;
   transition: transform 0.15s cubic-bezier(0.32, 0.94, 0.6, 1);
 }
@@ -1413,67 +1407,65 @@
 :root[data-theme='liquid-diamond'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.06);
   border: none;
 }
 :root[data-theme='liquid-diamond'] input[type='range']::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #FFFFFF;
+  background: #5A6A80;
   border: none;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.10);
+  box-shadow: 0 0 0 2px rgba(90, 106, 128, 0.15);
 }
 
-/* Select */
 :root[data-theme='liquid-diamond'] select {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  color: #1A1D24;
   border-radius: 20px;
   padding: 6px 14px;
   letter-spacing: 0.3px;
 }
 
-/* Labels */
 :root[data-theme='liquid-diamond'] label {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(26, 29, 36, 0.50);
   font-weight: 450;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
 
 :root[data-theme='liquid-diamond'] .control-label {
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(26, 29, 36, 0.45);
   font-size: 10px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 :root[data-theme='liquid-diamond'] .control-label b {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(26, 29, 36, 0.8);
 }
 
 :root[data-theme='liquid-diamond'] .bpm b,
 :root[data-theme='liquid-diamond'] .swing b {
-  color: #CFE8FF;
+  color: #5B8FC0;
 }
 
 :root[data-theme='liquid-diamond'] h1 {
-  color: #FFFFFF;
+  color: #1A1D24;
   letter-spacing: 3px;
   font-weight: 300;
   font-size: 20px;
 }
 
 :root[data-theme='liquid-diamond'] .tagline {
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(26, 29, 36, 0.35);
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 :root[data-theme='liquid-diamond'] .track-name {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(26, 29, 36, 0.85);
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -1481,20 +1473,20 @@
 }
 
 :root[data-theme='liquid-diamond'] .mini-metrics b {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(26, 29, 36, 0.65);
 }
 :root[data-theme='liquid-diamond'] .mini-metrics span {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(26, 29, 36, 0.30);
 }
 
 :root[data-theme='liquid-diamond'] .playback-select select {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.04);
   border-radius: 18px;
   padding: 4px 12px;
 }
 :root[data-theme='liquid-diamond'] .playback-select span {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(26, 29, 36, 0.4);
 }
 
 :root {
