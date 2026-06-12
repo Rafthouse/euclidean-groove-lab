@@ -360,7 +360,7 @@ export default function App() {
           onClick={handleExportMidi}
           title={`Export ${EXPORT_BARS} bars as a Standard MIDI File`}
         >
-          ⤓ Mixdown
+          ⤓ MIDI
         </button>
         <button
           type="button"
