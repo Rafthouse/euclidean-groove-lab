@@ -4,7 +4,6 @@ import VelocityLane from './VelocityLane';
 import GhostLane from './GhostLane';
 import DuckingLane from './DuckingLane';
 import Knob from './Knob';
-import Oscilloscope from './Oscilloscope';
 import { trackPattern, onsetCount, density, PATTERN_SLOT_COUNT } from '../engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from '../engine';
 
@@ -25,10 +24,6 @@ interface TrackCardProps {
   onSwitchPattern: (slot: number) => void;
   onToggleMute: () => void;
   onToggleSolo: () => void;
-  scopeEnabled?: boolean;
-  onToggleScope?: () => void;
-  scopeColor?: string;
-  scopePlaying?: boolean;
 }
 
 export default function TrackCard({
@@ -38,10 +33,6 @@ export default function TrackCard({
   onSwitchPattern,
   onToggleMute,
   onToggleSolo,
-  scopeEnabled = false,
-  onToggleScope,
-  scopeColor = '#88cc88',
-  scopePlaying = false,
 }: TrackCardProps) {
   const { pulses: pattern, mutedStepMask } = trackPattern(track);
   // --track-color is sourced from CSS by voice (`[data-voice]`), so it follows
@@ -105,29 +96,8 @@ export default function TrackCard({
           >
             S
           </button>
-          {onToggleScope && (
-            <button
-              type="button"
-              data-kind="scope"
-              className={'toggle scope-toggle-btn' + (scopeEnabled ? ' is-on' : '')}
-              onClick={onToggleScope}
-              aria-pressed={scopeEnabled}
-              aria-label={`Oscilloscope ${track.name}`}
-              title="Oscilloscope"
-            >
-              ∞
-            </button>
-          )}
         </div>
       </div>
-      {scopeEnabled && (
-        <Oscilloscope
-          trackId={track.id}
-          active={scopePlaying}
-          color={scopeColor}
-          height={64}
-        />
-      )}
 
       <PatternBank
         track={track}

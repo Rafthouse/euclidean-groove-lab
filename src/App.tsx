@@ -78,18 +78,9 @@ export default function App() {
     catch { return false; }
   });
 
-  // ── Oscilloscope state (all OFF by default) ────────────────
+  // ── Master oscilloscope ────────────────────────────────────
   const [scopeMaster, setScopeMaster] = useState(false);
   const [scopeMasterMode, setScopeMasterMode] = useState<'waveform' | 'spectrum' | 'sonagram'>('waveform');
-  const [scopeChannels, setScopeChannels] = useState<Record<string, boolean>>({});
-
-  const toggleScopeChannel = useCallback((trackId: string) => {
-    setScopeChannels((prev) => {
-      const next = { ...prev };
-      next[trackId] = !next[trackId];
-      return next;
-    });
-  }, []);
 
   // Activate/deactivate master analyser
   useEffect(() => {
@@ -98,16 +89,6 @@ export default function App() {
       clearChannelHistory();
     }
   }, [scopeMaster]);
-
-  const getTrackColor = useCallback((trackId: string): string => {
-    const map: Record<string, string> = {
-      kick: '#e8a040',
-      snare: '#e08040',
-      hat: '#80b0d0',
-      bass: '#40b0b0',
-    };
-    return map[trackId] ?? '#88cc88';
-  }, []);
 
   // Ctrl+Shift+D toggles developer mode
   useEffect(() => {
@@ -409,10 +390,6 @@ export default function App() {
             onSwitchPattern={(slot) => switchPattern(track.id, slot)}
             onToggleMute={() => toggleMute(track.id)}
             onToggleSolo={() => toggleSolo(track.id)}
-            scopeEnabled={!!scopeChannels[track.id]}
-            onToggleScope={() => toggleScopeChannel(track.id)}
-            scopeColor={getTrackColor(track.id)}
-            scopePlaying={playing}
           />
         ))}
       </section>
