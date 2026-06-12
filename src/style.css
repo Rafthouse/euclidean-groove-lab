@@ -3710,10 +3710,109 @@ header h1 {
   grid-template-columns: 1fr;
 }
 
-/* Tablet portrait — 2×2 grid */
-@media (min-width: 768px) {
+/* Tablet portrait — 2×2 grid with dedicated compact card layout */
+@media (min-width: 768px) and (max-width: 1023px) {
   .tracks {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .app {
+    padding: 16px 14px 40px;
+    gap: 12px;
+  }
+
+  /* --- Dedicated compact card layout for portrait --- */
+  .track-card {
+    padding: 6px;
+  }
+
+  /* Track head: compact */
+  .track-name {
+    font-size: 11px;
+  }
+  .track-toggles .toggle {
+    font-size: 9px;
+    padding: 2px 5px;
+  }
+
+  /* Sequencer: capped height — polygon ~30% of card */
+  .sequencer-wrapper {
+    max-height: 100px;
+  }
+  .sequencer-wrapper svg {
+    width: 100%;
+    height: auto;
+    max-height: 100px;
+  }
+
+  /* Knob row: compact 2×2 grid */
+  .knob-row {
+    padding: 3px;
+    gap: 2px;
+  }
+  .knob-row[data-role='params'] {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .knob-row .knob-dial {
+    width: 28px;
+    height: 28px;
+  }
+  .knob-row .knob-label {
+    font-size: 8px;
+  }
+  .knob-row .knob-value {
+    font-size: 8px;
+  }
+
+  /* Pattern bank: compact */
+  .track-card .pattern-bank .pattern-slot {
+    width: 18px;
+    height: 18px;
+    font-size: 8px;
+  }
+
+  /* Mask lane: tight */
+  .mask-lane {
+    gap: 2px;
+  }
+  .mask-label {
+    font-size: 9px;
+  }
+  .mask-row {
+    gap: 2px;
+  }
+
+  /* Playback controls: compact two-column */
+  .playback-controls {
+    gap: 4px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .playback-select select {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+  .playback-select span {
+    font-size: 9px;
+  }
+
+  /* Metrics: compact inline */
+  .mini-metrics {
+    gap: 4px;
+  }
+  .mini-axis b {
+    font-size: 11px;
+  }
+  .mini-axis span {
+    font-size: 9px;
+  }
+
+  /* Ghost/ducking module lanes: compact */
+  .module-lane {
+    gap: 4px;
+  }
+  .module-controls {
+    padding: 4px;
+    gap: 4px;
   }
 }
 
@@ -3809,19 +3908,6 @@ header h1 {
   .track-toggles .toggle {
     font-size: 10px;
     padding: 3px 6px;
-  }
-}
-
-/* Desktop — wider container, original spacing */
-@media (min-width: 1200px) {
-  .app {
-    max-width: 1440px;
-    padding: 28px 20px 64px;
-    gap: 24px;
-  }
-  .tracks {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
   }
 }
 
