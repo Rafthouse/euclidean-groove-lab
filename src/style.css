@@ -498,128 +498,45 @@
   --radius: 6px;
   --mono: ui-monospace, Consolas, monospace;
 
-  --color-kick: #B87333;
-  --color-kick-mid: #C98A4A;
-  --color-kick-light: #DCA86A;
+  --color-kick: #C98A4A;
+  --color-kick-mid: #DCA86A;
+  --color-kick-light: #E8C080;
 
-  --color-snare: #C9A227;
-  --color-snare-mid: #D8B43E;
-  --color-snare-light: #E8C85A;
+  --color-snare: #D8B43E;
+  --color-snare-mid: #E8C85A;
+  --color-snare-light: #F2D878;
 
-  --color-hat: #5B8FA8;
-  --color-hat-mid: #7AADC4;
-  --color-hat-light: #A0C8D8;
+  --color-hat: #7AADC4;
+  --color-hat-mid: #A0C8D8;
+  --color-hat-light: #C0E0F0;
 
-  --color-bass: #4E6E58;
-  --color-bass-mid: #6A8C74;
-  --color-bass-light: #8CAC94;
+  --color-bass: #6A8C74;
+  --color-bass-mid: #8CAC94;
+  --color-bass-light: #A8C8B0;
 
   --card-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
 }
 
-/* ===== ANIMATED NEBULA BACKGROUND ===== */
-/* Three independent pseudo-layer gradients drifting at different speeds.
-   GPU-friendly: only translate + scale transforms, no repaints.
-   Each cycle: 60-120s. Movement is barely perceptible. */
-
+/* ===== BACKGROUND — subtle static void ===== */
 :root[data-theme='nostradamus'] body {
-  position: relative;
-  background: #0D1117;
-  overflow-x: hidden;
-}
-
-:root[data-theme='nostradamus'] body::before {
-  content: '';
-  position: fixed;
-  top: -30%;
-  left: -30%;
-  width: 160%;
-  height: 160%;
-  pointer-events: none;
-  z-index: 0;
   background:
-    /* Deep indigo drift — slow, large */
-    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(27, 26, 85, 0.30) 0%, transparent 60%),
-    /* Cosmic violet — medium */
-    radial-gradient(ellipse 40% 60% at 70% 60%, rgba(76, 42, 133, 0.20) 0%, transparent 55%),
-    /* Midnight blue — slowest, largest */
-    radial-gradient(ellipse 80% 40% at 50% 80%, rgba(10, 22, 51, 0.35) 0%, transparent 65%),
-    /* Dark lilac hint — smallest */
-    radial-gradient(ellipse 30% 40% at 85% 20%, rgba(107, 79, 163, 0.12) 0%, transparent 50%);
-  will-change: transform, opacity;
-  animation: nebula-drift-a 90s ease-in-out infinite;
-  transform-origin: center center;
+    radial-gradient(ellipse 60% 40% at 25% 15%, rgba(76, 42, 133, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 75% 80%, rgba(201, 162, 39, 0.03) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 30% at 50% 50%, rgba(27, 26, 85, 0.05) 0%, transparent 60%),
+    #0D1117;
 }
 
-:root[data-theme='nostradamus'] body::after {
-  content: '';
-  position: fixed;
-  top: -20%;
-  left: -20%;
-  width: 140%;
-  height: 140%;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse 50% 40% at 40% 50%, rgba(27, 26, 85, 0.15) 0%, transparent 55%),
-    radial-gradient(ellipse 35% 55% at 60% 30%, rgba(76, 42, 133, 0.10) 0%, transparent 50%),
-    radial-gradient(ellipse 45% 35% at 30% 70%, rgba(107, 79, 163, 0.08) 0%, transparent 50%);
-  will-change: transform, opacity;
-  animation: nebula-drift-b 120s ease-in-out infinite;
-  transform-origin: center center;
-}
-
-/* Occasional faint light pulse — the nebula "breathes" */
-:root[data-theme='nostradamus'] .app::before {
-  content: '';
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgba(214, 196, 255, 0.03) 0%, transparent 50%);
-  will-change: opacity;
-  animation: nebula-pulse 60s ease-in-out infinite;
-}
-
-/* Layer A: slow elliptical translation (85s) */
-@keyframes nebula-drift-a {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  33%      { transform: translate3d(2%, -1.5%, 0) scale(1.02); }
-  66%      { transform: translate3d(-1.5%, 1%, 0) scale(0.98); }
-}
-
-/* Layer B: even slower, different path (110s) */
-@keyframes nebula-drift-b {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  25%      { transform: translate3d(-2%, 1%, 0) scale(1.01); }
-  50%      { transform: translate3d(1.5%, -2%, 0) scale(0.99); }
-  75%      { transform: translate3d(-1%, 1.5%, 0) scale(1.01); }
-}
-
-/* Pulse: subtle brightness shift over 60s */
-@keyframes nebula-pulse {
-  0%, 100% { opacity: 0.4; }
-  50%      { opacity: 1; }
-}
-
-/* Ensure app content sits above nebula */
-:root[data-theme='nostradamus'] .app {
-  position: relative;
-  z-index: 1;
-}
-
-/* ===== TRACK CARDS ===== */
+/* ===== TRACK CARDS — floating glass-like dark panels ===== */
 :root[data-theme='nostradamus'] .track-card {
-  background: #161B22;
+  background: rgba(22, 26, 34, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(201, 162, 39, 0.10);
   border-radius: 6px;
   box-shadow:
-    inset 0 0 0 1px rgba(201, 162, 39, 0.03),
-    0 2px 16px rgba(0, 0, 0, 0.4);
+    inset 0 0.5px 0 0 rgba(201, 162, 39, 0.06),
+    0 2px 12px rgba(0, 0, 0, 0.3);
   position: relative;
 }
 
@@ -684,11 +601,9 @@
   stroke: var(--color-bass-mid);
 }
 
-/* ===== STAR-FLASH ON ACTIVE NOTE ===== */
-/* When a step becomes current, emit a brief celestial flash.
-   Scale 1.0 → 1.35 → 1.0 over 350ms. Soft radial glow. */
+/* ===== ENHANCED STAR-FLASH ON ACTIVE NOTE ===== */
 :root[data-theme='nostradamus'] .step.onset.current {
-  animation: star-flash 350ms ease-out forwards;
+  animation: star-flash 300ms ease-out forwards;
 }
 
 @keyframes star-flash {
@@ -697,15 +612,17 @@
     r: 11px;
     filter: drop-shadow(0 0 0 rgba(214, 196, 255, 0));
   }
-  15% {
-    fill: #FFF7D6;
-    r: 15px;
-    filter: drop-shadow(0 0 6px rgba(214, 196, 255, 0.35));
+  12% {
+    fill: #FFFFFF;
+    r: 16px;
+    filter: drop-shadow(0 0 10px rgba(214, 196, 255, 0.45))
+            drop-shadow(0 0 20px rgba(201, 162, 39, 0.12));
   }
-  40% {
-    fill: #D6C4FF;
-    r: 13px;
-    filter: drop-shadow(0 0 4px rgba(214, 196, 255, 0.20));
+  30% {
+    fill: #E8D0FF;
+    r: 14px;
+    filter: drop-shadow(0 0 8px rgba(214, 196, 255, 0.30))
+            drop-shadow(0 0 14px rgba(201, 162, 39, 0.08));
   }
   100% {
     fill: var(--color-kick-mid);
@@ -715,34 +632,30 @@
 }
 
 /* ===== CONSTELLATION LINES ===== */
-/* Within each sequencer SVG, draw faint luminous chords between
-   the circle center and active steps — like ancient astrolabe.
-   These use the existing .hand line styled as a celestial ray. */
 :root[data-theme='nostradamus'] .hand {
-  stroke: rgba(214, 196, 255, 0.12);
+  stroke: rgba(214, 196, 255, 0.15);
   stroke-width: 0.5px;
   opacity: 0;
   transition: opacity 0.3s;
 }
 
-:root[data-theme='nostradamus'] .step.current ~ .hand,
 :root[data-theme='nostradamus'] .sequencer:has(.step.current) .hand {
   opacity: 1;
 }
 
-/* Faint circular guide ring as astrolabe */
 :root[data-theme='nostradamus'] .guide {
   fill: none;
-  stroke: rgba(201, 162, 39, 0.06);
+  stroke: rgba(201, 162, 39, 0.08);
   stroke-width: 0.5px;
 }
 
-/* ===== PLAYHEAD ===== */
+/* ===== PLAYHEAD — stronger celestial glow ===== */
 :root[data-theme='nostradamus'] .step.current .step-indicator {
   fill: #FFF7D6;
   stroke: #D6C4FF;
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 6px rgba(214, 196, 255, 0.25));
+  filter: drop-shadow(0 0 8px rgba(214, 196, 255, 0.30))
+          drop-shadow(0 0 16px rgba(201, 162, 39, 0.10));
 }
 :root[data-theme='nostradamus'] .step.current .visual {
   fill: #FFF7D6;
@@ -756,8 +669,10 @@
 /* ===== CONTROLS ===== */
 :root[data-theme='nostradamus'] button {
   border-radius: 6px;
-  border: 1px solid rgba(201, 162, 39, 0.15);
-  background: rgba(31, 41, 55, 0.6);
+  border: 1px solid rgba(201, 162, 39, 0.18);
+  background: rgba(22, 26, 34, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: #E8DCC2;
   font-weight: 400;
   letter-spacing: 0.5px;
@@ -765,25 +680,25 @@
   transition: background 0.25s, box-shadow 0.25s;
 }
 :root[data-theme='nostradamus'] button:hover {
-  background: rgba(31, 41, 55, 0.9);
-  box-shadow: inset 0 0 12px rgba(201, 162, 39, 0.06), 0 0 8px rgba(201, 162, 39, 0.08);
+  background: rgba(31, 41, 55, 0.7);
+  box-shadow: inset 0 0 14px rgba(201, 162, 39, 0.08), 0 0 12px rgba(201, 162, 39, 0.06);
 }
 
 :root[data-theme='nostradamus'] .play {
-  background: rgba(31, 41, 55, 0.8);
-  border: 1px solid rgba(201, 162, 39, 0.25);
+  background: rgba(22, 26, 34, 0.6);
+  border: 1px solid rgba(201, 162, 39, 0.30);
   color: #E8DCC2;
-  box-shadow: 0 0 12px rgba(201, 162, 39, 0.04);
+  box-shadow: 0 0 16px rgba(201, 162, 39, 0.06);
 }
 :root[data-theme='nostradamus'] .play.is-playing {
-  background: rgba(31, 41, 55, 0.5);
-  border: 1px solid rgba(201, 162, 39, 0.12);
+  background: rgba(22, 26, 34, 0.35);
+  border: 1px solid rgba(201, 162, 39, 0.15);
 }
 
 :root[data-theme='nostradamus'] .export {
   border-radius: 6px;
-  border: 1px solid rgba(201, 162, 39, 0.15);
-  background: rgba(31, 41, 55, 0.6);
+  border: 1px solid rgba(201, 162, 39, 0.18);
+  background: rgba(22, 26, 34, 0.45);
   color: #E8DCC2;
 }
 
@@ -794,21 +709,21 @@
 :root[data-theme='nostradamus'] input[type='range']::-webkit-slider-runnable-track {
   height: 3px;
   border-radius: 1px;
-  background: rgba(201, 162, 39, 0.08);
+  background: rgba(201, 162, 39, 0.10);
 }
 :root[data-theme='nostradamus'] input[type='range']::-webkit-slider-thumb {
   width: 12px;
   height: 12px;
   border-radius: 50%;
   background: #C9A227;
-  border: 1px solid rgba(232, 220, 194, 0.3);
-  box-shadow: 0 0 6px rgba(201, 162, 39, 0.15);
+  border: none;
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.25), 0 0 8px rgba(201, 162, 39, 0.20);
   margin-top: -5px;
 }
 
 :root[data-theme='nostradamus'] select {
-  background: #161B22;
-  border: 1px solid rgba(201, 162, 39, 0.10);
+  background: rgba(22, 26, 34, 0.5);
+  border: 1px solid rgba(201, 162, 39, 0.12);
   color: #E8DCC2;
   border-radius: 4px;
   padding: 4px 10px;
@@ -816,7 +731,7 @@
 }
 
 :root[data-theme='nostradamus'] label {
-  color: rgba(184, 170, 140, 0.7);
+  color: rgba(184, 170, 140, 0.75);
   font-weight: 400;
   letter-spacing: 0.8px;
   text-transform: uppercase;
@@ -825,7 +740,7 @@
 
 :root[data-theme='nostradamus'] .bpm b,
 :root[data-theme='nostradamus'] .swing b {
-  color: #C9A227;
+  color: #D8B43E;
 }
 
 :root[data-theme='nostradamus'] h1 {
