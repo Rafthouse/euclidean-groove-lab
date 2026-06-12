@@ -5723,7 +5723,7 @@ header h1 {
   --panel: #ffe0ec;
   --panel-hi: #ffe8f0;
   --text: #2b1824;
-  --text-dim: #5d3a50;
+  --text-dim: #4a283a;
   --text-hi: #160a14;
   --accent: #ff4f92;
   --accent-dim: rgba(255, 79, 146, 0.12);
@@ -6010,8 +6010,8 @@ header h1 {
 
 /* Mask controls — improved contrast */
 :root[data-theme='candyflip'] .mask-label {
-  color: #5d3a50;
-  font-weight: 500;
+  color: #4a283a;
+  font-weight: 600;
 }
 :root[data-theme='candyflip'] .mask-cell {
   border-radius: 16px;
@@ -6101,24 +6101,26 @@ header h1 {
 }
 :root[data-theme='candyflip'] select option {
   background: #ffe0ec;
-  color: #2b1824;
+  color: #170a12;
+  font-weight: 500;
 }
 :root[data-theme='candyflip'] select option:checked {
   background: rgba(255, 79, 146, 0.14);
 }
 
 :root[data-theme='candyflip'] label {
-  color: #5d3a50;
-  font-weight: 500;
+  color: #3a1e2c;
+  font-weight: 600;
   letter-spacing: 0.3px;
   font-size: 11px;
 }
 
 :root[data-theme='candyflip'] .control-label {
-  color: #5d3a50;
+  color: #3a1e2c;
   font-size: 10px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  font-weight: 600;
 }
 :root[data-theme='candyflip'] .control-label b {
   color: #2b1824;
@@ -6127,6 +6129,7 @@ header h1 {
 :root[data-theme='candyflip'] .bpm b,
 :root[data-theme='candyflip'] .swing b {
   color: #ff4f92;
+  font-weight: 700;
 }
 
 :root[data-theme='candyflip'] h1 {
@@ -6137,16 +6140,17 @@ header h1 {
 }
 
 :root[data-theme='candyflip'] .tagline {
-  color: #5d3a50;
+  color: #3a1e2c;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  opacity: 0.55;
+  opacity: 0.75;
+  font-weight: 500;
 }
 
 :root[data-theme='candyflip'] .track-name {
-  color: #2b1824;
-  font-weight: 600;
+  color: #170a12;
+  font-weight: 650;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
@@ -6155,8 +6159,8 @@ header h1 {
   color: #2b1824;
 }
 :root[data-theme='candyflip'] .mini-metrics span {
-  color: #5d3a50;
-  opacity: 0.65;
+  color: #4a283a;
+  opacity: 0.85;
 }
 
 :root[data-theme='candyflip'] .playback-select select {
@@ -6168,8 +6172,9 @@ header h1 {
   font-size: 12px;
 }
 :root[data-theme='candyflip'] .playback-select span {
-  color: #5d3a50;
-  opacity: 0.65;
+  color: #3a1e2c;
+  opacity: 0.85;
+  font-weight: 500;
 }
 
 :root[data-theme='candyflip'] .module-lane {
