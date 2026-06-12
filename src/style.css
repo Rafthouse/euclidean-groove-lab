@@ -2934,7 +2934,7 @@ header h1 {
   grid-template-columns: repeat(12, 1fr);
   gap: 3px;
 }
-.pattern-slot {
+.pattern-bank .pattern-slot {
   font: 600 10px/1 var(--mono);
   padding: 5px 0;
   padding-inline: 0;
