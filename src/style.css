@@ -3699,9 +3699,9 @@ header h1 {
 }
 
 /* ---------- responsive track grid ---------- */
-/* Mobile-first: 1 column < 768px, 2 columns (2x2) 768ΓÇô1199px, and all four
-   tracks in a single row on landscape desktop >= 1200px (the container widens
-   to match so the horizontal space is used instead of wasted). */
+/* Mobile-first: 1 column < 768px, 2 columns (2x2) 768–1023px (tablet portrait),
+   4 columns (1×4) 1024–1199px (tablet landscape), and 4 columns with wider
+   container ≥ 1200px (desktop). */
 
 .tracks {
   width: 100%;
@@ -3709,17 +3709,36 @@ header h1 {
   gap: 16px;
   grid-template-columns: 1fr;
 }
+
+/* Tablet portrait — 2×2 grid */
 @media (min-width: 768px) {
   .tracks {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Tablet landscape — all four tracks in one row */
+@media (min-width: 1024px) {
+  .tracks {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .app {
+    padding: 20px 16px 48px;
+    gap: 16px;
+  }
+}
+
+/* Desktop — wider container, original spacing */
 @media (min-width: 1200px) {
   .app {
     max-width: 1440px;
+    padding: 28px 20px 64px;
+    gap: 24px;
   }
   .tracks {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
   }
 }
 
