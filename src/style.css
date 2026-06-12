@@ -5722,30 +5722,30 @@ header h1 {
   --bg: #e8a0b8;
   --panel: #ffe0ec;
   --panel-hi: #ffe8f0;
-  --text: #2b1824;
-  --text-dim: #4a283a;
-  --text-hi: #160a14;
-  --accent: #ff4f92;
-  --accent-dim: rgba(255, 79, 146, 0.12);
-  --rest: #c8a0b0;
-  --current: #ff4f92;
-  --danger: #ff2f7a;
-  --warn: #ffae42;
+  --text: #1f0a16;
+  --text-dim: #3d1a28;
+  --text-hi: #0f040a;
+  --accent: #ff2f8f;
+  --accent-dim: rgba(255, 47, 143, 0.15);
+  --rest: #9a7082;
+  --current: #ff2f8f;
+  --danger: #e82060;
+  --warn: #ff8c00;
   --radius: 16px;
   --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
 
-  --color-kick: #ff4f92;
-  --color-kick-mid: #ff74aa;
-  --color-kick-light: #ff99c2;
-  --color-snare: #ffae42;
-  --color-snare-mid: #ffc268;
-  --color-snare-light: #ffd68e;
-  --color-hat: #32d8ff;
-  --color-hat-mid: #60e2ff;
-  --color-hat-light: #90ecff;
-  --color-bass: #4fe88e;
-  --color-bass-mid: #76eea8;
-  --color-bass-light: #9ef4c2;
+  --color-kick: #ff2f8f;
+  --color-kick-mid: #ff5aa8;
+  --color-kick-light: #ff84c0;
+  --color-snare: #ff8c00;
+  --color-snare-mid: #ffa842;
+  --color-snare-light: #ffc474;
+  --color-hat: #18c8ff;
+  --color-hat-mid: #48daff;
+  --color-hat-light: #78e4ff;
+  --color-bass: #28d878;
+  --color-bass-mid: #58e89a;
+  --color-bass-light: #88f2bc;
 
   --card-shadow: 0 4px 24px rgba(255, 79, 146, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03);
   color-scheme: light;
@@ -5812,73 +5812,73 @@ header h1 {
 /* Kick card — Watermelon Candy */
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
-  background: rgba(255, 65, 130, 0.20);
-  border: 1px solid rgba(255, 65, 130, 0.12);
+  background: rgba(255, 47, 143, 0.22);
+  border: 1px solid rgba(255, 47, 143, 0.18);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] .step.onset {
-  fill: var(--color-kick-mid);
+  fill: var(--color-kick);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-kick) 25%, transparent);
-  stroke: rgba(255, 79, 146, 0.25);
+  fill: color-mix(in srgb, var(--color-kick) 30%, transparent);
+  stroke: rgba(255, 47, 143, 0.40);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] .mask-cell.rest {
-  background: rgba(255, 65, 130, 0.05);
-  border-color: rgba(255, 65, 130, 0.10);
+  background: rgba(255, 47, 143, 0.06);
+  border-color: rgba(255, 47, 143, 0.14);
 }
 
 /* Snare card — Mango Candy */
 :root[data-theme='candyflip'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare);
-  background: rgba(255, 174, 66, 0.18);
-  border: 1px solid rgba(255, 174, 66, 0.12);
+  background: rgba(255, 140, 0, 0.20);
+  border: 1px solid rgba(255, 140, 0, 0.18);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='snare'] .step.onset {
-  fill: var(--color-snare-mid);
+  fill: var(--color-snare);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-snare) 25%, transparent);
-  stroke: rgba(255, 174, 66, 0.25);
+  fill: color-mix(in srgb, var(--color-snare) 30%, transparent);
+  stroke: rgba(255, 140, 0, 0.40);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='snare'] .mask-cell.rest {
-  background: rgba(255, 174, 66, 0.05);
-  border-color: rgba(255, 174, 66, 0.10);
+  background: rgba(255, 140, 0, 0.06);
+  border-color: rgba(255, 140, 0, 0.14);
 }
 
 /* Hat card — Blue Raspberry Candy */
 :root[data-theme='candyflip'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat);
-  background: rgba(50, 216, 255, 0.15);
-  border: 1px solid rgba(50, 216, 255, 0.10);
+  background: rgba(24, 200, 255, 0.16);
+  border: 1px solid rgba(24, 200, 255, 0.14);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='hat'] .step.onset {
-  fill: var(--color-hat-mid);
+  fill: var(--color-hat);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-hat) 22%, transparent);
-  stroke: rgba(50, 216, 255, 0.22);
+  fill: color-mix(in srgb, var(--color-hat) 28%, transparent);
+  stroke: rgba(24, 200, 255, 0.38);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='hat'] .mask-cell.rest {
-  background: rgba(50, 216, 255, 0.04);
-  border-color: rgba(50, 216, 255, 0.08);
+  background: rgba(24, 200, 255, 0.05);
+  border-color: rgba(24, 200, 255, 0.12);
 }
 
 /* Bass card — Mint Lime Candy */
 :root[data-theme='candyflip'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass);
-  background: rgba(79, 232, 142, 0.18);
-  border: 1px solid rgba(79, 232, 142, 0.12);
+  background: rgba(40, 216, 120, 0.20);
+  border: 1px solid rgba(40, 216, 120, 0.18);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='bass'] .step.onset {
-  fill: var(--color-bass-mid);
+  fill: var(--color-bass);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-bass) 25%, transparent);
-  stroke: rgba(79, 232, 142, 0.25);
+  fill: color-mix(in srgb, var(--color-bass) 30%, transparent);
+  stroke: rgba(40, 216, 120, 0.40);
 }
 :root[data-theme='candyflip'] .track-card[data-voice='bass'] .mask-cell.rest {
-  background: rgba(79, 232, 142, 0.05);
-  border-color: rgba(79, 232, 142, 0.10);
+  background: rgba(40, 216, 120, 0.06);
+  border-color: rgba(40, 216, 120, 0.14);
 }
 
 :root[data-theme='candyflip'] .track-card::after {
@@ -5892,29 +5892,29 @@ header h1 {
   pointer-events: none;
 }
 
-/* Kick: watermelon pulse */
+/* Kick: watermelon pop */
 @keyframes candyflip-kick-bubble {
-  0%   { r: 11px; fill: #ff74aa; }
-  20%  { r: 14px; fill: #ff99c2; filter: drop-shadow(0 0 10px rgba(255, 79, 146, 0.14)); }
-  100% { r: 11px; fill: var(--color-kick-mid); filter: none; }
+  0%   { r: 11px; fill: #ff5aa8; }
+  20%  { r: 14px; fill: #ff84c0; filter: drop-shadow(0 0 10px rgba(255, 47, 143, 0.18)); }
+  100% { r: 11px; fill: var(--color-kick); filter: none; }
 }
-/* Snare: mango sparkle */
+/* Snare: mango burst */
 @keyframes candyflip-snare-sparkle {
-  0%   { r: 11px; fill: #ffc268; }
-  15%  { r: 14px; fill: #ffd68e; filter: drop-shadow(0 0 10px rgba(255, 174, 66, 0.12)); }
-  100% { r: 11px; fill: var(--color-snare-mid); filter: none; }
+  0%   { r: 11px; fill: #ffa842; }
+  15%  { r: 14px; fill: #ffc474; filter: drop-shadow(0 0 10px rgba(255, 140, 0, 0.16)); }
+  100% { r: 11px; fill: var(--color-snare); filter: none; }
 }
-/* Hat: cyan twinkle */
+/* Hat: cyan flash */
 @keyframes candyflip-hat-twinkle {
-  0%   { r: 9px; fill: #60e2ff; }
-  25%  { r: 11px; fill: #90ecff; filter: drop-shadow(0 0 6px rgba(50, 216, 255, 0.10)); }
-  100% { r: 9px; fill: var(--color-hat-mid); filter: none; }
+  0%   { r: 9px; fill: #48daff; }
+  25%  { r: 11px; fill: #78e4ff; filter: drop-shadow(0 0 6px rgba(24, 200, 255, 0.14)); }
+  100% { r: 9px; fill: var(--color-hat); filter: none; }
 }
-/* Bass: lime mint glow */
+/* Bass: lime bright */
 @keyframes candyflip-bass-glow {
-  0%   { r: 11px; fill: #76eea8; }
-  25%  { r: 14px; fill: #9ef4c2; filter: drop-shadow(0 0 10px rgba(79, 232, 142, 0.12)); }
-  100% { r: 11px; fill: var(--color-bass-mid); filter: none; }
+  0%   { r: 11px; fill: #58e89a; }
+  25%  { r: 14px; fill: #88f2bc; filter: drop-shadow(0 0 10px rgba(40, 216, 120, 0.16)); }
+  100% { r: 11px; fill: var(--color-bass); filter: none; }
 }
 
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] .step.onset.current {
@@ -5941,18 +5941,18 @@ header h1 {
   fill: #ff4f92;
 }
 :root[data-theme='candyflip'] .step.rest .step-indicator {
-  opacity: 0.05;
+  opacity: 0.08;
 }
 
 :root[data-theme='candyflip'] .guide {
   fill: none;
-  stroke: rgba(255, 79, 146, 0.04);
-  stroke-width: 0.5px;
+  stroke: rgba(255, 47, 143, 0.08);
+  stroke-width: 0.6px;
 }
 
 :root[data-theme='candyflip'] .hand {
-  stroke: rgba(255, 79, 146, 0.06);
-  stroke-width: 0.5px;
+  stroke: rgba(255, 47, 143, 0.10);
+  stroke-width: 0.6px;
 }
 
 /* Buttons: glossy hard candy — clear inactive/hover/active */
@@ -5979,10 +5979,11 @@ header h1 {
   color: #2b1824;
 }
 :root[data-theme='candyflip'] .play.is-playing {
-  background: rgba(255, 79, 146, 0.08);
-  border-color: #ff4f92;
-  color: #2b1824;
-  box-shadow: 0 0 12px rgba(255, 79, 146, 0.08);
+  background: rgba(255, 47, 143, 0.12);
+  border-color: #ff2f8f;
+  color: #1f0a16;
+  box-shadow: 0 0 14px rgba(255, 47, 143, 0.14);
+  font-weight: 700;
 }
 
 :root[data-theme='candyflip'] .export,
@@ -6020,8 +6021,8 @@ header h1 {
   height: 15px;
 }
 :root[data-theme='candyflip'] .mask-cell.rest {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.08);
+  background: rgba(255, 47, 143, 0.04);
+  border-color: rgba(255, 47, 143, 0.12);
   border-width: 1px;
   opacity: 1;
 }
@@ -6039,7 +6040,7 @@ header h1 {
   filter: brightness(1.12);
 }
 :root[data-theme='candyflip'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #e8a0b8, 0 0 0 3px #ff4f92;
+  box-shadow: 0 0 0 2px #e8a0b8, 0 0 0 3px #ff2f8f;
 }
 
 :root[data-theme='candyflip'] .toggle {
@@ -6050,8 +6051,8 @@ header h1 {
   background: rgba(255, 232, 240, 0.5);
 }
 :root[data-theme='candyflip'] .toggle.is-on {
-  background: rgba(255, 79, 146, 0.10);
-  border-color: #ff4f92;
+  background: rgba(255, 47, 143, 0.14);
+  border-color: #ff2f8f;
 }
 
 :root[data-theme='candyflip'] input[type='range'] {
@@ -6087,7 +6088,7 @@ header h1 {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #ff4f92;
+  background: #ff2f8f;
   border: none;
 }
 
@@ -6128,7 +6129,7 @@ header h1 {
 
 :root[data-theme='candyflip'] .bpm b,
 :root[data-theme='candyflip'] .swing b {
-  color: #ff4f92;
+  color: #ff2f8f;
   font-weight: 700;
 }
 
