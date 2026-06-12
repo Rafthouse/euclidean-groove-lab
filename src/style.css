@@ -5341,3 +5341,376 @@ header h1 {
   border-top: 1px solid rgba(180, 183, 186, 0.04);
 }
 
+/* ===== High Contrast (Broadcast / Laboratory / Stage) ===== */
+/* Maximum readability for live performance, stage use, bright environments.
+   Vivid track colors, clear layer separation, no decorative effects. */
+:root[data-theme='high-contrast'] {
+  --bg: #0a0a0a;
+  --panel: #171717;
+  --panel-hi: #222222;
+  --text: #ffffff;
+  --text-dim: #cfcfcf;
+  --text-hi: #ffffff;
+  --accent: #3a7bd5;
+  --accent-dim: rgba(58, 123, 213, 0.20);
+  --rest: #2a2a2a;
+  --current: #ffffff;
+  --danger: #ff4040;
+  --warn: #ffb000;
+  --radius: 4px;
+  --mono: ui-monospace, Consolas, 'Courier New', monospace;
+
+  --color-kick: #ff4040;
+  --color-kick-mid: #ff6060;
+  --color-kick-light: #ff8888;
+  --color-snare: #ffb000;
+  --color-snare-mid: #ffc440;
+  --color-snare-light: #ffd870;
+  --color-hat: #33cfff;
+  --color-hat-mid: #60daff;
+  --color-hat-light: #88e5ff;
+  --color-bass: #38e27d;
+  --color-bass-mid: #5eec97;
+  --color-bass-light: #84f6b1;
+
+  --card-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 2px 12px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+
+:root[data-theme='high-contrast'] body {
+  background: #0a0a0a;
+}
+
+:root[data-theme='high-contrast'] .app {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cards: clean, professional panels */
+:root[data-theme='high-contrast'] .track-card {
+  background: #171717;
+  border: 1px solid #5a5a5a;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.03),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 2px 12px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+:root[data-theme='high-contrast'] .track-card[data-voice='kick'] {
+  --track-color: var(--color-kick);
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='kick'] .step.onset {
+  fill: var(--color-kick-mid);
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='kick'] .shape {
+  fill: color-mix(in srgb, var(--color-kick) 25%, transparent);
+  stroke: rgba(255, 64, 64, 0.35);
+}
+
+:root[data-theme='high-contrast'] .track-card[data-voice='snare'] {
+  --track-color: var(--color-snare);
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='snare'] .step.onset {
+  fill: var(--color-snare-mid);
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='snare'] .shape {
+  fill: color-mix(in srgb, var(--color-snare) 25%, transparent);
+  stroke: rgba(255, 176, 0, 0.35);
+}
+
+:root[data-theme='high-contrast'] .track-card[data-voice='hat'] {
+  --track-color: var(--color-hat);
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='hat'] .step.onset {
+  fill: var(--color-hat-mid);
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='hat'] .shape {
+  fill: color-mix(in srgb, var(--color-hat) 25%, transparent);
+  stroke: rgba(51, 207, 255, 0.35);
+}
+
+:root[data-theme='high-contrast'] .track-card[data-voice='bass'] {
+  --track-color: var(--color-bass);
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='bass'] .step.onset {
+  fill: var(--color-bass-mid);
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='bass'] .shape {
+  fill: color-mix(in srgb, var(--color-bass) 25%, transparent);
+  stroke: rgba(56, 226, 125, 0.35);
+}
+
+/* Active note: minimal, functional pulse */
+@keyframes hc-kick-pulse {
+  0% { r: 11px; fill: #ff6060; }
+  20% { r: 15px; fill: #ff8888; filter: drop-shadow(0 0 6px rgba(255, 64, 64, 0.15)); }
+  100% { r: 11px; fill: var(--color-kick-mid); filter: none; }
+}
+@keyframes hc-snare-flash {
+  0% { r: 11px; fill: #ffc440; }
+  15% { r: 15px; fill: #ffd870; filter: drop-shadow(0 0 6px rgba(255, 176, 0, 0.12)); }
+  100% { r: 11px; fill: var(--color-snare-mid); filter: none; }
+}
+@keyframes hc-hat-shimmer {
+  0% { r: 9px; fill: #60daff; }
+  25% { r: 11px; fill: #88e5ff; filter: drop-shadow(0 0 4px rgba(51, 207, 255, 0.10)); }
+  100% { r: 9px; fill: var(--color-hat-mid); filter: none; }
+}
+@keyframes hc-bass-glow {
+  0% { r: 11px; fill: #5eec97; }
+  25% { r: 14px; fill: #84f6b1; filter: drop-shadow(0 0 6px rgba(56, 226, 125, 0.12)); }
+  100% { r: 11px; fill: var(--color-bass-mid); filter: none; }
+}
+
+:root[data-theme='high-contrast'] .track-card[data-voice='kick'] .step.onset.current {
+  animation: hc-kick-pulse 350ms ease-out forwards;
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='snare'] .step.onset.current {
+  animation: hc-snare-flash 300ms ease-out forwards;
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='hat'] .step.onset.current {
+  animation: hc-hat-shimmer 250ms ease-out forwards;
+}
+:root[data-theme='high-contrast'] .track-card[data-voice='bass'] .step.onset.current {
+  animation: hc-bass-glow 350ms ease-out forwards;
+}
+
+/* Playhead: bright white */
+:root[data-theme='high-contrast'] .step.current .step-indicator {
+  fill: #ffffff;
+  stroke: #cfcfcf;
+  stroke-width: 2px;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+}
+:root[data-theme='high-contrast'] .step.current .visual {
+  fill: #ffffff;
+}
+:root[data-theme='high-contrast'] .step.rest .step-indicator {
+  opacity: 0.15;
+}
+
+:root[data-theme='high-contrast'] .guide {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.04);
+  stroke-width: 0.5px;
+}
+
+:root[data-theme='high-contrast'] .hand {
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-width: 0.5px;
+}
+
+/* Buttons: clean, bordered */
+:root[data-theme='high-contrast'] button {
+  border-radius: 4px;
+  border: 1px solid #5a5a5a;
+  background: #222222;
+  color: #ffffff;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 8px 18px;
+  transition: background 0.1s ease, border-color 0.1s ease;
+}
+:root[data-theme='high-contrast'] button:hover {
+  background: #2e2e2e;
+  border-color: #7a7a7a;
+}
+
+:root[data-theme='high-contrast'] .play {
+  background: #222222;
+  border: 1px solid #5a5a5a;
+  color: #ffffff;
+}
+:root[data-theme='high-contrast'] .play.is-playing {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+:root[data-theme='high-contrast'] .export,
+:root[data-theme='high-contrast'] .reset-pattern {
+  border-radius: 4px;
+  border: 1px solid #5a5a5a;
+  background: #222222;
+  color: #ffffff;
+}
+:root[data-theme='high-contrast'] .export:hover,
+:root[data-theme='high-contrast'] .reset-pattern:hover {
+  border-color: #9d9d9d;
+}
+
+/* Pattern slots: clear states */
+:root[data-theme='high-contrast'] .pattern-slot {
+  border-radius: 4px;
+  padding: 5px 0;
+  font-size: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid transparent;
+}
+:root[data-theme='high-contrast'] .pattern-slot:hover {
+  background: #2a2a2a;
+  border-color: #7a7a7a;
+}
+
+/* Mask section */
+:root[data-theme='high-contrast'] .mask-label {
+  color: #cfcfcf;
+}
+:root[data-theme='high-contrast'] .mask-cell {
+  border-radius: 4px;
+  padding: 0;
+  width: 15px;
+  height: 15px;
+}
+:root[data-theme='high-contrast'] .mask-cell.rest {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid #5a5a5a;
+  opacity: 1;
+}
+:root[data-theme='high-contrast'] .mask-cell.onset {
+  background: var(--track-color);
+  border: 1px solid var(--track-color);
+  opacity: 1;
+}
+:root[data-theme='high-contrast'] .mask-cell.onset.muted {
+  background: transparent;
+  border: 1px solid var(--track-color);
+  opacity: 0.55;
+}
+:root[data-theme='high-contrast'] .mask-cell.onset:hover {
+  filter: brightness(1.2);
+}
+:root[data-theme='high-contrast'] .mask-cell.is-current {
+  box-shadow: 0 0 0 2px #0a0a0a, 0 0 0 3px #ffffff;
+}
+
+:root[data-theme='high-contrast'] .toggle {
+  border-radius: 4px;
+  min-width: 32px;
+  padding: 4px 12px;
+  border: 1px solid #5a5a5a;
+  background: rgba(0, 0, 0, 0.2);
+}
+:root[data-theme='high-contrast'] .toggle.is-on {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+}
+
+:root[data-theme='high-contrast'] input[type='range'] {
+  height: 4px;
+  cursor: pointer;
+}
+:root[data-theme='high-contrast'] input[type='range']::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: #2a2a2a;
+}
+:root[data-theme='high-contrast'] input[type='range']::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #cfcfcf;
+  border: 2px solid #ffffff;
+  margin-top: -6px;
+  transition: transform 0.1s ease;
+}
+:root[data-theme='high-contrast'] input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+:root[data-theme='high-contrast'] input[type='range']::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: #2a2a2a;
+  border: none;
+}
+:root[data-theme='high-contrast'] input[type='range']::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #cfcfcf;
+  border: 2px solid #ffffff;
+}
+
+:root[data-theme='high-contrast'] select {
+  background: #222222;
+  border: 1px solid #5a5a5a;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 6px 14px;
+}
+:root[data-theme='high-contrast'] select option {
+  background: #171717;
+  color: #ffffff;
+}
+:root[data-theme='high-contrast'] select option:checked {
+  background: rgba(58, 123, 213, 0.25);
+}
+
+:root[data-theme='high-contrast'] label {
+  color: #cfcfcf;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  font-size: 11px;
+}
+
+:root[data-theme='high-contrast'] .control-label {
+  color: #cfcfcf;
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+:root[data-theme='high-contrast'] .control-label b {
+  color: #ffffff;
+}
+
+:root[data-theme='high-contrast'] .bpm b,
+:root[data-theme='high-contrast'] .swing b {
+  color: #cfcfcf;
+}
+
+:root[data-theme='high-contrast'] h1 {
+  color: #ffffff;
+  letter-spacing: 2px;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+:root[data-theme='high-contrast'] .tagline {
+  color: #9d9d9d;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+:root[data-theme='high-contrast'] .track-name {
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+:root[data-theme='high-contrast'] .mini-metrics b {
+  color: #ffffff;
+}
+:root[data-theme='high-contrast'] .mini-metrics span {
+  color: #9d9d9d;
+}
+
+:root[data-theme='high-contrast'] .playback-select select {
+  background: #222222;
+  border: 1px solid #5a5a5a;
+  border-radius: 4px;
+  padding: 4px 12px;
+  color: #ffffff;
+}
+:root[data-theme='high-contrast'] .playback-select span {
+  color: #9d9d9d;
+}
+
+:root[data-theme='high-contrast'] .module-lane {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
