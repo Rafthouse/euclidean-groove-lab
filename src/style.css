@@ -6181,15 +6181,15 @@ header h1 {
   border-top: 1px solid rgba(255, 79, 146, 0.04);
 }
 :root[data-theme='barbie'] {
-  --bg: #d680b0;
-  --panel: #ffdceb;
-  --panel-hi: #ffe9f3;
-  --text: #2b1824;
-  --text-dim: #5d4050;
-  --text-hi: #170d16;
+  --bg: #d85aa5;
+  --panel: #ffe8f2;
+  --panel-hi: #fff0f6;
+  --text: #1f0a16;
+  --text-dim: #3d1c30;
+  --text-hi: #0f040a;
   --accent: #ff4fa3;
   --accent-dim: rgba(255, 79, 163, 0.12);
-  --rest: #d9baca;
+  --rest: #ba8ca0;
   --current: #ff4fa3;
   --danger: #e83070;
   --warn: #ff7ab8;
@@ -6209,47 +6209,46 @@ header h1 {
   --color-bass-mid: #ff7498;
   --color-bass-light: #ff9ab6;
 
-  --card-shadow: 0 2px 20px rgba(90, 30, 60, 0.06), 0 1px 4px rgba(0, 0, 0, 0.02);
+  --card-shadow: 0 4px 28px rgba(60, 10, 30, 0.10), 0 2px 6px rgba(0, 0, 0, 0.03);
   color-scheme: light;
 }
 
-/* Background: large luxurious atmospheric pink gradient.
-   5–6 overlapping radial layers — no flat fill, no hard edges,
-   feels like a Barbie movie poster / luxury cosmetics ad. */
+/* Background: bold Barbie Dreamhouse gradient.
+   F8B6D0 → F58FC0 → D85AA5 — immediately visible as strong pink. */
 :root[data-theme='barbie'] body {
   background:
-    radial-gradient(ellipse 50% 35% at 22% 10%,   rgba(255, 79, 163, 0.10) 0%, transparent 50%),
-    radial-gradient(ellipse 45% 40% at 78% 15%,   rgba(243, 143, 196, 0.06) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 35% at 55% 78%,   rgba(255, 115, 183, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse 35% 30% at 12% 68%,   rgba(255, 158, 207, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse 45% 30% at 85% 72%,   rgba(255, 184, 220, 0.03) 0%, transparent 50%),
-    radial-gradient(ellipse 50% 50% at 50% 50%,   rgba(214, 128, 176, 0.6) 0%, transparent 50%),
-    #d680b0;
+    radial-gradient(ellipse 55% 40% at 20% 5%,   #f8b6d0 0%, transparent 55%),
+    radial-gradient(ellipse 50% 45% at 75% 10%,  rgba(245, 143, 192, 0.50) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 40% at 50% 80%,  rgba(216, 90, 165, 0.55) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 10% 60%,  rgba(248, 182, 208, 0.30) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 70%,  rgba(216, 90, 165, 0.35) 0%, transparent 50%),
+    linear-gradient(160deg, #f8b6d0 0%, #f58fc0 40%, #d85aa5 100%);
   position: relative;
   overflow-x: hidden;
 }
 
-/* Ambient drifting pink light — gentle bokeh float, very slow */
+/* Ambient drifting pink bokeh — stronger than before */
 :root[data-theme='barbie'] body::before {
   content: '';
   position: fixed;
   inset: -100px;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.18;
+  opacity: 0.30;
   background-image:
-    radial-gradient(circle 240px at 20% 12%, rgba(255, 79, 163, 0.06) 0%, transparent 50%),
-    radial-gradient(circle 200px at 75% 20%, rgba(243, 143, 196, 0.04) 0%, transparent 50%),
-    radial-gradient(circle 180px at 50% 82%, rgba(255, 115, 183, 0.03) 0%, transparent 50%),
-    radial-gradient(circle 160px at 85% 60%, rgba(255, 158, 207, 0.03) 0%, transparent 50%);
-  animation: barbie-ambient-drift 28s ease-in-out infinite alternate;
+    radial-gradient(circle 280px at 15% 8%,  rgba(255, 79, 163, 0.12) 0%, transparent 50%),
+    radial-gradient(circle 220px at 70% 15%, rgba(248, 182, 208, 0.10) 0%, transparent 50%),
+    radial-gradient(circle 200px at 45% 85%, rgba(216, 90, 165, 0.08) 0%, transparent 50%),
+    radial-gradient(circle 180px at 82% 55%, rgba(245, 143, 192, 0.06) 0%, transparent 50%),
+    radial-gradient(circle 160px at 8% 65%,  rgba(255, 79, 163, 0.06) 0%, transparent 50%);
+  animation: barbie-ambient-drift 30s ease-in-out infinite alternate;
 }
 
 @keyframes barbie-ambient-drift {
-  0%   { transform: translate(0px, 0px) scale(1); opacity: 0.16; }
-  30%  { transform: translate(-18px, 12px) scale(1.03); opacity: 0.22; }
-  60%  { transform: translate(14px, -18px) scale(0.96); opacity: 0.12; }
-  100% { transform: translate(-8px, 14px) scale(1.02); opacity: 0.16; }
+  0%   { transform: translate(0px, 0px) scale(1); opacity: 0.26; }
+  30%  { transform: translate(-18px, 14px) scale(1.04); opacity: 0.34; }
+  60%  { transform: translate(16px, -20px) scale(0.96); opacity: 0.20; }
+  100% { transform: translate(-10px, 16px) scale(1.02); opacity: 0.28; }
 }
 
 :root[data-theme='barbie'] .app {
@@ -6257,16 +6256,16 @@ header h1 {
   z-index: 1;
 }
 
-/* Cards: solid, clearly lighter than background, very subtle tint only.
-   Max 5-8% colour difference — readability over decoration. */
+/* Cards: bright premium surface, strong separation from rich bg.
+   Glossy highlight bar, deeper shadow for pop. */
 :root[data-theme='barbie'] .track-card {
-  background: #ffdceb;
-  border: 1px solid rgba(90, 30, 60, 0.12);
-  border-radius: 12px;
+  background: #ffe8f2;
+  border: 1px solid rgba(60, 10, 30, 0.08);
+  border-radius: 14px;
   box-shadow:
     inset 0 0.5px 0 0 rgba(255, 255, 255, 0.5),
-    0 2px 20px rgba(90, 30, 60, 0.06),
-    0 1px 4px rgba(0, 0, 0, 0.02);
+    0 4px 28px rgba(60, 10, 30, 0.10),
+    0 2px 6px rgba(0, 0, 0, 0.03);
   position: relative;
 }
 
@@ -6274,10 +6273,11 @@ header h1 {
   content: '';
   position: absolute;
   top: 1px;
-  left: 6px;
-  right: 6px;
+  left: 8px;
+  right: 8px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  border-radius: 14px 14px 0 0;
   pointer-events: none;
 }
 
@@ -6374,7 +6374,7 @@ header h1 {
   fill: #ff4fa3;
 }
 :root[data-theme='barbie'] .step.rest .step-indicator {
-  opacity: 0.06;
+  opacity: 0.04;
 }
 
 :root[data-theme='barbie'] .guide {
@@ -6390,63 +6390,65 @@ header h1 {
 
 /* Buttons: clear hierarchy — inactive / hover / selected */
 :root[data-theme='barbie'] button {
-  border-radius: 12px;
-  border: 1px solid rgba(90, 30, 60, 0.10);
-  background: rgba(255, 233, 243, 0.7);
-  color: #2b1824;
-  font-weight: 500;
+  border-radius: 14px;
+  border: 1px solid rgba(60, 10, 30, 0.08);
+  background: rgba(255, 240, 246, 0.7);
+  color: #1f0a16;
+  font-weight: 600;
   letter-spacing: 0.3px;
   padding: 8px 18px;
   font-size: 12px;
   transition: background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
 }
 :root[data-theme='barbie'] button:hover {
-  background: rgba(255, 233, 243, 0.95);
-  border-color: rgba(255, 79, 163, 0.20);
-  box-shadow: 0 0 12px rgba(255, 79, 163, 0.06);
+  background: rgba(255, 240, 246, 0.95);
+  border-color: rgba(255, 79, 163, 0.25);
+  box-shadow: 0 0 14px rgba(255, 79, 163, 0.10);
 }
 
 :root[data-theme='barbie'] .play {
-  background: rgba(255, 233, 243, 0.7);
-  border: 1px solid rgba(90, 30, 60, 0.10);
-  color: #2b1824;
+  background: rgba(255, 240, 246, 0.7);
+  border: 1px solid rgba(60, 10, 30, 0.08);
+  color: #1f0a16;
 }
 :root[data-theme='barbie'] .play.is-playing {
-  background: rgba(255, 79, 163, 0.08);
-  border-color: #ff4fa3;
-  color: #2b1824;
-  box-shadow: 0 0 12px rgba(255, 79, 163, 0.06);
+  background: rgba(255, 79, 163, 0.12);
+  border-color: #ff2f8f;
+  color: #1f0a16;
+  box-shadow: 0 0 16px rgba(255, 79, 163, 0.14);
+  font-weight: 700;
 }
 
 :root[data-theme='barbie'] .export,
 :root[data-theme='barbie'] .reset-pattern {
-  border-radius: 12px;
-  border: 1px solid rgba(90, 30, 60, 0.10);
-  background: rgba(255, 233, 243, 0.7);
-  color: #2b1824;
+  border-radius: 14px;
+  border: 1px solid rgba(60, 10, 30, 0.08);
+  background: rgba(255, 240, 246, 0.7);
+  color: #1f0a16;
+  font-weight: 600;
 }
 :root[data-theme='barbie'] .export:hover,
 :root[data-theme='barbie'] .reset-pattern:hover {
-  border-color: rgba(255, 79, 163, 0.22);
-  background: rgba(255, 233, 243, 0.95);
+  border-color: rgba(255, 79, 163, 0.25);
+  background: rgba(255, 240, 246, 0.95);
 }
 
 /* Pattern slots */
 :root[data-theme='barbie'] .pattern-slot {
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 5px 0;
   font-size: 10px;
-  background: rgba(90, 30, 60, 0.02);
+  background: rgba(60, 10, 30, 0.02);
 }
 :root[data-theme='barbie'] .pattern-slot:hover {
-  background: rgba(255, 233, 243, 0.85);
-  border-color: rgba(255, 79, 163, 0.12);
+  background: rgba(255, 240, 246, 0.85);
+  border-color: rgba(255, 79, 163, 0.15);
 }
 
 /* Mask controls */
 :root[data-theme='barbie'] .mask-label {
-  color: #5d4050;
-  font-weight: 500;
+  color: #3d1c30;
+  font-weight: 600;
 }
 :root[data-theme='barbie'] .mask-cell {
   border-radius: 12px;
@@ -6455,8 +6457,8 @@ header h1 {
   height: 15px;
 }
 :root[data-theme='barbie'] .mask-cell.rest {
-  background: rgba(90, 30, 60, 0.03);
-  border-color: rgba(90, 30, 60, 0.10);
+  background: rgba(60, 10, 30, 0.03);
+  border-color: rgba(60, 10, 30, 0.08);
   border-width: 1px;
   opacity: 1;
 }
@@ -6478,14 +6480,14 @@ header h1 {
 }
 
 :root[data-theme='barbie'] .toggle {
-  border-radius: 12px;
+  border-radius: 14px;
   min-width: 32px;
   padding: 4px 14px;
-  border: 1px solid rgba(90, 30, 60, 0.10);
-  background: rgba(255, 233, 243, 0.5);
+  border: 1px solid rgba(60, 10, 30, 0.08);
+  background: rgba(255, 240, 246, 0.5);
 }
 :root[data-theme='barbie'] .toggle.is-on {
-  background: rgba(255, 79, 163, 0.10);
+  background: rgba(255, 79, 163, 0.14);
   border-color: #ff4fa3;
 }
 
@@ -6528,86 +6530,95 @@ header h1 {
 
 /* Dropdowns: stronger separation */
 :root[data-theme='barbie'] select {
-  background: rgba(255, 233, 243, 0.85);
-  border: 1px solid rgba(90, 30, 60, 0.12);
-  color: #2b1824;
-  border-radius: 12px;
+  background: rgba(255, 240, 246, 0.85);
+  border: 1px solid rgba(60, 10, 30, 0.10);
+  color: #1f0a16;
+  border-radius: 14px;
   padding: 6px 14px;
   font-size: 12px;
+  font-weight: 500;
 }
 :root[data-theme='barbie'] select option {
-  background: #ffdceb;
-  color: #2b1824;
+  background: #ffe8f2;
+  color: #1f0a16;
+  font-weight: 500;
 }
 :root[data-theme='barbie'] select option:checked {
-  background: rgba(255, 79, 163, 0.14);
+  background: rgba(255, 79, 163, 0.16);
 }
 
 :root[data-theme='barbie'] label {
-  color: #5d4050;
-  font-weight: 500;
+  color: #3d1c30;
+  font-weight: 600;
   letter-spacing: 0.3px;
   font-size: 11px;
 }
 
 :root[data-theme='barbie'] .control-label {
-  color: #5d4050;
+  color: #3d1c30;
   font-size: 10px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  font-weight: 600;
 }
 :root[data-theme='barbie'] .control-label b {
-  color: #2b1824;
+  color: #1f0a16;
 }
 
 :root[data-theme='barbie'] .bpm b,
 :root[data-theme='barbie'] .swing b {
   color: #ff4fa3;
+  font-weight: 700;
 }
 
 :root[data-theme='barbie'] h1 {
-  color: #2b1824;
+  color: #1f0a16;
   letter-spacing: 2px;
-  font-weight: 400;
-  font-size: 18px;
+  font-weight: 500;
+  font-size: 19px;
 }
 
 :root[data-theme='barbie'] .tagline {
-  color: #5d4050;
+  color: #3d1c30;
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  opacity: 0.55;
+  opacity: 0.75;
+  font-weight: 500;
 }
 
 :root[data-theme='barbie'] .track-name {
-  color: #2b1824;
-  font-weight: 600;
+  color: #1f0a16;
+  font-weight: 650;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
 
 :root[data-theme='barbie'] .mini-metrics b {
-  color: #2b1824;
+  color: #1f0a16;
+  font-weight: 650;
 }
 :root[data-theme='barbie'] .mini-metrics span {
-  color: #5d4050;
-  opacity: 0.65;
+  color: #3d1c30;
+  opacity: 0.85;
+  font-weight: 500;
 }
 
 :root[data-theme='barbie'] .playback-select select {
-  background: rgba(255, 233, 243, 0.85);
-  border: 1px solid rgba(90, 30, 60, 0.12);
-  border-radius: 12px;
+  background: rgba(255, 240, 246, 0.85);
+  border: 1px solid rgba(60, 10, 30, 0.10);
+  border-radius: 14px;
   padding: 4px 12px;
-  color: #2b1824;
+  color: #1f0a16;
   font-size: 12px;
+  font-weight: 500;
 }
 :root[data-theme='barbie'] .playback-select span {
-  color: #5d4050;
-  opacity: 0.65;
+  color: #3d1c30;
+  opacity: 0.85;
+  font-weight: 500;
 }
 
 :root[data-theme='barbie'] .module-lane {
-  border-top: 1px solid rgba(90, 30, 60, 0.03);
+  border-top: 1px solid rgba(60, 10, 30, 0.03);
 }
