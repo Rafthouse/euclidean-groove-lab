@@ -46,6 +46,7 @@ export type PresetCategory =
   | 'Clave Rotations'
   | 'African Timelines'
   | 'Arabic Rhythms'
+  | 'Euclidean Library'
   | 'User'
   | 'Uncategorised';
 
@@ -60,6 +61,7 @@ export const FACTORY_CATEGORIES: PresetCategory[] = [
   'Clave Rotations',
   'African Timelines',
   'Arabic Rhythms',
+  'Euclidean Library',
 ];
 
 /** Core preset data — shared by factory and user presets. */
@@ -411,6 +413,80 @@ function hydrateHistoricalPresets(): void {
           histTrack(3, ar.s, Math.ceil(ar.h * 0.6), 2),
         ],
         theme: ar.theme,
+      },
+      version: 1,
+    });
+  }
+
+  /* ── Euclidean Library — comprehensive single-voice patterns ── */
+  type RhLib = { id: string; n: string; s: number; h: number; r: number };
+  const lib: RhLib[] = [
+    { id:'rl-pendulum',        n:'Pendulum',        s:5,  h:2, r:0 },
+    { id:'rl-long-swing',      n:'Long Swing',      s:7,  h:2, r:0 },
+    { id:'rl-triangle',        n:'Triangle',        s:7,  h:3, r:0 },
+    { id:'rl-tresillo',        n:'Tresillo',        s:8,  h:3, r:0 },
+    { id:'rl-orbit',           n:'Orbit',           s:8,  h:3, r:1 },
+    { id:'rl-nandon-bawaa',    n:'Nandon Bawaa',    s:8,  h:3, r:2 },
+    { id:'rl-sparse-tresillo', n:'Sparse Tresillo', s:10, h:3, r:0 },
+    { id:'rl-dry-season',      n:'Dry Season',      s:11, h:3, r:0 },
+    { id:'rl-horizon',         n:'Horizon',         s:14, h:3, r:0 },
+    { id:'rl-caravan',         n:'Caravan',         s:9,  h:4, r:0 },
+    { id:'rl-stepper',         n:'Stepper',         s:11, h:4, r:0 },
+    { id:'rl-marchline',       n:'Marchline',       s:12, h:4, r:0 },
+    { id:'rl-crooked-road',    n:'Crooked Road',    s:13, h:4, r:0 },
+    { id:'rl-drift',           n:'Drift',           s:15, h:4, r:0 },
+    { id:'rl-engine',          n:'Engine',          s:9,  h:5, r:0 },
+    { id:'rl-spring',          n:'Spring',          s:11, h:5, r:0 },
+    { id:'rl-fume-fume',       n:'Fume-Fume',       s:12, h:5, r:0 },
+    { id:'rl-wavepath',        n:'Wavepath',        s:13, h:5, r:0 },
+    { id:'rl-tilt',            n:'Tilt',            s:14, h:5, r:0 },
+    { id:'rl-son-clave-3-2',   n:'Son Clave 3-2',   s:16, h:5, r:0 },
+    { id:'rl-son-clave-2-3',   n:'Son Clave 2-3',   s:16, h:5, r:8 },
+    { id:'rl-bossa-clave',     n:'Bossa Clave',     s:16, h:5, r:4 },
+    { id:'rl-rumba-clave',     n:'Rumba Clave',     s:16, h:5, r:12 },
+    { id:'rl-cinquillo',       n:'Cinquillo',       s:16, h:5, r:2 },
+    { id:'rl-echo-clave',      n:'Echo Clave',      s:16, h:5, r:6 },
+    { id:'rl-reverse-clave',   n:'Reverse Clave',   s:16, h:5, r:10 },
+    { id:'rl-shadow-clave',    n:'Shadow Clave',    s:16, h:5, r:14 },
+    { id:'rl-bembe',           n:'Bembe',           s:12, h:7, r:0 },
+    { id:'rl-bembe-orbit',     n:'Bembe Orbit',     s:12, h:7, r:1 },
+    { id:'rl-bembe-spiral',    n:'Bembe Spiral',    s:12, h:7, r:2 },
+    { id:'rl-bembe-current',   n:'Bembe Current',   s:12, h:7, r:3 },
+    { id:'rl-bembe-flow',      n:'Bembe Flow',      s:12, h:7, r:4 },
+    { id:'rl-bembe-pulse',     n:'Bembe Pulse',     s:12, h:7, r:5 },
+    { id:'rl-bembe-return',    n:'Bembe Return',    s:12, h:7, r:6 },
+    { id:'rl-locomotive',      n:'Locomotive',      s:15, h:7, r:0 },
+    { id:'rl-conveyor',        n:'Conveyor',        s:16, h:7, r:0 },
+    { id:'rl-crosswind',       n:'Crosswind',       s:17, h:7, r:0 },
+    { id:'rl-dual-pulse',      n:'Dual Pulse',      s:15, h:8, r:0 },
+    { id:'rl-tightrope',       n:'Tightrope',       s:17, h:8, r:0 },
+    { id:'rl-swarm',           n:'Swarm',           s:16, h:9, r:0 },
+    { id:'rl-hive',            n:'Hive',            s:17, h:9, r:0 },
+    { id:'rl-migration',       n:'Migration',       s:19, h:9, r:0 },
+    { id:'rl-monsoon',         n:'Monsoon',         s:16, h:11, r:0 },
+    { id:'rl-rainforest',      n:'Rainforest',      s:24, h:11, r:0 },
+    { id:'rl-rapids',          n:'Rapids',          s:24, h:13, r:0 },
+    { id:'rl-torrent',         n:'Torrent',         s:24, h:15, r:0 },
+  ];
+  for (const x of lib) {
+    if (factoryPresets.find((p) => p.id === x.id)) continue;
+    factoryPresets.push({
+      id: x.id,
+      kind: 'factory',
+      name: x.n,
+      category: 'Euclidean Library',
+      description: x.n + ' — E(' + x.h + ',' + x.s + ') R' + x.r,
+      tags: ['euclidean-library'],
+      groove: {
+        bpm: 120,
+        swing: 0,
+        tracks: [
+          histTrack(0, x.s, x.h, x.r),
+          histTrack(1, 1, 0, 0),
+          histTrack(2, 1, 0, 0),
+          histTrack(3, 1, 0, 0),
+        ],
+        theme: 'dark' as ThemeId,
       },
       version: 1,
     });
