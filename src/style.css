@@ -6023,61 +6023,7 @@ header h1 {
 }
 
 /* Pan slider — fixed, theme-independent */
-.mixer-pan {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  width: 100%;
-  flex-shrink: 0;
-}
 
-.mixer-pan-label {
-  font-size: 8px !important;
-  color: var(--text-dim);
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-}
-
-.mixer-pan-slider {
-  width: 100%;
-  height: 4px !important;
-  cursor: pointer;
-  -webkit-appearance: none !important;
-  appearance: none !important;
-  background: var(--rest) !important;
-  border-radius: 2px;
-  outline: none;
-  margin: 0;
-}
-
-.mixer-pan-slider::-webkit-slider-thumb {
-  -webkit-appearance: none !important;
-  width: 10px !important;
-  height: 10px !important;
-  border-radius: 50% !important;
-  background: var(--accent) !important;
-  cursor: pointer;
-  border: none !important;
-  margin-top: -3px;
-  box-shadow: none !important;
-}
-
-.mixer-pan-slider::-moz-range-thumb {
-  width: 10px !important;
-  height: 10px !important;
-  border-radius: 50% !important;
-  background: var(--accent) !important;
-  cursor: pointer;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.mixer-pan-value {
-  font-size: 8px !important;
-  font-family: var(--mono);
-  color: var(--text);
-}
 
 /* Button rows: two rows (FX + M/S/R), each centered */
 .mixer-controls {
@@ -6522,50 +6468,8 @@ header h1 {
 }
 
 /* Neutralise ALL theme range slider overrides on mixer pan sliders */
-:root[data-theme] .mixer-pan-slider {
-  height: 4px !important;
-  border: none !important;
-  background: var(--rest) !important;
-  border-radius: 2px !important;
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-appearance: none !important;
-  appearance: none !important;
-}
-
-:root[data-theme] .mixer-pan-slider::-webkit-slider-runnable-track {
-  height: 4px;
-  background: var(--rest);
-}
-
-:root[data-theme] .mixer-pan-slider::-webkit-slider-thumb {
-  width: 10px !important;
-  height: 10px !important;
-  border-radius: 50% !important;
-  background: var(--accent) !important;
-  border: none !important;
-  box-shadow: none !important;
-  -webkit-appearance: none !important;
-  margin-top: -3px;
-}
-
-:root[data-theme] .mixer-pan-slider::-moz-range-thumb {
-  width: 10px !important;
-  height: 10px !important;
-  border-radius: 50% !important;
-  background: var(--accent) !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-/* Neutralise theme channel name font overrides */
 :root[data-theme] .mixer-channel-name {
   font-size: 10px !important;
-}
-
-:root[data-theme] .mixer-pan-label,
-:root[data-theme] .mixer-pan-value {
-  font-size: 8px !important;
 }
 
 :root[data-theme] .fader-value {

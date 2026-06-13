@@ -1,5 +1,6 @@
 import { useMemo, useRef } from 'react';
 import ChannelFader from './ChannelFader';
+import Knob from '../components/Knob';
 import type { MixerChannelState } from './mixerState';
 
 interface MixerChannelProps {
@@ -142,23 +143,19 @@ export default function MixerChannel({
         label=""
       />
 
-      {/* Pan knob (simple horizontal slider for now) */}
+      {/* Pan knob — replaces old horizontal slider */}
       {!isMaster && (
-        <div className="mixer-pan">
-          <span className="mixer-pan-label">Pan</span>
-          <input
-            type="range"
-            min={-100}
-            max={100}
-            value={pan}
-            onChange={(e) => onPanChange(parseInt(e.target.value))}
-            className="mixer-pan-slider"
-            aria-label={`${name} pan`}
-          />
-          <span className="mixer-pan-value">
-            {pan === 0 ? 'C' : pan < 0 ? `L${-pan}` : `R${pan}`}
-          </span>
-        </div>
+        <Knob
+          label="Pan"
+          value={pan}
+          min={-100}
+          max={100}
+          step={1}
+          resetValue={0}
+          sensitivity={160}
+          format={(v) => v === 0 ? 'C' : v < 0 ? `L${-v}` : `R${v}`}
+          onChange={onPanChange}
+        />
       )}
 
       {/* FX button */}

@@ -119,13 +119,22 @@ export default function App() {
     swing,
     tracks: tracks.map((t) => ({ ...t })),
     theme,
-  }), [bpm, swing, tracks, theme]);
+    mixer: mixerConfig.map((ch) => ({ id: ch.id, pan: ch.pan, faderDb: ch.faderDb })),
+  }), [bpm, swing, tracks, theme, mixerConfig]);
 
   const handleLoadGroove = useCallback((groove: GrooveSnapshot) => {
     setBpm(groove.bpm);
     setSwingState(groove.swing);
     setTracksState(groove.tracks);
     setTheme(groove.theme);
+    if (groove.mixer) {
+      setMixerConfig((prev) =>
+        prev.map((ch) => {
+          const saved = groove.mixer!.find((m) => m.id === ch.id);
+          return saved ? { ...ch, pan: saved.pan, faderDb: saved.faderDb } : ch;
+        })
+      );
+    }
   }, []);
 
   // Initialise Web MIDI on mount

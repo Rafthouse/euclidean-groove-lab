@@ -33,6 +33,7 @@ export interface GrooveSnapshot {
   swing: number;
   tracks: Track[];
   theme: ThemeId;
+  mixer?: { id: string; pan: number; faderDb: number }[];
 }
 
 export type PresetCategory =
@@ -557,5 +558,6 @@ export function cloneGroove(snapshot: GrooveSnapshot): GrooveSnapshot {
     swing: snapshot.swing,
     theme: snapshot.theme,
     tracks: snapshot.tracks.map((t) => ({ ...t })),
+    mixer: snapshot.mixer ? snapshot.mixer.map((m) => ({ ...m })) : undefined,
   };
 }
