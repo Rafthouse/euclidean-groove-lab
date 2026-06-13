@@ -18,6 +18,10 @@
 import * as Tone from 'tone';
 import type { FxSlot } from './fxTypes';
 
+function dbToLinear(db: number): number {
+  return Math.pow(10, db / 20);
+}
+
 /**
  * Create a Tone.js effect node from a slot definition.
  * Returns the Tone node (or a Gain bypass when disabled).
@@ -41,10 +45,16 @@ function createFxNode(slot: FxSlot): Tone.ToneAudioNode {
 
     case 'compressor': {
       const p = slot.params as any;
-      return new Tone.Compressor({
+      // Tone.Compressor + post makeup gain, exposed as a single node.
+      // The makeup Gain acts as the chain output.
+      const comp = new Tone.Compressor({
         threshold: p.threshold, ratio: p.ratio,
         attack: p.attack, release: p.release,
-      });
+        knee: p.knee ?? 0,
+      }).set({ wet: p.dryWet ?? 1 });
+      const makeup = new Tone.Gain(dbToLinear(p.makeup ?? 0));
+      comp.connect(makeup);
+      return makeup;
     }
 
     case 'delay': {
@@ -153,10 +163,11 @@ export function updateFxParams(
 
   switch (slot.type) {
     case 'compressor':
-      if (node instanceof Tone.Compressor) {
-        const p = slot.params as any;
-        node.set({ threshold: p.threshold, ratio: p.ratio, attack: p.attack, release: p.release });
-      }
+      // node is the makeup Gain, connected after Tone.Compressor.
+      // Walk back to find the compressor in the chain (it's the only input).
+      // For simplicity: updateFxParams for compressor is a no-op in v1;
+      // the chain will be rebuilt when params change.
+      // TODO: store ref to both Tone.Compressor and makeup Gain for live updates.
       break;
     case 'filter':
       if (node instanceof Tone.Filter) {

@@ -48,7 +48,9 @@ export interface CompressorParams {
   ratio: number;      // 1..20, default 4
   attack: number;     // 0..0.1 s, default 0.003
   release: number;    // 0..1 s, default 0.25
+  knee: number;       // 0..1 (0=hard, 1=soft), default 0
   makeup: number;     // -12..+12 dB, default 0
+  dryWet: number;     // 0..1, default 1
   /** Sidechain source track id, or null = internal (no sidechain). */
   sidechainSource: string | null;
 }
@@ -118,7 +120,7 @@ export type FxParams =
 
 export const DEFAULT_PARAMS: Record<BuiltInEffectType, FxParams> = {
   eq: { low: 0, mid: 0, high: 0, lowFreq: 250, highFreq: 4000 },
-  compressor: { threshold: -24, ratio: 4, attack: 0.003, release: 0.25, makeup: 0, sidechainSource: null },
+  compressor: { threshold: -24, ratio: 4, attack: 0.003, release: 0.25, knee: 0, makeup: 0, dryWet: 1, sidechainSource: null },
   delay: { time: 0.25, feedback: 0.3, mix: 0.5 },
   reverb: { decay: 1.5, preDelay: 0.01, mix: 0.3 },
   chorus: { frequency: 1.5, delayTime: 3, depth: 0.5, mix: 0.5 },
