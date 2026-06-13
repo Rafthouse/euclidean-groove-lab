@@ -18,9 +18,17 @@
 import * as Tone from 'tone';
 import type { FxSlot } from './fxTypes';
 
+function dbToLinear(db: number): number {
+  return Math.pow(10, db / 20);
+}
+
 /**
  * Create a Tone.js effect node from a slot definition.
  * Returns the Tone node (or a Gain bypass when disabled).
+ *
+ * For compressor: returns a composite where the output node is the
+ * makeup Gain (post-comp). The CompressorModule panel can override
+ * this path when opened.
  */
 function createFxNode(slot: FxSlot): Tone.ToneAudioNode {
   const { type, enabled } = slot;
@@ -41,10 +49,13 @@ function createFxNode(slot: FxSlot): Tone.ToneAudioNode {
 
     case 'compressor': {
       const p = slot.params as any;
-      return new Tone.Compressor({
+      const comp = new Tone.Compressor({
         threshold: p.threshold, ratio: p.ratio,
         attack: p.attack, release: p.release,
-      });
+      }).set({ wet: p.dryWet ?? 1 });
+      const makeup = new Tone.Gain(dbToLinear(p.makeup ?? 0));
+      comp.connect(makeup);
+      return makeup;
     }
 
     case 'delay': {
