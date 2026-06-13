@@ -1,24 +1,21 @@
 /**
- * FX Rack Panel — popup overlay for per-channel effect chains.
+ * FX Rack Panel — clean effect list.
  *
- * Visual inspiration: Vital FX Rack (simple, fast, clean, professional).
- *
- * Features:
- *   - Ordered list of insert slots (initially 4, expandable)
- *   - Add Effect from a picker (EQ, Compressor, Delay, Reverb, etc.)
- *   - Per-slot enable/disable toggle
- *   - Per-slot remove
- *   - Drag reorder (via drag-and-drop)
- *   - Per-effect parameter editor (compact, in-line)
- *   - Empty slots show [ Empty ] placeholder
- *
- * Architecture is also used for Master FX Rack (masterChannel).
+ * Modern workflow:
+ *   - Clean list of effects with enable/disable, delete, move up/down
+ *   - Each effect has an "Open Editor" button → dedicated full editor
+ *   - No inline controls, no miniature sliders, no duplicated UI
+ *   - Effects with dedicated modules: Compressor, SHCHUR EQ
+ *   - Effects without dedicated modules: open in a simple all-params editor
  */
-import { useCallback, useState } from 'react';
-import type { FxSlot, BuiltInEffectType, FxParams, EqParams, CompressorParams, DelayParams, ReverbParams, ChorusParams, DistortionParams, FilterParams } from './fxTypes';
+
+import React, { useCallback, useState } from 'react';
+import type { FxSlot, BuiltInEffectType, FxParams, EqParams, Eq2Params, CompressorParams, DelayParams, ReverbParams, ChorusParams, DistortionParams, FilterParams, LimiterParams, StereoWidthParams, GateParams } from './fxTypes';
 import { FX_TYPE_NAMES, createFxSlot } from './fxTypes';
 import CompressorModule from '../compressor/CompressorModule';
 import EqModule from '../eq/EqModule';
+
+// ── Props ─────────────────────────────────────────────────────────────
 
 interface FxRackPanelProps {
   channelName: string;
@@ -26,7 +23,6 @@ interface FxRackPanelProps {
   fxChain: FxSlot[];
   onUpdateChain: (channelId: string, chain: FxSlot[]) => void;
   onClose: () => void;
-  /** Available voices for sidechain source selection (for compressor). */
   availableSidechainSources?: string[];
 }
 
@@ -37,12 +33,10 @@ const AVAILABLE_EFFECTS: BuiltInEffectType[] = [
   'distortion', 'filter', 'limiter', 'stereoWidth', 'gate',
 ];
 
-interface EffectPickerProps {
+function EffectPicker({ onSelect, onClose }: {
   onSelect: (type: BuiltInEffectType) => void;
   onClose: () => void;
-}
-
-function EffectPicker({ onSelect, onClose }: EffectPickerProps) {
+}) {
   return (
     <div className="fx-picker-overlay" onClick={onClose}>
       <div className="fx-picker" onClick={(e) => e.stopPropagation()}>
@@ -66,215 +60,119 @@ function EffectPicker({ onSelect, onClose }: EffectPickerProps) {
   );
 }
 
-// ── Parameter Editor Components ────────────────────────────────────────
+// ── Universal Param Editor (fallback for effects without a dedicated UI) ──
 
-function EqEditor({ params, onChange }: {
-  params: EqParams;
-  onChange: (p: EqParams) => void;
+function UniversalEditor({ params, onChange, onClose, type, channelName }: {
+  params: FxParams;
+  onChange: (p: FxParams) => void;
+  onClose: () => void;
+  type: BuiltInEffectType;
+  channelName: string;
 }) {
+  const p = params as any;
+
   return (
-    <div className="fx-param-grid">
-      <label>Low <input type="range" min={-30} max={30} value={params.low} onChange={(e) => onChange({ ...params, low: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.low.toFixed(1)} dB</span>
-      <label>Mid <input type="range" min={-30} max={30} value={params.mid} onChange={(e) => onChange({ ...params, mid: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.mid.toFixed(1)} dB</span>
-      <label>High <input type="range" min={-30} max={30} value={params.high} onChange={(e) => onChange({ ...params, high: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.high.toFixed(1)} dB</span>
+    <div className="fx-rack-overlay" onClick={onClose}>
+      <div className="fx-rack-panel" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 500 }}>
+        <div className="fx-rack-header">
+          <span className="fx-rack-title">{FX_TYPE_NAMES[type]}: {channelName}</span>
+          <button className="fx-rack-close" onClick={onClose}>✕</button>
+        </div>
+        <div className="fx-param-grid">
+          {Object.keys(p).map((key) => {
+            if (typeof p[key] !== 'number') return null;
+            // Determine range from reasonable defaults
+            const isDb = key.includes('threshold') || key.includes('makeup') || key.includes('gain');
+            const isTime = key.includes('attack') || key.includes('release') || key.includes('time');
+            const isMix = key.includes('mix') || key.includes('dry') || key.includes('wet') || key.includes('depth') || key.includes('feedback');
+            const isFreq = key.includes('freq') || key === 'frequency';
+            const isRatio = key === 'ratio';
+
+            let min = 0, max = 1, step = 0.01;
+            if (isDb) { min = -60; max = 24; step = 0.5; }
+            else if (isTime) { min = 0; max = 5; step = 0.001; }
+            else if (isMix) { min = 0; max = 1; step = 0.01; }
+            else if (isFreq) { min = 20; max = 20000; step = 1; }
+            else if (isRatio) { min = 1; max = 20; step = 0.5; }
+
+            let display = p[key].toFixed(step >= 1 ? 0 : step >= 0.1 ? 1 : 2);
+            if (isDb) display += ' dB';
+            else if (isTime) display += (p[key] >= 1 ? ' s' : ' ms');
+            else if (isMix) display = `${(p[key] * 100).toFixed(0)}%`;
+            else if (isFreq) display = p[key] >= 1000 ? `${(p[key] / 1000).toFixed(2)} kHz` : `${p[key].toFixed(0)} Hz`;
+            else if (isRatio) display = `${p[key].toFixed(1)}:1`;
+
+            return (
+              <React.Fragment key={key}>
+                <label style={{ textTransform: 'capitalize', fontSize: 10 }}>
+                  {key.replace(/([A-Z])/g, ' $1').trim()}
+                  <input type="range" min={min} max={max} step={step}
+                    value={p[key]} onChange={(e) => onChange({ ...p, [key]: Number(e.target.value) })} />
+                </label>
+                <span className="fx-param-value">{display}</span>
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
 
-function Eq2Editor({ params, onChange, channelName }: {
-  params: any;
-  onChange: (p: any) => void;
-  channelName: string;
-}) {
-  const [fullOpen, setFullOpen] = useState(false);
-  return (
-    <>
-      <div className="fx-param-grid-compact">
-        <span style={{ fontSize: 10, color: 'var(--text-dim, #888)' }}>
-          {params.bands?.filter((b: any) => b.enabled).length ?? 0}/8 bands active
-        </span>
-      </div>
-      <button className="fx-open-compressor" onClick={() => setFullOpen(true)}>
-        ◉ Open SHCHUR EQ
-      </button>
-      {fullOpen && (
-        <EqModule
-          params={params}
-          onChange={onChange}
-          onClose={() => setFullOpen(false)}
-          channelName={channelName}
-        />
-      )}
-    </>
-  );
+// ── Dedicated Editor Router ───────────────────────────────────────────
+
+type EditorType = 'none' | 'eq2' | 'compressor';
+
+function openEditorFor(type: BuiltInEffectType): EditorType {
+  if (type === 'eq2') return 'eq2';
+  if (type === 'compressor') return 'compressor';
+  return 'none';
 }
 
-function CompressorEditor({ params, onChange, sidechainSources, channelName }: {
-  params: CompressorParams;
-  onChange: (p: CompressorParams) => void;
-  sidechainSources?: string[];
+function EditorOverlay({ type, params, onChange, onClose, channelName, sidechainSources }: {
+  type: BuiltInEffectType;
+  params: FxParams;
+  onChange: (p: FxParams) => void;
+  onClose: () => void;
   channelName: string;
+  sidechainSources?: string[];
 }) {
-  const [fullOpen, setFullOpen] = useState(false);
-  return (
-    <>
-      <div className="fx-param-grid-compact">
-        <label>Threshold <input type="range" min={-60} max={0} value={params.threshold} onChange={(e) => onChange({ ...params, threshold: Number(e.target.value) })} /></label>
-        <span className="fx-param-value">{params.threshold.toFixed(1)} dB</span>
-        <label>Ratio <input type="range" min={1} max={20} step={0.5} value={params.ratio} onChange={(e) => onChange({ ...params, ratio: Number(e.target.value) })} /></label>
-        <span className="fx-param-value">{params.ratio.toFixed(1)}:1</span>
-        <label>Attack <input type="range" min={0.0001} max={0.5} step={0.0001} value={params.attack} onChange={(e) => onChange({ ...params, attack: Number(e.target.value) })} /></label>
-        <span className="fx-param-value">{(params.attack * 1000).toFixed(0)} ms</span>
-        <label>Release <input type="range" min={0.005} max={5} step={0.001} value={params.release} onChange={(e) => onChange({ ...params, release: Number(e.target.value) })} /></label>
-        <span className="fx-param-value">{(params.release * 1000).toFixed(0)} ms</span>
-      </div>
-      <button className="fx-open-compressor" onClick={() => setFullOpen(true)}>
-        ◉ Open Compressor
-      </button>
-      {fullOpen && (
-        <CompressorModule
-          params={params}
+  const editor = openEditorFor(type);
+
+  switch (editor) {
+    case 'eq2':
+      return (
+        <EqModule
+          params={params as Eq2Params}
           onChange={onChange}
-          onClose={() => setFullOpen(false)}
+          onClose={onClose}
+          channelName={channelName}
+        />
+      );
+    case 'compressor':
+      return (
+        <CompressorModule
+          params={params as CompressorParams}
+          onChange={onChange}
+          onClose={onClose}
           channelName={channelName}
           sidechainSources={sidechainSources ?? []}
         />
-      )}
-    </>
-  );
+      );
+    default:
+      return (
+        <UniversalEditor
+          params={params}
+          onChange={onChange}
+          onClose={onClose}
+          type={type}
+          channelName={channelName}
+        />
+      );
+  }
 }
 
-function DelayEditor({ params, onChange }: {
-  params: DelayParams;
-  onChange: (p: DelayParams) => void;
-}) {
-  return (
-    <div className="fx-param-grid">
-      <label>Time <input type="range" min={0.01} max={1} step={0.01} value={params.time} onChange={(e) => onChange({ ...params, time: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.time.toFixed(2)} s</span>
-      <label>Feedback <input type="range" min={0} max={0.99} step={0.01} value={params.feedback} onChange={(e) => onChange({ ...params, feedback: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.feedback.toFixed(2)}</span>
-      <label>Mix <input type="range" min={0} max={1} step={0.01} value={params.mix} onChange={(e) => onChange({ ...params, mix: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{(params.mix * 100).toFixed(0)}%</span>
-    </div>
-  );
-}
-
-function ReverbEditor({ params, onChange }: {
-  params: ReverbParams;
-  onChange: (p: ReverbParams) => void;
-}) {
-  return (
-    <div className="fx-param-grid">
-      <label>Decay <input type="range" min={0.1} max={10} step={0.1} value={params.decay} onChange={(e) => onChange({ ...params, decay: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.decay.toFixed(1)} s</span>
-      <label>Pre-delay <input type="range" min={0} max={0.1} step={0.001} value={params.preDelay} onChange={(e) => onChange({ ...params, preDelay: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{(params.preDelay * 1000).toFixed(0)} ms</span>
-      <label>Mix <input type="range" min={0} max={1} step={0.01} value={params.mix} onChange={(e) => onChange({ ...params, mix: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{(params.mix * 100).toFixed(0)}%</span>
-    </div>
-  );
-}
-
-function ChorusEditor({ params, onChange }: {
-  params: ChorusParams;
-  onChange: (p: ChorusParams) => void;
-}) {
-  return (
-    <div className="fx-param-grid">
-      <label>Freq <input type="range" min={0.1} max={10} step={0.1} value={params.frequency} onChange={(e) => onChange({ ...params, frequency: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.frequency.toFixed(1)} Hz</span>
-      <label>Delay <input type="range" min={1} max={30} value={params.delayTime} onChange={(e) => onChange({ ...params, delayTime: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.delayTime.toFixed(0)} ms</span>
-      <label>Depth <input type="range" min={0} max={1} step={0.01} value={params.depth} onChange={(e) => onChange({ ...params, depth: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.depth.toFixed(2)}</span>
-      <label>Mix <input type="range" min={0} max={1} step={0.01} value={params.mix} onChange={(e) => onChange({ ...params, mix: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{(params.mix * 100).toFixed(0)}%</span>
-    </div>
-  );
-}
-
-function DistortionEditor({ params, onChange }: {
-  params: DistortionParams;
-  onChange: (p: DistortionParams) => void;
-}) {
-  return (
-    <div className="fx-param-grid">
-      <label>Drive <input type="range" min={0} max={1} step={0.01} value={params.distortion} onChange={(e) => onChange({ ...params, distortion: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{(params.distortion * 100).toFixed(0)}%</span>
-      <label>Oversample</label>
-      <select value={params.oversample} onChange={(e) => onChange({ ...params, oversample: e.target.value as any })}>
-        <option value="none">None</option>
-        <option value="2x">2x</option>
-        <option value="4x">4x</option>
-      </select>
-    </div>
-  );
-}
-
-function FilterEditor({ params, onChange }: {
-  params: FilterParams;
-  onChange: (p: FilterParams) => void;
-}) {
-  return (
-    <div className="fx-param-grid">
-      <label>Freq <input type="range" min={20} max={20000} step={1} value={params.frequency} onChange={(e) => onChange({ ...params, frequency: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.frequency < 1000 ? `${params.frequency.toFixed(0)} Hz` : `${(params.frequency / 1000).toFixed(2)} kHz`}</span>
-      <label>Type</label>
-      <select value={params.type} onChange={(e) => onChange({ ...params, type: e.target.value as any })}>
-        <option value="lowpass">Low-pass</option>
-        <option value="highpass">High-pass</option>
-        <option value="bandpass">Band-pass</option>
-        <option value="notch">Notch</option>
-        <option value="lowshelf">Low-shelf</option>
-        <option value="highshelf">High-shelf</option>
-        <option value="peaking">Peaking</option>
-      </select>
-      <label>Resonance <input type="range" min={0.1} max={20} step={0.1} value={params.Q} onChange={(e) => onChange({ ...params, Q: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.Q.toFixed(1)}</span>
-      <label>Gain <input type="range" min={-40} max={40} step={0.5} value={params.gain} onChange={(e) => onChange({ ...params, gain: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.gain.toFixed(1)} dB</span>
-    </div>
-  );
-}
-
-function LimiterEditor({ params, onChange }: { params: any; onChange: (p: any) => void }) {
-  return (
-    <div className="fx-param-grid">
-      <label>Threshold <input type="range" min={-60} max={0} value={params.threshold} onChange={(e) => onChange({ ...params, threshold: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.threshold.toFixed(1)} dB</span>
-    </div>
-  );
-}
-
-function StereoWidthEditor({ params, onChange }: { params: any; onChange: (p: any) => void }) {
-  return (
-    <div className="fx-param-grid">
-      <label>Width <input type="range" min={0} max={1} step={0.01} value={params.width} onChange={(e) => onChange({ ...params, width: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{(params.width * 100).toFixed(0)}%</span>
-    </div>
-  );
-}
-
-function GateEditor({ params, onChange }: { params: any; onChange: (p: any) => void }) {
-  return (
-    <div className="fx-param-grid">
-      <label>Threshold <input type="range" min={-60} max={0} value={params.threshold} onChange={(e) => onChange({ ...params, threshold: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.threshold.toFixed(1)} dB</span>
-      <label>Attack <input type="range" min={0} max={0.05} step={0.001} value={params.attack} onChange={(e) => onChange({ ...params, attack: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.attack.toFixed(3)} s</span>
-      <label>Release <input type="range" min={0.01} max={1} step={0.01} value={params.release} onChange={(e) => onChange({ ...params, release: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.release.toFixed(2)} s</span>
-      <label>Hold <input type="range" min={0} max={1} step={0.01} value={params.hold} onChange={(e) => onChange({ ...params, hold: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{params.hold.toFixed(2)} s</span>
-    </div>
-  );
-}
-
-// ── Slot Row ──────────────────────────────────────────────────────────
+// ── Slot Row (clean — no inline controls) ─────────────────────────────
 
 interface SlotRowProps {
   slot: FxSlot;
@@ -290,63 +188,48 @@ interface SlotRowProps {
 }
 
 function SlotRow({ slot, index, total, onToggle, onRemove, onMoveUp, onMoveDown, onParamsChange, slotChannelName, sidechainSources }: SlotRowProps) {
-  const [expanded, setExpanded] = useState(false);
+  const [editorOpen, setEditorOpen] = useState(false);
 
   return (
-    <div className={`fx-slot${!slot.enabled ? ' fx-slot-disabled' : ''}`}>
-      <div className="fx-slot-header" onClick={() => setExpanded(!expanded)}>
-        <div className="fx-slot-controls">
-          <button
-            className="fx-slot-toggle"
-            onClick={(e) => { e.stopPropagation(); onToggle(); }}
-            title={slot.enabled ? 'Disable' : 'Enable'}
-          >
-            {slot.enabled ? '●' : '○'}
-          </button>
-          <span className="fx-slot-number">{index + 1}.</span>
-          <span className="fx-slot-name">{FX_TYPE_NAMES[slot.type]}</span>
-        </div>
-        <div className="fx-slot-actions">
-          <button className="fx-slot-move" onClick={(e) => { e.stopPropagation(); onMoveUp(); }} disabled={index === 0} title="Move up">▲</button>
-          <button className="fx-slot-move" onClick={(e) => { e.stopPropagation(); onMoveDown(); }} disabled={index === total - 1} title="Move down">▼</button>
-          <button className="fx-slot-remove" onClick={(e) => { e.stopPropagation(); onRemove(); }} title="Remove">✕</button>
+    <>
+      <div className={`fx-slot${!slot.enabled ? ' fx-slot-disabled' : ''}`}>
+        <div className="fx-slot-header">
+          <div className="fx-slot-controls">
+            <button
+              className="fx-slot-toggle"
+              onClick={onToggle}
+              title={slot.enabled ? 'Disable' : 'Enable'}
+            >
+              {slot.enabled ? '●' : '○'}
+            </button>
+            <span className="fx-slot-number">{index + 1}.</span>
+            <span className="fx-slot-name">{FX_TYPE_NAMES[slot.type]}</span>
+          </div>
+          <div className="fx-slot-actions">
+            <button className="fx-slot-edit" onClick={() => setEditorOpen(true)} title="Open Editor">
+              ◉ Open
+            </button>
+            <button className="fx-slot-move" onClick={onMoveUp} disabled={index === 0} title="Move up">▲</button>
+            <button className="fx-slot-move" onClick={onMoveDown} disabled={index === total - 1} title="Move down">▼</button>
+            <button className="fx-slot-remove" onClick={onRemove} title="Remove">✕</button>
+          </div>
         </div>
       </div>
-      {expanded && (
-        <div className="fx-slot-editor">
-          <ParameterEditor type={slot.type} params={slot.params} onChange={onParamsChange} channelName={slotChannelName} sidechainSources={sidechainSources} />
-        </div>
+      {editorOpen && (
+        <EditorOverlay
+          type={slot.type}
+          params={slot.params}
+          onChange={onParamsChange}
+          onClose={() => setEditorOpen(false)}
+          channelName={slotChannelName}
+          sidechainSources={sidechainSources}
+        />
       )}
-    </div>
+    </>
   );
 }
 
-// ── Parameter Editor Router ───────────────────────────────────────────
-
-function ParameterEditor({ type, params, onChange, channelName, sidechainSources }: {
-  type: BuiltInEffectType;
-  params: FxParams;
-  onChange: (p: any) => void;
-  channelName: string;
-  sidechainSources?: string[];
-}) {
-  switch (type) {
-    case 'eq': return <EqEditor params={params as any} onChange={onChange} />;
-    case 'eq2': return <Eq2Editor params={params as any} onChange={onChange} channelName={channelName} />;
-    case 'compressor': return <CompressorEditor params={params as any} onChange={onChange} channelName={channelName} sidechainSources={sidechainSources} />;
-    case 'delay': return <DelayEditor params={params as any} onChange={onChange} />;
-    case 'reverb': return <ReverbEditor params={params as any} onChange={onChange} />;
-    case 'chorus': return <ChorusEditor params={params as any} onChange={onChange} />;
-    case 'distortion': return <DistortionEditor params={params as any} onChange={onChange} />;
-    case 'filter': return <FilterEditor params={params as any} onChange={onChange} />;
-    case 'limiter': return <LimiterEditor params={params as any} onChange={onChange} />;
-    case 'stereoWidth': return <StereoWidthEditor params={params as any} onChange={onChange} />;
-    case 'gate': return <GateEditor params={params as any} onChange={onChange} />;
-    default: return null;
-  }
-}
-
-// ── Main FX Rack Panel ────────────────────────────────────────────────
+// ── Main Panel ────────────────────────────────────────────────────────
 
 export default function FxRackPanel({
   channelName,
@@ -354,6 +237,7 @@ export default function FxRackPanel({
   fxChain,
   onUpdateChain,
   onClose,
+  availableSidechainSources,
 }: FxRackPanelProps) {
   const [pickerOpen, setPickerOpen] = useState(false);
 

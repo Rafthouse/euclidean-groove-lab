@@ -6308,11 +6308,19 @@ header h1 {
   color: var(--danger);
 }
 
-/* FX Slot Editor */
+/* FX Slot Edit + Universal Editor */
 
-.fx-slot-editor {
-  padding: 8px 8px 8px 28px;
-  border-top: 1px solid var(--rest);
+.fx-slot-edit {
+  font-size: 10px;
+  padding: 2px 8px;
+  background: var(--accent-dim, rgba(255,0,200,0.1));
+  border: 1px solid var(--accent-dim, rgba(255,255,255,0.08));
+  border-radius: 4px;
+  color: var(--accent, #ff00c8);
+  cursor: pointer;
+}
+.fx-slot-edit:hover {
+  background: var(--accent-dim, rgba(255,0,200,0.2));
 }
 
 .fx-param-grid {
@@ -6320,6 +6328,7 @@ header h1 {
   grid-template-columns: 1fr 48px;
   gap: 4px 8px;
   align-items: center;
+  padding: 8px;
 }
 
 .fx-param-grid label {
