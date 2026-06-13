@@ -1,7 +1,10 @@
 
+import { useCallback, useState } from 'react';
 import MixerChannel from './MixerChannel';
+import FxRackPanel from './FxRackPanel';
 import Oscilloscope from '../components/Oscilloscope';
 import type { MixerConfig } from './mixerState';
+import type { FxSlot } from './fxTypes';
 import type { Track } from '../engine';
 
 interface MixerPanelProps {
@@ -12,6 +15,8 @@ interface MixerPanelProps {
   onMuteToggle: (trackId: string) => void;
   onSoloToggle: (trackId: string) => void;
   onRecToggle: (channelId: string) => void;
+  /** Update a channel's FX chain (state + audio). */
+  onFxChainChange: (channelId: string, chain: FxSlot[]) => void;
   /** Master oscilloscope state */
   scopeEnabled: boolean;
   scopeMode: 'waveform' | 'spectrum' | 'sonagram';
@@ -26,8 +31,9 @@ interface MixerPanelProps {
  * Layout:
  *   [Kick][Snare][Ghost?][Hat][Bass]  [Master]
  *
- * Each channel: Name, Peak Meter, Fader (+12 to -∞), Pan, M/S/R buttons.
- * Master channel additionally shows the master oscilloscope.
+ * Each channel: Name, Peak Meter, Fader, Pan, M/S/R/FX buttons.
+ * Master channel includes the oscilloscope.
+ * FX Rack opens as an overlay popup per channel.
  */
 export default function MixerPanel({
   tracks,
@@ -37,12 +43,24 @@ export default function MixerPanel({
   onMuteToggle,
   onSoloToggle,
   onRecToggle,
+  onFxChainChange,
   scopeEnabled,
   scopeMode,
   onScopeModeChange,
   scopePlaying,
 }: MixerPanelProps) {
-  // Compute mute/solo state from tracks
+  // ── FX Rack overlay state ──────────────────────────────────────
+  const [fxRackOpen, setFxRackOpen] = useState<string | null>(null);
+
+  const handleFxButton = useCallback((channelId: string) => {
+    setFxRackOpen(channelId);
+  }, []);
+
+  const handleCloseFxRack = useCallback(() => {
+    setFxRackOpen(null);
+  }, []);
+
+  // ── Mute/Solo from tracks ──────────────────────────────────────
   const hasSoloGroup = tracks.some((t) => t.solo);
   const muteState = (id: string) => {
     if (id === 'master') return false;
@@ -55,14 +73,18 @@ export default function MixerPanel({
     return !!track?.solo;
   };
 
-  // Split channels into instrument channels + master.
-  // Ghost channel is hidden when ghost is disabled on the snare track.
+  // Filter channels — hide ghost when disabled
   const ghostTrack = tracks.find((t) => t.id === 'snare');
   const ghostEnabled = ghostTrack?.ghost?.enabled === true;
   const instrumentChannels = mixerConfig.filter(
     (ch) => ch.id !== 'master' && (ch.id !== 'ghost' || ghostEnabled)
   );
   const masterChannel = mixerConfig.find((ch) => ch.id === 'master');
+
+  // Find the channel that has its FX rack open
+  const fxRackChannel = fxRackOpen
+    ? mixerConfig.find((ch) => ch.id === fxRackOpen)
+    : null;
 
   return (
     <section className="mixer-panel" aria-label="Mixer">
@@ -71,23 +93,22 @@ export default function MixerPanel({
       </div>
 
       <div className="mixer-channels">
-        {instrumentChannels.map((ch) => {
-          return (
-            <MixerChannel
-              key={ch.id}
-              channel={ch}
-              isMaster={false}
-              muted={muteState(ch.id)}
-              soloed={soloState(ch.id)}
-              hasSoloGroup={hasSoloGroup}
-              onFaderChange={(db) => onFaderChange(ch.id, db)}
-              onPanChange={(pan) => onPanChange(ch.id, pan)}
-              onMuteToggle={() => onMuteToggle(ch.id)}
-              onSoloToggle={() => onSoloToggle(ch.id)}
-              onRecToggle={() => onRecToggle(ch.id)}
-            />
-          );
-        })}
+        {instrumentChannels.map((ch) => (
+          <MixerChannel
+            key={ch.id}
+            channel={ch}
+            isMaster={false}
+            muted={muteState(ch.id)}
+            soloed={soloState(ch.id)}
+            hasSoloGroup={hasSoloGroup}
+            onFaderChange={(db) => onFaderChange(ch.id, db)}
+            onPanChange={(pan) => onPanChange(ch.id, pan)}
+            onMuteToggle={() => onMuteToggle(ch.id)}
+            onSoloToggle={() => onSoloToggle(ch.id)}
+            onRecToggle={() => onRecToggle(ch.id)}
+            onFxRackOpen={() => handleFxButton(ch.id)}
+          />
+        ))}
 
         {/* Master channel */}
         {masterChannel && (
@@ -103,11 +124,12 @@ export default function MixerPanel({
             onMuteToggle={() => {}}
             onSoloToggle={() => {}}
             onRecToggle={() => onRecToggle('master')}
+            onFxRackOpen={() => handleFxButton('master')}
           />
         )}
       </div>
 
-      {/* Master oscilloscope — moved from transport section into the mixer */}
+      {/* Master oscilloscope */}
       {scopeEnabled && masterChannel && (
         <div className="mixer-scope-section">
           <div className="mixer-scope-header">
@@ -152,6 +174,22 @@ export default function MixerPanel({
             height={120}
           />
         </div>
+      )}
+
+      {/* FX Rack overlay */}
+      {fxRackChannel && (
+        <FxRackPanel
+          channelName={fxRackChannel.name}
+          channelId={fxRackChannel.id}
+          fxChain={fxRackChannel.fxChain}
+          onUpdateChain={onFxChainChange}
+          onClose={handleCloseFxRack}
+          availableSidechainSources={
+            fxRackChannel.id !== 'master'
+              ? ['kick', 'snare', 'ghost', 'hat', 'bass']
+              : undefined
+          }
+        />
       )}
     </section>
   );

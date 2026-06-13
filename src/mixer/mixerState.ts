@@ -1,3 +1,5 @@
+import type { FxChain } from './fxTypes';
+
 /**
  * Mixer state model.
  *
@@ -9,9 +11,12 @@
  *   Instrument Generator
  *   → Instrument Volume (track.volume)
  *   → Mixer Channel
+ *     → Channel Gain (pre-fader, from instrument)
+ *     → FX Chain (ordered insert effects)
  *     → Channel Fader (dB)
  *     → Pan (L100 ↔ Center ↔ R100, equal-power)
  *   → Master Bus
+ *     → Master FX Chain
  *     → Master Fader (dB)
  *   → Audio Output
  *
@@ -31,6 +36,10 @@ export interface MixerChannelState {
   pan: number;
   /** REC arm state. Gray = inactive, Red = armed. For future stem recording. */
   rec: boolean;
+  /** FX chain (ordered insert effects). Empty array = bypass. */
+  fxChain: FxChain;
+  /** FX rack panel open/closed (UI state, not persisted). */
+  fxRackOpen: boolean;
 }
 
 export type MixerConfig = MixerChannelState[];
@@ -80,15 +89,16 @@ export function panToGains(pan: number): { left: number; right: number } {
 
 /** Create default mixer channels matching the standard 4 instrument voices + master. */
 export function defaultMixerConfig(includeGhost: boolean = false): MixerConfig {
+  const emptyChain = () => ({ fxChain: [], fxRackOpen: false });
   const channels: MixerChannelState[] = [
-    { id: 'kick',   name: 'Kick',  faderDb: DEFAULT_FADER_DB, pan: 0, rec: false },
-    { id: 'snare',  name: 'Snare', faderDb: DEFAULT_FADER_DB, pan: 0, rec: false },
-    { id: 'hat',    name: 'Hat',   faderDb: DEFAULT_FADER_DB, pan: 0, rec: false },
-    { id: 'bass',   name: 'Bass',  faderDb: DEFAULT_FADER_DB, pan: 0, rec: false },
+    { id: 'kick',   name: 'Kick',  faderDb: DEFAULT_FADER_DB, pan: 0, rec: false, ...emptyChain() },
+    { id: 'snare',  name: 'Snare', faderDb: DEFAULT_FADER_DB, pan: 0, rec: false, ...emptyChain() },
+    { id: 'hat',    name: 'Hat',   faderDb: DEFAULT_FADER_DB, pan: 0, rec: false, ...emptyChain() },
+    { id: 'bass',   name: 'Bass',  faderDb: DEFAULT_FADER_DB, pan: 0, rec: false, ...emptyChain() },
   ];
   if (includeGhost) {
-    channels.splice(2, 0, { id: 'ghost', name: 'Ghost', faderDb: DEFAULT_FADER_DB, pan: 0, rec: false });
+    channels.splice(2, 0, { id: 'ghost', name: 'Ghost', faderDb: DEFAULT_FADER_DB, pan: 0, rec: false, ...emptyChain() });
   }
-  channels.push({ id: 'master', name: 'Master', faderDb: DEFAULT_FADER_DB, pan: 0, rec: false });
+  channels.push({ id: 'master', name: 'Master', faderDb: DEFAULT_FADER_DB, pan: 0, rec: false, ...emptyChain() });
   return channels;
 }

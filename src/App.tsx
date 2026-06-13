@@ -6,8 +6,10 @@ import PresetBrowser from './components/PresetBrowser';
 import MixerPanel from './mixer/MixerPanel';
 import { defaultMixerConfig } from './mixer/mixerState';
 import type { MixerConfig } from './mixer/mixerState';
+import type { FxSlot } from './mixer/fxTypes';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import { setMasterScopeEnabled, clearChannelHistory } from './engine/oscilloscope';
+import { setChannelFxChain } from './audio';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import type { GrooveSnapshot } from './engine/preset';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
@@ -372,6 +374,14 @@ export default function App() {
     );
   }, []);
 
+  /** Update a channel's FX chain: state + audio routing. */
+  const handleFxChainChange = useCallback((channelId: string, chain: FxSlot[]) => {
+    setMixerConfig((prev) =>
+      prev.map((ch) => (ch.id === channelId ? { ...ch, fxChain: chain } : ch))
+    );
+    setChannelFxChain(channelId, chain);
+  }, []);
+
   const togglePlay = async () => {
     if (playing) {
       stop();
@@ -600,6 +610,7 @@ export default function App() {
         onMuteToggle={toggleMute}
         onSoloToggle={toggleSolo}
         onRecToggle={handleMixerRec}
+        onFxChainChange={handleFxChainChange}
         scopeEnabled={scopeMaster}
         scopeMode={scopeMasterMode}
         onScopeModeChange={setScopeMasterMode}

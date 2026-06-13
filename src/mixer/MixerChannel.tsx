@@ -16,6 +16,8 @@ interface MixerChannelProps {
   onMuteToggle: () => void;
   onSoloToggle: () => void;
   onRecToggle: () => void;
+  /** Open FX Rack panel for this channel. */
+  onFxRackOpen: () => void;
 }
 
 /**
@@ -49,8 +51,10 @@ export default function MixerChannel({
   onMuteToggle,
   onSoloToggle,
   onRecToggle,
+  onFxRackOpen,
 }: MixerChannelProps) {
-  const { name, faderDb, pan, rec } = channel;
+  const { name, faderDb, pan, rec, fxChain } = channel;
+  const fxActive = fxChain.length > 0;
   const dimmed = hasSoloGroup && !soloed && !isMaster;
 
   // Peak hold state (persists across renders via ref)
@@ -156,6 +160,18 @@ export default function MixerChannel({
           </span>
         </div>
       )}
+
+      {/* FX button */}
+      <div className="mixer-controls">
+        <button
+          type="button"
+          className={`mixer-btn mixer-fx${fxActive ? ' fx-active' : ''}`}
+          onClick={onFxRackOpen}
+          title={`FX Rack: ${name}`}
+        >
+          FX
+        </button>
+      </div>
 
       {/* Mute / Solo / REC row */}
       <div className="mixer-controls">

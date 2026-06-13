@@ -15,6 +15,8 @@ import { DRUM_KITS } from './drumKits';
 import type { DrumKitId } from './drumKits';
 import { sendNoteOn, sendNoteOff } from './midiOut';
 import { feedChannelStep } from './engine/oscilloscope';
+import type { FxSlot } from './mixer/fxTypes';
+import { buildFxChain } from './mixer/fxEngine';
 
 // The audio layer is a *consumer* of the engine: it never generates rhythm,
 // it only plays whatever tracks the app feeds it.
@@ -33,6 +35,8 @@ const bass = new Tone.MonoSynth({
 // Keyed by track id (e.g. 'kick', 'snare', 'hat', 'bass').
 const channelGains: Record<string, Tone.Gain> = {};
 const channelPanners: Record<string, Tone.Panner> = {};
+// Track current FX chain dispose functions per channel
+const channelFxDispose: Record<string, () => void> = {};
 
 function ensureChannel(id: string): { gain: Tone.Gain; panner: Tone.Panner } {
   if (!channelGains[id]) {
@@ -42,8 +46,36 @@ function ensureChannel(id: string): { gain: Tone.Gain; panner: Tone.Panner } {
     p.connect(masterBus);
     channelGains[id] = g;
     channelPanners[id] = p;
+    channelFxDispose[id] = () => {}; // no-op initial
   }
   return { gain: channelGains[id], panner: channelPanners[id] };
+}
+
+/**
+ * Rebuild a channel's FX chain. Disposes the old chain and wires the new
+ * one between the channel gain and the channel panner.
+ *
+ * Signal flow:
+ *   Channel Gain → [FX Insert Chain] → Channel Panner → Master Bus
+ */
+export function setChannelFxChain(channelId: string, slots: FxSlot[]): void {
+  const ch = ensureChannel(channelId);
+  // Disconnect and dispose old FX chain
+  channelFxDispose[channelId]();
+  // Disconnect gain from panner (direct connection)
+  try { ch.gain.disconnect(ch.panner); } catch { /* not connected */ }
+  // Build new chain
+  const chain = buildFxChain(slots);
+  ch.gain.connect(chain.input);
+  chain.output.connect(ch.panner);
+  channelFxDispose[channelId] = () => {
+    chain.dispose();
+  };
+}
+
+/** Get a channel's gain node for direct instrument connection. */
+export function getChannelGain(id: string): Tone.Gain {
+  return ensureChannel(id).gain;
 }
 
 /** Set a channel's fader level in dB. */

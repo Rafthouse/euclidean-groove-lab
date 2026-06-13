@@ -105,4 +105,12 @@ describe('defaultMixerConfig', () => {
       expect(ch.rec).toBe(false);
     }
   });
+
+  it('all channels should have empty fxChain and fxRackOpen=false', () => {
+    const config = defaultMixerConfig(false);
+    for (const ch of config) {
+      expect(ch.fxChain).toEqual([]);
+      expect(ch.fxRackOpen).toBe(false);
+    }
+  });
 });
