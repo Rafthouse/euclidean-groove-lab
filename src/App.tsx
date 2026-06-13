@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
 import Knob from './components/Knob';
+import PresetBrowser from './components/PresetBrowser';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import { rhythmPresets, getRhythmPreset } from './presets';
@@ -69,13 +70,8 @@ export default function App() {
   const [midiSelected, setMidiSelected] = useState<string | null>(null);
   const [midiEnabled, setMidiEnabled] = useState(false);
 
-  const [presetId, setPresetId] = useState<string>('');
-
-  const handlePresetLoad = useCallback((id: string) => {
-    const preset = getRhythmPreset(id);
-    if (!preset) return;
-    setPresetId(id);
-    setTracksState(preset.tracks);
+  const handlePresetLoad = useCallback((tracks: Track[]) => {
+    setTracksState(tracks);
   }, []);
 
   // Initialise Web MIDI on mount
@@ -400,21 +396,7 @@ export default function App() {
           />
         </div>
         <DrumKitSelect value={kitId} loading={kitLoading} onChange={handleKitChange} />
-        <label className="preset-select">
-          Preset
-          <select
-            value={presetId}
-            onChange={(e) => handlePresetLoad(e.target.value)}
-            aria-label="Load rhythm preset"
-          >
-            <option value="">—</option>
-            {rhythmPresets.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.name}{'★'.repeat(p.authenticity ?? 0)}
-              </option>
-            ))}
-          </select>
-        </label>
+        <PresetBrowser onLoad={handlePresetLoad} tracks={tracksState} />
         {midiPorts.length > 0 && (
           <label className="midi-out">
             MIDI
