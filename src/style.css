@@ -5767,6 +5767,362 @@ header h1 {
   font-size: 11px;
 }
 
+/* ---------- Mixer Panel ---------- */
+
+.mixer-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.mixer-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mixer-title {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0;
+}
+
+.mixer-channels {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 8px 4px;
+}
+
+.mixer-channel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 64px;
+  max-width: 80px;
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 8px 4px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+.mixer-master {
+  min-width: 80px;
+  max-width: 100px;
+  background: var(--panel-hi);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.10),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.mixer-channel-name {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Peak meter — vertical bar */
+.mixer-peak-meter {
+  width: 10px;
+  height: 60px;
+  position: relative;
+}
+
+.mixer-peak-track {
+  position: absolute;
+  inset: 0;
+  background: var(--rest);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.mixer-peak-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, #44cc44, #88ee44, #cccc44, #ee8844);
+  border-radius: 2px;
+  transition: height 0.05s linear;
+}
+
+.mixer-peak-hot {
+  background: linear-gradient(to top, #44cc44, #88ee44, #cccc44, #ee4422);
+}
+
+.mixer-peak-clip {
+  background: #ff2222;
+}
+
+.mixer-peak-clip-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 7px;
+  font-weight: 700;
+  color: #fff;
+  background: #ff2222;
+  border-radius: 2px 2px 0 0;
+  line-height: 1.2;
+}
+
+/* Fader */
+.channel-fader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.fader-rail {
+  width: 20px;
+  position: relative;
+  cursor: pointer;
+  background: var(--rest);
+  border-radius: 3px;
+}
+
+.fader-scale {
+  position: absolute;
+  left: -22px;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  pointer-events: none;
+}
+
+.fader-tick {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(128, 128, 128, 0.15);
+}
+
+.fader-tick-label {
+  position: absolute;
+  left: 2px;
+  top: -5px;
+  font-size: 7px;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.fader-track {
+  position: absolute;
+  bottom: 0;
+  left: 3px;
+  right: 3px;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.10);
+  border-radius: 1.5px;
+  overflow: hidden;
+}
+
+.fader-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, #4488cc, #66aadd);
+  border-radius: 1.5px;
+}
+
+.fader-thumb {
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  height: 8px;
+  background: var(--panel-hi);
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  border-radius: 2px;
+  z-index: 1;
+  cursor: grab;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.fader-thumb:active {
+  cursor: grabbing;
+}
+
+.fader-label {
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+}
+
+.fader-value {
+  font-size: 9px;
+  font-family: var(--mono);
+  color: var(--text);
+  min-width: 32px;
+  text-align: center;
+}
+
+/* Pan slider */
+.mixer-pan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+
+.mixer-pan-label {
+  font-size: 8px;
+  color: var(--text-dim);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.mixer-pan-slider {
+  width: 100%;
+  height: 4px !important;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--rest);
+  border-radius: 2px;
+  outline: none;
+}
+
+.mixer-pan-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
+.mixer-pan-slider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+}
+
+.mixer-pan-value {
+  font-size: 8px;
+  font-family: var(--mono);
+  color: var(--text);
+}
+
+/* Mute / Solo / REC buttons */
+.mixer-controls {
+  display: flex;
+  gap: 2px;
+}
+
+.mixer-btn {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  font-size: 9px;
+  font-weight: 700;
+  font-family: var(--mono);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.1s ease;
+}
+
+.mixer-mute {
+  background: var(--panel-hi);
+  color: var(--text-dim);
+}
+
+.mixer-mute.is-on {
+  background: var(--danger);
+  color: #fff;
+}
+
+.mixer-solo {
+  background: var(--panel-hi);
+  color: var(--text-dim);
+}
+
+.mixer-solo.is-on {
+  background: var(--warn);
+  color: #fff;
+}
+
+.mixer-rec {
+  background: var(--panel-hi);
+  color: var(--text-dim);
+}
+
+.mixer-rec.is-armed {
+  background: #cc2222;
+  color: #fff;
+}
+
+/* Scope section inside mixer */
+.mixer-scope-section {
+  width: 100%;
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.mixer-scope-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.mixer-scope-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.mixer-scope-modes {
+  display: flex;
+  gap: 4px;
+}
+
+.mixer-scope-modes .scope-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 9px;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+
+.mixer-scope-modes .scope-mode-toggle input[type='radio'] {
+  accent-color: var(--accent);
+}
+
 /* ---------- note ---------- */
 
 .note {

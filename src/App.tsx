@@ -3,13 +3,16 @@ import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
 import Knob from './components/Knob';
 import PresetBrowser from './components/PresetBrowser';
-import Oscilloscope from './components/Oscilloscope';
+import MixerPanel from './mixer/MixerPanel';
+import { defaultMixerConfig } from './mixer/mixerState';
+import type { MixerConfig } from './mixer/mixerState';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import { setMasterScopeEnabled, clearChannelHistory } from './engine/oscilloscope';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import type { GrooveSnapshot } from './engine/preset';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
-  onKitLoading, resetClock, setMidiOut } from './audio';
+  onKitLoading, resetClock, setMidiOut, setMasterFader, setChannelFader,
+  setChannelPan } from './audio';
 import { downloadBytes } from './download';
 import type { DrumKitId } from './drumKits';
 import { init as initMidi, onPortsChange, selectPort } from './midiOut';
@@ -77,6 +80,9 @@ export default function App() {
     try { return localStorage.getItem('groove-dev-mode') === 'true'; }
     catch { return false; }
   });
+
+  // ── Mixer state ───────────────────────────────────────────
+  const [mixerConfig, setMixerConfig] = useState<MixerConfig>(() => defaultMixerConfig(false));
 
   // ── Master oscilloscope ────────────────────────────────────
   const [scopeMaster, setScopeMaster] = useState(false);
@@ -339,6 +345,33 @@ export default function App() {
     );
   }, []);
 
+  // ── Mixer handlers ──────────────────────────────────────────
+  const handleMixerFader = useCallback((channelId: string, db: number) => {
+    setMixerConfig((prev) =>
+      prev.map((ch) => (ch.id === channelId ? { ...ch, faderDb: db } : ch))
+    );
+    if (channelId === 'master') {
+      setMasterFader(db);
+    } else {
+      setChannelFader(channelId, db);
+    }
+  }, []);
+
+  const handleMixerPan = useCallback((channelId: string, pan: number) => {
+    setMixerConfig((prev) =>
+      prev.map((ch) => (ch.id === channelId ? { ...ch, pan } : ch))
+    );
+    if (channelId !== 'master') {
+      setChannelPan(channelId, pan);
+    }
+  }, []);
+
+  const handleMixerRec = useCallback((channelId: string) => {
+    setMixerConfig((prev) =>
+      prev.map((ch) => (ch.id === channelId ? { ...ch, rec: !ch.rec } : ch))
+    );
+  }, []);
+
   const togglePlay = async () => {
     if (playing) {
       stop();
@@ -558,51 +591,20 @@ export default function App() {
         </label>
       </section>
 
-      {scopeMaster && (
-        <section className="master-scope" aria-label="Master oscilloscope">
-          <div className="master-scope-header">
-            <span className="master-scope-label">Master</span>
-            <div className="master-scope-modes">
-              <label className="scope-mode-toggle">
-                <input
-                  type="radio"
-                  name="scope-mode"
-                  value="waveform"
-                  checked={scopeMasterMode === 'waveform'}
-                  onChange={() => setScopeMasterMode('waveform')}
-                />
-                Wave
-              </label>
-              <label className="scope-mode-toggle">
-                <input
-                  type="radio"
-                  name="scope-mode"
-                  value="spectrum"
-                  checked={scopeMasterMode === 'spectrum'}
-                  onChange={() => setScopeMasterMode('spectrum')}
-                />
-                Spec
-              </label>
-              <label className="scope-mode-toggle">
-                <input
-                  type="radio"
-                  name="scope-mode"
-                  value="sonagram"
-                  checked={scopeMasterMode === 'sonagram'}
-                  onChange={() => setScopeMasterMode('sonagram')}
-                />
-                Sonagram
-              </label>
-            </div>
-          </div>
-          <Oscilloscope
-            active={scopeMaster && playing}
-            mode={scopeMasterMode}
-            color="#88cc88"
-            height={140}
-          />
-        </section>
-      )}
+      {/* Mixer Section — replaces the old standalone master-scope */}
+      <MixerPanel
+        tracks={tracks}
+        mixerConfig={mixerConfig}
+        onFaderChange={handleMixerFader}
+        onPanChange={handleMixerPan}
+        onMuteToggle={toggleMute}
+        onSoloToggle={toggleSolo}
+        onRecToggle={handleMixerRec}
+        scopeEnabled={scopeMaster}
+        scopeMode={scopeMasterMode}
+        onScopeModeChange={setScopeMasterMode}
+        scopePlaying={playing}
+      />
 
       <PresetBrowser
         open={presetBrowserOpen}
