@@ -70,7 +70,7 @@ export const rhythmPresets: RhythmPreset[] = [
         volume: 100,
         playbackMode: 'forward',
         playbackSpeed: 1,
-        velocityPattern: [100, 85, 100, 85, 100, 85, 100, 85],
+        velocity: [100, 85, 100, 85, 100, 85, 100, 85],
       },
       {
         id: 'bass',
@@ -137,7 +137,7 @@ export const rhythmPresets: RhythmPreset[] = [
         volume: 100,
         playbackMode: 'forward',
         playbackSpeed: 1,
-        velocityPattern: [100, 85, 100, 85, 100, 85, 100, 85],
+        velocity: [100, 85, 100, 85, 100, 85, 100, 85],
       },
       {
         id: 'bass',
@@ -204,7 +204,7 @@ export const rhythmPresets: RhythmPreset[] = [
         volume: 100,
         playbackMode: 'forward',
         playbackSpeed: 1,
-        velocityPattern: [100, 80, 100, 80],
+        velocity: [100, 80, 100, 80],
       },
       {
         id: 'bass',
@@ -271,7 +271,7 @@ export const rhythmPresets: RhythmPreset[] = [
         volume: 100,
         playbackMode: 'forward',
         playbackSpeed: 1,
-        velocityPattern: [100, 90, 100, 85, 100, 90, 100, 85],
+        velocity: [100, 90, 100, 85, 100, 90, 100, 85],
       },
       {
         id: 'bass',
@@ -338,7 +338,7 @@ export const rhythmPresets: RhythmPreset[] = [
         volume: 100,
         playbackMode: 'forward',
         playbackSpeed: 1,
-        velocityPattern: [100, 85, 95, 80, 100, 90],
+        velocity: [100, 85, 95, 80, 100, 90],
       },
       {
         id: 'bass',
@@ -405,7 +405,7 @@ export const rhythmPresets: RhythmPreset[] = [
         volume: 100,
         playbackMode: 'forward',
         playbackSpeed: 1,
-        velocityPattern: [100, 80, 85, 95, 100, 85, 90, 100],
+        velocity: [100, 80, 85, 95, 100, 85, 90, 100],
       },
       {
         id: 'bass',

@@ -7566,54 +7566,59 @@ header h1 {
   border-top: 1px solid rgba(143, 212, 216, 0.04);
 }
 
-/* ===== Satisfaction (Light Ivory / Braun Minimal / Clean Precision) ===== */
-/* Premium industrial design — Dieter Rams / Apple / Braun / Muji.
-   Warm ivory surfaces, soft cream tones, light beige materials.
-   Clean, airy, precise, elegant. NOT vintage. NOT dark. NOT rustic.
-   Like a precision instrument in a bright sunlit room. */
+/* ===== SATISFACTION (1999 Club Culture / Glossy / Chrome / Backlit) ===== */
+/* Premium electronic music workstation from the future as imagined in 1999.
+   Pioneering DJ hardware meets club culture — glossy, sensual, expensive.
+   Ministry of Sound. Benny Benassi. Ibiza 1999. Pioneer DJM. Gatecrasher. */
 :root[data-theme='satisfaction'] {
-  --bg: #f5f0e8;
-  --panel: #ece6dc;
-  --panel-hi: #e4dcd0;
-  --text: #3d3832;
-  --text-dim: #9a9082;
-  --text-hi: #25221e;
-  --accent: #c4864a;
-  --accent-dim: rgba(196, 134, 74, 0.14);
-  --rest: #d8cfc0;
-  --current: #c4864a;
-  --danger: #b06048;
-  --warn: #c4864a;
-  --radius: 8px;
-  --mono: ui-monospace, 'SF Mono', Consolas, monospace;
+  --bg: #1E2230;
+  --panel: rgba(42, 49, 69, 0.85);
+  --panel-hi: rgba(52, 60, 82, 0.90);
+  --text: #E8EDF5;
+  --text-dim: rgba(180, 190, 210, 0.65);
+  --text-hi: #FFFFFF;
+  --accent: #FF9A1F;
+  --accent-dim: rgba(255, 154, 31, 0.18);
+  --rest: rgba(180, 190, 210, 0.10);
+  --current: #FFFFFF;
+  --danger: #FF3060;
+  --warn: #FFC800;
+  --radius: 16px;
+  --mono: ui-monospace, 'SF Mono', 'Cascadia Code', Consolas, monospace;
 
-  /* Track colors — muted, tonal, not brown */
-  --color-kick: #7a6a5a;
-  --color-kick-mid: #9a8876;
-  --color-kick-light: #b8a898;
+  --color-kick: #B8FF3D;
+  --color-kick-mid: #C8FF5E;
+  --color-kick-light: #D8FF80;
 
-  --color-snare: #b08068;
-  --color-snare-mid: #c89a7e;
-  --color-snare-light: #d8b09a;
+  --color-snare: #FF9A1F;
+  --color-snare-mid: #FFB140;
+  --color-snare-light: #FFC866;
 
-  --color-hat: #9a9a88;
-  --color-hat-mid: #b0b09c;
-  --color-hat-light: #c8c8b4;
+  --color-hat: #6CCEFF;
+  --color-hat-mid: #8CD9FF;
+  --color-hat-light: #B0E5FF;
 
-  --color-bass: #8a7a6a;
-  --color-bass-mid: #a09080;
-  --color-bass-light: #b8aa9a;
+  --color-bass: #3EF0C0;
+  --color-bass-mid: #5EF5CE;
+  --color-bass-light: #80F9DA;
 
   --card-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.06),
-    0 6px 12px rgba(0, 0, 0, 0.05),
-    0 12px 24px rgba(0, 0, 0, 0.03);
-  color-scheme: light;
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.06),
+    0 8px 40px rgba(0, 0, 0, 0.50),
+    0 2px 8px rgba(0, 0, 0, 0.30);
+  color-scheme: dark;
 }
 
-/* Warm ivory background — like premium paper in sunlight */
+/* ── Background: dark graphite gradient ─────────────────────────── */
 :root[data-theme='satisfaction'] body {
-  background: var(--bg);
+  overflow-x: hidden;
+  background: linear-gradient(
+    180deg,
+    #1E2230 0%,
+    #2A3145 50%,
+    #161A24 100%
+  );
+  position: relative;
 }
 
 :root[data-theme='satisfaction'] .app {
@@ -7621,273 +7626,362 @@ header h1 {
   z-index: 1;
 }
 
-/* Panels — manufactured from same warm ivory material.
-   Separation through shadow + ambient occlusion, not borders.
-   Think: precision-machined plastic, not painted metal. */
+/* ── Panels: glossy molded plastic, backlit — think Pioneer CDJ ─── */
 :root[data-theme='satisfaction'] .track-card {
-  background: var(--panel);
-  border: none;
-  border-radius: var(--radius);
+  background: rgba(42, 49, 69, 0.85);
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.50),
-    0 2px 4px rgba(0, 0, 0, 0.06),
-    0 6px 12px rgba(0, 0, 0, 0.05),
-    0 12px 24px rgba(0, 0, 0, 0.03);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.10),
+    inset 0 -0.5px 0 0 rgba(0, 0, 0, 0.20),
+    0 8px 40px rgba(0, 0, 0, 0.50),
+    0 2px 8px rgba(0, 0, 0, 0.30);
   position: relative;
+  transition: border-color 0.20s ease, box-shadow 0.20s ease;
 }
 
-/* Contact shadow — weighted against surface */
+/* Glossy highlight sweep — like backlit molded plastic */
 :root[data-theme='satisfaction'] .track-card::after {
   content: '';
   position: absolute;
-  left: 8%;
-  bottom: -4px;
-  width: 84%;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.04);
-  filter: blur(4px);
-  border-radius: 50%;
+  inset: 0;
   pointer-events: none;
+  z-index: 0;
+  border-radius: 16px;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.02) 25%,
+    transparent 45%,
+    transparent 75%,
+    rgba(255, 255, 255, 0.015) 100%
+  );
 }
 
+/* Faint metallic chrome edge — very subtle */
+:root[data-theme='satisfaction'] .track-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(200, 210, 230, 0.03);
+  mask: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.4) 0%,
+    rgba(0,0,0,0.02) 30%,
+    rgba(0,0,0,0.02) 70%,
+    rgba(0,0,0,0.3) 100%
+  );
+  -webkit-mask: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.4) 0%,
+    rgba(0,0,0,0.02) 30%,
+    rgba(0,0,0,0.02) 70%,
+    rgba(0,0,0,0.3) 100%
+  );
+}
+
+/* ── Track colors: accents only — panels stay neutral graphite ──── */
 :root[data-theme='satisfaction'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
+  border-bottom: 2px solid rgba(184, 255, 61, 0.15);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.onset {
-  fill: var(--color-kick-mid);
+  fill: var(--color-kick);
+  filter: drop-shadow(0 0 8px rgba(184, 255, 61, 0.30)) drop-shadow(0 0 18px rgba(184, 255, 61, 0.10));
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-kick) 14%, transparent);
-  stroke: var(--color-kick-mid);
-  stroke-opacity: 0.25;
+  fill: color-mix(in srgb, var(--color-kick) 22%, transparent);
+  stroke: rgba(184, 255, 61, 0.30);
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare);
+  border-bottom: 2px solid rgba(255, 154, 31, 0.15);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] .step.onset {
-  fill: var(--color-snare-mid);
+  fill: var(--color-snare);
+  filter: drop-shadow(0 0 8px rgba(255, 154, 31, 0.30)) drop-shadow(0 0 18px rgba(255, 154, 31, 0.10));
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-snare) 14%, transparent);
-  stroke: var(--color-snare-mid);
-  stroke-opacity: 0.25;
+  fill: color-mix(in srgb, var(--color-snare) 22%, transparent);
+  stroke: rgba(255, 154, 31, 0.30);
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat);
+  border-bottom: 2px solid rgba(108, 206, 255, 0.15);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] .step.onset {
-  fill: var(--color-hat-mid);
+  fill: var(--color-hat);
+  filter: drop-shadow(0 0 8px rgba(108, 206, 255, 0.30)) drop-shadow(0 0 18px rgba(108, 206, 255, 0.10));
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-hat) 14%, transparent);
-  stroke: var(--color-hat-mid);
-  stroke-opacity: 0.20;
+  fill: color-mix(in srgb, var(--color-hat) 22%, transparent);
+  stroke: rgba(108, 206, 255, 0.28);
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass);
+  border-bottom: 2px solid rgba(62, 240, 192, 0.15);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] .step.onset {
-  fill: var(--color-bass-mid);
+  fill: var(--color-bass);
+  filter: drop-shadow(0 0 8px rgba(62, 240, 192, 0.30)) drop-shadow(0 0 18px rgba(62, 240, 192, 0.10));
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-bass) 14%, transparent);
-  stroke: var(--color-bass-mid);
-  stroke-opacity: 0.22;
+  fill: color-mix(in srgb, var(--color-bass) 22%, transparent);
+  stroke: rgba(62, 240, 192, 0.28);
 }
 
-@keyframes satisfaction-kick-pulse {
-  0%   { r: 10px; fill: var(--color-kick-mid); }
-  20%  { r: 12px; fill: var(--color-kick-light); filter: drop-shadow(0 0 6px rgba(122, 106, 90, 0.06)); }
-  100% { r: 10px; fill: var(--color-kick-mid); filter: none; }
+/* ── Orbit dots: LED indicators — old hardware vibe ─────────────── */
+:root[data-theme='satisfaction'] .step.rest .step-indicator {
+  fill: rgba(180, 190, 210, 0.10);
 }
-@keyframes satisfaction-snare-flash {
-  0%   { r: 10px; fill: var(--color-snare-mid); }
-  15%  { r: 12px; fill: var(--color-snare-light); filter: drop-shadow(0 0 6px rgba(176, 128, 104, 0.05)); }
-  100% { r: 10px; fill: var(--color-snare-mid); filter: none; }
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.rest .step-indicator {
+  fill: rgba(184, 255, 61, 0.20);
+  filter: drop-shadow(0 0 3px rgba(184, 255, 61, 0.08));
 }
-@keyframes satisfaction-hat-shimmer {
-  0%   { r: 9px; fill: var(--color-hat-mid); }
-  25%  { r: 11px; fill: var(--color-hat-light); filter: drop-shadow(0 0 4px rgba(154, 154, 136, 0.04)); }
-  100% { r: 9px; fill: var(--color-hat-mid); filter: none; }
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] .step.rest .step-indicator {
+  fill: rgba(255, 154, 31, 0.20);
+  filter: drop-shadow(0 0 3px rgba(255, 154, 31, 0.08));
 }
-@keyframes satisfaction-bass-glow {
-  0%   { r: 10px; fill: var(--color-bass-mid); }
-  25%  { r: 12px; fill: var(--color-bass-light); filter: drop-shadow(0 0 6px rgba(138, 122, 106, 0.05)); }
-  100% { r: 10px; fill: var(--color-bass-mid); filter: none; }
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] .step.rest .step-indicator {
+  fill: rgba(108, 206, 255, 0.20);
+  filter: drop-shadow(0 0 3px rgba(108, 206, 255, 0.08));
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] .step.rest .step-indicator {
+  fill: rgba(62, 240, 192, 0.20);
+  filter: drop-shadow(0 0 3px rgba(62, 240, 192, 0.08));
+}
+
+/* Guide ring and hand lines — very faint */
+:root[data-theme='satisfaction'] .guide {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.02);
+  stroke-width: 0.5px;
+}
+:root[data-theme='satisfaction'] .hand {
+  stroke: rgba(255, 255, 255, 0.03);
+  stroke-width: 0.5px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+:root[data-theme='satisfaction'] .sequencer:has(.step.current) .hand {
+  opacity: 1;
+}
+
+/* ── Active note bloom — bright saturated LED shimmer ────────────── */
+@keyframes satisfaction-kick-bloom {
+  0%   { r: 11px; fill: var(--color-kick-mid); filter: drop-shadow(0 0 8px rgba(184,255,61,0.30)) drop-shadow(0 0 18px rgba(184,255,61,0.10)); }
+  15%  { r: 15px; fill: var(--color-kick-light); filter: drop-shadow(0 0 14px rgba(184,255,61,0.50)) drop-shadow(0 0 30px rgba(184,255,61,0.20)); }
+  50%  { r: 13px; filter: drop-shadow(0 0 10px rgba(184,255,61,0.35)) drop-shadow(0 0 22px rgba(184,255,61,0.12)); }
+  100% { r: 11px; fill: var(--color-kick-mid); filter: drop-shadow(0 0 8px rgba(184,255,61,0.30)) drop-shadow(0 0 18px rgba(184,255,61,0.10)); }
+}
+@keyframes satisfaction-snare-bloom {
+  0%   { r: 11px; fill: var(--color-snare-mid); filter: drop-shadow(0 0 8px rgba(255,154,31,0.30)) drop-shadow(0 0 18px rgba(255,154,31,0.10)); }
+  12%  { r: 15px; fill: var(--color-snare-light); filter: drop-shadow(0 0 14px rgba(255,154,31,0.50)) drop-shadow(0 0 30px rgba(255,154,31,0.20)); }
+  45%  { r: 13px; filter: drop-shadow(0 0 10px rgba(255,154,31,0.35)) drop-shadow(0 0 22px rgba(255,154,31,0.12)); }
+  100% { r: 11px; fill: var(--color-snare-mid); filter: drop-shadow(0 0 8px rgba(255,154,31,0.30)) drop-shadow(0 0 18px rgba(255,154,31,0.10)); }
+}
+@keyframes satisfaction-hat-bloom {
+  0%   { r: 9px; fill: var(--color-hat-mid); filter: drop-shadow(0 0 6px rgba(108,206,255,0.30)) drop-shadow(0 0 14px rgba(108,206,255,0.10)); }
+  20%  { r: 11px; fill: var(--color-hat-light); filter: drop-shadow(0 0 10px rgba(108,206,255,0.50)) drop-shadow(0 0 22px rgba(108,206,255,0.20)); }
+  55%  { r: 10px; filter: drop-shadow(0 0 8px rgba(108,206,255,0.35)) drop-shadow(0 0 16px rgba(108,206,255,0.12)); }
+  100% { r: 9px; fill: var(--color-hat-mid); filter: drop-shadow(0 0 6px rgba(108,206,255,0.30)) drop-shadow(0 0 14px rgba(108,206,255,0.10)); }
+}
+@keyframes satisfaction-bass-bloom {
+  0%   { r: 11px; fill: var(--color-bass-mid); filter: drop-shadow(0 0 8px rgba(62,240,192,0.30)) drop-shadow(0 0 18px rgba(62,240,192,0.10)); }
+  20%  { r: 14px; fill: var(--color-bass-light); filter: drop-shadow(0 0 14px rgba(62,240,192,0.50)) drop-shadow(0 0 30px rgba(62,240,192,0.20)); }
+  55%  { r: 13px; filter: drop-shadow(0 0 10px rgba(62,240,192,0.35)) drop-shadow(0 0 22px rgba(62,240,192,0.12)); }
+  100% { r: 11px; fill: var(--color-bass-mid); filter: drop-shadow(0 0 8px rgba(62,240,192,0.30)) drop-shadow(0 0 18px rgba(62,240,192,0.10)); }
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.onset.current {
-  animation: satisfaction-kick-pulse 350ms ease-out forwards;
+  animation: satisfaction-kick-bloom 350ms ease-out forwards;
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] .step.onset.current {
-  animation: satisfaction-snare-flash 300ms ease-out forwards;
+  animation: satisfaction-snare-bloom 320ms ease-out forwards;
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] .step.onset.current {
-  animation: satisfaction-hat-shimmer 250ms ease-out forwards;
+  animation: satisfaction-hat-bloom 300ms ease-out forwards;
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] .step.onset.current {
-  animation: satisfaction-bass-glow 350ms ease-out forwards;
+  animation: satisfaction-bass-bloom 340ms ease-out forwards;
 }
 
-/* Playhead — warm accent, not amber-brown */
+/* ── Playhead: bright white dot with warm halo ───────────────────── */
 :root[data-theme='satisfaction'] .step.current .step-indicator {
-  fill: var(--accent);
-  stroke: color-mix(in srgb, var(--accent) 60%, #fff);
+  fill: #FFFFFF;
+  stroke: rgba(255, 255, 255, 0.40);
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 6px rgba(196, 134, 74, 0.10));
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.25)) drop-shadow(0 0 18px rgba(255, 154, 31, 0.10));
 }
 :root[data-theme='satisfaction'] .step.current .visual {
-  fill: var(--accent);
-}
-:root[data-theme='satisfaction'] .step.rest .step-indicator {
-  opacity: 0.10;
+  fill: #FFFFFF;
 }
 
-:root[data-theme='satisfaction'] .guide {
-  fill: none;
-  stroke: rgba(196, 134, 74, 0.04);
-  stroke-width: 0.5px;
-}
-
-:root[data-theme='satisfaction'] .hand {
-  stroke: rgba(196, 134, 74, 0.04);
-  stroke-width: 0.5px;
-}
-
-/* Buttons — machined ivory plastic, slightly darker than surface.
-   NOT dark, NOT capsules, NOT guitar-pedal. */
+/* ── BUTTONS: glossy hardware — early 2000s Pioneer style ────────── */
+/* Glossy top highlight, soft bevel, subtle inner shadow */
 :root[data-theme='satisfaction'] button {
-  border-radius: 6px;
-  border: none;
-  background: var(--panel-hi);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(42, 49, 69, 0.70);
   color: var(--text);
   font-weight: 500;
   letter-spacing: 0.3px;
   padding: 8px 18px;
-  font-family: var(--mono);
   font-size: 11px;
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.40),
-    0 1px 2px rgba(0, 0, 0, 0.06),
-    0 2px 4px rgba(0, 0, 0, 0.04);
-  transition: background 0.12s ease, box-shadow 0.12s ease;
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.15),
+    inset 0 -0.5px 0 0 rgba(0, 0, 0, 0.10),
+    0 2px 4px rgba(0, 0, 0, 0.20);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+/* Glossy highlight on buttons */
+:root[data-theme='satisfaction'] button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+  pointer-events: none;
 }
 :root[data-theme='satisfaction'] button:hover {
-  background: #ded4c6;
+  background: rgba(56, 65, 88, 0.85);
+  border-color: rgba(255, 255, 255, 0.10);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
-    0 1px 3px rgba(0, 0, 0, 0.08),
-    0 2px 6px rgba(0, 0, 0, 0.06);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.18),
+    inset 0 -0.5px 0 0 rgba(0, 0, 0, 0.10),
+    0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* Play — elevated but not dark */
+/* Play button — glossy orange accent, like a hot cue button */
 :root[data-theme='satisfaction'] .play {
-  background: var(--panel-hi);
-  border: none;
+  background: rgba(42, 49, 69, 0.80);
+  border: 1px solid rgba(255, 154, 31, 0.15);
   color: var(--text);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.40),
-    0 2px 4px rgba(0, 0, 0, 0.08),
-    0 4px 8px rgba(0, 0, 0, 0.05);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.25);
+}
+:root[data-theme='satisfaction'] .play:hover {
+  border-color: rgba(255, 154, 31, 0.30);
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.15),
+    0 0 12px rgba(255, 154, 31, 0.08);
 }
 :root[data-theme='satisfaction'] .play.is-playing {
-  background: color-mix(in srgb, var(--accent) 10%, var(--panel));
-  color: var(--text-hi);
+  background: rgba(255, 154, 31, 0.10);
+  border-color: var(--color-snare);
+  color: var(--color-snare-light);
+  font-weight: 600;
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
-    0 1px 2px rgba(0, 0, 0, 0.06);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.10),
+    0 0 14px rgba(255, 154, 31, 0.12);
 }
 
-/* Export / Reset — same material */
 :root[data-theme='satisfaction'] .export,
 :root[data-theme='satisfaction'] .reset-pattern {
-  border-radius: 6px;
-  border: none;
-  background: var(--panel-hi);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(42, 49, 69, 0.70);
   color: var(--text);
-  font-family: var(--mono);
-  font-size: 11px;
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.40),
-    0 1px 2px rgba(0, 0, 0, 0.06);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.18);
 }
 :root[data-theme='satisfaction'] .export:hover,
 :root[data-theme='satisfaction'] .reset-pattern:hover {
-  background: #ded4c6;
+  background: rgba(56, 65, 88, 0.85);
+  border-color: rgba(255, 255, 255, 0.10);
 }
 
 :root[data-theme='satisfaction'] .pattern-slot {
-  border-radius: 4px;
+  border-radius: 14px;
   padding: 5px 0;
   font-size: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  transition: background 0.15s ease;
+}
+:root[data-theme='satisfaction'] .pattern-slot:hover {
+  background: rgba(56, 65, 88, 0.60);
 }
 
-/* Mask controls — light, tonal */
+/* ── Mask controls: glowing LED cells ────────────────────────────── */
 :root[data-theme='satisfaction'] .mask-label {
   color: var(--text-dim);
+  font-weight: 600;
 }
 :root[data-theme='satisfaction'] .mask-cell {
-  border-radius: 4px;
+  border-radius: 14px;
   padding: 0;
   width: 15px;
   height: 15px;
-  border: none;
-  background: rgba(196, 134, 74, 0.04);
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: box-shadow 0.15s ease, background 0.15s ease;
 }
 :root[data-theme='satisfaction'] .mask-cell.rest {
-  background: rgba(196, 134, 74, 0.02);
-  opacity: 1;
-  cursor: default;
+  background: rgba(255, 255, 255, 0.02);
+  opacity: 0.50;
 }
 :root[data-theme='satisfaction'] .mask-cell.onset {
   background: var(--track-color);
   border-color: var(--track-color);
   opacity: 1;
+  box-shadow: 0 0 6px var(--track-color), 0 0 12px color-mix(in srgb, var(--track-color) 40%, transparent);
 }
 :root[data-theme='satisfaction'] .mask-cell.onset.muted {
   background: transparent;
   border: 1px solid var(--track-color);
-  opacity: 0.45;
+  opacity: 0.55;
+  box-shadow: none;
 }
 :root[data-theme='satisfaction'] .mask-cell.onset:hover {
-  filter: brightness(1.08);
+  filter: brightness(1.25);
+  box-shadow: 0 0 10px var(--track-color), 0 0 20px color-mix(in srgb, var(--track-color) 50%, transparent);
 }
 :root[data-theme='satisfaction'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--accent);
+  box-shadow: 0 0 0 2px #1E2230, 0 0 0 3px var(--track-color), 0 0 10px var(--track-color);
 }
 
-/* Toggles — same material language */
+/* ── Toggles: small glossy capsules ──────────────────────────────── */
 :root[data-theme='satisfaction'] .toggle {
-  border-radius: 6px;
+  border-radius: 14px;
   min-width: 32px;
-  padding: 4px 12px;
-  font-family: var(--mono);
+  padding: 4px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(42, 49, 69, 0.50);
+  color: var(--text-dim);
   font-size: 10px;
   letter-spacing: 0.5px;
-  background: var(--panel-hi);
-  border: none;
-  color: var(--text-dim);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
-    0 1px 1px rgba(0, 0, 0, 0.04);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.10);
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 :root[data-theme='satisfaction'] .toggle:hover {
-  color: var(--text);
-  background: #ded4c6;
+  background: rgba(56, 65, 88, 0.60);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 :root[data-theme='satisfaction'] .toggle.is-on {
-  background: color-mix(in srgb, var(--accent) 12%, var(--panel-hi));
+  background: rgba(255, 154, 31, 0.08);
+  border-color: var(--color-snare);
   color: var(--text-hi);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.30),
-    0 1px 1px rgba(0, 0, 0, 0.06);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08),
+    0 0 8px rgba(255, 154, 31, 0.06);
 }
 
-/* Sliders */
+/* ── Sliders / knobs: hardware feel ──────────────────────────────── */
 :root[data-theme='satisfaction'] input[type='range'] {
   height: 4px;
   cursor: pointer;
@@ -7895,152 +7989,165 @@ header h1 {
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(196, 134, 74, 0.08);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.04);
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: var(--accent);
-  border: none;
+  background: radial-gradient(circle at 35% 35%, #E8EDF5, #C0C8D8);
+  border: 1px solid rgba(200, 210, 230, 0.30);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.20),
-    0 1px 2px rgba(0, 0, 0, 0.10);
-  margin-top: -5px;
-  transition: transform 0.10s ease, box-shadow 0.10s ease;
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.30),
+    0 0 0 1px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.20);
+  margin-top: -6px;
+  transition: transform 0.10s ease, box-shadow 0.10s ease, border-color 0.10s ease;
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb:hover {
-  transform: scale(1.12);
+  transform: scale(1.15);
+  border-color: rgba(255, 154, 31, 0.50);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.25),
-    0 1px 3px rgba(0, 0, 0, 0.12);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.35),
+    0 0 0 1px rgba(0, 0, 0, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.25);
 }
 :root[data-theme='satisfaction'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
-  background: rgba(196, 134, 74, 0.08);
+  background: rgba(255, 255, 255, 0.04);
   border: none;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 :root[data-theme='satisfaction'] input[type='range']::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: var(--accent);
-  border: none;
+  background: radial-gradient(circle at 35% 35%, #E8EDF5, #C0C8D8);
+  border: 1px solid rgba(200, 210, 230, 0.30);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.20),
-    0 1px 2px rgba(0, 0, 0, 0.10);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.30),
+    0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
-/* Select/dropdowns — light, same material family */
+/* ── Select/dropdown ─────────────────────────────────────────────── */
 :root[data-theme='satisfaction'] select {
-  background: var(--panel-hi);
-  border: none;
+  background: rgba(42, 49, 69, 0.80);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   color: var(--text);
-  border-radius: 6px;
+  border-radius: 14px;
   padding: 6px 14px;
-  font-family: var(--mono);
   font-size: 11px;
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
-    0 1px 2px rgba(0, 0, 0, 0.05);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: border-color 0.15s ease;
+}
+:root[data-theme='satisfaction'] select:focus {
+  border-color: var(--color-snare);
+  box-shadow:
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08),
+    0 0 8px rgba(255, 154, 31, 0.06);
 }
 :root[data-theme='satisfaction'] select option {
-  background: var(--panel);
+  background: #2A3145;
   color: var(--text);
 }
 :root[data-theme='satisfaction'] select option:checked {
-  background: rgba(196, 134, 74, 0.10);
+  background: rgba(255, 154, 31, 0.10);
 }
 
-/* Typography — clean, warm, restrained */
+/* ── Typography: clean uppercase — club flyer energy ─────────────── */
 :root[data-theme='satisfaction'] label {
   color: var(--text-dim);
-  font-weight: 450;
-  letter-spacing: 0.3px;
-  font-family: var(--mono);
+  font-weight: 500;
+  letter-spacing: 0.5px;
   font-size: 10px;
 }
 
 :root[data-theme='satisfaction'] .control-label {
   color: var(--text-dim);
   font-size: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 :root[data-theme='satisfaction'] .control-label b {
-  color: var(--accent);
+  color: var(--text-hi);
 }
 
 :root[data-theme='satisfaction'] .bpm b,
 :root[data-theme='satisfaction'] .swing b {
-  color: var(--accent);
+  color: var(--color-snare);
 }
 
 :root[data-theme='satisfaction'] h1 {
   color: var(--text);
-  font-weight: 400;
-  letter-spacing: 2px;
+  letter-spacing: 4px;
+  font-weight: 300;
+  font-size: 22px;
 }
 
 :root[data-theme='satisfaction'] .tagline {
-  color: var(--text-dim);
-  font-size: 11px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
+  display: none;
 }
 
 :root[data-theme='satisfaction'] .track-name {
   color: var(--text);
   font-weight: 500;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  font-family: var(--mono);
   font-size: 11px;
 }
 
 :root[data-theme='satisfaction'] .mini-metrics b {
-  color: var(--accent);
+  color: var(--text-hi);
 }
 :root[data-theme='satisfaction'] .mini-metrics span {
   color: var(--text-dim);
+  opacity: 0.75;
 }
 
 :root[data-theme='satisfaction'] .playback-select select {
-  background: var(--panel-hi);
-  border: none;
-  border-radius: 6px;
+  background: rgba(42, 49, 69, 0.80);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
   padding: 4px 12px;
   color: var(--text);
-  font-family: var(--mono);
   font-size: 11px;
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
-    0 1px 2px rgba(0, 0, 0, 0.05);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.15);
 }
 :root[data-theme='satisfaction'] .playback-select span {
   color: var(--text-dim);
+  opacity: 0.75;
 }
 
 :root[data-theme='satisfaction'] .module-lane {
-  border-top: 1px solid rgba(196, 134, 74, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-/* Master scope — clean panel, same material */
+/* ── Master scope: LED meter with classic green/yellow/red ───────── */
 :root[data-theme='satisfaction'] .master-scope {
-  background: var(--panel-hi);
-  border: none;
+  background: rgba(30, 34, 48, 0.70);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: var(--radius);
   box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.40),
-    inset 0 -1px 0 0 rgba(0, 0, 0, 0.03),
-    0 2px 4px rgba(0, 0, 0, 0.06),
-    0 6px 12px rgba(0, 0, 0, 0.04);
+    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.40);
 }
 :root[data-theme='satisfaction'] .master-scope .oscilloscope-canvas {
-  opacity: 0.85;
+  opacity: 0.90;
+}
+
+/* ── Ambient animated reflection (very slow, barely perceptible) ─── */
+@keyframes satisfaction-gloss-sweep {
+  0%   { opacity: 0.40; transform: translateX(-10px) skewX(-10deg); }
+  50%  { opacity: 0.50; transform: translateX(10px) skewX(-10deg); }
+  100% { opacity: 0.40; transform: translateX(-10px) skewX(-10deg); }
+}
+
+:root[data-theme='satisfaction'] .track-card::after {
+  animation: satisfaction-gloss-sweep 8s ease-in-out infinite;
 }
 /* ===== Ashes (Cold Observatory / Weathered Silver / Lunar Parchment) ===== */
 /* Ancient astronomical manuscript discovered in a forgotten observatory.
