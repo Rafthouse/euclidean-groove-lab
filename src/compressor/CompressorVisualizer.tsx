@@ -7,8 +7,12 @@
  *   - Input/Output compression curve
  *   - GR value readout
  *
- * Uses simulated GR envelope for display. Real audio tap (post-compressor
- * analyser) can replace the simulation in a future revision.
+ * GR is computed from the engine's analyser (liveGR prop).
+ * When no signal is present (liveGR is undefined/null or ≈ 0 dB),
+ * the meter shows 0 — no animation, no flickering.
+ *
+ * NaN/Infinity guard: all intermediate values are clamped and
+ * validated before rendering.
  */
 
 import { useRef, useEffect, useCallback } from 'react';
@@ -21,18 +25,31 @@ function compressionCurve(
   threshold: number,
   ratio: number,
 ): number {
+  if (!isFinite(inputDb) || !isFinite(threshold) || !isFinite(ratio)) return 0;
   if (inputDb >= threshold) {
-    return threshold + (inputDb - threshold) / ratio;
+    return threshold + (inputDb - threshold) / Math.max(ratio, 1);
   }
   return inputDb;
+}
+
+// ── Guards ────────────────────────────────────────────────────────────
+
+function safeDb(v: number, fallback: number = 0): number {
+  if (!isFinite(v) || isNaN(v)) return fallback;
+  return v;
+}
+
+function isSilent(grDb: number): boolean {
+  // No meaningful gain reduction when signal is below -90 dBFS
+  return safeDb(grDb) > -0.5;
 }
 
 // ── Component ─────────────────────────────────────────────────────────
 
 interface Props {
   params: CompressorParams;
-  /** Live GR from engine analyser (dB, ≤ 0). */
-  liveGR?: number;
+  /** Live GR from engine analyser (dB, ≤ 0). null/undefined = no signal. */
+  liveGR?: number | null;
   isOpen: boolean;
 }
 
@@ -52,18 +69,36 @@ const CURVE_STEPS = 200;
 export default function CompressorVisualizer({ params, liveGR, isOpen }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const grRef = useRef(0);
-  const simTimeRef = useRef(0);
+  const idlingRef = useRef(false);
 
-  const draw = useCallback((ctx: CanvasRenderingContext2D, now: number) => {
+  const draw = useCallback((ctx: CanvasRenderingContext2D) => {
     const { threshold, ratio } = params;
 
-    // Simulated GR envelope when no liveGR
-    simTimeRef.current += 0.016;
-    const simDrive = Math.max(0, -threshold) / 60;
-    const simEnvelope = (Math.sin(simTimeRef.current * 4 * Math.PI) + 1) / 2;
-    const targetGR = liveGR ?? -(simEnvelope * simDrive * 24);
-    grRef.current = grRef.current * 0.88 + targetGR * 0.12;
-    const gr = grRef.current;
+    // ── GR calculation ───────────────────────────────────────────────
+    // When liveGR is null/undefined (engine not connected or no signal),
+    // we decay GR to 0 immediately.
+    let gr = 0;
+    if (liveGR !== null && liveGR !== undefined) {
+      const safeGr = safeDb(liveGR);
+      // Smooth toward the live value with noise floor gate
+      const smoothed = grRef.current * 0.7 + safeGr * 0.3;
+      grRef.current = smoothed;
+      gr = smoothed;
+    } else {
+      // No signal: decay to 0 instantly
+      grRef.current = 0;
+      idlingRef.current = true;
+    }
+
+    // Noise floor gate: below -0.5 dB GR is silent → hard clamp to 0
+    if (isSilent(gr)) {
+      gr = 0;
+      grRef.current = 0;
+    }
+
+    // Final safety clamp
+    gr = Math.min(0, Math.max(-60, gr));
+    if (isNaN(gr) || !isFinite(gr)) gr = 0;
 
     ctx.clearRect(0, 0, W, H);
 
@@ -88,7 +123,6 @@ export default function CompressorVisualizer({ params, liveGR, isOpen }: Props) 
       ctx.moveTo(GX, y);
       ctx.lineTo(GX + GW, y);
       ctx.stroke();
-      // Labels
       ctx.fillStyle = 'rgba(255,255,255,0.25)';
       ctx.font = '8px monospace';
       ctx.textAlign = 'right';
@@ -135,14 +169,17 @@ export default function CompressorVisualizer({ params, liveGR, isOpen }: Props) 
     ctx.fillText(`T ${threshold.toFixed(1)} dB`, GX + GW - 70, ty - 4);
 
     // ── GR Meter ─────────────────────────────────────────────────────
-    // Background
     ctx.fillStyle = 'rgba(0,0,0,0.3)';
     ctx.fillRect(MX, MY, MW, MH);
 
-    // Fill from bottom
-    const grNorm = clamp(-gr / 30, 0, 1);
+    // Only show GR fill when there's actual gain reduction
+    const grNorm = Math.min(1, Math.max(0, -gr / 30));
     const fillH = grNorm * MH;
-    const color = grNorm > 0.7 ? '#ff4444' : grNorm > 0.4 ? '#ffaa00' : '#44dd44';
+    const hasReduction = gr < -0.5;
+    const color = hasReduction
+      ? (grNorm > 0.7 ? '#ff4444' : grNorm > 0.4 ? '#ffaa00' : '#44dd44')
+      : 'transparent';
+
     ctx.fillStyle = color;
     ctx.fillRect(MX, MY + MH - fillH, MW, fillH);
 
@@ -159,11 +196,13 @@ export default function CompressorVisualizer({ params, liveGR, isOpen }: Props) 
     ctx.fillText('-15', MX + MW / 2, MY + MH / 2 + 3);
     ctx.fillText('-30', MX + MW / 2, MY + MH + 10);
 
-    // GR value readout
-    ctx.fillStyle = color;
-    ctx.font = 'bold 12px monospace';
-    ctx.textAlign = 'right';
-    ctx.fillText(`${gr.toFixed(1)} dB`, MX - 6, MY + MH / 2 + 5);
+    // GR value readout (only when there's reduction)
+    if (hasReduction) {
+      ctx.fillStyle = color;
+      ctx.font = 'bold 12px monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText(`${gr.toFixed(1)} dB`, MX - 6, MY + MH / 2 + 5);
+    }
 
     // Ratio / threshold info
     ctx.fillStyle = 'rgba(255,255,255,0.3)';
@@ -179,8 +218,8 @@ export default function CompressorVisualizer({ params, liveGR, isOpen }: Props) 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     let raf = 0;
-    const loop = (t: number) => {
-      draw(ctx, t);
+    const loop = () => {
+      draw(ctx);
       raf = requestAnimationFrame(loop);
     };
     raf = requestAnimationFrame(loop);
@@ -193,8 +232,4 @@ export default function CompressorVisualizer({ params, liveGR, isOpen }: Props) 
       <div className="cmp-vis-label">GAIN REDUCTION</div>
     </div>
   );
-}
-
-function clamp(v: number, min: number, max: number): number {
-  return Math.max(min, Math.min(max, v));
 }
