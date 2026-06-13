@@ -41,10 +41,20 @@ function createFxNode(slot: FxSlot): Tone.ToneAudioNode {
 
     case 'compressor': {
       const p = slot.params as any;
-      return new Tone.Compressor({
+      const comp = new Tone.Compressor({
         threshold: p.threshold, ratio: p.ratio,
         attack: p.attack, release: p.release,
       });
+      // Makeup gain node (post-compressor)
+      const makeup = new Tone.Gain(Tone.gainToDb(1));
+      const makeupDb = typeof p.makeup === 'number' ? p.makeup : 0;
+      makeup.gain.value = Math.pow(10, makeupDb / 20);
+      comp.connect(makeup);
+      // Wrap so that connect() pipes through the chain
+      // Return the makeup node as the output for chain continuity
+      return makeup;
+      // Note: full CompressorModule panel manages its own Tone nodes.
+      // This is the base FX rack path; the dedicated UI can override.
     }
 
     case 'delay': {

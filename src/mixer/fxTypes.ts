@@ -43,14 +43,41 @@ export interface EqParams {
   highFreq: number;  // Hz, default 4000
 }
 
+export interface MultiBandParams {
+  threshold: number;  // -60..0 dB
+  attack: number;     // 0.0001..0.5 s
+  release: number;    // 0.005..5 s
+  ratio: number;      // 1..20
+  makeup: number;     // -24..+24 dB
+  solo: boolean;
+  mute: boolean;
+  bypass: boolean;
+}
+
+const DEFAULT_MB = (): MultiBandParams => ({
+  threshold: -24, attack: 0.003, release: 0.25, ratio: 4,
+  makeup: 0, solo: false, mute: false, bypass: false,
+});
+
 export interface CompressorParams {
   threshold: number;  // -60..0 dB, default -24
   ratio: number;      // 1..20, default 4
-  attack: number;     // 0..0.1 s, default 0.003
-  release: number;    // 0..1 s, default 0.25
-  makeup: number;     // -12..+12 dB, default 0
-  /** Sidechain source track id, or null = internal (no sidechain). */
+  attack: number;     // 0.0001..0.5 s (0.1ms-500ms), default 0.003
+  release: number;    // 0.005..5 s (5ms-5000ms), default 0.25
+  knee: number;       // 0..100 %, default 0
+  makeup: number;     // -24..+24 dB, default 0
+  dryWet: number;     // 0..100 %, default 100
+  lookahead: number;  // 0=OFF, 0.001, 0.005, 0.010 (seconds)
   sidechainSource: string | null;
+  sidechainFilterType: 'off' | 'highpass' | 'lowpass' | 'bandpass';
+  sidechainFilterFreq: number;  // 20..20000 Hz
+  mode: 'standard' | 'multiband';
+  mbCrossoverLow: number;   // Hz
+  mbCrossoverHigh: number;  // Hz
+  mbLow: MultiBandParams;
+  mbMid: MultiBandParams;
+  mbHigh: MultiBandParams;
+  detector: 'rms' | 'peak';
 }
 
 export interface DelayParams {
@@ -118,7 +145,16 @@ export type FxParams =
 
 export const DEFAULT_PARAMS: Record<BuiltInEffectType, FxParams> = {
   eq: { low: 0, mid: 0, high: 0, lowFreq: 250, highFreq: 4000 },
-  compressor: { threshold: -24, ratio: 4, attack: 0.003, release: 0.25, makeup: 0, sidechainSource: null },
+  compressor: {
+    threshold: -24, ratio: 4, attack: 0.003, release: 0.25,
+    knee: 0, makeup: 0, dryWet: 100, lookahead: 0,
+    sidechainSource: null,
+    sidechainFilterType: 'off', sidechainFilterFreq: 1000,
+    mode: 'standard',
+    mbCrossoverLow: 120, mbCrossoverHigh: 4000,
+    mbLow: DEFAULT_MB(), mbMid: DEFAULT_MB(), mbHigh: DEFAULT_MB(),
+    detector: 'rms',
+  },
   delay: { time: 0.25, feedback: 0.3, mix: 0.5 },
   reverb: { decay: 1.5, preDelay: 0.01, mix: 0.3 },
   chorus: { frequency: 1.5, delayTime: 3, depth: 0.5, mix: 0.5 },
