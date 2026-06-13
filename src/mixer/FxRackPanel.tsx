@@ -17,7 +17,6 @@
 import { useCallback, useState } from 'react';
 import type { FxSlot, BuiltInEffectType, FxParams, EqParams, CompressorParams, DelayParams, ReverbParams, ChorusParams, DistortionParams, FilterParams } from './fxTypes';
 import { FX_TYPE_NAMES, createFxSlot } from './fxTypes';
-import CompressorModule from '../compressor/CompressorModule';
 
 interface FxRackPanelProps {
   channelName: string;
@@ -83,39 +82,23 @@ function EqEditor({ params, onChange }: {
   );
 }
 
-function CompressorEditor({ params, onChange, sidechainSources, channelName }: {
+function CompressorEditor({ params, onChange }: {
   params: CompressorParams;
   onChange: (p: CompressorParams) => void;
-  sidechainSources?: string[];
-  channelName: string;
 }) {
-  const [fullOpen, setFullOpen] = useState(false);
-
   return (
-    <>
-      <div className="fx-param-grid-compact">
-        <label>Threshold <input type="range" min={-60} max={0} value={params.threshold} onChange={(e) => onChange({ ...params, threshold: Number(e.target.value) })} /></label>
-        <span className="fx-param-value">{params.threshold.toFixed(1)} dB</span>
-        <label>Ratio <input type="range" min={1} max={20} step={0.5} value={params.ratio} onChange={(e) => onChange({ ...params, ratio: Number(e.target.value) })} /></label>
-        <span className="fx-param-value">{params.ratio.toFixed(1)}:1</span>
-        <label>Attack <input type="range" min={0.0001} max={0.5} step={0.0001} value={params.attack} onChange={(e) => onChange({ ...params, attack: Number(e.target.value) })} /></label>
-        <span className="fx-param-value">{(params.attack * 1000).toFixed(0)} ms</span>
-        <label>Release <input type="range" min={0.005} max={5} step={0.001} value={params.release} onChange={(e) => onChange({ ...params, release: Number(e.target.value) })} /></label>
-        <span className="fx-param-value">{(params.release * 1000).toFixed(0)} ms</span>
-      </div>
-      <button className="fx-open-compressor" onClick={() => setFullOpen(true)}>
-        ◉ Open Compressor
-      </button>
-      {fullOpen && (
-        <CompressorModule
-          params={params}
-          onChange={onChange}
-          onClose={() => setFullOpen(false)}
-          channelName={channelName}
-          sidechainSources={sidechainSources ?? []}
-        />
-      )}
-    </>
+    <div className="fx-param-grid">
+      <label>Threshold <input type="range" min={-60} max={0} value={params.threshold} onChange={(e) => onChange({ ...params, threshold: Number(e.target.value) })} /></label>
+      <span className="fx-param-value">{params.threshold.toFixed(1)} dB</span>
+      <label>Ratio <input type="range" min={1} max={20} step={0.5} value={params.ratio} onChange={(e) => onChange({ ...params, ratio: Number(e.target.value) })} /></label>
+      <span className="fx-param-value">{params.ratio.toFixed(1)}:1</span>
+      <label>Attack <input type="range" min={0} max={0.1} step={0.001} value={params.attack} onChange={(e) => onChange({ ...params, attack: Number(e.target.value) })} /></label>
+      <span className="fx-param-value">{params.attack.toFixed(3)} s</span>
+      <label>Release <input type="range" min={0} max={1} step={0.01} value={params.release} onChange={(e) => onChange({ ...params, release: Number(e.target.value) })} /></label>
+      <span className="fx-param-value">{params.release.toFixed(2)} s</span>
+      <label>Makeup <input type="range" min={-12} max={12} step={0.5} value={params.makeup} onChange={(e) => onChange({ ...params, makeup: Number(e.target.value) })} /></label>
+      <span className="fx-param-value">{params.makeup.toFixed(1)} dB</span>
+    </div>
   );
 }
 
@@ -257,11 +240,9 @@ interface SlotRowProps {
   onMoveUp: () => void;
   onMoveDown: () => void;
   onParamsChange: (params: FxParams) => void;
-  slotChannelName: string;
-  sidechainSources?: string[];
 }
 
-function SlotRow({ slot, index, total, onToggle, onRemove, onMoveUp, onMoveDown, onParamsChange, slotChannelName, sidechainSources }: SlotRowProps) {
+function SlotRow({ slot, index, total, onToggle, onRemove, onMoveUp, onMoveDown, onParamsChange }: SlotRowProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -286,7 +267,7 @@ function SlotRow({ slot, index, total, onToggle, onRemove, onMoveUp, onMoveDown,
       </div>
       {expanded && (
         <div className="fx-slot-editor">
-          <ParameterEditor type={slot.type} params={slot.params} onChange={onParamsChange} channelName={slotChannelName} sidechainSources={sidechainSources} />
+          <ParameterEditor type={slot.type} params={slot.params} onChange={onParamsChange} />
         </div>
       )}
     </div>
@@ -295,16 +276,14 @@ function SlotRow({ slot, index, total, onToggle, onRemove, onMoveUp, onMoveDown,
 
 // ── Parameter Editor Router ───────────────────────────────────────────
 
-function ParameterEditor({ type, params, onChange, channelName, sidechainSources }: {
+function ParameterEditor({ type, params, onChange }: {
   type: BuiltInEffectType;
   params: FxParams;
   onChange: (p: any) => void;
-  channelName: string;
-  sidechainSources?: string[];
 }) {
   switch (type) {
     case 'eq': return <EqEditor params={params as any} onChange={onChange} />;
-    case 'compressor': return <CompressorEditor params={params as any} onChange={onChange} channelName={channelName} sidechainSources={sidechainSources} />;
+    case 'compressor': return <CompressorEditor params={params as any} onChange={onChange} />;
     case 'delay': return <DelayEditor params={params as any} onChange={onChange} />;
     case 'reverb': return <ReverbEditor params={params as any} onChange={onChange} />;
     case 'chorus': return <ChorusEditor params={params as any} onChange={onChange} />;
@@ -325,7 +304,6 @@ export default function FxRackPanel({
   fxChain,
   onUpdateChain,
   onClose,
-  availableSidechainSources,
 }: FxRackPanelProps) {
   const [pickerOpen, setPickerOpen] = useState(false);
 
@@ -384,8 +362,6 @@ export default function FxRackPanel({
               onMoveUp={() => handleMove(index, -1)}
               onMoveDown={() => handleMove(index, 1)}
               onParamsChange={(params) => handleParamsChange(index, params)}
-              slotChannelName={channelName}
-              sidechainSources={availableSidechainSources}
             />
           ))}
         </div>
