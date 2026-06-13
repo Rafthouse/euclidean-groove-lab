@@ -64,6 +64,11 @@ function createFxNode(slot: FxSlot): Tone.ToneAudioNode {
       return makeup;
     }
 
+    case 'deliveryDelay': {
+      // Managed by DeliveryDelayModule — pass-through in basic chain.
+      return new Tone.Gain(1);
+    }
+
     case 'delay': {
       const p = slot.params as any;
       return new Tone.FeedbackDelay({

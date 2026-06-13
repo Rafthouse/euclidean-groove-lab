@@ -11328,3 +11328,137 @@ header h1 {
   color: var(--text-dim, #888);
   min-width: 50px;
 }
+
+/* ===== Delivery Delay ===== */
+/* Premium stereo delay — clean, professional */
+
+.dd-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+}
+.dd-panel {
+  background: var(--panel, #111);
+  border: 1px solid var(--accent-dim, rgba(255,255,255,0.08));
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 520px; width: 95%;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+
+.dd-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.dd-hdr-l { display: flex; align-items: center; gap: 10px; }
+.dd-title {
+  font-size: 14px; font-weight: 700;
+  color: var(--text-hi, #eee); letter-spacing: 1.5px;
+}
+.dd-ch {
+  font-size: 11px; color: var(--text-dim, #888);
+  background: var(--rest, rgba(0,0,0,0.3));
+  padding: 2px 8px; border-radius: 4px;
+}
+.dd-close {
+  background: none; border: none;
+  color: var(--text-dim, #888); font-size: 16px;
+  cursor: pointer; padding: 4px 8px;
+}
+.dd-close:hover { color: var(--text-hi, #eee); }
+
+.dd-body { display: flex; flex-direction: column; gap: 12px; }
+
+.dd-main {
+  display: flex; gap: 16px;
+}
+.dd-time-section {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--rest, rgba(0,0,0,0.15));
+  border-radius: 8px; padding: 12px;
+}
+.dd-time-readout {
+  display: flex; align-items: baseline; gap: 4px;
+  margin-bottom: 8px;
+}
+.dd-time-val {
+  font-size: 36px; font-weight: 700;
+  font-family: var(--mono, monospace);
+  color: #66ccff;
+  line-height: 1;
+}
+.dd-time-unit {
+  font-size: 14px; color: var(--text-dim, #888);
+}
+.dd-time-slider {
+  width: 100%;
+}
+.dd-core {
+  flex: 1;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.dd-tog-row {
+  display: flex; align-items: center; gap: 8px;
+}
+.dd-tog-lbl {
+  font-size: 10px; color: var(--text-dim, #888);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.dd-tog {
+  font-size: 10px; padding: 3px 14px;
+  background: var(--rest, rgba(0,0,0,0.3));
+  border: 1px solid var(--accent-dim, rgba(255,255,255,0.08));
+  border-radius: 4px;
+  color: var(--text-dim, #888); cursor: pointer;
+}
+.dd-tog-on {
+  background: rgba(102,204,255,0.15);
+  border-color: #66ccff;
+  color: #66ccff;
+}
+
+.dd-section {
+  background: var(--rest, rgba(0,0,0,0.1));
+  border-radius: 8px; padding: 8px;
+}
+.dd-sec-lbl {
+  font-size: 9px; letter-spacing: 1px;
+  color: var(--text-dim, #888);
+  display: block; margin-bottom: 6px;
+}
+.dd-sec-row {
+  display: flex; gap: 12px;
+}
+
+.dd-param {
+  flex: 1;
+}
+.dd-param-h {
+  display: flex; justify-content: space-between;
+  margin-bottom: 2px;
+}
+.dd-pl {
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.3px;
+  color: var(--text-dim, #888);
+}
+.dd-pv {
+  font-size: 10px; font-family: var(--mono, monospace);
+  color: var(--text, #ddd);
+}
+.dd-pt {
+  position: relative; height: 18px;
+  background: var(--rest, rgba(0,0,0,0.3));
+  border-radius: 3px; overflow: hidden;
+}
+.dd-pf {
+  position: absolute; top: 0; left: 0; height: 100%;
+  opacity: 0.3; pointer-events: none;
+}
+.dd-ps {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0; cursor: pointer;
+}

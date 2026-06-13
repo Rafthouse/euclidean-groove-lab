@@ -22,6 +22,7 @@ export type BuiltInEffectType =
   | 'eq'
   | 'eq2'
   | 'compressor'
+  | 'deliveryDelay'
   | 'delay'
   | 'reverb'
   | 'chorus'
@@ -122,6 +123,19 @@ export interface DelayParams {
   mix: number;        // 0..1 (wet/dry), default 0.5
 }
 
+export interface DeliveryDelayParams extends Record<string, number> {
+  delayTime: number;   // 0.001–2 s
+  feedback: number;    // 0–0.99
+  mix: number;         // 0–1
+  pingPong: number;    // 0/1
+  filterLp: number;    // 0–1
+  filterHp: number;    // 0–1
+  saturation: number;  // 0–1
+  modRate: number;     // 0–20 Hz
+  modDepth: number;    // 0–1
+  duckThreshold: number; // 0–1
+}
+
 export interface ReverbParams {
   decay: number;      // 0.1..10 s, default 1.5
   preDelay: number;   // 0..0.1 s, default 0.01
@@ -169,6 +183,7 @@ export type FxParams =
   | EqParams
   | Eq2Params
   | CompressorParams
+  | DeliveryDelayParams
   | DelayParams
   | ReverbParams
   | ChorusParams
@@ -199,6 +214,12 @@ export const DEFAULT_PARAMS: Record<BuiltInEffectType, FxParams> = {
     mbLow: defaultMB(), mbMid: defaultMB(), mbHigh: defaultMB(),
   },
   delay: { time: 0.25, feedback: 0.3, mix: 0.5 },
+  deliveryDelay: {
+    delayTime: 0.25, feedback: 0.3, mix: 0.5,
+    pingPong: 0, filterLp: 0, filterHp: 0,
+    saturation: 0, modRate: 0, modDepth: 0,
+    duckThreshold: 0,
+  },
   reverb: { decay: 1.5, preDelay: 0.01, mix: 0.3 },
   chorus: { frequency: 1.5, delayTime: 3, depth: 0.5, mix: 0.5 },
   distortion: { distortion: 0.4, oversample: 'none' },
@@ -256,6 +277,7 @@ export function createFxSlot(type: BuiltInEffectType): FxSlot {
 export const FX_TYPE_NAMES: Record<BuiltInEffectType, string> = {
   eq: 'EQ',
   eq2: 'SHCHUR EQ',
+  deliveryDelay: 'Delivery Delay',
   compressor: 'Compressor',
   delay: 'Delay',
   reverb: 'Reverb',

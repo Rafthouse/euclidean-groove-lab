@@ -29,7 +29,7 @@ interface FxRackPanelProps {
 // ── Effect Picker ─────────────────────────────────────────────────────
 
 const AVAILABLE_EFFECTS: BuiltInEffectType[] = [
-  'eq2', 'eq', 'compressor', 'delay', 'reverb', 'chorus',
+  'eq2', 'compressor', 'deliveryDelay', 'eq', 'delay', 'reverb', 'chorus',
   'distortion', 'filter', 'limiter', 'stereoWidth', 'gate',
 ];
 
