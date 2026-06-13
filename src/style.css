@@ -4765,7 +4765,10 @@ header h1 {
   grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   box-shadow: var(--card-shadow);
-  overflow: hidden;
+  /* overflow:hidden removed — it was clipping SVG sequencer content
+     in themes with large border-radius (University: 28px, BigBoss: 24px).
+     Themes must NEVER affect geometry/layout.
+     Children that need clipping handle it themselves. */
 }
 
 .track-card.is-muted {
