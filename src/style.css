@@ -5801,6 +5801,15 @@ header h1 {
 .mixer-channel {
   display: flex;
   flex-direction: column;
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+.mixer-dimmed {
+  opacity: 0.30;
+}
+
+.mixer-channel {
   align-items: center;
   gap: 6px;
   min-width: 64px;
@@ -5855,17 +5864,48 @@ header h1 {
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, #44cc44, #88ee44, #cccc44, #ee8844);
+  background: linear-gradient(to top, #44cc44 0%, #66dd44 40%, #ddcc44 70%, #ee8844 85%, #ee4422 93%, #ff2222 100%);
   border-radius: 2px;
-  transition: height 0.05s linear;
+  transition: height 0.04s linear;
 }
 
+/* dBFS zone colours — green (-∞ to -18), yellow-green (-18 to -12),
+   yellow (-12 to -6), orange (-6 to -3), red (-3 to 0) */
+.mixer-peak-cool {
+  background: linear-gradient(to top, #66cc66 0%, #88dd66 60%, #ccdd66 100%);
+}
+.mixer-peak-warm {
+  background: linear-gradient(to top, #88dd66 0%, #ccdd44 60%, #ddcc44 100%);
+}
 .mixer-peak-hot {
-  background: linear-gradient(to top, #44cc44, #88ee44, #cccc44, #ee4422);
+  background: linear-gradient(to top, #ddcc44 0%, #ee8833 50%, #ee4422 100%);
 }
-
 .mixer-peak-clip {
   background: #ff2222;
+}
+
+/* Reference lines at -6, -12, -18 dBFS */
+.mixer-peak-ref {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(128, 128, 128, 0.20);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Peak hold dot */
+.mixer-peak-hold {
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  height: 2px;
+  background: var(--text-hi);
+  border-radius: 1px;
+  z-index: 2;
+  pointer-events: none;
+  transition: bottom 0.1s ease;
 }
 
 .mixer-peak-clip-indicator {
@@ -5880,6 +5920,7 @@ header h1 {
   background: #ff2222;
   border-radius: 2px 2px 0 0;
   line-height: 1.2;
+  z-index: 3;
 }
 
 /* Fader */

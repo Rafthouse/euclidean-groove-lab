@@ -55,8 +55,13 @@ export default function MixerPanel({
     return !!track?.solo;
   };
 
-  // Split channels into instrument channels + master
-  const instrumentChannels = mixerConfig.filter((ch) => ch.id !== 'master');
+  // Split channels into instrument channels + master.
+  // Ghost channel is hidden when ghost is disabled on the snare track.
+  const ghostTrack = tracks.find((t) => t.id === 'snare');
+  const ghostEnabled = ghostTrack?.ghost?.enabled === true;
+  const instrumentChannels = mixerConfig.filter(
+    (ch) => ch.id !== 'master' && (ch.id !== 'ghost' || ghostEnabled)
+  );
   const masterChannel = mixerConfig.find((ch) => ch.id === 'master');
 
   return (

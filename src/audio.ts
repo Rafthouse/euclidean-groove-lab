@@ -29,6 +29,35 @@ const bass = new Tone.MonoSynth({
   filter: { type: 'lowpass', Q: 0.7, frequency: BASS_FILTER_FREQ, rolloff: -12 },
 });
 
+// ── Per-channel gain & panner for mixer fader/pan control ──────
+// Keyed by track id (e.g. 'kick', 'snare', 'hat', 'bass').
+const channelGains: Record<string, Tone.Gain> = {};
+const channelPanners: Record<string, Tone.Panner> = {};
+
+function ensureChannel(id: string): { gain: Tone.Gain; panner: Tone.Panner } {
+  if (!channelGains[id]) {
+    const g = new Tone.Gain(1);
+    const p = new Tone.Panner(0);
+    g.connect(p);
+    p.connect(masterBus);
+    channelGains[id] = g;
+    channelPanners[id] = p;
+  }
+  return { gain: channelGains[id], panner: channelPanners[id] };
+}
+
+/** Set a channel's fader level in dB. */
+export function setChannelFader(channelId: string, db: number): void {
+  const { gain } = ensureChannel(channelId);
+  gain.gain.value = Math.pow(10, db / 20);
+}
+
+/** Set a channel's pan: -100 (L) to +100 (R). */
+export function setChannelPan(channelId: string, pan: number): void {
+  const { panner } = ensureChannel(channelId);
+  panner.pan.value = Math.max(-1, Math.min(1, pan / 100));
+}
+
 // ── Master Bus ────────────────────────────────────────────────────────
 // All audio routes through the master bus before reaching the output.
 // Master fader controls the final level. The master scope analyser
@@ -36,8 +65,9 @@ const bass = new Tone.MonoSynth({
 const masterBus = new Tone.Gain(1);
 const masterPanner = new Tone.Panner(0);
 const masterAnalyser = new Tone.Analyser({ type: 'waveform', size: 512 });
-// Bass synth connects to its mixer channel gain (created on first use).
-// Ensure the bass channel exists now so disconnect/reconnect isn't needed at trigger time.
+
+// Bass synth connects to its mixer channel gain. Create it now so
+// disconnect/reconnect isn't needed at trigger time.
 const _bassChan = ensureChannel('bass');
 bass.connect(_bassChan.gain);
 masterBus.connect(masterPanner);
@@ -61,12 +91,13 @@ export function getMasterAnalyser(): Tone.Analyser {
 }
 
 // --- Ghost lane (Snare) — a SEPARATE audio path so the ghost retrigger can
-// never cut the main snare's transient. Routes through master bus.
+// never cut the main snare's transient. Routes through its own mixer channel.
 // -24 dB/oct (Tone.Filter has no -18; -24 is the next steeper native slope).
 const ghostHP = new Tone.Filter({ type: 'highpass', frequency: 200, rolloff: -24 });
 const ghostLP = new Tone.Filter({ type: 'lowpass', frequency: 6000, rolloff: -24 });
+const _ghostChan = ensureChannel('ghost');
 ghostHP.connect(ghostLP);
-ghostLP.connect(masterBus);
+ghostLP.connect(_ghostChan.gain);
 
 // --- Drum kit (sample-based, swappable) ---
 // POLYPHONIC, EVENT-DRIVEN model: we hold one BUFFER per voice (not a shared
@@ -169,39 +200,6 @@ function linearToDb(normalized: number): number {
 
 function clamp01(v: number): number {
   return v < 0 ? 0 : v > 1 ? 1 : v;
-}
-
-// Voices take `velocity` (per-hit dynamics, 0–1) and `volume` (per-track mixer
-// level, 0–1). For the sample voices the effective level is volume × velocity,
-// baked into a fresh one-shot source at trigger time — no shared node, no
-// monophonic retrigger. `midi` is used only by the (pitched) bass voice.
-// Per-channel gain & panner for mixer fader/pan control.
-// Keyed by track id (e.g. 'kick', 'snare', 'hat', 'bass').
-const channelGains: Record<string, Tone.Gain> = {};
-const channelPanners: Record<string, Tone.Panner> = {};
-
-function ensureChannel(id: string): { gain: Tone.Gain; panner: Tone.Panner } {
-  if (!channelGains[id]) {
-    const g = new Tone.Gain(1);
-    const p = new Tone.Panner(0);
-    g.connect(p);
-    p.connect(masterBus);
-    channelGains[id] = g;
-    channelPanners[id] = p;
-  }
-  return { gain: channelGains[id], panner: channelPanners[id] };
-}
-
-/** Set a channel's fader level in dB. */
-export function setChannelFader(channelId: string, db: number): void {
-  const { gain } = ensureChannel(channelId);
-  gain.gain.value = Math.pow(10, db / 20);
-}
-
-/** Set a channel's pan: -100 (L) to +100 (R). */
-export function setChannelPan(channelId: string, pan: number): void {
-  const { panner } = ensureChannel(channelId);
-  panner.pan.value = Math.max(-1, Math.min(1, pan / 100));
 }
 
 const voices: Record<
