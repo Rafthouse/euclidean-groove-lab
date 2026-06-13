@@ -96,12 +96,8 @@ function CompressorEditor({ params, onChange }: {
       <span className="fx-param-value">{params.attack.toFixed(3)} s</span>
       <label>Release <input type="range" min={0} max={1} step={0.01} value={params.release} onChange={(e) => onChange({ ...params, release: Number(e.target.value) })} /></label>
       <span className="fx-param-value">{params.release.toFixed(2)} s</span>
-      <label>Knee <input type="range" min={0} max={1} step={0.01} value={params.knee} onChange={(e) => onChange({ ...params, knee: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{(params.knee * 100).toFixed(0)}%</span>
       <label>Makeup <input type="range" min={-12} max={12} step={0.5} value={params.makeup} onChange={(e) => onChange({ ...params, makeup: Number(e.target.value) })} /></label>
       <span className="fx-param-value">{params.makeup.toFixed(1)} dB</span>
-      <label>Dry/Wet <input type="range" min={0} max={1} step={0.01} value={params.dryWet} onChange={(e) => onChange({ ...params, dryWet: Number(e.target.value) })} /></label>
-      <span className="fx-param-value">{(params.dryWet * 100).toFixed(0)}%</span>
     </div>
   );
 }
