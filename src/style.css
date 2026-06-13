@@ -11169,3 +11169,153 @@ header h1 {
   border-color: var(--accent, #ff00c8);
   color: var(--accent, #ff00c8);
 }
+
+/* ===== SHCHUR EQ Module ===== */
+/* Professional parametric equalizer */
+
+.eq-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+}
+
+.eq-panel {
+  background: var(--panel, #111);
+  border: 1px solid var(--accent-dim, rgba(255,255,255,0.08));
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 820px; width: 95%;
+  max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+
+.eq-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.eq-hdr-l { display: flex; align-items: center; gap: 10px; }
+.eq-title {
+  font-size: 14px; font-weight: 700;
+  color: var(--text-hi, #eee); letter-spacing: 1.5px;
+}
+.eq-ch {
+  font-size: 11px; color: var(--text-dim, #888);
+  background: var(--rest, rgba(0,0,0,0.3));
+  padding: 2px 8px; border-radius: 4px;
+}
+.eq-hdr-c {
+  display: flex; align-items: center; gap: 6px;
+}
+.eq-an-btn {
+  font-size: 10px; padding: 3px 10px;
+  background: var(--rest, rgba(0,0,0,0.3));
+  border: 1px solid var(--accent-dim, rgba(255,255,255,0.08));
+  border-radius: 4px;
+  color: var(--text-dim, #888); cursor: pointer;
+}
+.eq-an-on {
+  background: rgba(68,136,255,0.15);
+  border-color: #4488ff;
+  color: #4488ff;
+}
+.eq-sel {
+  background: var(--rest, rgba(0,0,0,0.3));
+  border: 1px solid var(--accent-dim, rgba(255,255,255,0.08));
+  border-radius: 4px;
+  color: var(--text, #ddd); font-size: 10px;
+  padding: 3px 6px;
+}
+.eq-close {
+  background: none; border: none;
+  color: var(--text-dim, #888); font-size: 16px;
+  cursor: pointer; padding: 4px 8px;
+}
+.eq-close:hover { color: var(--text-hi, #eee); }
+
+.eq-vis-wrap {
+  margin-bottom: 12px;
+}
+.eq-vis-canvas {
+  width: 100%; height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.eq-bands {
+  margin-bottom: 8px;
+}
+.eq-bands-hdr {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 8px;
+  font-size: 9px; color: var(--text-dim, #888);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--accent-dim, rgba(255,255,255,0.06));
+}
+.eq-bh-item {
+  display: flex; align-items: center;
+}
+
+.eq-band-row {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 8px;
+  border-left: 3px solid transparent;
+  border-bottom: 1px solid var(--accent-dim, rgba(255,255,255,0.03));
+}
+.eq-band-disabled {
+  opacity: 0.4;
+}
+.eq-band-num {
+  width: 24px; text-align: center;
+  font-size: 12px; font-weight: 700;
+}
+.eq-band-enable {
+  width: 24px; display: flex; align-items: center;
+}
+.eq-band-enable input {
+  accent-color: var(--accent, #88cc88);
+}
+.eq-band-type {
+  width: 90px;
+  background: var(--rest, rgba(0,0,0,0.3));
+  border: 1px solid var(--accent-dim, rgba(255,255,255,0.08));
+  border-radius: 4px;
+  color: var(--text, #ddd); font-size: 10px;
+  padding: 2px 4px;
+}
+.eq-band-param {
+  flex: 1;
+  display: flex; align-items: center; gap: 4px;
+}
+.eq-band-param input[type="range"] {
+  flex: 1; height: 16px;
+  accent-color: var(--accent, #88cc88);
+}
+.eq-band-val {
+  font-size: 10px; font-family: var(--mono, monospace);
+  color: var(--text, #ddd); min-width: 50px; text-align: right;
+}
+
+.eq-ftr {
+  border-top: 1px solid var(--accent-dim, rgba(255,255,255,0.06));
+  padding-top: 8px;
+}
+.eq-pr {
+  display: flex; align-items: center; gap: 6px;
+}
+.eq-pr-btn {
+  font-size: 10px; padding: 3px 10px;
+  background: var(--rest, rgba(0,0,0,0.3));
+  border: 1px solid var(--accent-dim, rgba(255,255,255,0.08));
+  border-radius: 4px;
+  color: var(--text, #ddd); cursor: pointer;
+}
+.eq-pr-on {
+  background: rgba(68,136,255,0.15);
+  border-color: #4488ff;
+  color: #4488ff;
+}
+.eq-sc-lbl {
+  font-size: 9px; letter-spacing: 1px;
+  color: var(--text-dim, #888);
+  min-width: 50px;
+}

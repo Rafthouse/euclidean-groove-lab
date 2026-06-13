@@ -47,6 +47,12 @@ function createFxNode(slot: FxSlot): Tone.ToneAudioNode {
       });
     }
 
+    case 'eq2': {
+      // SHCHUR EQ: pass-through in basic FX chain mode.
+      // Full DSP managed by EqModule when opened.
+      return new Tone.Gain(1);
+    }
+
     case 'compressor': {
       const p = slot.params as any;
       const comp = new Tone.Compressor({

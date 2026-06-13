@@ -20,6 +20,7 @@
 
 export type BuiltInEffectType =
   | 'eq'
+  | 'eq2'
   | 'compressor'
   | 'delay'
   | 'reverb'
@@ -41,6 +42,40 @@ export interface EqParams {
   high: number;      // -30..+30 dB
   lowFreq: number;   // Hz, default 250
   highFreq: number;  // Hz, default 4000
+}
+
+export type EqBandType =
+  | 'bell'
+  | 'lowShelf'
+  | 'highShelf'
+  | 'lowCut'
+  | 'highCut'
+  | 'notch'
+  | 'bandPass'
+  | 'tilt';
+
+export interface EqBandParams {
+  enabled: boolean;
+  type: EqBandType;
+  frequency: number;  // 20..20000 Hz
+  gain: number;       // -24..+24 dB
+  Q: number;          // 0.1..20
+}
+
+export interface Eq2Params {
+  bands: EqBandParams[];  // 8 bands
+  analyzerMode: 'off' | 'pre' | 'post';
+  analyzerFftSize: 1024 | 2048 | 4096 | 8192;
+  /** Future mid/side. V1: stereo only. */
+  mode: 'stereo';
+}
+
+export const BAND_COLORS = ['#ff4444','#ff8800','#ffcc00','#44dd44','#00dddd','#4488ff','#aa44ff','#ff44aa'];
+
+function defaultEqBand(idx: number): EqBandParams {
+  const types: EqBandType[] = ['bell','bell','bell','bell','bell','bell','bell','bell'];
+  const freqs = [60, 150, 400, 1000, 2500, 6000, 12000, 18000];
+  return { enabled: idx < 4, type: types[idx], frequency: freqs[idx], gain: 0, Q: 1 };
 }
 
 export interface MultiBandParams {
@@ -132,6 +167,7 @@ export interface GateParams {
 
 export type FxParams =
   | EqParams
+  | Eq2Params
   | CompressorParams
   | DelayParams
   | ReverbParams
@@ -146,6 +182,12 @@ export type FxParams =
 
 export const DEFAULT_PARAMS: Record<BuiltInEffectType, FxParams> = {
   eq: { low: 0, mid: 0, high: 0, lowFreq: 250, highFreq: 4000 },
+  eq2: {
+    bands: Array.from({ length: 8 }, (_, i) => defaultEqBand(i)),
+    analyzerMode: 'off',
+    analyzerFftSize: 2048,
+    mode: 'stereo',
+  },
   compressor: {
     threshold: -24, ratio: 4, attack: 0.003, release: 0.25,
     knee: 0, makeup: 0, dryWet: 1, lookahead: 0,
@@ -213,6 +255,7 @@ export function createFxSlot(type: BuiltInEffectType): FxSlot {
 /** Human-readable display names for each effect type. */
 export const FX_TYPE_NAMES: Record<BuiltInEffectType, string> = {
   eq: 'EQ',
+  eq2: 'SHCHUR EQ',
   compressor: 'Compressor',
   delay: 'Delay',
   reverb: 'Reverb',

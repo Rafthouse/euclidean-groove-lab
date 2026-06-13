@@ -18,6 +18,7 @@ import { useCallback, useState } from 'react';
 import type { FxSlot, BuiltInEffectType, FxParams, EqParams, CompressorParams, DelayParams, ReverbParams, ChorusParams, DistortionParams, FilterParams } from './fxTypes';
 import { FX_TYPE_NAMES, createFxSlot } from './fxTypes';
 import CompressorModule from '../compressor/CompressorModule';
+import EqModule from '../eq/EqModule';
 
 interface FxRackPanelProps {
   channelName: string;
@@ -32,7 +33,7 @@ interface FxRackPanelProps {
 // ── Effect Picker ─────────────────────────────────────────────────────
 
 const AVAILABLE_EFFECTS: BuiltInEffectType[] = [
-  'eq', 'compressor', 'delay', 'reverb', 'chorus',
+  'eq2', 'eq', 'compressor', 'delay', 'reverb', 'chorus',
   'distortion', 'filter', 'limiter', 'stereoWidth', 'gate',
 ];
 
@@ -80,6 +81,34 @@ function EqEditor({ params, onChange }: {
       <label>High <input type="range" min={-30} max={30} value={params.high} onChange={(e) => onChange({ ...params, high: Number(e.target.value) })} /></label>
       <span className="fx-param-value">{params.high.toFixed(1)} dB</span>
     </div>
+  );
+}
+
+function Eq2Editor({ params, onChange, channelName }: {
+  params: any;
+  onChange: (p: any) => void;
+  channelName: string;
+}) {
+  const [fullOpen, setFullOpen] = useState(false);
+  return (
+    <>
+      <div className="fx-param-grid-compact">
+        <span style={{ fontSize: 10, color: 'var(--text-dim, #888)' }}>
+          {params.bands?.filter((b: any) => b.enabled).length ?? 0}/8 bands active
+        </span>
+      </div>
+      <button className="fx-open-compressor" onClick={() => setFullOpen(true)}>
+        ◉ Open SHCHUR EQ
+      </button>
+      {fullOpen && (
+        <EqModule
+          params={params}
+          onChange={onChange}
+          onClose={() => setFullOpen(false)}
+          channelName={channelName}
+        />
+      )}
+    </>
   );
 }
 
@@ -303,6 +332,7 @@ function ParameterEditor({ type, params, onChange, channelName, sidechainSources
 }) {
   switch (type) {
     case 'eq': return <EqEditor params={params as any} onChange={onChange} />;
+    case 'eq2': return <Eq2Editor params={params as any} onChange={onChange} channelName={channelName} />;
     case 'compressor': return <CompressorEditor params={params as any} onChange={onChange} channelName={channelName} sidechainSources={sidechainSources} />;
     case 'delay': return <DelayEditor params={params as any} onChange={onChange} />;
     case 'reverb': return <ReverbEditor params={params as any} onChange={onChange} />;
