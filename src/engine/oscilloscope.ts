@@ -4,6 +4,7 @@
  * Two complementary visualizations:
  *   Master Oscilloscope — real AnalyserNode on the summed output.
  *     Provides a live waveform (time-domain) and spectrum (frequency-domain).
+ *     Data sourced from audio.ts's masterAnalyser (Tone.Analyser on the master bus).
  *
  *   Per-channel Oscilloscope — step-data driven "rhythm waveform".
  *     Tied to the actual step clock; shows hits as they fire with velocity
@@ -12,161 +13,52 @@
  * All scopes are OFF by default. Users must explicitly enable them.
  */
 
-import { Tone } from './toneShim';
+import { getMasterAnalyser, getMasterAnalyserFft } from '../audio';
 
 // ---------------------------------------------------------------------------
-// Master analyser — real Audio AnalyserNode on master output
+// Master analyser — reads real audio data from audio.ts's master bus analyser
 // ---------------------------------------------------------------------------
 
-let masterAnalyser: AnalyserNode | null = null;
 let masterEnabled = false;
 
-/** Get the underlying AudioContext used by Tone. */
-function getAudioContext(): AudioContext | null {
+/**
+ * Enable or disable the master scope data pipeline.
+ * When disabled, all get* functions return null.
+ */
+export function setMasterScopeEnabled(enabled: boolean): void {
+  masterEnabled = enabled;
+}
+
+/**
+ * Get time-domain waveform data for the master output.
+ * Reads from the Tone.Analyser on the master bus (audio.ts).
+ * Returns Float32Array of amplitude values (-1 to 1) or null if disabled.
+ */
+export function getMasterWaveform(): Float32Array | null {
+  if (!masterEnabled) return null;
   try {
-    return (Tone.getContext() as any)._context as AudioContext;
+    const analyser = getMasterAnalyser();
+    if (!analyser) return null;
+    return analyser.getValue() as Float32Array;
   } catch {
     return null;
   }
 }
 
 /**
- * Initialise or tear down the master AnalyserNode.
- *
- * Architecture:
- *   Tone.Destination.output (Gain)
- *     → masterGain (our GainNode, always present when enabled)
- *     → masterAnalyser (AnalyserNode, fftSize 2048)
- *     → AudioDestinationNode (speakers)
- *
- * When disabled: bypass the analyser and connect output directly to destination.
- */
-export function setMasterScopeEnabled(enabled: boolean): void {
-  const ctx = getAudioContext();
-  if (!ctx) return;
-
-  const dest = Tone.getDestination();
-  // @ts-ignore — .output is a Tone.Gain, which wraps an AudioNode
-  const toneOutput: AudioNode | undefined = (dest as any).output?._internalAudioNode ?? (dest as any).output?._gain;
-  if (!toneOutput && !masterAnalyser) {
-    // first time — need to find the output node differently
-    // Fallback: use the AudioContext destination directly
-    masterEnabled = enabled;
-    if (enabled) {
-      setupMasterFromContext(ctx);
-    } else {
-      teardownMaster();
-    }
-    return;
-  }
-
-  masterEnabled = enabled;
-  if (enabled) {
-    if (masterAnalyser) return; // already set up
-    setupMasterAnalyser(ctx, toneOutput!);
-  } else {
-    teardownMaster();
-  }
-}
-
-function setupMasterFromContext(ctx: AudioContext): void {
-  // Find Tone's output by exploring the destination chain
-  try {
-    const dest = Tone.getDestination() as any;
-    // Tone.Destination is a ToneAudioNode with .input (Volume) and .output (Gain)
-    // We need the raw AudioNode that connects to ctx.destination
-    const volNode = dest.input?._internalAudioNode ?? dest.input?._volume ?? dest.input?.output;
-    const gainNode = dest.output?._internalAudioNode ?? dest.output?._gain;
-    const rawOutput = gainNode || volNode;
-
-    if (rawOutput) {
-      setupMasterAnalyser(ctx, rawOutput);
-    } else {
-      // Last resort — chain between the volume and the destination
-      const toneCtx = ctx;
-      const analyser = toneCtx.createAnalyser();
-      analyser.fftSize = 2048;
-      analyser.smoothingTimeConstant = 0.8;
-      masterAnalyser = analyser;
-
-      // We can't easily rewire Tone's internal chain at runtime without
-      // knowing the exact internal node. Use a workaround: connect analyser
-      // to destination in parallel (doesn't affect main signal path).
-      // The analyser reads the output without modifying it.
-      try {
-        const gainOutput = dest.output?._internalAudioNode ?? dest.output?._gain;
-        if (gainOutput) {
-          gainOutput.connect(analyser);
-        }
-      } catch {
-        // If that fails, connect the fallback analyser to destination
-        analyser.connect(toneCtx.destination);
-      }
-    }
-  } catch {
-    // Ultimate fallback — create a parallel analyser on the destination
-    const toneCtx = ctx;
-    const analyser = toneCtx.createAnalyser();
-    analyser.fftSize = 2048;
-    analyser.smoothingTimeConstant = 0.8;
-    masterAnalyser = analyser;
-    try {
-      toneCtx.destination.connect(analyser);
-    } catch {
-      // destination might not allow connections
-    }
-  }
-}
-
-function setupMasterAnalyser(ctx: AudioContext, outputNode: AudioNode): void {
-  const analyser = ctx.createAnalyser();
-  analyser.fftSize = 2048;
-  analyser.smoothingTimeConstant = 0.8;
-  masterAnalyser = analyser;
-
-  try {
-    // Connect in parallel — reads signal without affecting main path
-    outputNode.connect(analyser);
-  } catch {
-    // Fallback
-    try {
-      ctx.destination.connect(analyser);
-    } catch {
-      // Ignore
-    }
-  }
-}
-
-function teardownMaster(): void {
-  if (masterAnalyser) {
-    try {
-      masterAnalyser.disconnect();
-    } catch { /* ignore */ }
-    masterAnalyser = null;
-  }
-  masterEnabled = false;
-}
-
-/**
- * Get time-domain waveform data for the master output.
- * Returns Float32Array of length fftSize (2048), or null if disabled.
- */
-export function getMasterWaveform(): Float32Array | null {
-  if (!masterAnalyser || !masterEnabled) return null;
-  const buf = new Float32Array(masterAnalyser.fftSize);
-  masterAnalyser.getFloatTimeDomainData(buf);
-  return buf;
-}
-
-/**
  * Get frequency-domain data for the master output.
- * Returns Float32Array of length fftSize/2 (1024), or null if disabled.
+ * Uses the dedicated FFT analyser on the master bus.
+ * Returns Float32Array of dBFS values (-100 to 0), size 256, or null if disabled.
  */
 export function getMasterFrequencyData(): Float32Array | null {
-  if (!masterAnalyser || !masterEnabled) return null;
-  const buf = new Float32Array(masterAnalyser.frequencyBinCount);
-  masterAnalyser.getFloatFrequencyData(buf);
-  return buf;
+  if (!masterEnabled) return null;
+  try {
+    const analyser = getMasterAnalyserFft();
+    if (!analyser) return null;
+    return analyser.getValue() as Float32Array;
+  } catch {
+    return null;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -208,14 +100,11 @@ export function feedChannelStep(trackId: string, hit: number, globalStep: number
  * Get the per-channel waveform buffer for rendering.
  * Returns a Float32Array of samples (0–1) representing recent hit activity,
  * or null if the channel is not tracked.
- *
- * The number of samples equals the minimum of `desiredLength` and available history.
  */
 export function getChannelWaveform(trackId: string, desiredLength: number): Float32Array | null {
   const events = channelHistory[trackId];
   if (!events || events.length < 2) return null;
 
-  // Interpolate events into a continuous buffer
   const buf = new Float32Array(desiredLength);
   if (events.length === 0) return buf;
 
@@ -224,7 +113,6 @@ export function getChannelWaveform(trackId: string, desiredLength: number): Floa
 
   for (let i = 0; i < desiredLength; i++) {
     const targetT = events[0].t + (i / desiredLength) * timeRange;
-    // Find the two surrounding events
     while (evIdx < events.length - 1 && events[evIdx + 1].t < targetT) {
       evIdx++;
     }
@@ -248,30 +136,26 @@ export function clearChannelHistory(): void {
   for (const key of Object.keys(channelHistory)) {
     delete channelHistory[key];
   }
-
-  // Also clear sonagram history
   sonagramHistory.length = 0;
 }
 
 // ---------------------------------------------------------------------------
 // Sonagram (spectrogram) — rolling buffer of FFT magnitude frames
-//   - Each frame is a slice of frequency magnitudes (0 = low, end = high)
-//   - Newest frame appended on request; canvas paints oldest-left → newest-right
-//   - Max frames = CANVAS_WIDTH (256) so each column = 1px
+//   - Each frame is frequency magnitudes (0 = low, end = high)
+//   - Appended every ~60ms; canvas paints oldest-left → newest-right
 // ---------------------------------------------------------------------------
 
 const SONAGRAM_MAX_FRAMES = 256;
 const sonagramHistory: Float32Array[] = [];
 let sonagramTimer = 0;
-const SONAGRAM_INTERVAL_MS = 60; // ~16 fps refresh
+const SONAGRAM_INTERVAL_MS = 60;
 
 /**
- * Capture a new sonagram frame from the master analyser and store it.
- * Returns the full history (oldest → newest) for drawing, or null if unavailable.
- * Frame magnitudes are 0–1 normalised.
+ * Capture a new sonagram frame from the master analyser.
+ * Returns the full history (oldest → newest) for drawing, or null.
  */
 export function captureSonagramFrame(): Float32Array[] | null {
-  if (!masterAnalyser || !masterEnabled) return null;
+  if (!masterEnabled) return null;
 
   const now = Date.now();
   if (now - sonagramTimer < SONAGRAM_INTERVAL_MS) {
@@ -279,24 +163,26 @@ export function captureSonagramFrame(): Float32Array[] | null {
   }
   sonagramTimer = now;
 
-  // Get frequency magnitude data (linear scale for sonagram)
-  const buf = new Uint8Array(masterAnalyser.frequencyBinCount);
-  masterAnalyser.getByteFrequencyData(buf);
+  try {
+    const analyser = getMasterAnalyserFft();
+    if (!analyser) return null;
 
-  // Convert to 0-1 float and store
-  const frame = new Float32Array(buf.length);
-  for (let i = 0; i < buf.length; i++) {
-    frame[i] = buf[i] / 255;
+    const buf = analyser.getValue() as Float32Array;
+
+    // Normalize to 0–1
+    const frame = new Float32Array(buf.length);
+    for (let i = 0; i < buf.length; i++) {
+      // buf is likely in dB (-100 to 0), normalize
+      frame[i] = Math.max(0, Math.min(1, (buf[i] + 100) / 100));
+    }
+
+    sonagramHistory.push(frame);
+    while (sonagramHistory.length > SONAGRAM_MAX_FRAMES) {
+      sonagramHistory.shift();
+    }
+
+    return sonagramHistory;
+  } catch {
+    return null;
   }
-
-  sonagramHistory.push(frame);
-
-  // Trim to max frames
-  while (sonagramHistory.length > SONAGRAM_MAX_FRAMES) {
-    sonagramHistory.shift();
-  }
-
-  return sonagramHistory;
 }
-
-

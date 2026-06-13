@@ -96,7 +96,9 @@ export function setChannelPan(channelId: string, pan: number): void {
 // taps the signal here.
 const masterBus = new Tone.Gain(1);
 const masterPanner = new Tone.Panner(0);
+// Dual analyser: waveform (time-domain) + FFT (frequency-domain)
 const masterAnalyser = new Tone.Analyser({ type: 'waveform', size: 512 });
+const masterAnalyserFft = new Tone.Analyser({ type: 'fft', size: 512 });
 
 // Bass synth connects to its mixer channel gain. Create it now so
 // disconnect/reconnect isn't needed at trigger time.
@@ -104,6 +106,7 @@ const _bassChan = ensureChannel('bass');
 bass.connect(_bassChan.gain);
 masterBus.connect(masterPanner);
 masterPanner.connect(masterAnalyser);
+masterPanner.connect(masterAnalyserFft);
 masterPanner.toDestination();
 
 // Export master bus fader control
@@ -117,9 +120,14 @@ export function getMasterFader(): number {
   return masterFaderDb;
 }
 
-/** Get the master analyser for oscilloscope. */
+/** Get the master waveform analyser for oscilloscope. */
 export function getMasterAnalyser(): Tone.Analyser {
   return masterAnalyser;
+}
+
+/** Get the master FFT analyser for spectrum/sonagram modes. */
+export function getMasterAnalyserFft(): Tone.Analyser {
+  return masterAnalyserFft;
 }
 
 // --- Ghost lane (Snare) — a SEPARATE audio path so the ghost retrigger can
