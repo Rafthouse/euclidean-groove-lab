@@ -5,7 +5,7 @@ import Knob from './components/Knob';
 import PresetBrowser from './components/PresetBrowser';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
-import { rhythmPresets, getRhythmPreset } from './presets';
+import type { GrooveSnapshot, ThemeId } from './engine/preset';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading, resetClock, setMidiOut } from './audio';
 import { downloadBytes } from './download';
@@ -16,12 +16,12 @@ import type { MidiOutputPort } from './midiOut';
 /** How many 4/4 bars the MIDI export renders. */
 const EXPORT_BARS = 4;
 
-type ThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'cherry' | 'nostradamus' | 'big-boss' | 'university' | 'neon-void' | 'dark-side' | 'bauhaus' | 'smoke-dub' | 'nautilus' | 'satisfaction' | 'revelation' | 'high-contrast' | 'candyflip' | 'barbie' | 'alchemy' | 'beekeeper';
+type AppThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'cherry' | 'nostradamus' | 'big-boss' | 'university' | 'neon-void' | 'dark-side' | 'bauhaus' | 'smoke-dub' | 'nautilus' | 'satisfaction' | 'revelation' | 'high-contrast' | 'candyflip' | 'barbie' | 'alchemy' | 'beekeeper';
 const THEME_KEY = 'groove-theme';
 const FX_KEY = 'groove-elements-fx';
 const RESTART_KEY = 'groove-restart-on-mode-change';
 
-function initialTheme(): ThemeId {
+function initialTheme(): AppThemeId {
   try {
     const t = localStorage.getItem(THEME_KEY);
     return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' || t === 'cherry' || t === 'nostradamus' || t === 'big-boss' || t === 'university' || t === 'neon-void' || t === 'dark-side' || t === 'bauhaus' || t === 'smoke-dub' || t === 'nautilus' || t === 'satisfaction' || t === 'revelation' || t === 'high-contrast' || t === 'candyflip' || t === 'barbie' || t === 'alchemy' || t === 'beekeeper' ? t : 'elements';
@@ -59,20 +59,27 @@ export default function App() {
   const gRef = useRef(-1);
   const [kitId, setKitId] = useState<DrumKitId>('cr78');
   const [kitLoading, setKitLoading] = useState(false);
-  const [theme, setTheme] = useState<ThemeId>(initialTheme);
+  const [theme, setTheme] = useState<AppThemeId>(initialTheme);
   const [elementFx, setElementFx] = useState<boolean>(initialFx);
   const [restartOnModeChange, setRestartOnModeChange] = useState<boolean>(initialRestartOnModeChange);
   // Read in the (synchronous) updateTrack closure without re-renders.
   const restartOnModeChangeRef = useRef(restartOnModeChange);
   restartOnModeChangeRef.current = restartOnModeChange;
 
+  // PresetBrowser state
+  const [presetOpen, setPresetOpen] = useState(false);
+
   const [midiPorts, setMidiPorts] = useState<MidiOutputPort[]>([]);
   const [midiSelected, setMidiSelected] = useState<string | null>(null);
   const [midiEnabled, setMidiEnabled] = useState(false);
 
-  const handlePresetLoad = useCallback((tracks: Track[]) => {
-    setTracksState(tracks);
-  }, []);
+  // Build a GrooveSnapshot from the current app state.
+  const currentGroove: GrooveSnapshot = {
+    bpm,
+    swing,
+    tracks,
+    theme,
+  };
 
   // Initialise Web MIDI on mount
   useEffect(() => {
@@ -316,6 +323,18 @@ export default function App() {
     downloadBytes(bytes, 'groove.mid', 'audio/midi');
   };
 
+  // PresetBrowser: load a groove snapshot.
+  const handleLoadPreset = useCallback((groove: GrooveSnapshot) => {
+    setTempo(groove.bpm);
+    setSwingState(groove.swing);
+    setTracksState(groove.tracks);
+    document.documentElement.dataset.theme = groove.theme;
+    try {
+      localStorage.setItem(THEME_KEY, groove.theme);
+    } catch { /* ignore */ }
+    setTheme(groove.theme);
+  }, []);
+
   const handleExportStems = () => {
     const stems = renderMidiStems(tracks, EXPORT_BARS, bpm);
     for (const stem of stems) {
@@ -396,7 +415,20 @@ export default function App() {
           />
         </div>
         <DrumKitSelect value={kitId} loading={kitLoading} onChange={handleKitChange} />
-        <PresetBrowser onLoad={handlePresetLoad} tracks={tracksState} />
+        <button
+          type="button"
+          className="presets-button"
+          onClick={() => setPresetOpen(true)}
+        >
+          Presets
+        </button>
+        <PresetBrowser
+          open={presetOpen}
+          onClose={() => setPresetOpen(false)}
+          onLoadPreset={handleLoadPreset}
+          currentGroove={currentGroove}
+          developerMode={false}
+        />
         {midiPorts.length > 0 && (
           <label className="midi-out">
             MIDI
@@ -438,7 +470,7 @@ export default function App() {
           Theme
           <select
             value={theme}
-            onChange={(e) => setTheme(e.target.value as ThemeId)}
+            onChange={(e) => setTheme(e.target.value as AppThemeId)}
             aria-label="Visual theme"
           >
             <option value="dark">Nocturne</option>
