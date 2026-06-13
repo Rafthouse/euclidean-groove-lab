@@ -1,0 +1,451 @@
+{
+  "presets": [
+    {
+      "id": "shiko-kit",
+      "name": "Shiko Kit",
+      "description": "Afro-Cuban hybrid from Shiko rhythm [4-2-4-2-4]",
+      "tracks": [
+        {
+          "id": "kick",
+          "name": "Kick",
+          "color": "#c084fc",
+          "steps": 16,
+          "hits": 3,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "kick",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "snare",
+          "name": "Snare",
+          "color": "#f472b6",
+          "steps": 16,
+          "hits": 1,
+          "rotation": 5,
+          "mute": false,
+          "solo": false,
+          "voiceId": "snare",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "hat",
+          "name": "Hat",
+          "color": "#60a5fa",
+          "steps": 16,
+          "hits": 8,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "hat",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1,
+          "velocityPattern": [100]
+        },
+        {
+          "id": "bass",
+          "name": "Bass",
+          "color": "#34d399",
+          "steps": 16,
+          "hits": 1,
+          "rotation": 3,
+          "mute": false,
+          "solo": false,
+          "voiceId": "bass",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        }
+      ]
+    },
+    {
+      "id": "clave-son-kit",
+      "name": "Clave Son Kit",
+      "description": "Afro-Cuban foundation [3-3-4-2-4] - Bo Diddley beat",
+      "tracks": [
+        {
+          "id": "kick",
+          "name": "Kick",
+          "color": "#c084fc",
+          "steps": 16,
+          "hits": 4,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "kick",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "snare",
+          "name": "Snare",
+          "color": "#f472b6",
+          "steps": 16,
+          "hits": 3,
+          "rotation": -4,
+          "mute": false,
+          "solo": false,
+          "voiceId": "snare",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "hat",
+          "name": "Hat",
+          "color": "#60a5fa",
+          "steps": 16,
+          "hits": 8,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "hat",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1,
+          "velocityPattern": [100, 85, 100, 85, 100, 85, 100, 85]
+        },
+        {
+          "id": "bass",
+          "name": "Bass",
+          "color": "#34d399",
+          "steps": 16,
+          "hits": 3,
+          "rotation": 1,
+          "mute": false,
+          "solo": false,
+          "voiceId": "bass",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        }
+      ]
+    },
+    {
+      "id": "tresillo-kit",
+      "name": "Tresillo Kit",
+      "description": "Cuban Tresillo foundation [3-3-2] - reggaeton core",
+      "tracks": [
+        {
+          "id": "kick",
+          "name": "Kick",
+          "color": "#c084fc",
+          "steps": 8,
+          "hits": 3,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "kick",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "snare",
+          "name": "Snare",
+          "color": "#f472b6",
+          "steps": 8,
+          "hits": 3,
+          "rotation": 1,
+          "mute": false,
+          "solo": false,
+          "voiceId": "snare",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "hat",
+          "name": "Hat",
+          "color": "#60a5fa",
+          "steps": 8,
+          "hits": 4,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "hat",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1,
+          "velocityPattern": [100, 80, 100, 80]
+        },
+        {
+          "id": "bass",
+          "name": "Bass",
+          "color": "#34d399",
+          "steps": 8,
+          "hits": 2,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "bass",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        }
+      ]
+    },
+    {
+      "id": "bossa-nova-kit",
+      "name": "Bossa Nova Kit",
+      "description": "Brazilian groove [3-3-4-3-3]",
+      "tracks": [
+        {
+          "id": "kick",
+          "name": "Kick",
+          "color": "#c084fc",
+          "steps": 16,
+          "hits": 5,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "kick",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "snare",
+          "name": "Snare",
+          "color": "#f472b6",
+          "steps": 16,
+          "hits": 2,
+          "rotation": 6,
+          "mute": false,
+          "solo": false,
+          "voiceId": "snare",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "hat",
+          "name": "Hat",
+          "color": "#60a5fa",
+          "steps": 16,
+          "hits": 8,
+          "rotation": 2,
+          "mute": false,
+          "solo": false,
+          "voiceId": "hat",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1,
+          "velocityPattern": [100, 90, 100, 85, 100, 90, 100, 85]
+        },
+        {
+          "id": "bass",
+          "name": "Bass",
+          "color": "#34d399",
+          "steps": 16,
+          "hits": 3,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "bass",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        }
+      ]
+    },
+    {
+      "id": "west-african-bell-kit",
+      "name": "West African Bell Kit",
+      "description": "12-pulse bell pattern [2-1-2-2-1-2-2]",
+      "tracks": [
+        {
+          "id": "kick",
+          "name": "Kick",
+          "color": "#c084fc",
+          "steps": 12,
+          "hits": 5,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "kick",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "snare",
+          "name": "Snare",
+          "color": "#f472b6",
+          "steps": 12,
+          "hits": 5,
+          "rotation": 1,
+          "mute": false,
+          "solo": false,
+          "voiceId": "snare",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "hat",
+          "name": "Hat",
+          "color": "#60a5fa",
+          "steps": 12,
+          "hits": 6,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "hat",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1,
+          "velocityPattern": [100, 85, 95, 80, 100, 90]
+        },
+        {
+          "id": "bass",
+          "name": "Bass",
+          "color": "#34d399",
+          "steps": 12,
+          "hits": 4,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "bass",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        }
+      ]
+    },
+    {
+      "id": "gahu-kit",
+      "name": "Gahu Kit",
+      "description": "Ewe people rhythm [3-3-4-4-2]",
+      "tracks": [
+        {
+          "id": "kick",
+          "name": "Kick",
+          "color": "#c084fc",
+          "steps": 16,
+          "hits": 5,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "kick",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "snare",
+          "name": "Snare",
+          "color": "#f472b6",
+          "steps": 16,
+          "hits": 2,
+          "rotation": 4,
+          "mute": false,
+          "solo": false,
+          "voiceId": "snare",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "hat",
+          "name": "Hat",
+          "color": "#60a5fa",
+          "steps": 16,
+          "hits": 8,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "hat",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1,
+          "velocityPattern": [100, 80, 85, 95, 100, 85, 90, 100]
+        },
+        {
+          "id": "bass",
+          "name": "Bass",
+          "color": "#34d399",
+          "steps": 16,
+          "hits": 2,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "bass",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        }
+      ]
+    },
+    {
+      "id": "soukous-kit",
+      "name": "Soukous Kit",
+      "description": "Congolese rhythm [3-3-4-1-5]",
+      "tracks": [
+        {
+          "id": "kick",
+          "name": "Kick",
+          "color": "#c084fc",
+          "steps": 16,
+          "hits": 5,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "kick",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "snare",
+          "name": "Snare",
+          "color": "#f472b6",
+          "steps": 16,
+          "hits": 4,
+          "rotation": 2,
+          "mute": false,
+          "solo": false,
+          "voiceId": "snare",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "hat",
+          "name": "Hat",
+          "color": "#60a5fa",
+          "steps": 16,
+          "hits": 8,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "hat",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        },
+        {
+          "id": "bass",
+          "name": "Bass",
+          "color": "#34d399",
+          "steps": 16,
+          "hits": 3,
+          "rotation": 0,
+          "mute": false,
+          "solo": false,
+          "voiceId": "bass",
+          "volume": 100,
+          "playbackMode": "forward",
+          "playbackSpeed": 1
+        }
+      ]
+    }
+  ]
+}
