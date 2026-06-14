@@ -560,11 +560,6 @@
   color: #EEEEFF;
 }
 
-:root[data-theme='neon-void'] .bpm b,
-:root[data-theme='neon-void'] .swing b {
-  color: #00AAFF;
-}
-
 :root[data-theme='neon-void'] h1 {
   color: #EEEEFF;
   letter-spacing: 3px;
@@ -1118,11 +1113,6 @@
 }
 
 /* Brightness labels on play button */
-:root[data-theme='cherry'] .bpm b,
-:root[data-theme='cherry'] .swing b {
-  color: #ffb8e8;
-}
-
 /* ===== Nostradamus (Alchemical Transmutation Engine) ===== */
 /* An alchemical machine for transmuting harmony into gold.
    Sacred geometry, brass instruments, occult engineering.
@@ -1617,11 +1607,6 @@
   font-size: 10px;
 }
 
-:root[data-theme='nostradamus'] .bpm b,
-:root[data-theme='nostradamus'] .swing b {
-  color: #D4AF37;
-}
-
 :root[data-theme='nostradamus'] h1 {
   color: #D7C7A2;
 }
@@ -1958,11 +1943,6 @@
 }
 
 /* BPM / Swing ΓÇö brighter ice blue */
-:root[data-theme='big-boss'] .bpm b,
-:root[data-theme='big-boss'] .swing b {
-  color: #7AD0FF;
-}
-
 /* Header */
 :root[data-theme='big-boss'] h1 {
   color: #FFFFFF;
@@ -2303,11 +2283,6 @@
   color: rgba(26, 29, 36, 0.8);
 }
 
-:root[data-theme='university'] .bpm b,
-:root[data-theme='university'] .swing b {
-  color: #5B8FC0;
-}
-
 :root[data-theme='university'] h1 {
   color: #1A1D24;
 }
@@ -2372,394 +2347,6 @@
 }
 :root[data-theme='university'] .mask-cell.is-current {
   box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px #1A1D24;
-}
-
-/* ===== TRIP (Liquid Synesthesia / Living Color) ===== */
-/* A musical instrument built inside a living dream.
-   Premium psychedelic ΓÇö flowing gradients, stained-glass light. */
-:root[data-theme='trip'] {
-  --bg: #06000e;
-  --panel: #120824;
-  --panel-hi: #1e0f38;
-  --text: #E8D8FF;
-  --text-dim: #b09ac8;
-  --text-hi: #FFFFFF;
-  --accent: #D48AFF;
-  --accent-dim: rgba(212, 138, 255, 0.15);
-  --rest: #1a0d30;
-  --current: #FFFFFF;
-  --danger: #FF6B9D;
-  --warn: #FFBA00;
-  --radius: 14px;
-  --mono: ui-monospace, Consolas, monospace;
-
-  --color-kick: #FF7A00;
-  --color-kick-mid: #FF9A3E;
-  --color-kick-light: #FFB870;
-
-  --color-snare: #FF00AA;
-  --color-snare-mid: #FF3CC0;
-  --color-snare-light: #FF70D0;
-
-  --color-hat: #00D9FF;
-  --color-hat-mid: #3EE0FF;
-  --color-hat-light: #70E8FF;
-
-  --color-bass: #00D48A;
-  --color-bass-mid: #3EDAA0;
-  --color-bass-light: #70E4B8;
-
-  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
-  color-scheme: dark;
-}
-
-/* Background: deeper, darker color field */
-:root[data-theme='trip'] body {
-  overflow-x: hidden;
-  background:
-    radial-gradient(ellipse 40% 45% at 22% 22%, rgba(106, 0, 255, 0.20) 0%, transparent 60%),
-    radial-gradient(ellipse 35% 40% at 72% 28%, rgba(255, 0, 170, 0.13) 0%, transparent 60%),
-    radial-gradient(ellipse 28% 35% at 50% 68%, rgba(0, 212, 138, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 32% 25% at 78% 72%, rgba(255, 122, 0, 0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 38% 30% at 28% 78%, rgba(0, 217, 255, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 35% 30% at 58% 15%, rgba(74, 0, 232, 0.12) 0%, transparent 60%),
-    #06000e;
-}
-
-:root[data-theme='trip'] .app {
-  position: relative;
-  z-index: 1;
-}
-
-/* Track cards: solid base, clearly separate from background */
-:root[data-theme='trip'] .track-card {
-  background: #120824;
-  border: 1px solid rgba(212, 138, 255, 0.08);
-  border-radius: 14px;
-  box-shadow:
-    inset 0 0.5px 0 0 rgba(212, 138, 255, 0.06),
-    0 4px 24px rgba(0, 0, 0, 0.5);
-  position: relative;
-}
-
-:root[data-theme='trip'] .track-card[data-voice='kick'] {
-  --track-color: var(--color-kick);
-}
-:root[data-theme='trip'] .track-card[data-voice='kick'] .step.onset {
-  fill: var(--color-kick-mid);
-}
-:root[data-theme='trip'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-kick) 20%, transparent);
-  stroke: rgba(255, 122, 0, 0.25);
-}
-
-:root[data-theme='trip'] .track-card[data-voice='snare'] {
-  --track-color: var(--color-snare);
-}
-:root[data-theme='trip'] .track-card[data-voice='snare'] .step.onset {
-  fill: var(--color-snare-mid);
-}
-:root[data-theme='trip'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-snare) 20%, transparent);
-  stroke: rgba(255, 0, 170, 0.25);
-}
-
-:root[data-theme='trip'] .track-card[data-voice='hat'] {
-  --track-color: var(--color-hat);
-}
-:root[data-theme='trip'] .track-card[data-voice='hat'] .step.onset {
-  fill: var(--color-hat-mid);
-}
-:root[data-theme='trip'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-hat) 20%, transparent);
-  stroke: rgba(0, 217, 255, 0.25);
-}
-
-:root[data-theme='trip'] .track-card[data-voice='bass'] {
-  --track-color: var(--color-bass);
-}
-:root[data-theme='trip'] .track-card[data-voice='bass'] .step.onset {
-  fill: var(--color-bass-mid);
-}
-:root[data-theme='trip'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-bass) 20%, transparent);
-  stroke: rgba(0, 212, 138, 0.25);
-}
-
-/* Active note: colored light bloom / chromatic shimmer */
-:root[data-theme='trip'] .step.onset.current {
-  animation: trip-bloom 300ms ease-out forwards;
-}
-
-@keyframes trip-bloom {
-  0% {
-    fill: #FFFFFF;
-    r: 11px;
-    filter: drop-shadow(0 0 0 rgba(212, 138, 255, 0));
-  }
-  15% {
-    fill: #FFFFFF;
-    r: 16px;
-    filter: drop-shadow(0 0 14px rgba(212, 138, 255, 0.50))
-            drop-shadow(0 0 28px rgba(255, 122, 0, 0.15));
-  }
-  40% {
-    fill: #D48AFF;
-    r: 13px;
-    filter: drop-shadow(0 0 8px rgba(212, 138, 255, 0.25))
-            drop-shadow(0 0 16px rgba(0, 217, 255, 0.10));
-  }
-  100% {
-    fill: var(--color-kick-mid);
-    r: 11px;
-    filter: drop-shadow(0 0 0 rgba(212, 138, 255, 0));
-  }
-}
-
-/* Playhead: luminous point */
-:root[data-theme='trip'] .step.current .step-indicator {
-  fill: #FFFFFF;
-  stroke: #D48AFF;
-  stroke-width: 1.5px;
-  filter: drop-shadow(0 0 10px rgba(212, 138, 255, 0.35))
-          drop-shadow(0 0 20px rgba(255, 0, 170, 0.10));
-}
-:root[data-theme='trip'] .step.current .visual {
-  fill: #FFFFFF;
-}
-
-:root[data-theme='trip'] .step.rest .step-indicator {
-  opacity: 0.12;
-}
-
-:root[data-theme='trip'] .guide {
-  fill: none;
-  stroke: rgba(212, 138, 255, 0.04);
-  stroke-width: 0.5px;
-}
-
-:root[data-theme='trip'] .hand {
-  stroke: rgba(212, 138, 255, 0.06);
-  stroke-width: 0.5px;
-}
-
-/* ===== CONTROLS ΓÇö solid, readable ===== */
-:root[data-theme='trip'] button {
-  border-radius: 14px;
-  border: 1px solid rgba(212, 138, 255, 0.10);
-  background: #1e0f38;
-  color: #E8D8FF;
-  font-weight: 450;
-  letter-spacing: 0.3px;
-  padding: 8px 18px;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-:root[data-theme='trip'] button:hover {
-  background: #2a1a44;
-  border-color: rgba(212, 138, 255, 0.20);
-}
-
-:root[data-theme='trip'] .play {
-  background: #1e0f38;
-  border: 1px solid rgba(212, 138, 255, 0.12);
-  color: #E8D8FF;
-}
-:root[data-theme='trip'] .play.is-playing {
-  background: rgba(212, 138, 255, 0.10);
-  border-color: #D48AFF;
-  color: #FFFFFF;
-}
-
-:root[data-theme='trip'] .export,
-:root[data-theme='trip'] .reset-pattern {
-  border-radius: 14px;
-  border: 1px solid rgba(212, 138, 255, 0.10);
-  background: #1e0f38;
-  color: #E8D8FF;
-}
-:root[data-theme='trip'] .export:hover,
-:root[data-theme='trip'] .reset-pattern:hover {
-  border-color: rgba(212, 138, 255, 0.25);
-  background: #2a1a44;
-}
-
-/* ===== PATTERN SLOTS ΓÇö clearly visible ===== */
-:root[data-theme='trip'] .pattern-slot {
-  border-radius: 14px;
-  padding: 5px 0;
-  font-size: 10px;
-  background: rgba(10, 0, 20, 0.3);
-}
-:root[data-theme='trip'] .pattern-slot:hover {
-  background: rgba(30, 15, 56, 0.6);
-  border-color: rgba(212, 138, 255, 0.12);
-}
-
-/* ===== MASK SECTION ΓÇö strong separation ===== */
-:root[data-theme='trip'] .mask-label {
-  color: #b09ac8;
-}
-:root[data-theme='trip'] .mask-cell {
-  border-radius: 14px;
-  padding: 0;
-  width: 15px;
-  height: 15px;
-}
-:root[data-theme='trip'] .mask-cell.rest {
-  background: rgba(212, 138, 255, 0.03);
-  border-color: rgba(212, 138, 255, 0.06);
-  opacity: 1;
-}
-:root[data-theme='trip'] .mask-cell.onset {
-  background: var(--track-color);
-  border-color: var(--track-color);
-  opacity: 1;
-}
-:root[data-theme='trip'] .mask-cell.onset.muted {
-  background: transparent;
-  border-color: var(--track-color);
-  opacity: 0.50;
-}
-:root[data-theme='trip'] .mask-cell.onset:hover {
-  filter: brightness(1.2);
-}
-:root[data-theme='trip'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #06000e, 0 0 0 3px #D48AFF;
-}
-
-/* ===== TOGGLES ===== */
-:root[data-theme='trip'] .toggle {
-  border-radius: 14px;
-  min-width: 32px;
-  padding: 4px 14px;
-  border: 1px solid rgba(212, 138, 255, 0.08);
-  background: rgba(10, 0, 20, 0.3);
-}
-:root[data-theme='trip'] .toggle.is-on {
-  background: rgba(212, 138, 255, 0.12);
-  border-color: #D48AFF;
-}
-
-/* ===== SLIDERS ===== */
-:root[data-theme='trip'] input[type='range'] {
-  height: 4px;
-  cursor: pointer;
-}
-:root[data-theme='trip'] input[type='range']::-webkit-slider-runnable-track {
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(212, 138, 255, 0.08);
-}
-:root[data-theme='trip'] input[type='range']::-webkit-slider-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #D48AFF;
-  border: none;
-  box-shadow: 0 0 0 2px rgba(212, 138, 255, 0.12), 0 0 8px rgba(212, 138, 255, 0.10);
-  margin-top: -6px;
-  transition: transform 0.12s ease;
-}
-:root[data-theme='trip'] input[type='range']::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-}
-:root[data-theme='trip'] input[type='range']::-moz-range-track {
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(212, 138, 255, 0.08);
-  border: none;
-}
-:root[data-theme='trip'] input[type='range']::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #D48AFF;
-  border: none;
-  box-shadow: 0 0 0 2px rgba(212, 138, 255, 0.12);
-}
-
-/* ===== DROPDOWNS ===== */
-:root[data-theme='trip'] select {
-  background: #1e0f38;
-  border: 1px solid rgba(212, 138, 255, 0.10);
-  color: #E8D8FF;
-  border-radius: 14px;
-  padding: 6px 14px;
-  letter-spacing: 0.3px;
-}
-:root[data-theme='trip'] select option {
-  background: #120824;
-  color: #E8D8FF;
-}
-:root[data-theme='trip'] select option:checked {
-  background: rgba(212, 138, 255, 0.15);
-}
-
-/* ===== LABELS & META ΓÇö improved contrast ===== */
-:root[data-theme='trip'] label {
-  color: #b09ac8;
-  font-weight: 450;
-  letter-spacing: 0.5px;
-  font-size: 11px;
-}
-
-:root[data-theme='trip'] .control-label {
-  color: #b09ac8;
-  font-size: 10px;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-}
-:root[data-theme='trip'] .control-label b {
-  color: #d4b8f0;
-}
-
-:root[data-theme='trip'] .bpm b,
-:root[data-theme='trip'] .swing b {
-  color: #00D9FF;
-}
-
-:root[data-theme='trip'] h1 {
-  color: #E8D8FF;
-  letter-spacing: 3px;
-  font-weight: 300;
-  font-size: 20px;
-}
-
-:root[data-theme='trip'] .tagline {
-  color: #7a648f;
-  font-size: 11px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-:root[data-theme='trip'] .track-name {
-  color: #E8D8FF;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-size: 11px;
-}
-
-:root[data-theme='trip'] .mini-metrics b {
-  color: #d4b8f0;
-}
-:root[data-theme='trip'] .mini-metrics span {
-  color: #7a648f;
-}
-
-:root[data-theme='trip'] .playback-select select {
-  background: #1e0f38;
-  border: 1px solid rgba(212, 138, 255, 0.10);
-  border-radius: 14px;
-  padding: 4px 12px;
-  color: #E8D8FF;
-}
-:root[data-theme='trip'] .playback-select span {
-  color: #7a648f;
-}
-
-:root[data-theme='trip'] .module-lane {
-  border-top: 1px solid rgba(212, 138, 255, 0.04);
 }
 
 /* ===== Dark Side (Forbidden Ritual Instrument / Obsidian Cathedral) ===== */
@@ -3079,11 +2666,6 @@
   text-transform: uppercase;
 }
 :root[data-theme='dark-side'] .control-label b {
-  color: #D91C1C;
-}
-
-:root[data-theme='dark-side'] .bpm b,
-:root[data-theme='dark-side'] .swing b {
   color: #D91C1C;
 }
 
@@ -5059,11 +4641,6 @@ header h1 {
   color: #8a9470;
 }
 
-:root[data-theme='smoke-dub'] .bpm b,
-:root[data-theme='smoke-dub'] .swing b {
-  color: #b47a44;
-}
-
 :root[data-theme='smoke-dub'] h1 {
   color: #d8d0c5;
 }
@@ -5104,7 +4681,6 @@ header h1 {
 :root[data-theme='smoke-dub'] .module-lane {
   border-top: 1px solid rgba(216, 208, 197, 0.04);
 }
-
 
 /* ===== Nautilus (Deep Sea / Oceanographic Laboratory) ===== */
 /* Jules Verne meets ambient electronic ΓÇö calm, deep, meditative.
@@ -5479,11 +5055,6 @@ header h1 {
 }
 :root[data-theme='nautilus'] .control-label b {
   color: #96dbd4;
-}
-
-:root[data-theme='nautilus'] .bpm b,
-:root[data-theme='nautilus'] .swing b {
-  color: #8fd4d8;
 }
 
 :root[data-theme='nautilus'] h1 {
@@ -5912,12 +5483,6 @@ header h1 {
   color: #ff7a00;
 }
 
-:root[data-theme='satisfaction'] .bpm b,
-:root[data-theme='satisfaction'] .swing b {
-  color: #ff7a00;
-  font-weight: 700;
-}
-
 /* Header — silk-screen panel label */
 :root[data-theme='satisfaction'] h1 {
   color: #d8d8d8;
@@ -6337,11 +5902,6 @@ header h1 {
   color: #c8cbce;
 }
 
-:root[data-theme='revelation'] .bpm b,
-:root[data-theme='revelation'] .swing b {
-  color: #b4b7ba;
-}
-
 :root[data-theme='revelation'] h1 {
   color: #dde2e6;
 }
@@ -6705,11 +6265,6 @@ header h1 {
 }
 :root[data-theme='high-contrast'] .control-label b {
   color: #ffffff;
-}
-
-:root[data-theme='high-contrast'] .bpm b,
-:root[data-theme='high-contrast'] .swing b {
-  color: #cfcfcf;
 }
 
 :root[data-theme='high-contrast'] h1 {
@@ -7230,12 +6785,6 @@ header h1 {
   color: #170612;
 }
 
-:root[data-theme='candyflip'] .bpm b,
-:root[data-theme='candyflip'] .swing b {
-  color: #ff2f8f;
-  font-weight: 700;
-}
-
 :root[data-theme='candyflip'] h1 {
   color: #170612;
 }
@@ -7670,12 +7219,6 @@ header h1 {
 }
 :root[data-theme='barbie'] .control-label b {
   color: #180610;
-}
-
-:root[data-theme='barbie'] .bpm b,
-:root[data-theme='barbie'] .swing b {
-  color: #ff2f8f;
-  font-weight: 700;
 }
 
 :root[data-theme='barbie'] h1 {
@@ -8190,11 +7733,6 @@ header h1 {
 }
 :root[data-theme='alchemy'] .control-label b {
   color: #E8ECF0;
-}
-
-:root[data-theme='alchemy'] .bpm b,
-:root[data-theme='alchemy'] .swing b {
-  color: #00B4FF;
 }
 
 :root[data-theme='alchemy'] h1 {
@@ -8732,12 +8270,6 @@ header h1 {
 }
 :root[data-theme='beekeeper'] .control-label b {
   color: #3a2208;
-}
-
-:root[data-theme='beekeeper'] .bpm b,
-:root[data-theme='beekeeper'] .swing b {
-  color: #d88b00;
-  font-weight: 700;
 }
 
 :root[data-theme='beekeeper'] h1 {
