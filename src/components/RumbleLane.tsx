@@ -1,4 +1,5 @@
 import type { Track, RumbleModule } from '../engine';
+import Knob from './Knob';
 
 const DEFAULT_RUMBLE: RumbleModule = {
   enabled: true,
@@ -49,77 +50,48 @@ export default function RumbleLane({ track, onChange }: RumbleLaneProps) {
       </div>
 
       {enabled && rumble && (
-        <div className="module-controls">
-          <label className="control">
-            <span className="control-label">
-              Amount
-              <b>{rumble.amount}%</b>
-            </span>
-            <input
-              type="range"
-              min={0}
-              max={100}
-              step={1}
-              value={rumble.amount}
-              onChange={(e) => update({ amount: Number(e.target.value) })}
-            />
-          </label>
-          <label className="control">
-            <span className="control-label">
-              Hits
-              <b>{rumble.hits}</b>
-            </span>
-            <input
-              type="range"
-              min={1}
-              max={4}
-              step={1}
-              value={rumble.hits}
-              onChange={(e) => update({ hits: Number(e.target.value) })}
-            />
-          </label>
-          <label className="control">
-            <span className="control-label">
-              Decay
-              <b>{rumble.decay} st</b>
-            </span>
-            <input
-              type="range"
-              min={1}
-              max={8}
-              step={1}
-              value={rumble.decay}
-              onChange={(e) => update({ decay: Number(e.target.value) })}
-            />
-          </label>
-          <label className="control">
-            <span className="control-label">
-              Tone
-              <b>{rumble.toneHz} Hz</b>
-            </span>
-            <input
-              type="range"
-              min={20}
-              max={200}
-              step={1}
-              value={rumble.toneHz}
-              onChange={(e) => update({ toneHz: Number(e.target.value) })}
-            />
-          </label>
-          <label className="control">
-            <span className="control-label">
-              LP Filter
-              <b>{rumble.lpHz} Hz</b>
-            </span>
-            <input
-              type="range"
-              min={20}
-              max={500}
-              step={1}
-              value={rumble.lpHz}
-              onChange={(e) => update({ lpHz: Number(e.target.value) })}
-            />
-          </label>
+        <div className="knob-row">
+          <Knob
+            label="Amount"
+            value={rumble.amount}
+            min={0}
+            max={100}
+            step={1}
+            resetValue={DEFAULT_RUMBLE.amount}
+            format={(v) => `${v}%`}
+            onChange={(v) => update({ amount: v })}
+          />
+          <Knob
+            label="Decay"
+            value={rumble.decay}
+            min={1}
+            max={8}
+            step={1}
+            sensitivity={120}
+            resetValue={DEFAULT_RUMBLE.decay}
+            format={(v) => `${v} st`}
+            onChange={(v) => update({ decay: v })}
+          />
+          <Knob
+            label="Tone"
+            value={rumble.toneHz}
+            min={20}
+            max={200}
+            step={1}
+            resetValue={DEFAULT_RUMBLE.toneHz}
+            format={(v) => `${v} Hz`}
+            onChange={(v) => update({ toneHz: v })}
+          />
+          <Knob
+            label="LP Filter"
+            value={rumble.lpHz}
+            min={20}
+            max={500}
+            step={1}
+            resetValue={DEFAULT_RUMBLE.lpHz}
+            format={(v) => `${v} Hz`}
+            onChange={(v) => update({ lpHz: v })}
+          />
         </div>
       )}
     </div>
