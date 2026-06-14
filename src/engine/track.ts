@@ -96,6 +96,9 @@ export interface Track {
    */
   ducking?: DuckingModule;
 
+  /** Rumble module (Kick). Sub-bass synthesizer layer triggered on kick onsets. */
+  rumble?: RumbleModule;
+
   /**
    * Per-track playback config. The audio scheduler runs a SINGLE clock; these
    * fields only change how that clock's `g` is INTERPRETED for this track.
@@ -175,6 +178,25 @@ export interface DuckingModule {
   target: VoiceId;      // default 'bass'
   amount: number;       // 0..1 — fraction of volume to remove at peak
   decaySteps: number;   // 1..8 — how many 16ths until ducking fully recovers
+}
+
+/**
+ * Rumble module (Kick) — synthesized sub-bass oscillator layer triggered on
+ * every kick onset. Adds low-frequency body beneath the sampled kick transient.
+ *
+ * Each trigger spawns `hits` independent sine-burst pulses, staggered evenly
+ * across the `decay` window, each with its own exponential amplitude envelope.
+ * All pulses route through a shared per-trigger lowpass filter (lpHz) before
+ * reaching the output. Parameters are applied via AudioParam scheduling so
+ * there are no clicks or zipper artefacts.
+ */
+export interface RumbleModule {
+  enabled: boolean;
+  amount: number;    // 0..100 — sub-bass level relative to track volume
+  hits: number;      // 1..4 — resonant pulse count per kick trigger
+  decay: number;     // 1..8 — envelope length in 16th-note steps (tempo-synced)
+  toneHz: number;    // 20..200 Hz — fundamental frequency of the sub oscillator
+  lpHz: number;      // 20..500 Hz — low-pass filter cutoff on the rumble output
 }
 
 /**

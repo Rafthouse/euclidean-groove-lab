@@ -10,7 +10,7 @@ import {
   resolvePitchSpec,
   GM_DRUM_MAP,
 } from './engine';
-import type { Track, VoiceId, MidiNote, PlaybackMode, PlaybackSpeed } from './engine';
+import type { Track, VoiceId, MidiNote, PlaybackMode, PlaybackSpeed, RumbleModule } from './engine';
 import { DRUM_KITS } from './drumKits';
 import type { DrumKitId } from './drumKits';
 import { sendNoteOn, sendNoteOff } from './midiOut';
@@ -35,6 +35,57 @@ const ghostHP = new Tone.Filter({ type: 'highpass', frequency: 200, rolloff: -24
 const ghostLP = new Tone.Filter({ type: 'lowpass', frequency: 6000, rolloff: -24 });
 ghostHP.connect(ghostLP);
 ghostLP.toDestination();
+
+// --- Rumble lane (Kick) — synthesized sub-bass layer ---
+// Each trigger creates self-contained oscillator+gain+LP nodes from the raw
+// WebAudio context. All scheduling is via AudioParam methods (no zipper noise).
+// Nodes are auto-disconnected via `onended` and a cleanup setTimeout.
+function triggerRumble(time: number, module: RumbleModule, trackVolume: number): void {
+  const ctx = Tone.getContext().rawContext as AudioContext;
+  const hitCount = Math.max(1, Math.min(4, Math.round(module.hits)));
+  const sixteenthSec = Tone.Time('16n').toSeconds();
+  const decaySec = Math.max(0.05, sixteenthSec * module.decay);
+  const hitDuration = decaySec / hitCount;
+  const baseLevel = clamp01(module.amount / 100) * trackVolume;
+  const freq = Math.max(20, Math.min(200, module.toneHz));
+  const lpCutoff = Math.max(20, Math.min(500, module.lpHz));
+
+  // Per-trigger LP biquad — cheap, one-shot, routes directly to hardware out.
+  const lpNode = ctx.createBiquadFilter();
+  lpNode.type = 'lowpass';
+  lpNode.frequency.value = lpCutoff;
+  lpNode.Q.value = 0.7;
+  lpNode.connect(ctx.destination);
+
+  for (let i = 0; i < hitCount; i++) {
+    const hitTime = time + i * hitDuration;
+    // Each successive pulse is quieter, giving the characteristic resonant decay.
+    const hitLevel = baseLevel * Math.max(0.1, Math.pow(0.45, i));
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    osc.connect(gain);
+    gain.connect(lpNode);
+
+    // 2 ms linear attack → exponential tail: smooth, click-free, no zipper.
+    gain.gain.setValueAtTime(0, hitTime);
+    gain.gain.linearRampToValueAtTime(hitLevel, hitTime + 0.002);
+    gain.gain.exponentialRampToValueAtTime(0.0001, hitTime + hitDuration * 0.92);
+
+    osc.start(hitTime);
+    osc.stop(hitTime + hitDuration);
+    osc.onended = () => {
+      osc.disconnect();
+      gain.disconnect();
+    };
+  }
+
+  // Disconnect LP node after all pulses are done.
+  const cleanupMs = Math.max(50, (time - ctx.currentTime + decaySec + 0.1) * 1000);
+  setTimeout(() => lpNode.disconnect(), cleanupMs);
+}
 
 // --- Drum kit (sample-based, swappable) ---
 // POLYPHONIC, EVENT-DRIVEN model: we hold one BUFFER per voice (not a shared
@@ -405,6 +456,13 @@ export async function start(initial: Track[], bpm: number): Promise<void> {
       // MIDI OUT: fire Note On for every audible onset
       if (mainMidiNote !== undefined) {
         fireMidiNote(time, mainMidiNote, mainMidiVelocity, mainMidiChannel, 1);
+      }
+
+      // ──────────────────────────────────────────────────────────────────
+      // RUMBLE PATH (Kick only). Sub-bass synth layer beneath the sample hit.
+      // ──────────────────────────────────────────────────────────────────
+      if (track.voiceId === 'kick' && track.rumble?.enabled) {
+        triggerRumble(time, track.rumble, mainVolume);
       }
 
       // ──────────────────────────────────────────────────────────────────
