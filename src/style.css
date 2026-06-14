@@ -4359,6 +4359,86 @@ header h1 {
   letter-spacing: 0.3px;
 }
 
+/* ---------- BPM control ◄ 128 ► ---------- */
+
+.bpm-control {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+}
+
+.bpm-arrow {
+  background: var(--panel-hi);
+  border: 1px solid var(--rest);
+  border-radius: var(--radius, 999px);
+  color: var(--text-dim);
+  font: 600 11px/1 var(--mono);
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.08s, color 0.08s;
+  padding: 0;
+}
+.bpm-arrow:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.bpm-arrow:active {
+  transform: scale(0.92);
+}
+
+.bpm-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 48px;
+}
+
+.bpm-value {
+  font: 700 20px/1 var(--mono);
+  color: var(--accent);
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  outline: none;
+  padding: 1px 2px;
+  border-radius: 2px;
+}
+.bpm-value:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.bpm-input {
+  font: 700 20px/1 var(--mono);
+  color: var(--accent);
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--accent);
+  width: 52px;
+  text-align: center;
+  outline: none;
+  padding: 0 2px;
+  -moz-appearance: textfield;
+}
+.bpm-input::-webkit-outer-spin-button,
+.bpm-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.bpm-unit {
+  font: 500 9px/1 var(--mono);
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 /* ---------- MIDI OUT ---------- */
 
 .midi-out {
@@ -5441,42 +5521,48 @@ header h1 {
 /* Vintage electronic instrument panel ΓÇö printed into the machine.
    Orange monochrome display, Dieter Rams industrial design.
    No black backgrounds, no club, no neon. Warm amber on cream. */
+/* ===== Satisfaction — Bedroom Groovebox 2002 ===== */
+/* Molded graphite housing. Amber LED indicators. Industrial controls.
+   FL Studio 3 + Electribe ER-1 + ReBirth RB-338. 2 AM hard techno session.
+   Every decision passes the test: would this ship on a groovebox in 2002? */
 :root[data-theme='satisfaction'] {
-  --bg: #ece4d8;
-  --panel: #e0d5c4;
-  --panel-hi: #d4c6b0;
-  --text: #4a3f35;
-  --text-dim: #8a7a66;
-  --text-hi: #2c2420;
-  --accent: #c47a3a;
-  --accent-dim: rgba(196, 122, 58, 0.18);
-  --rest: #c7b8a2;
-  --current: #c47a3a;
-  --danger: #b05030;
-  --warn: #c47a3a;
-  --radius: 3px;
-  --mono: ui-monospace, 'SF Mono', Consolas, monospace;
+  --bg: #0b0b0b;
+  --panel: #121212;
+  --panel-hi: #1a1a1a;
+  --text: #d8d8d8;
+  --text-dim: #8a8a8a;
+  --text-hi: #f0f0f0;
+  --accent: #ff7a00;
+  --accent-dim: rgba(255, 122, 0, 0.12);
+  --rest: #252525;
+  --current: #ff7a00;
+  --danger: #ff3333;
+  --warn: #ffb347;
+  --radius: 2px;
+  --mono: ui-monospace, 'Cascadia Code', Consolas, 'Courier New', monospace;
 
-  --color-kick: #6b4c30;
-  --color-kick-mid: #8a6638;
-  --color-kick-light: #b08850;
-  --color-snare: #b07040;
-  --color-snare-mid: #c88a4e;
-  --color-snare-light: #d8a468;
-  --color-hat: #9a9068;
-  --color-hat-mid: #b0a678;
-  --color-hat-light: #c8be8e;
-  --color-bass: #7a6a58;
-  --color-bass-mid: #968470;
-  --color-bass-light: #b09e88;
+  --color-kick: #e85500;
+  --color-kick-mid: #ff6a00;
+  --color-kick-light: #ff8c33;
 
-  --card-shadow: 0 0 0 1px rgba(196, 122, 58, 0.06), 0 1px 4px rgba(0, 0, 0, 0.06);
-  color-scheme: light;
+  --color-snare: #e08800;
+  --color-snare-mid: #ff9a00;
+  --color-snare-light: #ffb347;
+
+  --color-hat: #b89000;
+  --color-hat-mid: #d4a800;
+  --color-hat-light: #f0c800;
+
+  --color-bass: #cc5500;
+  --color-bass-mid: #e86a00;
+  --color-bass-light: #ff8833;
+
+  --card-shadow: 0 0 0 1px #0a0a0a;
+  color-scheme: dark;
 }
 
-/* Warm cream background ΓÇö clean instrument workbench */
 :root[data-theme='satisfaction'] body {
-  background: #ece4d8;
+  background: #0b0b0b;
 }
 
 :root[data-theme='satisfaction'] .app {
@@ -5484,31 +5570,20 @@ header h1 {
   z-index: 1;
 }
 
-/* Instrument faceplates ΓÇö printed into the panel, not floating.
-   Warm cream cards with subtle amber-toned borders.
-   Think: machine printed interface, not glass UI. */
+/* Hardware module face plates — graphite molded plastic */
 :root[data-theme='satisfaction'] .track-card {
-  background: #e0d5c4;
-  border: 1px solid rgba(196, 122, 58, 0.06);
-  border-radius: 3px;
+  background: #121212;
+  border: 1px solid #222222;
+  border-top-color: #2a2a2a;
+  border-radius: 2px;
   box-shadow:
-    inset 0 0.5px 0 0 rgba(255, 255, 255, 0.4),
-    0 0 0 1px rgba(196, 122, 58, 0.06),
-    0 1px 4px rgba(0, 0, 0, 0.06);
+    inset 0 1px 0 rgba(255, 255, 255, 0.025),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.40),
+    0 0 0 1px #0a0a0a;
   position: relative;
 }
 
-:root[data-theme='satisfaction'] .track-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 4px;
-  right: 4px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(196, 122, 58, 0.06), transparent);
-  pointer-events: none;
-}
-
+/* Voice channel colours — LED strip per section */
 :root[data-theme='satisfaction'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
 }
@@ -5516,8 +5591,8 @@ header h1 {
   fill: var(--color-kick-mid);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='kick'] .shape {
-  fill: color-mix(in srgb, var(--color-kick) 18%, transparent);
-  stroke: rgba(107, 76, 48, 0.18);
+  fill: rgba(232, 85, 0, 0.10);
+  stroke: rgba(232, 85, 0, 0.22);
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] {
@@ -5527,8 +5602,8 @@ header h1 {
   fill: var(--color-snare-mid);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] .shape {
-  fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
-  stroke: rgba(176, 112, 64, 0.18);
+  fill: rgba(224, 136, 0, 0.10);
+  stroke: rgba(224, 136, 0, 0.22);
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] {
@@ -5538,8 +5613,8 @@ header h1 {
   fill: var(--color-hat-mid);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] .shape {
-  fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
-  stroke: rgba(154, 144, 104, 0.15);
+  fill: rgba(184, 144, 0, 0.10);
+  stroke: rgba(184, 144, 0, 0.22);
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] {
@@ -5549,133 +5624,172 @@ header h1 {
   fill: var(--color-bass-mid);
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] .shape {
-  fill: color-mix(in srgb, var(--color-bass) 18%, transparent);
-  stroke: rgba(122, 106, 88, 0.15);
+  fill: rgba(204, 85, 0, 0.10);
+  stroke: rgba(204, 85, 0, 0.22);
 }
 
-/* Kick: warm impulse on the panel */
-@keyframes satisfaction-kick-pulse {
-  0% { r: 11px; fill: #8a6638; }
-  20% { r: 13px; fill: #b08850; filter: drop-shadow(0 0 4px rgba(107, 76, 48, 0.06)); }
-  100% { r: 11px; fill: var(--color-kick-mid); filter: none; }
+/* Step trigger animations — LED flash on hit, fast settle */
+@keyframes satisfaction-kick-trigger {
+  0%   { r: 11px; fill: #ff8c33; }
+  12%  { r: 14px; fill: #ffaa66; }
+  60%  { r: 11px; fill: #ff6a00; }
+  100% { r: 11px; fill: var(--color-kick-mid); }
 }
-/* Snare: amber highlight */
-@keyframes satisfaction-snare-flash {
-  0% { r: 11px; fill: #c88a4e; }
-  15% { r: 13px; fill: #d8a468; filter: drop-shadow(0 0 6px rgba(176, 112, 64, 0.05)); }
-  100% { r: 11px; fill: var(--color-snare-mid); filter: none; }
+@keyframes satisfaction-snare-trigger {
+  0%   { r: 11px; fill: #ffb347; }
+  10%  { r: 14px; fill: #ffc870; }
+  55%  { r: 11px; fill: #ff9a00; }
+  100% { r: 11px; fill: var(--color-snare-mid); }
 }
-/* Hat: soft dusty shimmer */
-@keyframes satisfaction-hat-shimmer {
-  0% { r: 9px; fill: #b0a678; }
-  25% { r: 10px; fill: #c8be8e; filter: drop-shadow(0 0 3px rgba(154, 144, 104, 0.04)); }
-  100% { r: 9px; fill: var(--color-hat-mid); filter: none; }
+@keyframes satisfaction-hat-trigger {
+  0%   { r: 9px;  fill: #f0c800; }
+  15%  { r: 12px; fill: #ffe040; }
+  60%  { r: 9px;  fill: #d4a800; }
+  100% { r: 9px;  fill: var(--color-hat-mid); }
 }
-/* Bass: warm brown glow */
-@keyframes satisfaction-bass-glow {
-  0% { r: 11px; fill: #968470; }
-  25% { r: 13px; fill: #b09e88; filter: drop-shadow(0 0 6px rgba(122, 106, 88, 0.05)); }
-  100% { r: 11px; fill: var(--color-bass-mid); filter: none; }
+@keyframes satisfaction-bass-trigger {
+  0%   { r: 11px; fill: #ff8833; }
+  12%  { r: 14px; fill: #ffa060; }
+  60%  { r: 11px; fill: #e86a00; }
+  100% { r: 11px; fill: var(--color-bass-mid); }
 }
 
 :root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.onset.current {
-  animation: satisfaction-kick-pulse 350ms ease-out forwards;
+  animation: satisfaction-kick-trigger 300ms ease-out forwards;
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='snare'] .step.onset.current {
-  animation: satisfaction-snare-flash 300ms ease-out forwards;
+  animation: satisfaction-snare-trigger 280ms ease-out forwards;
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='hat'] .step.onset.current {
-  animation: satisfaction-hat-shimmer 250ms ease-out forwards;
+  animation: satisfaction-hat-trigger 240ms ease-out forwards;
 }
 :root[data-theme='satisfaction'] .track-card[data-voice='bass'] .step.onset.current {
-  animation: satisfaction-bass-glow 350ms ease-out forwards;
+  animation: satisfaction-bass-trigger 300ms ease-out forwards;
 }
 
-/* Playhead: warm amber indicator */
+/* Playhead — bright amber LED indicator */
 :root[data-theme='satisfaction'] .step.current .step-indicator {
-  fill: #c47a3a;
-  stroke: #c88a4e;
+  fill: #ff7a00;
+  stroke: rgba(255, 122, 0, 0.55);
   stroke-width: 1.5px;
-  filter: drop-shadow(0 0 4px rgba(196, 122, 58, 0.10));
+  filter: drop-shadow(0 0 3px rgba(255, 122, 0, 0.45));
 }
 :root[data-theme='satisfaction'] .step.current .visual {
-  fill: #c47a3a;
-}
-:root[data-theme='satisfaction'] .step.rest .step-indicator {
-  opacity: 0.12;
+  fill: #ff7a00;
 }
 
+/* Rest positions — dark panel, barely lit */
+:root[data-theme='satisfaction'] .step.rest .step-indicator {
+  fill: #1e1e1e;
+  opacity: 1;
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.rest .step-indicator {
+  fill: rgba(232, 85, 0, 0.12);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] .step.rest .step-indicator {
+  fill: rgba(224, 136, 0, 0.12);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] .step.rest .step-indicator {
+  fill: rgba(184, 144, 0, 0.12);
+}
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] .step.rest .step-indicator {
+  fill: rgba(204, 85, 0, 0.12);
+}
+
+/* Guide ring and hand — structural markers, invisible by default */
 :root[data-theme='satisfaction'] .guide {
   fill: none;
-  stroke: rgba(196, 122, 58, 0.04);
+  stroke: rgba(255, 122, 0, 0.04);
   stroke-width: 0.5px;
 }
-
 :root[data-theme='satisfaction'] .hand {
-  stroke: rgba(196, 122, 58, 0.05);
+  stroke: rgba(255, 122, 0, 0.06);
   stroke-width: 0.5px;
 }
 
+/* Buttons — flat molded plastic, no decoration */
 :root[data-theme='satisfaction'] button {
-  border-radius: 3px;
-  border: 1px solid rgba(196, 122, 58, 0.08);
-  background: #d4c6b0;
-  color: #4a3f35;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  padding: 8px 18px;
+  border-radius: 2px;
+  border: 1px solid #2d2d2d;
+  background: #1a1a1a;
+  color: #d8d8d8;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 7px 16px;
   font-family: var(--mono);
-  font-size: 11px;
-  transition: background 0.12s ease, border-color 0.12s ease;
+  font-size: 10px;
+  transition: border-color 0.08s, color 0.08s;
 }
 :root[data-theme='satisfaction'] button:hover {
-  background: #cabb9e;
-  border-color: #c47a3a;
+  border-color: #ff7a00;
+  color: #f0f0f0;
 }
 
+/* Play button — orange LED active state */
 :root[data-theme='satisfaction'] .play {
-  background: #d4c6b0;
-  border: 1px solid rgba(196, 122, 58, 0.10);
-  color: #4a3f35;
+  background: #171717;
+  border: 1px solid #2d2d2d;
+  color: #d8d8d8;
 }
 :root[data-theme='satisfaction'] .play.is-playing {
-  background: rgba(196, 122, 58, 0.08);
-  border-color: #c47a3a;
-  color: #2c2420;
+  background: rgba(255, 122, 0, 0.08);
+  border-color: #ff7a00;
+  color: #ff7a00;
+  box-shadow: inset 0 0 8px rgba(255, 122, 0, 0.06);
 }
 
 :root[data-theme='satisfaction'] .export,
 :root[data-theme='satisfaction'] .reset-pattern {
-  border-radius: 3px;
-  border: 1px solid rgba(196, 122, 58, 0.08);
-  background: #d4c6b0;
-  color: #4a3f35;
+  border-radius: 2px;
+  border: 1px solid #2d2d2d;
+  background: #1a1a1a;
+  color: #d8d8d8;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10px;
+  letter-spacing: 0.5px;
 }
 :root[data-theme='satisfaction'] .export:hover,
 :root[data-theme='satisfaction'] .reset-pattern:hover {
-  border-color: #c47a3a;
+  border-color: #ff7a00;
 }
 
+/* Pattern memory buttons — Electribe bank style */
 :root[data-theme='satisfaction'] .pattern-slot {
-  border-radius: 3px;
+  border-radius: 2px;
   padding: 5px 0;
   font-size: 10px;
+  background: #161616;
+  border: 1px solid #222222;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+:root[data-theme='satisfaction'] .pattern-slot:hover {
+  border-color: #3a3a3a;
+  background: #1e1e1e;
+}
+:root[data-theme='satisfaction'] .pattern-slot.active {
+  background: rgba(255, 122, 0, 0.10);
+  border-color: #ff7a00;
+  color: #ff7a00;
 }
 
+/* Step mask row */
 :root[data-theme='satisfaction'] .mask-label {
-  color: #8a7a66;
+  color: #8a8a8a;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 :root[data-theme='satisfaction'] .mask-cell {
-  border-radius: 3px;
+  border-radius: 2px;
   padding: 0;
   width: 15px;
   height: 15px;
 }
 :root[data-theme='satisfaction'] .mask-cell.rest {
-  background: rgba(196, 122, 58, 0.03);
-  border-color: rgba(196, 122, 58, 0.05);
+  background: #161616;
+  border-color: #222222;
+  border-width: 1px;
   opacity: 1;
 }
 :root[data-theme='satisfaction'] .mask-cell.onset {
@@ -5686,145 +5800,184 @@ header h1 {
 :root[data-theme='satisfaction'] .mask-cell.onset.muted {
   background: transparent;
   border-color: var(--track-color);
-  opacity: 0.50;
+  opacity: 0.45;
 }
 :root[data-theme='satisfaction'] .mask-cell.onset:hover {
-  filter: brightness(0.95);
+  filter: brightness(1.20);
 }
 :root[data-theme='satisfaction'] .mask-cell.is-current {
-  box-shadow: 0 0 0 2px #ece4d8, 0 0 0 3px #c47a3a;
+  box-shadow: 0 0 0 2px #0b0b0b, 0 0 0 3px #ff7a00;
 }
 
+/* Module lane toggle buttons — LED-style */
 :root[data-theme='satisfaction'] .toggle {
-  border-radius: 3px;
+  border-radius: 2px;
   min-width: 32px;
   padding: 4px 12px;
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid #2a2a2a;
+  background: #161616;
 }
 :root[data-theme='satisfaction'] .toggle.is-on {
-  background: rgba(196, 122, 58, 0.10);
-  border-color: #c47a3a;
+  background: rgba(255, 122, 0, 0.10);
+  border-color: #ff7a00;
+  color: #ff7a00;
 }
 
+/* Sliders — dark channel, square orange thumb */
 :root[data-theme='satisfaction'] input[type='range'] {
   height: 3px;
   cursor: pointer;
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-runnable-track {
   height: 3px;
-  border-radius: 1.5px;
-  background: #c7b8a2;
+  border-radius: 0;
+  background: #252525;
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   border-radius: 0;
-  background: #c47a3a;
+  background: #ff7a00;
   border: none;
   margin-top: -5px;
-  transition: transform 0.10s ease;
+  transition: transform 0.08s;
 }
 :root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb:hover {
-  transform: scale(1.10);
+  transform: scale(1.15);
 }
 :root[data-theme='satisfaction'] input[type='range']::-moz-range-track {
   height: 3px;
-  border-radius: 1.5px;
-  background: #c7b8a2;
+  border-radius: 0;
+  background: #252525;
   border: none;
 }
 :root[data-theme='satisfaction'] input[type='range']::-moz-range-thumb {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   border-radius: 0;
-  background: #c47a3a;
+  background: #ff7a00;
   border: none;
 }
 
+/* Dropdowns — recessed panel dark */
 :root[data-theme='satisfaction'] select {
-  background: #d4c6b0;
-  border: 1px solid rgba(196, 122, 58, 0.08);
-  color: #4a3f35;
-  border-radius: 3px;
-  padding: 6px 14px;
+  background: #161616;
+  border: 1px solid #2a2a2a;
+  color: #d8d8d8;
+  border-radius: 2px;
+  padding: 5px 12px;
   font-family: var(--mono);
   font-size: 11px;
+  letter-spacing: 0.3px;
+  color-scheme: dark;
 }
 :root[data-theme='satisfaction'] select option {
-  background: #e0d5c4;
-  color: #4a3f35;
+  background: #121212;
+  color: #d8d8d8;
 }
 :root[data-theme='satisfaction'] select option:checked {
-  background: rgba(196, 122, 58, 0.12);
+  background: rgba(255, 122, 0, 0.12);
 }
 
 :root[data-theme='satisfaction'] label {
-  color: #8a7a66;
-  font-weight: 450;
-  letter-spacing: 0.3px;
+  color: #8a8a8a;
+  font-weight: 500;
+  letter-spacing: 0.5px;
   font-family: var(--mono);
   font-size: 10px;
 }
 
 :root[data-theme='satisfaction'] .control-label {
-  color: #8a7a66;
+  color: #8a8a8a;
   font-size: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
 }
 :root[data-theme='satisfaction'] .control-label b {
-  color: #8a6638;
+  color: #ff7a00;
 }
 
 :root[data-theme='satisfaction'] .bpm b,
 :root[data-theme='satisfaction'] .swing b {
-  color: #c47a3a;
+  color: #ff7a00;
+  font-weight: 700;
 }
 
+/* Header — silk-screen panel label */
 :root[data-theme='satisfaction'] h1 {
-  color: #4a3f35;
-}
-
-:root[data-theme='satisfaction'] .tagline {
-  color: #8a7a66;
-  font-size: 11px;
-  letter-spacing: 1.5px;
+  color: #d8d8d8;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 4px;
   text-transform: uppercase;
 }
 
+:root[data-theme='satisfaction'] .tagline {
+  color: #3a3a3a;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Track name — orange channel label */
 :root[data-theme='satisfaction'] .track-name {
-  color: #4a3f35;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  color: #ff7a00;
+  font-weight: 700;
+  letter-spacing: 1px;
   text-transform: uppercase;
   font-family: var(--mono);
   font-size: 11px;
 }
 
 :root[data-theme='satisfaction'] .mini-metrics b {
-  color: #8a6638;
+  color: #ff7a00;
+  font-weight: 700;
 }
 :root[data-theme='satisfaction'] .mini-metrics span {
-  color: #8a7a66;
+  color: #8a8a8a;
 }
 
 :root[data-theme='satisfaction'] .playback-select select {
-  background: #d4c6b0;
-  border: 1px solid rgba(196, 122, 58, 0.08);
-  border-radius: 3px;
-  padding: 4px 12px;
-  color: #4a3f35;
+  background: #161616;
+  border: 1px solid #2a2a2a;
+  border-radius: 2px;
+  padding: 4px 10px;
+  color: #d8d8d8;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 10px;
+  color-scheme: dark;
 }
 :root[data-theme='satisfaction'] .playback-select span {
-  color: #8a7a66;
+  color: #8a8a8a;
 }
 
 :root[data-theme='satisfaction'] .module-lane {
-  border-top: 1px solid rgba(196, 122, 58, 0.04);
+  border-top: 1px solid #1c1c1c;
+}
+
+/* Knobs — dark groove, orange LED indicator */
+:root[data-theme='satisfaction'] .knob-track {
+  stroke: #252525;
+  stroke-width: 3.5;
+}
+:root[data-theme='satisfaction'] .knob-fill {
+  stroke: #ff7a00;
+  stroke-width: 3.5;
+}
+:root[data-theme='satisfaction'] .knob-dot {
+  fill: #ff7a00;
+}
+:root[data-theme='satisfaction'] .knob-label {
+  color: #8a8a8a;
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 /* ===== Ashes (Cold Observatory / Weathered Silver / Lunar Parchment) ===== */

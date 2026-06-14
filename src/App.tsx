@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
 import Knob from './components/Knob';
+import BpmControl, { DEFAULT_BPM } from './components/BpmControl';
 import PresetBrowser from './components/PresetBrowser';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
@@ -50,7 +51,7 @@ function initialRestartOnModeChange(): boolean {
 
 export default function App() {
   const [tracks, setTracksState] = useState<Track[]>(() => defaultTracks());
-  const [bpm, setTempo] = useState(120);
+  const [bpm, setTempo] = useState(DEFAULT_BPM);
   const [swing, setSwingState] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [currentSteps, setCurrentSteps] = useState<Record<string, number>>({});
@@ -391,17 +392,7 @@ export default function App() {
           ⟳ Clear
         </button>
         <div className="transport-knobs">
-          <Knob
-            label="Tempo"
-            value={bpm}
-            min={30}
-            max={300}
-            step={1}
-            sensitivity={100}
-            resetValue={120}
-            format={(v) => `${v} BPM`}
-            onChange={setTempo}
-          />
+          <BpmControl value={bpm} onChange={setTempo} />
           <Knob
             label="Swing"
             value={swing}
