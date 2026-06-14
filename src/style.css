@@ -3714,7 +3714,11 @@ header h1 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-@media (min-width: 1200px) {
+/* 4 columns only once the container is wide enough that a card never becomes
+   narrower than the 11x2 pattern bank (294px) + card padding. Below this the
+   2-column layout keeps cards comfortably wide, so .track-card's overflow:hidden
+   never clips the bank. Breakpoint raised 1200 -> 1440 to fix zoom-band clipping. */
+@media (min-width: 1440px) {
   .app {
     max-width: 1440px;
   }
