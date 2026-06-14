@@ -3983,9 +3983,15 @@ header h1 {
 
 /* ---------- pattern bank (AΓÇôL slots) ---------- */
 .pattern-bank {
-  display: flex;
+  /* Locked 11×2 grid for 22 slots.
+     Width derived from the grid (11 × 24px + 10 × 3px = 294px), centered
+     inside the card so both rows have equal visual weight. */
+  display: grid;
+  grid-template-columns: repeat(11, 24px);
   gap: 3px;
-  flex-wrap: wrap;
+  width: max-content;
+  justify-self: center;
+  margin-inline: auto;
 }
 .track-card .pattern-bank .pattern-slot {
   font: 600 10px/1 var(--mono);
