@@ -20,8 +20,9 @@ export type ThemeId =
   | 'dark' | 'paper' | 'elements' | 'military' | 'old-school'
   | 'cherry' | 'nostradamus' | 'big-boss' | 'university'
   | 'neon-void' | 'dark-side' | 'bauhaus' | 'smoke-dub'
-  | 'nautilus' | 'brownie' | 'revelation' | 'high-contrast'
-  | 'candyflip' | 'barbie' | 'alchemy' | 'beekeeper';
+  | 'nautilus' | 'brownie' | 'beeswax' | 'club-culture'
+  | 'revelation' | 'high-contrast' | 'candyflip' | 'barbie'
+  | 'alchemy' | 'beekeeper';
 
 // ---------------------------------------------------------------------------
 // Types
