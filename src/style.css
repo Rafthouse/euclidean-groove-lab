@@ -889,10 +889,10 @@
 
 /* Diamond sparkle on active note */
 :root[data-theme='big-boss'] .step.onset.current {
-  animation: diamond-sparkle 250ms ease-out forwards;
+  animation: big-boss-step-flash 250ms ease-out forwards;
 }
 
-@keyframes diamond-sparkle {
+@keyframes big-boss-step-flash {
   0% {
     fill: #FFFFFF;
     r: 11px;
@@ -3148,11 +3148,17 @@ header h1 {
   color: var(--text-dim);
 }
 .playback-select select {
-  background: var(--panel-hi);
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--panel-hi);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aaaaaa' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 7px center;
+  background-size: 10px 6px;
   color: var(--text-hi);
   border: 1px solid var(--rest);
   border-radius: 6px;
-  padding: 5px 8px;
+  padding: 5px 24px 5px 8px;
   font: 500 12px var(--mono);
   cursor: pointer;
 }
@@ -3288,11 +3294,17 @@ header h1 {
 }
 .kit-select select,
 .theme-select select {
-  background: var(--panel);
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--panel);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aaaaaa' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 10px 6px;
   color: var(--text-hi);
   border: 1px solid var(--rest);
   border-radius: 6px;
-  padding: 4px 8px;
+  padding: 5px 26px 5px 10px;
   font: inherit;
   cursor: pointer;
 }
@@ -3472,3 +3484,104 @@ header h1 {
   background: var(--accent);
   border-color: var(--accent);
 }
+
+/* ======================================================================
+   DROPDOWN POPUP FIXES
+   Custom arrow re-applied per theme because each theme's `select` block
+   uses `background:` shorthand which resets background-image.
+   Selectors with .kit-select/.theme-select/.playback-select have
+   specificity 0,3,1 — one class higher than bare theme `select` rules —
+   so these always win. Placed at the end of the file so equal-specificity
+   rules (elements, paper) are also overridden by source order.
+   ====================================================================== */
+
+/* — Light chevron + dark popup for all dark themes — */
+:root[data-theme='dark']         .kit-select select,
+:root[data-theme='dark']         .theme-select select,
+:root[data-theme='dark']         .playback-select select,
+:root[data-theme='military']     .kit-select select,
+:root[data-theme='military']     .theme-select select,
+:root[data-theme='military']     .playback-select select,
+:root[data-theme='old-school']   .kit-select select,
+:root[data-theme='old-school']   .theme-select select,
+:root[data-theme='old-school']   .playback-select select,
+:root[data-theme='cherry']       .kit-select select,
+:root[data-theme='cherry']       .theme-select select,
+:root[data-theme='cherry']       .playback-select select,
+:root[data-theme='nostradamus']  .kit-select select,
+:root[data-theme='nostradamus']  .theme-select select,
+:root[data-theme='nostradamus']  .playback-select select,
+:root[data-theme='big-boss']     .kit-select select,
+:root[data-theme='big-boss']     .theme-select select,
+:root[data-theme='big-boss']     .playback-select select,
+:root[data-theme='trip']         .kit-select select,
+:root[data-theme='trip']         .theme-select select,
+:root[data-theme='trip']         .playback-select select,
+:root[data-theme='dark-side']    .kit-select select,
+:root[data-theme='dark-side']    .theme-select select,
+:root[data-theme='dark-side']    .playback-select select,
+:root[data-theme='elements']     .kit-select select,
+:root[data-theme='elements']     .theme-select select,
+:root[data-theme='elements']     .playback-select select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23aaaaaa' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 10px 6px;
+  color-scheme: dark;
+}
+
+/* — Dark chevron + light popup for light themes — */
+:root[data-theme='paper']      .kit-select select,
+:root[data-theme='paper']      .theme-select select,
+:root[data-theme='paper']      .playback-select select,
+:root[data-theme='university'] .kit-select select,
+:root[data-theme='university'] .theme-select select,
+:root[data-theme='university'] .playback-select select,
+:root[data-theme='bauhaus']    .kit-select select,
+:root[data-theme='bauhaus']    .theme-select select,
+:root[data-theme='bauhaus']    .playback-select select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23555555' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 10px 6px;
+  color-scheme: light;
+}
+
+/* Themes with pill/compact `padding: X Ypx` on their bare select rule need
+   a padding-right fix so the arrow doesn't crowd the text. These run at
+   0,3,1 and beat the theme's 0,2,1 `select` rule for padding-right only. */
+:root[data-theme='big-boss']    .kit-select select,
+:root[data-theme='big-boss']    .theme-select select,
+:root[data-theme='big-boss']    .playback-select select,
+:root[data-theme='university']  .kit-select select,
+:root[data-theme='university']  .theme-select select,
+:root[data-theme='university']  .playback-select select,
+:root[data-theme='trip']        .kit-select select,
+:root[data-theme='trip']        .theme-select select,
+:root[data-theme='trip']        .playback-select select,
+:root[data-theme='dark-side']   .kit-select select,
+:root[data-theme='dark-side']   .theme-select select,
+:root[data-theme='dark-side']   .playback-select select,
+:root[data-theme='cherry']      .kit-select select,
+:root[data-theme='cherry']      .theme-select select,
+:root[data-theme='cherry']      .playback-select select,
+:root[data-theme='nostradamus'] .kit-select select,
+:root[data-theme='nostradamus'] .theme-select select,
+:root[data-theme='nostradamus'] .playback-select select {
+  padding-right: 28px;
+}
+
+/* — Option popup background colours (solid — some themes use semi-transparent
+   panel vars which OS/browser ignores for native popup rendering) — */
+:root[data-theme='dark']        select option { background: #181a21; color: #f3f4f6; }
+:root[data-theme='military']    select option { background: #131913; color: #def0de; }
+:root[data-theme='old-school']  select option { background: #2a2a2a; color: #e0e0e0; }
+:root[data-theme='cherry']      select option { background: #1a0b14; color: #ffffff; }
+:root[data-theme='nostradamus'] select option { background: #0d0b0a; color: #e8dfc8; }
+:root[data-theme='big-boss']    select option { background: #10141b; color: #ffffff; }
+:root[data-theme='trip']        select option { background: #0a0014; color: #ffffff; }
+:root[data-theme='dark-side']   select option { background: #050505; color: #f0ede8; }
+:root[data-theme='elements']    select option { background: #0f1218; color: #f0f4fa; }
+:root[data-theme='paper']       select option { background: #f8f5ed; color: #2a1f0e; }
+:root[data-theme='university']  select option { background: #ffffff; color: #1a1d24; }
+:root[data-theme='bauhaus']     select option { background: #ffffff; color: #1a1a1a; }
