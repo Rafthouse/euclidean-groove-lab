@@ -17,7 +17,7 @@ import type { MidiOutputPort } from './midiOut';
 /** How many 4/4 bars the MIDI export renders. */
 const EXPORT_BARS = 4;
 
-type AppThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'cherry' | 'nostradamus' | 'big-boss' | 'university' | 'neon-void' | 'dark-side' | 'bauhaus' | 'smoke-dub' | 'nautilus' | 'brownie' | 'beeswax' | 'club-culture' | 'revelation' | 'high-contrast' | 'candyflip' | 'barbie' | 'alchemy' | 'beekeeper';
+type AppThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'cherry' | 'nostradamus' | 'big-boss' | 'university' | 'neon-void' | 'dark-side' | 'bauhaus' | 'smoke-dub' | 'nautilus' | 'brownie' | 'beeswax' | 'satisfaction' | 'revelation' | 'high-contrast' | 'candyflip' | 'barbie' | 'alchemy' | 'beekeeper';
 const THEME_KEY = 'groove-theme';
 const FX_KEY = 'groove-elements-fx';
 const RESTART_KEY = 'groove-restart-on-mode-change';
@@ -25,7 +25,7 @@ const RESTART_KEY = 'groove-restart-on-mode-change';
 function initialTheme(): AppThemeId {
   try {
     const t = localStorage.getItem(THEME_KEY);
-    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' || t === 'cherry' || t === 'nostradamus' || t === 'big-boss' || t === 'university' || t === 'neon-void' || t === 'dark-side' || t === 'bauhaus' || t === 'smoke-dub' || t === 'nautilus' || t === 'brownie' || t === 'beeswax' || t === 'club-culture' || t === 'revelation' || t === 'high-contrast' || t === 'candyflip' || t === 'barbie' || t === 'alchemy' || t === 'beekeeper' ? t : 'elements';
+    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' || t === 'cherry' || t === 'nostradamus' || t === 'big-boss' || t === 'university' || t === 'neon-void' || t === 'dark-side' || t === 'bauhaus' || t === 'smoke-dub' || t === 'nautilus' || t === 'brownie' || t === 'beeswax' || t === 'satisfaction' || t === 'revelation' || t === 'high-contrast' || t === 'candyflip' || t === 'barbie' || t === 'alchemy' || t === 'beekeeper' ? t : 'elements';
   } catch {
     return 'elements';
   }
@@ -480,7 +480,7 @@ export default function App() {
             <option value="nautilus">Nautilus</option>
             <option value="brownie">Brownie</option>
             <option value="beeswax">Beeswax</option>
-            <option value="club-culture">Club Culture</option>
+            <option value="satisfaction">Satisfaction</option>
             <option value="revelation">Ashes</option>
             <option value="high-contrast">High Contrast</option>
             <option value="candyflip">Candyflip</option>
