@@ -1,4 +1,4 @@
-/* ===== NEON VOID (Premium Neon Experience) ===== */
+﻿/* ===== NEON VOID (Premium Neon Experience) ===== */
 /* Tokyo neon. Synthwave glow. Cyberpunk storefront lighting.
    Four neon chambers floating in endless darkness.
    Clean, sharp, geometric, luminous. No fantasy. */
@@ -66,7 +66,7 @@
   text-shadow: 0 0 10px rgba(180, 180, 210, 0.08);
 }
 
-/* Neon flicker animation ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ irregular, realistic neon tube behaviour */
+/* Neon flicker animation ╬ô├ç├╢ irregular, realistic neon tube behaviour */
 @keyframes neon-void-title-flicker {
   0%, 100% { opacity: 1; text-shadow: 0 0 8px rgba(255,255,255,0.60), 0 0 20px rgba(200,0,255,0.40), 0 0 40px rgba(200,0,255,0.20), 0 0 80px rgba(200,0,255,0.10); }
   8%       { opacity: 0.92; text-shadow: 0 0 6px rgba(255,255,255,0.40), 0 0 15px rgba(200,0,255,0.25); }
@@ -142,7 +142,7 @@
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* KICK ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ acid green neon chamber */
+/* KICK ╬ô├ç├╢ acid green neon chamber */
 :root[data-theme='neon-void'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
   border: 1px solid rgba(40, 255, 106, 0.30);
@@ -170,7 +170,7 @@
   filter: drop-shadow(0 0 4px rgba(40, 255, 106, 0.10));
 }
 
-/* SNARE ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ orange plasma neon chamber */
+/* SNARE ╬ô├ç├╢ orange plasma neon chamber */
 :root[data-theme='neon-void'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare);
   border: 1px solid rgba(255, 122, 0, 0.30);
@@ -198,7 +198,7 @@
   filter: drop-shadow(0 0 6px rgba(255, 122, 0, 0.12));
 }
 
-/* HAT ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ magenta neon chamber */
+/* HAT ╬ô├ç├╢ magenta neon chamber */
 :root[data-theme='neon-void'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat);
   border: 1px solid rgba(255, 0, 200, 0.30);
@@ -226,7 +226,7 @@
   filter: drop-shadow(0 0 4px rgba(255, 0, 200, 0.10));
 }
 
-/* BASS ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ electric blue neon chamber */
+/* BASS ╬ô├ç├╢ electric blue neon chamber */
 :root[data-theme='neon-void'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass);
   border: 1px solid rgba(0, 170, 255, 0.30);
@@ -254,7 +254,7 @@
   filter: drop-shadow(0 0 4px rgba(0, 170, 255, 0.10));
 }
 
-/* Neon border pulse animations ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ slow breathing, elegant */
+/* Neon border pulse animations ╬ô├ç├╢ slow breathing, elegant */
 @keyframes neon-void-pulse-green {
   0%, 100% { border-color: rgba(40, 255, 106, 0.28); box-shadow: 0 0 20px rgba(40, 255, 106, 0.10), 0 0 50px rgba(40, 255, 106, 0.04), 0 4px 32px rgba(0,0,0,0.6); }
   50%      { border-color: rgba(40, 255, 106, 0.36); box-shadow: 0 0 24px rgba(40, 255, 106, 0.13), 0 0 58px rgba(40, 255, 106, 0.06), 0 4px 32px rgba(0,0,0,0.6); }
@@ -322,7 +322,7 @@
   fill: #FFFFFF;
 }
 
-/* Orbit dots ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ tiny neon LEDs */
+/* Orbit dots ╬ô├ç├╢ tiny neon LEDs */
 :root[data-theme='neon-void'] .step.rest .step-indicator {
   fill: rgba(255, 255, 255, 0.08);
 }
@@ -359,7 +359,7 @@
   opacity: 1;
 }
 
-/* ===== CONTROLS ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ neon-accented ===== */
+/* ===== CONTROLS ╬ô├ç├╢ neon-accented ===== */
 :root[data-theme='neon-void'] button {
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -381,7 +381,7 @@
   box-shadow: 0 0 0 1px rgba(255, 0, 200, 0.30), 0 0 12px rgba(255, 0, 200, 0.08);
 }
 
-/* Play button ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ strongest neon interactive element */
+/* Play button ╬ô├ç├╢ strongest neon interactive element */
 :root[data-theme='neon-void'] .play {
   background: rgba(14, 14, 26, 0.7);
   border: 1px solid rgba(255, 0, 200, 0.12);
@@ -424,7 +424,7 @@
   background: rgba(20, 20, 36, 0.7);
 }
 
-/* Mask row ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ neon indicators */
+/* Mask row ╬ô├ç├╢ neon indicators */
 :root[data-theme='neon-void'] .mask-label {
   color: rgba(180, 180, 210, 0.7);
   font-weight: 600;
@@ -482,7 +482,7 @@
   box-shadow: 0 0 8px rgba(255, 0, 200, 0.06);
 }
 
-/* Sliders ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ neon-ring knobs */
+/* Sliders ╬ô├ç├╢ neon-ring knobs */
 :root[data-theme='neon-void'] input[type='range'] {
   height: 4px;
   cursor: pointer;
@@ -607,7 +607,7 @@
 :root[data-theme='neon-void'] .module-lane {
   border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
-/* No animations, no radar, no sweeps ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ pure static dark gradient. */
+/* No animations, no radar, no sweeps ╬ô├ç├╢ pure static dark gradient. */
 :root[data-theme='military'] {
   --bg: #0c0f0c;
   --panel: #131913;
@@ -737,7 +737,7 @@
   --radius: 2px;
   --mono: ui-monospace, Consolas, monospace;
 
-  /* Track colors ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ muted, flat DAW palette */
+  /* Track colors ╬ô├ç├╢ muted, flat DAW palette */
   --color-kick: #B87C4B;
   --color-kick-mid: #D4955A;
   --color-kick-light: #E8B078;
@@ -828,7 +828,7 @@
   fill: #FF6B00;
 }
 
-/* Controls ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ Ableton flat style */
+/* Controls ╬ô├ç├╢ Ableton flat style */
 :root[data-theme='old-school'] button {
   border-radius: 2px;
   border: 1px solid #3A3A3A;
@@ -868,7 +868,7 @@
   height: 15px;
 }
 
-/* Sliders ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ flat */
+/* Sliders ╬ô├ç├╢ flat */
 :root[data-theme='old-school'] input[type='range'] {
   height: 4px;
 }
@@ -886,7 +886,7 @@
   margin-top: -4px;
 }
 
-/* Step indicators ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ flat */
+/* Step indicators ╬ô├ç├╢ flat */
 :root[data-theme='old-school'] .step {
   border: none;
 }
@@ -948,7 +948,7 @@
   --radius: 8px;
   --mono: ui-monospace, Consolas, monospace;
 
-  /* Track colors ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ readable pastels on dark */
+  /* Track colors ╬ô├ç├╢ readable pastels on dark */
   --color-kick: #ff6bd6;
   --color-kick-mid: #ff90df;
   --color-kick-light: #ffb8e8;
@@ -1126,8 +1126,8 @@
 /* ===== Nostradamus (Alchemical Transmutation Engine) ===== */
 /* An alchemical machine for transmuting harmony into gold.
    Sacred geometry, brass instruments, occult engineering.
-   Completely rebuilt from scratch ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ no astronomy. */
-/* An ancient celestial observatory ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ Nostradamus meets Kepler.
+   Completely rebuilt from scratch ╬ô├ç├╢ no astronomy. */
+/* An ancient celestial observatory ╬ô├ç├╢ Nostradamus meets Kepler.
    Zodiac wheels, astrolabe markings, drifting star dust.
    Alchemical gold on midnight parchment. Sacred geometry alive. */
 :root[data-theme='nostradamus'] {
@@ -1167,19 +1167,19 @@
 }
 
 /* Layer 1: Dark cosmic void.
-   Layer 2: Astrological diagrams ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ zodiac wheels, astrolabe rings.
-   Layer 3: Star field ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ tiny points of light.
-   Layer 4: Grid lines ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ manuscript ruling.
+   Layer 2: Astrological diagrams ╬ô├ç├╢ zodiac wheels, astrolabe rings.
+   Layer 3: Star field ╬ô├ç├╢ tiny points of light.
+   Layer 4: Grid lines ╬ô├ç├╢ manuscript ruling.
    All layers animated at their own imperceptible pace. */
 :root[data-theme='nostradamus'] body {
   background:
-    /* Zodiac ring 1 ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ large ecliptic circle */
+    /* Zodiac ring 1 ╬ô├ç├╢ large ecliptic circle */
     radial-gradient(ellipse 55% 45% at 22% 8%,  transparent 40%, rgba(212, 175, 55, 0.012) 42%, transparent 44%),
     radial-gradient(ellipse 55% 45% at 22% 8%,  transparent 46%, rgba(212, 175, 55, 0.006) 48%, transparent 50%),
-    /* Zodiac ring 2 ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ smaller astrolabe circle */
+    /* Zodiac ring 2 ╬ô├ç├╢ smaller astrolabe circle */
     radial-gradient(ellipse 40% 35% at 75% 15%, transparent 30%, rgba(212, 175, 55, 0.010) 32%, transparent 34%),
     radial-gradient(ellipse 40% 35% at 75% 15%, transparent 36%, rgba(212, 175, 55, 0.005) 38%, transparent 40%),
-    /* Zodiac ring 3 ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ deep celestial ring */
+    /* Zodiac ring 3 ╬ô├ç├╢ deep celestial ring */
     radial-gradient(ellipse 35% 30% at 50% 82%, transparent 25%, rgba(96, 144, 192, 0.008) 27%, transparent 29%),
     /* Alchemical cross-diagram */
     radial-gradient(ellipse 20% 100% at 50% 50%, transparent 45%, rgba(212, 175, 55, 0.004) 46%, transparent 47%),
@@ -1193,7 +1193,7 @@
   overflow-x: hidden;
 }
 
-/* Layer 3: Star field ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ tiny scattered points twinkling slowly.
+/* Layer 3: Star field ╬ô├ç├╢ tiny scattered points twinkling slowly.
    Also the ::before houses the animated celestial diagrams. */
 :root[data-theme='nostradamus'] body::before {
   content: '';
@@ -1229,7 +1229,7 @@
   animation: nos-star-twinkle 8s ease-in-out infinite alternate;
 }
 
-/* Twinkle animation for stars ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ gradual shimmer */
+/* Twinkle animation for stars ╬ô├ç├╢ gradual shimmer */
 @keyframes nos-star-twinkle {
   0%   { opacity: 0.32; }
   25%  { opacity: 0.48; }
@@ -1240,7 +1240,7 @@
 }
 
 /* Layer 2a: Rotating zodiac / astrolabe ring animation.
-   Very slow ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ one full rotation in ~90 seconds. */
+   Very slow ╬ô├ç├╢ one full rotation in ~90 seconds. */
 :root[data-theme='nostradamus'] body::after {
   content: '';
   position: fixed;
@@ -1298,7 +1298,7 @@
   z-index: 1;
 }
 
-/* ===== TRACK CARDS ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ engraved brass plates on velvet ===== */
+/* ===== TRACK CARDS ╬ô├ç├╢ engraved brass plates on velvet ===== */
 :root[data-theme='nostradamus'] .track-card {
   background: rgba(16, 13, 12, 0.60);
   backdrop-filter: blur(10px);
@@ -1321,7 +1321,7 @@
     0 0 2px rgba(212, 175, 55, 0.10);
 }
 
-/* Inner engraved border ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ celestial ring */
+/* Inner engraved border ╬ô├ç├╢ celestial ring */
 :root[data-theme='nostradamus'] .track-card::after {
   content: '';
   position: absolute;
@@ -1336,7 +1336,7 @@
 
 /* ===== TRACK ASTRAL IDENTITIES ===== */
 
-/* Kick ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ Solar / Sun Wheel / Leonine Gold */
+/* Kick ╬ô├ç├╢ Solar / Sun Wheel / Leonine Gold */
 :root[data-theme='nostradamus'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
 }
@@ -1363,7 +1363,7 @@
   stroke: rgba(212, 175, 55, 0.25);
 }
 
-/* Snare ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ Lunar / Crescent Moon / Silver-Red */
+/* Snare ╬ô├ç├╢ Lunar / Crescent Moon / Silver-Red */
 :root[data-theme='nostradamus'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare);
 }
@@ -1389,7 +1389,7 @@
   stroke: rgba(160, 64, 64, 0.25);
 }
 
-/* Hat ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ Mercury / Sacred Geometry / Celestial Blue */
+/* Hat ╬ô├ç├╢ Mercury / Sacred Geometry / Celestial Blue */
 :root[data-theme='nostradamus'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat);
 }
@@ -1415,7 +1415,7 @@
   stroke: rgba(96, 144, 192, 0.22);
 }
 
-/* Bass ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ Saturn / Rings / Ancient Diagrams / Green-Bronze */
+/* Bass ╬ô├ç├╢ Saturn / Rings / Ancient Diagrams / Green-Bronze */
 :root[data-theme='nostradamus'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass);
 }
@@ -1441,7 +1441,7 @@
   stroke: rgba(80, 128, 120, 0.22);
 }
 
-/* ===== PER-VOICE ALCHEMICAL IGNITION ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ mystical glow ===== */
+/* ===== PER-VOICE ALCHEMICAL IGNITION ╬ô├ç├╢ mystical glow ===== */
 /* Kick: sun-gold pulse with faint radial energy ring */
 @keyframes nos-kick-ignite {
   0%   { r: 11px; fill: #D4A060; filter: none; }
@@ -1454,7 +1454,7 @@
   animation: nos-kick-ignite 400ms ease-out forwards;
 }
 
-/* Snare: lunar crimson ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ eclipse glow */
+/* Snare: lunar crimson ╬ô├ç├╢ eclipse glow */
 @keyframes nos-snare-ignite {
   0%   { r: 11px; fill: #C06060; filter: none; }
   15%  { r: 16px; fill: #D88888; filter: drop-shadow(0 0 12px rgba(160, 64, 64, 0.20)); }
@@ -1466,7 +1466,7 @@
   animation: nos-snare-ignite 400ms ease-out forwards;
 }
 
-/* Hat: mercury blue ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ celestial glyph shimmer */
+/* Hat: mercury blue ╬ô├ç├╢ celestial glyph shimmer */
 @keyframes nos-hat-ignite {
   0%   { r: 9px; fill: #78A8D8; }
   20%  { r: 12px; fill: #90C0E8; filter: drop-shadow(0 0 10px rgba(96, 144, 192, 0.15)); }
@@ -1477,7 +1477,7 @@
   animation: nos-hat-ignite 350ms ease-out forwards;
 }
 
-/* Bass: saturn ring ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ green-bronze abyss glow */
+/* Bass: saturn ring ╬ô├ç├╢ green-bronze abyss glow */
 @keyframes nos-bass-ignite {
   0%   { r: 11px; fill: #609890; }
   20%  { r: 15px; fill: #78B0A8; filter: drop-shadow(0 0 12px rgba(80, 128, 120, 0.18)); }
@@ -1505,7 +1505,7 @@
   stroke-width: 0.5px;
 }
 
-/* ===== PLAYHEAD ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ glowing ember ===== */
+/* ===== PLAYHEAD ╬ô├ç├╢ glowing ember ===== */
 :root[data-theme='nostradamus'] .step.current .step-indicator {
   fill: #E8DFC8;
   stroke: #D4AF37;
@@ -1520,7 +1520,7 @@
   opacity: 0.14;
 }
 
-/* ===== CONTROLS ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ aged brass ===== */
+/* ===== CONTROLS ╬ô├ç├╢ aged brass ===== */
 :root[data-theme='nostradamus'] button {
   border-radius: 2px;
   border: 1px solid rgba(160, 130, 70, 0.18);
@@ -1557,7 +1557,7 @@
   color: #D7C7A2;
 }
 
-/* Sliders ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ engraved brass ring */
+/* Sliders ╬ô├ç├╢ engraved brass ring */
 :root[data-theme='nostradamus'] input[type='range'] {
   height: 3px;
 }
@@ -1631,7 +1631,7 @@
   font-style: italic;
 }
 
-/* Ornamental corner flourish ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ alchemical manuscript detail */
+/* Ornamental corner flourish ╬ô├ç├╢ alchemical manuscript detail */
 :root[data-theme='nostradamus'] .app::after {
   content: '';
   position: fixed;
@@ -1650,7 +1650,7 @@
   background-repeat: no-repeat;
 }
 
-/* Constellation shimmer on hover ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ celestial layer reacts */
+/* Constellation shimmer on hover ╬ô├ç├╢ celestial layer reacts */
 :root[data-theme='nostradamus'] .track-card:hover body::before {
   opacity: 0.50;
 }
@@ -1693,7 +1693,7 @@
   color-scheme: dark;
 }
 
-/* Background: clean premium anthracite ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ flat, matte, nothing more */
+/* Background: clean premium anthracite ╬ô├ç├╢ flat, matte, nothing more */
 :root[data-theme='big-boss'] body {
   background: #171717;
 }
@@ -1703,7 +1703,7 @@
   z-index: 1;
 }
 
-/* Track cards: crystal glass panels ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ thinner, clearer, more transparent */
+/* Track cards: crystal glass panels ╬ô├ç├╢ thinner, clearer, more transparent */
 :root[data-theme='big-boss'] .track-card {
   background: rgba(16, 20, 27, 0.28);
   backdrop-filter: blur(14px) saturate(1.1);
@@ -1716,7 +1716,7 @@
   position: relative;
 }
 
-/* Crystal reflection highlight ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ brighter, sharper edge light */
+/* Crystal reflection highlight ╬ô├ç├╢ brighter, sharper edge light */
 :root[data-theme='big-boss'] .track-card::after {
   content: '';
   position: absolute;
@@ -1825,7 +1825,7 @@
   stroke-width: 0.5px;
 }
 
-/* Hand: optical ray ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ brighter */
+/* Hand: optical ray ╬ô├ç├╢ brighter */
 :root[data-theme='big-boss'] .hand {
   stroke: rgba(255, 255, 255, 0.08);
   stroke-width: 0.5px;
@@ -1882,7 +1882,7 @@
   border-color: rgba(255, 255, 255, 0.20);
 }
 
-/* Sliders: precision crystal tracks ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ more luminous */
+/* Sliders: precision crystal tracks ╬ô├ç├╢ more luminous */
 :root[data-theme='big-boss'] input[type='range'] {
   height: 4px;
   cursor: pointer;
@@ -1938,7 +1938,7 @@
   background: rgba(90, 180, 255, 0.20);
 }
 
-/* Labels ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ brighter for readability on clearer glass */
+/* Labels ╬ô├ç├╢ brighter for readability on clearer glass */
 :root[data-theme='big-boss'] label {
   color: rgba(255, 255, 255, 0.6);
   font-weight: 450;
@@ -1957,7 +1957,7 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* BPM / Swing ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ brighter ice blue */
+/* BPM / Swing ╬ô├ç├╢ brighter ice blue */
 :root[data-theme='big-boss'] .bpm b,
 :root[data-theme='big-boss'] .swing b {
   color: #7AD0FF;
@@ -2005,7 +2005,7 @@
 }
 
 /* ===== University (Apple Glass / Titanium Synth) ===== */
-/* Pure statement theme ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ Apple Liquid Glass meets a $20,000 synthesizer.
+/* Pure statement theme ╬ô├ç├╢ Apple Liquid Glass meets a $20,000 synthesizer.
    Crystal-clear glass panels, titanium precision, diamond light. */
 :root[data-theme='university'] {
   --bg: #F5F7FA;
@@ -2043,12 +2043,12 @@
   color-scheme: light;
 }
 
-/* Background: premium paper ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ warm white, fine fiber texture */
+/* Background: premium paper ╬ô├ç├╢ warm white, fine fiber texture */
 :root[data-theme='university'] body {
   background:
     /* Warm vignette for paper depth */
     radial-gradient(ellipse 60% 50% at 50% 50%, #F7F7F5 0%, #F3F3F1 50%, #ECECE8 100%),
-    /* Paper fiber grain ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ fine, natural texture */
+    /* Paper fiber grain ╬ô├ç├╢ fine, natural texture */
     url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='0.35'/%3E%3C/svg%3E"),
     #F7F7F5;
   background-size: 200px 200px;
@@ -2060,7 +2060,7 @@
   z-index: 1;
 }
 
-/* Track cards: floating glass panels ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ deep blur, optical depth */
+/* Track cards: floating glass panels ╬ô├ç├╢ deep blur, optical depth */
 :root[data-theme='university'] .track-card {
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(30px) saturate(1.15);
@@ -2073,7 +2073,7 @@
   position: relative;
 }
 
-/* Internal caustic ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ top edge light band */
+/* Internal caustic ╬ô├ç├╢ top edge light band */
 :root[data-theme='university'] .track-card::after {
   content: '';
   position: absolute;
@@ -2130,7 +2130,7 @@
   stroke: rgba(0, 0, 0, 0.08);
 }
 
-/* Diamond sparkle on active note ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ light through cut diamond */
+/* Diamond sparkle on active note ╬ô├ç├╢ light through cut diamond */
 :root[data-theme='university'] .step.onset.current {
   animation: diamond-sparkle 250ms ease-out forwards;
 }
@@ -2184,7 +2184,7 @@
   stroke-width: 0.5px;
 }
 
-/* Buttons: glass capsules ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ spring-responsive */
+/* Buttons: glass capsules ╬ô├ç├╢ spring-responsive */
 :root[data-theme='university'] button {
   border-radius: 24px;
   border: 1px solid rgba(0, 0, 0, 0.04);
@@ -2376,7 +2376,7 @@
 
 /* ===== TRIP (Liquid Synesthesia / Living Color) ===== */
 /* A musical instrument built inside a living dream.
-   Premium psychedelic ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ flowing gradients, stained-glass light. */
+   Premium psychedelic ╬ô├ç├╢ flowing gradients, stained-glass light. */
 :root[data-theme='trip'] {
   --bg: #06000e;
   --panel: #120824;
@@ -2543,7 +2543,7 @@
   stroke-width: 0.5px;
 }
 
-/* ===== CONTROLS ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ solid, readable ===== */
+/* ===== CONTROLS ╬ô├ç├╢ solid, readable ===== */
 :root[data-theme='trip'] button {
   border-radius: 14px;
   border: 1px solid rgba(212, 138, 255, 0.10);
@@ -2583,7 +2583,7 @@
   background: #2a1a44;
 }
 
-/* ===== PATTERN SLOTS ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ clearly visible ===== */
+/* ===== PATTERN SLOTS ╬ô├ç├╢ clearly visible ===== */
 :root[data-theme='trip'] .pattern-slot {
   border-radius: 14px;
   padding: 5px 0;
@@ -2595,7 +2595,7 @@
   border-color: rgba(212, 138, 255, 0.12);
 }
 
-/* ===== MASK SECTION ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ strong separation ===== */
+/* ===== MASK SECTION ╬ô├ç├╢ strong separation ===== */
 :root[data-theme='trip'] .mask-label {
   color: #b09ac8;
 }
@@ -2695,7 +2695,7 @@
   background: rgba(212, 138, 255, 0.15);
 }
 
-/* ===== LABELS & META ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ improved contrast ===== */
+/* ===== LABELS & META ╬ô├ç├╢ improved contrast ===== */
 :root[data-theme='trip'] label {
   color: #b09ac8;
   font-weight: 450;
@@ -3128,13 +3128,13 @@
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* ===== Beeswax (Ivory / Cream / Warm Minimal) ===== */
-/* A premium physical instrument ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â material, warm, tactile.
+/* ===== SATISFACTION (Ivory / Cream / Warm Minimal) ===== */
+/* A premium physical instrument ΓÇö material, warm, tactile.
    Inspired by high-end audio gear from Apple, Teenage Engineering, Elektron.
    No flat digital surfaces. Everything feels like beeswax-coated wood,
    amber resin controls, and soft golden sunlight. */
 
-:root[data-theme='beeswax'] {
+:root[data-theme='satisfaction'] {
   --bg: #1a1610;
   --panel: #231f17;
   --panel-hi: #2e281e;
@@ -3150,7 +3150,7 @@
   --radius: 12px;
   --mono: ui-monospace, Consolas, monospace;
 
-  /* Warm, amber-tinted track colors ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â beeswax palette */
+  /* Warm, amber-tinted track colors ΓÇö beeswax palette */
   --color-kick: #b87a30;
   --color-kick-mid: #d49a40;
   --color-kick-light: #e8bc6a;
@@ -3171,9 +3171,9 @@
   color-scheme: dark;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Global atmospheric layer ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-/* Warm sunlight diffusion ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â felt, not seen. Upper-left source. */
-:root[data-theme='beeswax'] body {
+/* ΓöÇΓöÇ Global atmospheric layer ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+/* Warm sunlight diffusion ΓÇö felt, not seen. Upper-left source. */
+:root[data-theme='satisfaction'] body {
   overflow-x: hidden;
   background:
     radial-gradient(ellipse 50% 55% at 22% 18%, rgba(196, 136, 32, 0.06) 0%, transparent 70%),
@@ -3181,9 +3181,9 @@
     var(--bg);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Microtexture / grain overlay ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ Microtexture / grain overlay ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 /* Breaks perfect digital flatness. Nearly invisible (1.5% opacity). */
-:root[data-theme='beeswax'] body::before {
+:root[data-theme='satisfaction'] body::before {
   content: '';
   position: fixed;
   inset: 0;
@@ -3194,20 +3194,20 @@
   background-size: 200px 200px;
 }
 
-:root[data-theme='beeswax'] .app {
+:root[data-theme='satisfaction'] .app {
   position: relative;
   z-index: 1;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Elevation Hierarchy ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-/* Level 0: body background ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â warm dark ambient
-   Level 1: track cards ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â beeswax wood panels
-   Level 2: control sections ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â inset control trays
-   Level 3: interactive controls ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â elevated with contact shadows */
+/* ΓöÇΓöÇ Elevation Hierarchy ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+/* Level 0: body background ΓÇö warm dark ambient
+   Level 1: track cards ΓÇö beeswax wood panels
+   Level 2: control sections ΓÇö inset control trays
+   Level 3: interactive controls ΓÇö elevated with contact shadows */
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Track Cards (Level 1) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ Track Cards (Level 1) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 /* Beeswax-coated wood. Directional gradient from upper-left light. */
-:root[data-theme='beeswax'] .track-card {
+:root[data-theme='satisfaction'] .track-card {
   background:
     linear-gradient(
       150deg,
@@ -3220,7 +3220,7 @@
   border: none;
   border-radius: var(--radius);
   box-shadow:
-    /* Upper edge highlight ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â subtle catch light */
+    /* Upper edge highlight ΓÇö subtle catch light */
     inset 0 1px 0 0 rgba(255, 235, 200, 0.10),
     /* Ambient occlusion contact shadow */
     0 1px 2px rgba(0, 0, 0, 0.25),
@@ -3229,7 +3229,7 @@
 }
 
 /* Track-card bottom edge drop-shadow (contact with surface) */
-:root[data-theme='beeswax'] .track-card::after {
+:root[data-theme='satisfaction'] .track-card::after {
   content: '';
   position: absolute;
   left: 4%;
@@ -3243,7 +3243,7 @@
 }
 
 /* Upper edge highlight line */
-:root[data-theme='beeswax'] .track-card::before {
+:root[data-theme='satisfaction'] .track-card::before {
   content: '';
   position: absolute;
   top: 0;
@@ -3254,58 +3254,58 @@
   pointer-events: none;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Track Colors (voice-dependent) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .track-card[data-voice='kick'] {
+/* ΓöÇΓöÇ Track Colors (voice-dependent) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick-mid);
 }
-:root[data-theme='beeswax'] .track-card[data-voice='kick'] .step.onset {
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.onset {
   fill: var(--color-kick-mid);
 }
-:root[data-theme='beeswax'] .track-card[data-voice='kick'] .shape {
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] .shape {
   fill: color-mix(in srgb, var(--color-kick) 18%, transparent);
   stroke: var(--color-kick-mid);
 }
 
-:root[data-theme='beeswax'] .track-card[data-voice='snare'] {
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare-mid);
 }
-:root[data-theme='beeswax'] .track-card[data-voice='snare'] .step.onset {
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] .step.onset {
   fill: var(--color-snare-mid);
 }
-:root[data-theme='beeswax'] .track-card[data-voice='snare'] .shape {
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] .shape {
   fill: color-mix(in srgb, var(--color-snare) 18%, transparent);
   stroke: var(--color-snare-mid);
 }
 
-:root[data-theme='beeswax'] .track-card[data-voice='hat'] {
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat-mid);
 }
-:root[data-theme='beeswax'] .track-card[data-voice='hat'] .step.onset {
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] .step.onset {
   fill: var(--color-hat-mid);
 }
-:root[data-theme='beeswax'] .track-card[data-voice='hat'] .shape {
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] .shape {
   fill: color-mix(in srgb, var(--color-hat) 18%, transparent);
   stroke: var(--color-hat-mid);
 }
 
-:root[data-theme='beeswax'] .track-card[data-voice='bass'] {
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass-mid);
 }
-:root[data-theme='beeswax'] .track-card[data-voice='bass'] .step.onset {
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] .step.onset {
   fill: var(--color-bass-mid);
 }
-:root[data-theme='beeswax'] .track-card[data-voice='bass'] .shape {
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] .shape {
   fill: color-mix(in srgb, var(--color-bass) 18%, transparent);
   stroke: var(--color-bass-mid);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Step (Note) Styles ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ Step (Note) Styles ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 /* Active steps: illuminated honey cells with amber glow */
-:root[data-theme='beeswax'] .step.onset.current {
-  animation: beeswax-bloom 250ms ease-out forwards;
+:root[data-theme='satisfaction'] .step.onset.current {
+  animation: satisfaction-bloom 250ms ease-out forwards;
 }
 
-@keyframes beeswax-bloom {
+@keyframes satisfaction-bloom {
   0% {
     fill: #f2ebd8;
     r: 11px;
@@ -3331,7 +3331,7 @@
   }
 }
 
-:root[data-theme='beeswax'] .step.current .step-indicator {
+:root[data-theme='satisfaction'] .step.current .step-indicator {
   fill: #f2ebd8;
   stroke: #f2ca5a;
   stroke-width: 1.5px;
@@ -3339,31 +3339,31 @@
     drop-shadow(0 0 8px rgba(242, 202, 90, 0.30))
     drop-shadow(0 0 16px rgba(196, 136, 32, 0.08));
 }
-:root[data-theme='beeswax'] .step.current .visual {
+:root[data-theme='satisfaction'] .step.current .visual {
   fill: #f2ebd8;
 }
 
-:root[data-theme='beeswax'] .sequencer .step.rest {
+:root[data-theme='satisfaction'] .sequencer .step.rest {
   fill: rgba(255, 235, 200, 0.06);
 }
-:root[data-theme='beeswax'] .sequencer .step.onset {
+:root[data-theme='satisfaction'] .sequencer .step.onset {
   fill: var(--track-color);
 }
 
-:root[data-theme='beeswax'] .guide {
+:root[data-theme='satisfaction'] .guide {
   fill: none;
   stroke: rgba(255, 235, 200, 0.05);
   stroke-width: 0.5px;
 }
 
-:root[data-theme='beeswax'] .hand {
+:root[data-theme='satisfaction'] .hand {
   stroke: rgba(242, 202, 90, 0.12);
   stroke-width: 0.5px;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Shapes (polygons) with materiality ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ Shapes (polygons) with materiality ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 /* Faint internal gradient + drop-shadow for illuminated appearance */
-:root[data-theme='beeswax'] .sequencer .shape {
+:root[data-theme='satisfaction'] .sequencer .shape {
   fill: color-mix(in srgb, var(--track-color) 14%, transparent);
   stroke: var(--track-color);
   stroke-width: 1.2;
@@ -3371,13 +3371,13 @@
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Controls (Level 2: control sections / control trays) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ Controls (Level 2: control sections / control trays) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 /* Inset recessed areas suggesting wall thickness */
-:root[data-theme='beeswax'] .module-controls,
-:root[data-theme='beeswax'] .knob-row,
-:root[data-theme='beeswax'] .velocity-bars,
-:root[data-theme='beeswax'] .pitch-contour,
-:root[data-theme='beeswax'] .mini-axis {
+:root[data-theme='satisfaction'] .module-controls,
+:root[data-theme='satisfaction'] .knob-row,
+:root[data-theme='satisfaction'] .velocity-bars,
+:root[data-theme='satisfaction'] .pitch-contour,
+:root[data-theme='satisfaction'] .mini-axis {
   background:
     linear-gradient(
       150deg,
@@ -3389,14 +3389,14 @@
   border: none;
   border-radius: 8px;
   box-shadow:
-    /* Inset walls ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â perceived depth */
+    /* Inset walls ΓÇö perceived depth */
     inset 0 1px 2px rgba(255, 235, 200, 0.06),
     inset 0 -2px 4px rgba(0, 0, 0, 0.10);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Buttons (Level 3: interactive controls) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ Buttons (Level 3: interactive controls) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 /* Machined, beveled, with directional highlights */
-:root[data-theme='beeswax'] button:not(.play):not(.preset-browser-close):not(.pattern-slot):not(.toggle):not(.mask-cell):not(.velocity-step) {
+:root[data-theme='satisfaction'] button:not(.play):not(.preset-browser-close):not(.pattern-slot):not(.toggle):not(.mask-cell):not(.velocity-step) {
   background:
     linear-gradient(
       160deg,
@@ -3419,7 +3419,7 @@
     0 2px 4px rgba(0, 0, 0, 0.10);
   transition: background 0.15s ease, box-shadow 0.15s ease;
 }
-:root[data-theme='beeswax'] button:not(.play):not(.preset-browser-close):not(.pattern-slot):not(.toggle):not(.mask-cell):not(.velocity-step):hover {
+:root[data-theme='satisfaction'] button:not(.play):not(.preset-browser-close):not(.pattern-slot):not(.toggle):not(.mask-cell):not(.velocity-step):hover {
   background:
     linear-gradient(
       160deg,
@@ -3434,8 +3434,8 @@
     0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Toggle buttons ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .toggle {
+/* ΓöÇΓöÇ Toggle buttons ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .toggle {
   background:
     linear-gradient(
       160deg,
@@ -3453,7 +3453,7 @@
   letter-spacing: 1px;
   padding: 5px 9px;
 }
-:root[data-theme='beeswax'] .toggle:hover {
+:root[data-theme='satisfaction'] .toggle:hover {
   color: var(--text);
   border-color: rgba(255, 235, 200, 0.15);
   background:
@@ -3464,7 +3464,7 @@
     ),
     transparent;
 }
-:root[data-theme='beeswax'] .toggle.is-on[data-kind='mute'] {
+:root[data-theme='satisfaction'] .toggle.is-on[data-kind='mute'] {
   background: var(--danger);
   border-color: var(--danger);
   color: var(--bg);
@@ -3472,7 +3472,7 @@
     inset 0 1px 0 0 rgba(255, 235, 200, 0.15),
     0 1px 2px rgba(0, 0, 0, 0.15);
 }
-:root[data-theme='beeswax'] .toggle.is-on[data-kind='solo'] {
+:root[data-theme='satisfaction'] .toggle.is-on[data-kind='solo'] {
   background: var(--warn);
   border-color: var(--warn);
   color: var(--bg);
@@ -3481,8 +3481,8 @@
     0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Transport / Play button (machined feel) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .play {
+/* ΓöÇΓöÇ Transport / Play button (machined feel) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .play {
   background:
     linear-gradient(
       150deg,
@@ -3506,7 +3506,7 @@
     0 4px 12px rgba(0, 0, 0, 0.12);
   transition: filter 0.12s ease, box-shadow 0.12s ease;
 }
-:root[data-theme='beeswax'] .play:hover {
+:root[data-theme='satisfaction'] .play:hover {
   filter: brightness(1.05);
   box-shadow:
     inset 0 1px 1px 0 rgba(255, 235, 200, 0.25),
@@ -3514,10 +3514,10 @@
     0 2px 4px rgba(0, 0, 0, 0.25),
     0 4px 14px rgba(0, 0, 0, 0.15);
 }
-:root[data-theme='beeswax'] .play:active {
+:root[data-theme='satisfaction'] .play:active {
   transform: scale(0.97);
 }
-:root[data-theme='beeswax'] .play.is-playing {
+:root[data-theme='satisfaction'] .play.is-playing {
   background:
     linear-gradient(
       150deg,
@@ -3532,10 +3532,10 @@
     0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Export / Reset buttons ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .export,
-:root[data-theme='beeswax'] .reset,
-:root[data-theme='beeswax'] .reset-pattern {
+/* ΓöÇΓöÇ Export / Reset buttons ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .export,
+:root[data-theme='satisfaction'] .reset,
+:root[data-theme='satisfaction'] .reset-pattern {
   background:
     linear-gradient(
       160deg,
@@ -3554,9 +3554,9 @@
     0 1px 2px rgba(0, 0, 0, 0.12);
   transition: background 0.12s ease, box-shadow 0.12s ease;
 }
-:root[data-theme='beeswax'] .export:hover,
-:root[data-theme='beeswax'] .reset:hover,
-:root[data-theme='beeswax'] .reset-pattern:hover {
+:root[data-theme='satisfaction'] .export:hover,
+:root[data-theme='satisfaction'] .reset:hover,
+:root[data-theme='satisfaction'] .reset-pattern:hover {
   background:
     linear-gradient(
       160deg,
@@ -3570,42 +3570,42 @@
     0 1px 3px rgba(0, 0, 0, 0.18);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Knobs ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ Knobs ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 /* Polished amber resin with specular reflection */
-:root[data-theme='beeswax'] .knob-dial {
+:root[data-theme='satisfaction'] .knob-dial {
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.20));
 }
-:root[data-theme='beeswax'] .knob-fill {
+:root[data-theme='satisfaction'] .knob-fill {
   stroke: var(--accent);
 }
-:root[data-theme='beeswax'] .knob-track {
+:root[data-theme='satisfaction'] .knob-track {
   stroke: rgba(255, 235, 200, 0.08);
 }
-:root[data-theme='beeswax'] .knob-dot {
+:root[data-theme='satisfaction'] .knob-dot {
   fill: var(--accent);
 }
-:root[data-theme='beeswax'] .knob-label {
+:root[data-theme='satisfaction'] .knob-label {
   color: var(--text-dim);
 }
-:root[data-theme='beeswax'] .knob-value {
+:root[data-theme='satisfaction'] .knob-value {
   color: var(--text-hi);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Transport knobs ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .transport-knobs .knob .knob-fill,
-:root[data-theme='beeswax'] .transport-knobs .knob .knob-dot {
+/* ΓöÇΓöÇ Transport knobs ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .transport-knobs .knob .knob-fill,
+:root[data-theme='satisfaction'] .transport-knobs .knob .knob-dot {
   stroke: var(--accent);
 }
-:root[data-theme='beeswax'] .transport-knobs .knob .knob-dot {
+:root[data-theme='satisfaction'] .transport-knobs .knob .knob-dot {
   fill: var(--accent);
 }
-:root[data-theme='beeswax'] .transport-knobs .knob .knob-value {
+:root[data-theme='satisfaction'] .transport-knobs .knob .knob-value {
   font: 600 11px/1 var(--mono);
   letter-spacing: 0.3px;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Dropdowns (Level 3) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] select {
+/* ΓöÇΓöÇ Dropdowns (Level 3) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] select {
   background:
     linear-gradient(
       160deg,
@@ -3622,16 +3622,16 @@
     inset 0 1px 0 0 rgba(255, 235, 200, 0.06),
     0 1px 1px rgba(0, 0, 0, 0.08);
 }
-:root[data-theme='beeswax'] select option {
+:root[data-theme='satisfaction'] select option {
   background: #231f17;
   color: var(--text);
 }
-:root[data-theme='beeswax'] select option:checked {
+:root[data-theme='satisfaction'] select option:checked {
   background: rgba(196, 136, 32, 0.15);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Pattern Slots ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .pattern-slot {
+/* ΓöÇΓöÇ Pattern Slots ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .pattern-slot {
   background:
     linear-gradient(
       160deg,
@@ -3652,15 +3652,15 @@
     inset 0 1px 0 0 rgba(255, 235, 200, 0.04),
     0 1px 1px rgba(0, 0, 0, 0.06);
 }
-:root[data-theme='beeswax'] .pattern-slot:hover {
+:root[data-theme='satisfaction'] .pattern-slot:hover {
   color: var(--text);
   border-color: rgba(255, 235, 200, 0.12);
 }
-:root[data-theme='beeswax'] .pattern-slot.is-stored {
+:root[data-theme='satisfaction'] .pattern-slot.is-stored {
   color: var(--text);
   border-color: var(--accent);
 }
-:root[data-theme='beeswax'] .pattern-slot.is-active {
+:root[data-theme='satisfaction'] .pattern-slot.is-active {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--bg);
@@ -3669,18 +3669,18 @@
     0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Slider / Range ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] input[type='range'] {
+/* ΓöÇΓöÇ Slider / Range ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] input[type='range'] {
   height: 4px;
   cursor: pointer;
 }
-:root[data-theme='beeswax'] input[type='range']::-webkit-slider-runnable-track {
+:root[data-theme='satisfaction'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
   background: rgba(255, 235, 200, 0.06);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.10);
 }
-:root[data-theme='beeswax'] input[type='range']::-webkit-slider-thumb {
+:root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -3694,17 +3694,17 @@
   margin-top: -6px;
   transition: transform 0.10s ease;
 }
-:root[data-theme='beeswax'] input[type='range']::-webkit-slider-thumb:hover {
+:root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb:hover {
   transform: scale(1.15);
 }
-:root[data-theme='beeswax'] input[type='range']::-moz-range-track {
+:root[data-theme='satisfaction'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
   background: rgba(255, 235, 200, 0.06);
   border: none;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.10);
 }
-:root[data-theme='beeswax'] input[type='range']::-moz-range-thumb {
+:root[data-theme='satisfaction'] input[type='range']::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -3717,52 +3717,52 @@
     0 1px 2px rgba(0, 0, 0, 0.20);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Labels & Typography ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] label {
+/* ΓöÇΓöÇ Labels & Typography ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] label {
   color: var(--text-dim);
   font-weight: 450;
   letter-spacing: 0.5px;
   font-size: 11px;
 }
-:root[data-theme='beeswax'] .control-label {
+:root[data-theme='satisfaction'] .control-label {
   color: var(--text-dim);
   font-size: 10px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
-:root[data-theme='beeswax'] .control-label b {
+:root[data-theme='satisfaction'] .control-label b {
   color: var(--text);
 }
-:root[data-theme='beeswax'] .bpm b,
-:root[data-theme='beeswax'] .swing b {
+:root[data-theme='satisfaction'] .bpm b,
+:root[data-theme='satisfaction'] .swing b {
   color: var(--accent);
 }
-:root[data-theme='beeswax'] h1 {
+:root[data-theme='satisfaction'] h1 {
   color: var(--text-hi);
   font-weight: 400;
   letter-spacing: 2px;
 }
-:root[data-theme='beeswax'] .tagline {
+:root[data-theme='satisfaction'] .tagline {
   color: var(--text-dim);
   font-size: 11px;
   letter-spacing: 2px;
   text-transform: uppercase;
   opacity: 0.7;
 }
-:root[data-theme='beeswax'] .track-name {
+:root[data-theme='satisfaction'] .track-name {
   color: var(--text-hi);
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
   font-size: 11px;
 }
-:root[data-theme='beeswax'] .mini-metrics b {
+:root[data-theme='satisfaction'] .mini-metrics b {
   color: var(--accent);
 }
-:root[data-theme='beeswax'] .mini-metrics span {
+:root[data-theme='satisfaction'] .mini-metrics span {
   color: var(--text-dim);
 }
-:root[data-theme='beeswax'] .playback-select select {
+:root[data-theme='satisfaction'] .playback-select select {
   background:
     linear-gradient(
       160deg,
@@ -3778,15 +3778,15 @@
     inset 0 1px 0 0 rgba(255, 235, 200, 0.06),
     0 1px 1px rgba(0, 0, 0, 0.08);
 }
-:root[data-theme='beeswax'] .playback-select span {
+:root[data-theme='satisfaction'] .playback-select span {
   color: var(--text-dim);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Mask controls ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .mask-label {
+/* ΓöÇΓöÇ Mask controls ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .mask-label {
   color: var(--text-dim);
 }
-:root[data-theme='beeswax'] .mask-cell {
+:root[data-theme='satisfaction'] .mask-cell {
   border-radius: 4px;
   padding: 0;
   width: 15px;
@@ -3797,34 +3797,34 @@
     inset 0 1px 0 0 rgba(255, 235, 200, 0.04),
     0 1px 1px rgba(0, 0, 0, 0.06);
 }
-:root[data-theme='beeswax'] .mask-cell.rest {
+:root[data-theme='satisfaction'] .mask-cell.rest {
   background: rgba(255, 235, 200, 0.02);
   opacity: 1;
   cursor: default;
 }
-:root[data-theme='beeswax'] .mask-cell.onset {
+:root[data-theme='satisfaction'] .mask-cell.onset {
   background: var(--track-color);
   opacity: 1;
 }
-:root[data-theme='beeswax'] .mask-cell.onset.muted {
+:root[data-theme='satisfaction'] .mask-cell.onset.muted {
   background: transparent;
   border: 1px solid var(--track-color);
   opacity: 0.50;
 }
-:root[data-theme='beeswax'] .mask-cell.onset:hover {
+:root[data-theme='satisfaction'] .mask-cell.onset:hover {
   filter: brightness(1.2);
 }
-:root[data-theme='beeswax'] .mask-cell.is-current {
+:root[data-theme='satisfaction'] .mask-cell.is-current {
   box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--current);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Module lanes ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .module-lane {
+/* ΓöÇΓöÇ Module lanes ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .module-lane {
   border-top: 1px solid rgba(255, 235, 200, 0.04);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ MIDI OUT ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .midi-out select {
+/* ΓöÇΓöÇ MIDI OUT ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .midi-out select {
   background:
     linear-gradient(
       160deg,
@@ -3840,18 +3840,18 @@
     inset 0 1px 0 0 rgba(255, 235, 200, 0.06),
     0 1px 1px rgba(0, 0, 0, 0.08);
 }
-:root[data-theme='beeswax'] .midi-out .toggle {
+:root[data-theme='satisfaction'] .midi-out .toggle {
   border-radius: 6px;
   padding: 4px 10px;
 }
-:root[data-theme='beeswax'] .midi-out .toggle.is-on {
+:root[data-theme='satisfaction'] .midi-out .toggle.is-on {
   border-color: var(--accent);
   color: var(--accent);
   background: rgba(196, 136, 32, 0.10);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ FX Toggle ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .fx-toggle {
+/* ΓöÇΓöÇ FX Toggle ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .fx-toggle {
   background: rgba(255, 235, 200, 0.04);
   border: 1px solid rgba(255, 235, 200, 0.08);
   border-radius: 999px;
@@ -3860,13 +3860,13 @@
     inset 0 1px 0 0 rgba(255, 235, 200, 0.04),
     0 1px 1px rgba(0, 0, 0, 0.06);
 }
-:root[data-theme='beeswax'] .fx-toggle:hover {
+:root[data-theme='satisfaction'] .fx-toggle:hover {
   background: rgba(255, 235, 200, 0.08);
   border-color: rgba(255, 235, 200, 0.15);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Master scope ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='beeswax'] .master-scope {
+/* ΓöÇΓöÇ Master scope ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .master-scope {
   background:
     linear-gradient(
       150deg,
@@ -3883,7 +3883,7 @@
     0 1px 2px rgba(0, 0, 0, 0.15),
     0 3px 8px rgba(0, 0, 0, 0.10);
 }
-:root[data-theme='beeswax'] .master-scope .oscilloscope-canvas {
+:root[data-theme='satisfaction'] .master-scope .oscilloscope-canvas {
   opacity: 0.85;
 }
 
@@ -3977,20 +3977,20 @@ select option:checked {
   color-scheme: dark;
 }
 
-/* Aurora Glass background ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ three independently-blurred colour blobs.
+/* Aurora Glass background ╬ô├ç├╢ three independently-blurred colour blobs.
    The previous reactor used 4 radial gradients in a single `background`
    layer; they shared one `transparent` fade and met at sharp stops,
    producing visible horizontal seams. This version uses THREE separate
    pseudo-element layers, each with `filter: blur(120px)` and
    `mix-blend-mode: screen`, so the only thing that touches the dark base
-   is light ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ never a fade-to-black halo, never an edge to another blob.
+   is light ╬ô├ç├╢ never a fade-to-black halo, never an edge to another blob.
    No PNG/JPG/SVG, no JS, no canvas. Existing Elements palette only. */
 
 :root[data-theme='elements'] body {
   background: var(--bg);
 }
 
-/* Layer A ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ Earth + Fire (warm). Upper-left / top-centre. */
+/* Layer A ╬ô├ç├╢ Earth + Fire (warm). Upper-left / top-centre. */
 :root[data-theme='elements'] body::before {
   content: '';
   position: fixed;
@@ -4012,7 +4012,7 @@ select option:checked {
   will-change: transform;
 }
 
-/* Layer B ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ Air (blue). Upper-right. */
+/* Layer B ╬ô├ç├╢ Air (blue). Upper-right. */
 :root[data-theme='elements'] body::after {
   content: '';
   position: fixed;
@@ -4034,7 +4034,7 @@ select option:checked {
   will-change: transform;
 }
 
-/* Layer C ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ Water (cyan/turquoise). Lower-left.
+/* Layer C ╬ô├ç├╢ Water (cyan/turquoise). Lower-left.
    Hosted on .app::before so we get a third pseudo-element without
    touching the DOM. .app's z-index:1 stacking context keeps the blob
    below page content while still painting against the dark body. */
@@ -4066,8 +4066,8 @@ select option:checked {
 
 /* Almost-imperceptible drift. Three independent keyframes so the blobs
    never line up; amplitude is 2-4% so motion reads as breathing, not
-   travel. Translate only ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ no rotation, no scaling, no opacity pulse.
-   Long durations (130s / 170s / 150s) ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¥ÃƒÆ’Ã¢â‚¬Â  ~0.005 Hz, well below any
+   travel. Translate only ╬ô├ç├╢ no rotation, no scaling, no opacity pulse.
+   Long durations (130s / 170s / 150s) ╬ô├Ñ├å ~0.005 Hz, well below any
    conscious detection threshold. */
 :root[data-theme='elements'][data-fx='on'] body::before {
   animation: aurora-drift-a 150s ease-in-out infinite;
@@ -4314,11 +4314,11 @@ select option:checked {
 }
 
 /* ---------- Vintage Paper theme (light) ---------- */
-/* Warm, tactile, analog ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ a composer's notebook. Only CSS variables change;
+/* Warm, tactile, analog ╬ô├ç├╢ a composer's notebook. Only CSS variables change;
    the DOM, components and layout are identical to Nocturne. */
 :root[data-theme='paper'] {
   /* Premium notebook / sketchbook paper: warm cream, archival-feel.
-     Moleskine/Midori aesthetic ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ warmer and more beige than bright
+     Moleskine/Midori aesthetic ╬ô├ç├╢ warmer and more beige than bright
      office paper, but still light and readable. */
   --bg: #efe7d8;
   --panel: #e8dfcf;
@@ -4352,7 +4352,7 @@ select option:checked {
   color-scheme: light;
 }
 
-/* Procedural paper grain. SVG fractal noise inline as a data-uri ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ no external
+/* Procedural paper grain. SVG fractal noise inline as a data-uri ╬ô├ç├╢ no external
    file, no PNG, no GPU-heavy filter. The overlay sits above the background but
    below content with pointer-events: none so it can never block interaction. */
 :root[data-theme='paper'] body::before {
@@ -4459,9 +4459,9 @@ header h1 {
 
 /* ---------- responsive track grid ---------- */
 /* Mobile-first: 1 column < 768px.
-   Tablet portrait (768ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“1023px): 2ÃƒÆ’Ã¢â‚¬â€2 dedicated compact cards.
-   Tablet landscape (1024ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“1199px): 4 columns, full-width, hardware feel.
-   Desktop (ÃƒÂ¢Ã¢â‚¬Â°Ã‚Â¥1200px): 4 columns with wider container. */
+   Tablet portrait (768ΓÇô1023px): 2├ù2 dedicated compact cards.
+   Tablet landscape (1024ΓÇô1199px): 4 columns, full-width, hardware feel.
+   Desktop (ΓëÑ1200px): 4 columns with wider container. */
 
 .tracks {
   width: 100%;
@@ -4470,7 +4470,7 @@ header h1 {
   grid-template-columns: 1fr;
 }
 
-/* --- Tablet portrait (768ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“1023px) ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â dedicated compact card layout --- */
+/* --- Tablet portrait (768ΓÇô1023px) ΓÇö dedicated compact card layout --- */
 @media (min-width: 768px) and (max-width: 1023px) {
   .app {
     max-width: 100%;
@@ -4612,7 +4612,7 @@ header h1 {
   }
 }
 
-/* --- Tablet landscape (1024ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“1199px) ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â full-width hardware feel --- */
+/* --- Tablet landscape (1024ΓÇô1199px) ΓÇö full-width hardware feel --- */
 @media (min-width: 1024px) and (max-width: 1199px) {
   .app {
     max-width: 100%;
@@ -4644,7 +4644,7 @@ header h1 {
     padding: 2px 5px;
   }
 
-  /* Polygon: larger ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â ~42% of card height */
+  /* Polygon: larger ΓÇö ~42% of card height */
   .sequencer-wrapper {
     max-height: 170px;
   }
@@ -4740,7 +4740,7 @@ header h1 {
   }
 }
 
-/* Desktop ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â wider container, original spacing */
+/* Desktop ΓÇö wider container, original spacing */
 @media (min-width: 1200px) {
   .app {
     max-width: 1440px;
@@ -4765,7 +4765,7 @@ header h1 {
   grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   box-shadow: var(--card-shadow);
-  /* overflow:hidden removed ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â it was clipping SVG sequencer content
+  /* overflow:hidden removed ΓÇö it was clipping SVG sequencer content
      in themes with large border-radius (University: 28px, BigBoss: 24px).
      Themes must NEVER affect geometry/layout.
      Children that need clipping handle it themselves. */
@@ -4848,14 +4848,14 @@ header h1 {
   stroke-width: 1.5;
   stroke-linejoin: round;
 }
-/* Playhead arrow: stable. No transition, no pulse ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ it just rotates to point
+/* Playhead arrow: stable. No transition, no pulse ╬ô├ç├╢ it just rotates to point
    at the current step. The eye follows the dots, not the arrow. */
 .sequencer .hand {
   stroke: var(--current);
   stroke-width: 2;
   opacity: 0.5;
 }
-/* Non-current dots are static ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ no fill/radius transitions mean the eye
+/* Non-current dots are static ╬ô├ç├╢ no fill/radius transitions mean the eye
    isn't pulled around by ghost-pulses on neighbouring positions. */
 .sequencer .step.rest {
   fill: var(--rest);
@@ -4865,7 +4865,7 @@ header h1 {
 }
 /* One-shot flash when the playhead ENTERS an onset. CSS animations
    auto-restart whenever the class is (re)applied to a new element, and the
-   scheduler hands `.current` to a different dot each tick ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ so each entry
+   scheduler hands `.current` to a different dot each tick ╬ô├ç├╢ so each entry
    triggers a fresh, short flash and then the dot stays static until the
    playhead moves on. No infinite pulse, no ambient flicker. Opacity only
    (no scale) keeps the ring geometry frozen. */
@@ -4882,7 +4882,7 @@ header h1 {
   cursor: pointer;
 }
 /* A manually muted onset stays visible (original generated position) but
-   dimmed, with a cross ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ the rhythm is being sculpted, not regenerated. */
+   dimmed, with a cross ╬ô├ç├╢ the rhythm is being sculpted, not regenerated. */
 .sequencer .step.onset.muted {
   opacity: 0.3;
 }
@@ -5008,13 +5008,13 @@ header h1 {
   font: 500 10px var(--mono);
   color: var(--text-hi);
 }
-/* Main params row: Steps / Hits / Vol / Rot ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ four equal columns. */
+/* Main params row: Steps / Hits / Vol / Rot ╬ô├ç├╢ four equal columns. */
 .knob-row[data-role='params'] {
   grid-template-columns: repeat(4, 1fr);
   justify-items: center;
 }
 
-/* ---------- pattern bank (AÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â´L slots) ---------- */
+/* ---------- pattern bank (A╬ô├ç├┤L slots) ---------- */
 .pattern-bank {
   display: flex;
   gap: 3px;
@@ -5076,7 +5076,7 @@ header h1 {
   cursor: pointer;
   transition: background 0.12s ease, border-color 0.12s ease, opacity 0.12s ease;
 }
-/* An audible generated onset ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ filled with the track colour. Click to mute. */
+/* An audible generated onset ╬ô├ç├╢ filled with the track colour. Click to mute. */
 .mask-cell.onset {
   background: var(--track-color);
   border-color: var(--track-color);
@@ -5084,13 +5084,13 @@ header h1 {
 .mask-cell.onset:hover {
   filter: brightness(1.15);
 }
-/* A muted onset ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ hollow + dim so it reads as "won't sound". Click to unmute. */
+/* A muted onset ╬ô├ç├╢ hollow + dim so it reads as "won't sound". Click to unmute. */
 .mask-cell.onset.muted {
   background: transparent;
   border-color: var(--track-color);
   opacity: 0.45;
 }
-/* A rest ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ inert positional marker, nothing to mute. */
+/* A rest ╬ô├ç├╢ inert positional marker, nothing to mute. */
 .mask-cell.rest {
   opacity: 0.3;
   cursor: default;
@@ -5772,7 +5772,7 @@ header h1 {
 
 /* ===============================================================
    MIXER PANEL
-   Layout-layer only ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â colors/themes use only CSS variables.
+   Layout-layer only ΓÇö colors/themes use only CSS variables.
    All dimensions are FIXED, never theme-dependent.
    =============================================================== */
 
@@ -5811,7 +5811,7 @@ header h1 {
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  /* Fixed width ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â never changes between themes */
+  /* Fixed width ΓÇö never changes between themes */
   min-width: 78px;
   max-width: 78px;
   padding: 8px 6px;
@@ -5849,7 +5849,7 @@ header h1 {
   white-space: nowrap;
 }
 
-/* Peak meter ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â vertical bar, fixed dimensions */
+/* Peak meter ΓÇö vertical bar, fixed dimensions */
 .mixer-peak-meter {
   width: 10px;
   height: 60px;
@@ -5875,7 +5875,7 @@ header h1 {
   transition: height 0.04s linear;
 }
 
-/* dBFS zone colours ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â green (-ÃƒÂ¢Ã‹â€ Ã…Â¾ to -18), yellow-green (-18 to -12),
+/* dBFS zone colours ΓÇö green (-Γê₧ to -18), yellow-green (-18 to -12),
    yellow (-12 to -6), orange (-6 to -3), red (-3 to 0) */
 .mixer-peak-cool {
   background: linear-gradient(to top, #66cc66 0%, #88dd66 60%, #ccdd66 100%);
@@ -5929,7 +5929,7 @@ header h1 {
   z-index: 3;
 }
 
-/* Fader ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â fixed layout, theme has no influence on dimensions */
+/* Fader ΓÇö fixed layout, theme has no influence on dimensions */
 .channel-fader {
   display: flex;
   flex-direction: column;
@@ -5948,7 +5948,7 @@ header h1 {
 }
 
 .fader-scale {
-  /* Hidden by default ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â scale labels are visible inside 78px channel.
+  /* Hidden by default ΓÇö scale labels are visible inside 78px channel.
      We keep the structure so db ticks show through the fader-rail. */
   position: absolute;
   left: -4px;
@@ -6022,7 +6022,7 @@ header h1 {
   line-height: 1;
 }
 
-/* Pan slider ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â fixed, theme-independent */
+/* Pan slider ΓÇö fixed, theme-independent */
 
 
 /* Button rows: two rows (FX + M/S/R), each centered */
@@ -6087,7 +6087,7 @@ header h1 {
   background: color-mix(in srgb, var(--accent) 12%, var(--panel));
 }
 
-/* Scope section inside mixer ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â fixed radius, no theme override */
+/* Scope section inside mixer ΓÇö fixed radius, no theme override */
 .mixer-scope-section {
   width: 100%;
   background: var(--panel);
@@ -6243,7 +6243,7 @@ header h1 {
   background: color-mix(in srgb, var(--accent, #ff00c8) 6%, transparent);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ FX Slot ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ FX Slot ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 .fx-slot {
   display: flex;
@@ -6356,7 +6356,7 @@ header h1 {
   color: var(--danger, #ff4444);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Effect Picker ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ Effect Picker ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 .ep-overlay {
   position: fixed;
@@ -6430,7 +6430,7 @@ header h1 {
   color: var(--accent, #ff00c8);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Universal Editor ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ Universal Editor ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 
 .ue-row {
   margin-bottom: 6px;
@@ -6593,7 +6593,7 @@ header h1 {
    MIXER THEME OVERRIDES
    Every theme that sets global button/input styles must be
    neutralized for mixer elements. Theme rules should never
-   affect mixer layout geometry ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â only colors.
+   affect mixer layout geometry ΓÇö only colors.
    =============================================================== */
 
 /* Neutralise ALL theme button overrides on mixer buttons */
@@ -6770,7 +6770,7 @@ header h1 {
   color: #ffffff;
 }
 
-/* Compact buttons ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ restore small size; global `button` doesn't override padding here */
+/* Compact buttons ╬ô├ç├╢ restore small size; global `button` doesn't override padding here */
 :root[data-theme='bauhaus'] .pattern-slot {
   border-radius: 2px;
   padding: 5px 0;
@@ -6816,7 +6816,7 @@ header h1 {
   background: #d4d4d4;
 }
 
-/* Knob fill in track colour ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ inherited via --track-color, no override needed */
+/* Knob fill in track colour ╬ô├ç├╢ inherited via --track-color, no override needed */
 /* Toggle buttons */
 :root[data-theme='bauhaus'] .toggle.is-on {
   background: #1a1a1a;
@@ -6864,7 +6864,7 @@ header h1 {
   color-scheme: dark;
 }
 
-/* Warm haze background ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ smooth overlapping radial gradients,
+/* Warm haze background ╬ô├ç├╢ smooth overlapping radial gradients,
    no banding, no hard edges. Feels like angled light through smoke. */
 :root[data-theme='smoke-dub'] body {
   background:
@@ -6875,7 +6875,7 @@ header h1 {
     #12100d;
 }
 
-/* Grain overlay ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ fine analog texture */
+/* Grain overlay ╬ô├ç├╢ fine analog texture */
 :root[data-theme='smoke-dub'] body::before {
   content: '';
   position: fixed;
@@ -6892,7 +6892,7 @@ header h1 {
   z-index: 1;
 }
 
-/* Smoked glass cards ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ analog meter windows, studio hardware faceplates */
+/* Smoked glass cards ╬ô├ç├╢ analog meter windows, studio hardware faceplates */
 :root[data-theme='smoke-dub'] .track-card {
   background: rgba(33, 28, 22, 0.80);
   backdrop-filter: blur(10px);
@@ -6961,7 +6961,7 @@ header h1 {
   stroke: rgba(95, 119, 98, 0.18);
 }
 
-/* Active onsets ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ restrained warmth */
+/* Active onsets ╬ô├ç├╢ restrained warmth */
 /* Kick: small pressure pulse */
 @keyframes smoke-kick-pulse {
   0% { r: 11px; fill: #8a9470; }
@@ -7226,7 +7226,7 @@ header h1 {
 
 
 /* ===== Nautilus (Deep Sea / Oceanographic Laboratory) ===== */
-/* Jules Verne meets ambient electronic ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ calm, deep, meditative.
+/* Jules Verne meets ambient electronic ╬ô├ç├╢ calm, deep, meditative.
    Submarine glass, marine instrumentation, underwater observatory. */
 :root[data-theme='nautilus'] {
   --bg: #04141c;
@@ -7261,22 +7261,22 @@ header h1 {
   color-scheme: dark;
 }
 
-/* Background: submerged deep ocean ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ layered radial gradients,
+/* Background: submerged deep ocean ╬ô├ç├╢ layered radial gradients,
    no hard transitions, no colour banding. */
 :root[data-theme='nautilus'] body {
   background:
-    /* Core glow ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ ambient bioluminescence from below */
+    /* Core glow ╬ô├ç├╢ ambient bioluminescence from below */
     radial-gradient(ellipse 100% 60% at 50% 100%, rgba(63, 127, 217, 0.08) 0%, transparent 60%),
-    /* Mid-water column ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ deep teal drift */
+    /* Mid-water column ╬ô├ç├╢ deep teal drift */
     radial-gradient(ellipse 80% 40% at 30% 40%, rgba(61, 168, 156, 0.04) 0%, transparent 60%),
-    /* Surface light ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ distant, diffused */
+    /* Surface light ╬ô├ç├╢ distant, diffused */
     radial-gradient(ellipse 70% 30% at 50% 0%, rgba(143, 212, 216, 0.03) 0%, transparent 50%),
     /* Base colour */
     #04141c;
   animation: nautilus-drift 60s ease-in-out infinite alternate;
 }
 
-/* Slow drifting light ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ gentle, musical, never flashy */
+/* Slow drifting light ╬ô├ç├╢ gentle, musical, never flashy */
 @keyframes nautilus-drift {
   0% {
     background-position: 0% 0%, 0% 0%, 0% 0%;
@@ -7646,11 +7646,11 @@ header h1 {
   border-top: 1px solid rgba(143, 212, 216, 0.04);
 }
 
-/* ===== Club Culture (1999 Club Culture / Glossy / Chrome / Backlit) ===== */
+/* ===== SATISFACTION (1999 Club Culture / Glossy / Chrome / Backlit) ===== */
 /* Premium electronic music workstation from the future as imagined in 1999.
-   Pioneering DJ hardware meets club culture ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â glossy, sensual, expensive.
+   Pioneering DJ hardware meets club culture ΓÇö glossy, sensual, expensive.
    Ministry of Sound. Benny Benassi. Ibiza 1999. Pioneer DJM. Gatecrasher. */
-:root[data-theme='club-culture'] {
+:root[data-theme='satisfaction'] {
   --bg: #1E2230;
   --panel: rgba(42, 49, 69, 0.85);
   --panel-hi: rgba(52, 60, 82, 0.90);
@@ -7689,8 +7689,8 @@ header h1 {
   color-scheme: dark;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Background: dark graphite gradient ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] body {
+/* ΓöÇΓöÇ Background: dark graphite gradient ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] body {
   overflow-x: hidden;
   background: linear-gradient(
     180deg,
@@ -7701,13 +7701,13 @@ header h1 {
   position: relative;
 }
 
-:root[data-theme='club-culture'] .app {
+:root[data-theme='satisfaction'] .app {
   position: relative;
   z-index: 1;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Panels: glossy molded plastic, backlit ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â think Pioneer CDJ ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] .track-card {
+/* ΓöÇΓöÇ Panels: glossy molded plastic, backlit ΓÇö think Pioneer CDJ ΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .track-card {
   background: rgba(42, 49, 69, 0.85);
   backdrop-filter: blur(12px) saturate(1.2);
   -webkit-backdrop-filter: blur(12px) saturate(1.2);
@@ -7722,8 +7722,8 @@ header h1 {
   transition: border-color 0.20s ease, box-shadow 0.20s ease;
 }
 
-/* Glossy highlight sweep ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â like backlit molded plastic */
-:root[data-theme='club-culture'] .track-card::after {
+/* Glossy highlight sweep ΓÇö like backlit molded plastic */
+:root[data-theme='satisfaction'] .track-card::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -7740,8 +7740,8 @@ header h1 {
   );
 }
 
-/* Faint metallic chrome edge ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â very subtle */
-:root[data-theme='club-culture'] .track-card::before {
+/* Faint metallic chrome edge ΓÇö very subtle */
+:root[data-theme='satisfaction'] .track-card::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -7765,149 +7765,149 @@ header h1 {
   );
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Track colors: accents only ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â panels stay neutral graphite ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] .track-card[data-voice='kick'] {
+/* ΓöÇΓöÇ Track colors: accents only ΓÇö panels stay neutral graphite ΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] {
   --track-color: var(--color-kick);
   border-bottom: 2px solid rgba(184, 255, 61, 0.15);
 }
-:root[data-theme='club-culture'] .track-card[data-voice='kick'] .step.onset {
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.onset {
   fill: var(--color-kick);
   filter: drop-shadow(0 0 8px rgba(184, 255, 61, 0.30)) drop-shadow(0 0 18px rgba(184, 255, 61, 0.10));
 }
-:root[data-theme='club-culture'] .track-card[data-voice='kick'] .shape {
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] .shape {
   fill: color-mix(in srgb, var(--color-kick) 22%, transparent);
   stroke: rgba(184, 255, 61, 0.30);
 }
 
-:root[data-theme='club-culture'] .track-card[data-voice='snare'] {
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] {
   --track-color: var(--color-snare);
   border-bottom: 2px solid rgba(255, 154, 31, 0.15);
 }
-:root[data-theme='club-culture'] .track-card[data-voice='snare'] .step.onset {
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] .step.onset {
   fill: var(--color-snare);
   filter: drop-shadow(0 0 8px rgba(255, 154, 31, 0.30)) drop-shadow(0 0 18px rgba(255, 154, 31, 0.10));
 }
-:root[data-theme='club-culture'] .track-card[data-voice='snare'] .shape {
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] .shape {
   fill: color-mix(in srgb, var(--color-snare) 22%, transparent);
   stroke: rgba(255, 154, 31, 0.30);
 }
 
-:root[data-theme='club-culture'] .track-card[data-voice='hat'] {
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] {
   --track-color: var(--color-hat);
   border-bottom: 2px solid rgba(108, 206, 255, 0.15);
 }
-:root[data-theme='club-culture'] .track-card[data-voice='hat'] .step.onset {
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] .step.onset {
   fill: var(--color-hat);
   filter: drop-shadow(0 0 8px rgba(108, 206, 255, 0.30)) drop-shadow(0 0 18px rgba(108, 206, 255, 0.10));
 }
-:root[data-theme='club-culture'] .track-card[data-voice='hat'] .shape {
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] .shape {
   fill: color-mix(in srgb, var(--color-hat) 22%, transparent);
   stroke: rgba(108, 206, 255, 0.28);
 }
 
-:root[data-theme='club-culture'] .track-card[data-voice='bass'] {
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] {
   --track-color: var(--color-bass);
   border-bottom: 2px solid rgba(62, 240, 192, 0.15);
 }
-:root[data-theme='club-culture'] .track-card[data-voice='bass'] .step.onset {
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] .step.onset {
   fill: var(--color-bass);
   filter: drop-shadow(0 0 8px rgba(62, 240, 192, 0.30)) drop-shadow(0 0 18px rgba(62, 240, 192, 0.10));
 }
-:root[data-theme='club-culture'] .track-card[data-voice='bass'] .shape {
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] .shape {
   fill: color-mix(in srgb, var(--color-bass) 22%, transparent);
   stroke: rgba(62, 240, 192, 0.28);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Orbit dots: LED indicators ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â old hardware vibe ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] .step.rest .step-indicator {
+/* ΓöÇΓöÇ Orbit dots: LED indicators ΓÇö old hardware vibe ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .step.rest .step-indicator {
   fill: rgba(180, 190, 210, 0.10);
 }
-:root[data-theme='club-culture'] .track-card[data-voice='kick'] .step.rest .step-indicator {
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.rest .step-indicator {
   fill: rgba(184, 255, 61, 0.20);
   filter: drop-shadow(0 0 3px rgba(184, 255, 61, 0.08));
 }
-:root[data-theme='club-culture'] .track-card[data-voice='snare'] .step.rest .step-indicator {
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] .step.rest .step-indicator {
   fill: rgba(255, 154, 31, 0.20);
   filter: drop-shadow(0 0 3px rgba(255, 154, 31, 0.08));
 }
-:root[data-theme='club-culture'] .track-card[data-voice='hat'] .step.rest .step-indicator {
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] .step.rest .step-indicator {
   fill: rgba(108, 206, 255, 0.20);
   filter: drop-shadow(0 0 3px rgba(108, 206, 255, 0.08));
 }
-:root[data-theme='club-culture'] .track-card[data-voice='bass'] .step.rest .step-indicator {
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] .step.rest .step-indicator {
   fill: rgba(62, 240, 192, 0.20);
   filter: drop-shadow(0 0 3px rgba(62, 240, 192, 0.08));
 }
 
-/* Guide ring and hand lines ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â very faint */
-:root[data-theme='club-culture'] .guide {
+/* Guide ring and hand lines ΓÇö very faint */
+:root[data-theme='satisfaction'] .guide {
   fill: none;
   stroke: rgba(255, 255, 255, 0.02);
   stroke-width: 0.5px;
 }
-:root[data-theme='club-culture'] .hand {
+:root[data-theme='satisfaction'] .hand {
   stroke: rgba(255, 255, 255, 0.03);
   stroke-width: 0.5px;
   opacity: 0;
   transition: opacity 0.3s;
 }
-:root[data-theme='club-culture'] .sequencer:has(.step.current) .hand {
+:root[data-theme='satisfaction'] .sequencer:has(.step.current) .hand {
   opacity: 1;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Active note bloom ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â bright saturated LED shimmer ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-@keyframes beeswax-kick-bloom {
+/* ΓöÇΓöÇ Active note bloom ΓÇö bright saturated LED shimmer ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+@keyframes satisfaction-kick-bloom {
   0%   { r: 11px; fill: var(--color-kick-mid); filter: drop-shadow(0 0 8px rgba(184,255,61,0.30)) drop-shadow(0 0 18px rgba(184,255,61,0.10)); }
   15%  { r: 15px; fill: var(--color-kick-light); filter: drop-shadow(0 0 14px rgba(184,255,61,0.50)) drop-shadow(0 0 30px rgba(184,255,61,0.20)); }
   50%  { r: 13px; filter: drop-shadow(0 0 10px rgba(184,255,61,0.35)) drop-shadow(0 0 22px rgba(184,255,61,0.12)); }
   100% { r: 11px; fill: var(--color-kick-mid); filter: drop-shadow(0 0 8px rgba(184,255,61,0.30)) drop-shadow(0 0 18px rgba(184,255,61,0.10)); }
 }
-@keyframes beeswax-snare-bloom {
+@keyframes satisfaction-snare-bloom {
   0%   { r: 11px; fill: var(--color-snare-mid); filter: drop-shadow(0 0 8px rgba(255,154,31,0.30)) drop-shadow(0 0 18px rgba(255,154,31,0.10)); }
   12%  { r: 15px; fill: var(--color-snare-light); filter: drop-shadow(0 0 14px rgba(255,154,31,0.50)) drop-shadow(0 0 30px rgba(255,154,31,0.20)); }
   45%  { r: 13px; filter: drop-shadow(0 0 10px rgba(255,154,31,0.35)) drop-shadow(0 0 22px rgba(255,154,31,0.12)); }
   100% { r: 11px; fill: var(--color-snare-mid); filter: drop-shadow(0 0 8px rgba(255,154,31,0.30)) drop-shadow(0 0 18px rgba(255,154,31,0.10)); }
 }
-@keyframes beeswax-hat-bloom {
+@keyframes satisfaction-hat-bloom {
   0%   { r: 9px; fill: var(--color-hat-mid); filter: drop-shadow(0 0 6px rgba(108,206,255,0.30)) drop-shadow(0 0 14px rgba(108,206,255,0.10)); }
   20%  { r: 11px; fill: var(--color-hat-light); filter: drop-shadow(0 0 10px rgba(108,206,255,0.50)) drop-shadow(0 0 22px rgba(108,206,255,0.20)); }
   55%  { r: 10px; filter: drop-shadow(0 0 8px rgba(108,206,255,0.35)) drop-shadow(0 0 16px rgba(108,206,255,0.12)); }
   100% { r: 9px; fill: var(--color-hat-mid); filter: drop-shadow(0 0 6px rgba(108,206,255,0.30)) drop-shadow(0 0 14px rgba(108,206,255,0.10)); }
 }
-@keyframes beeswax-bass-bloom {
+@keyframes satisfaction-bass-bloom {
   0%   { r: 11px; fill: var(--color-bass-mid); filter: drop-shadow(0 0 8px rgba(62,240,192,0.30)) drop-shadow(0 0 18px rgba(62,240,192,0.10)); }
   20%  { r: 14px; fill: var(--color-bass-light); filter: drop-shadow(0 0 14px rgba(62,240,192,0.50)) drop-shadow(0 0 30px rgba(62,240,192,0.20)); }
   55%  { r: 13px; filter: drop-shadow(0 0 10px rgba(62,240,192,0.35)) drop-shadow(0 0 22px rgba(62,240,192,0.12)); }
   100% { r: 11px; fill: var(--color-bass-mid); filter: drop-shadow(0 0 8px rgba(62,240,192,0.30)) drop-shadow(0 0 18px rgba(62,240,192,0.10)); }
 }
 
-:root[data-theme='club-culture'] .track-card[data-voice='kick'] .step.onset.current {
-  animation: beeswax-kick-bloom 350ms ease-out forwards;
+:root[data-theme='satisfaction'] .track-card[data-voice='kick'] .step.onset.current {
+  animation: satisfaction-kick-bloom 350ms ease-out forwards;
 }
-:root[data-theme='club-culture'] .track-card[data-voice='snare'] .step.onset.current {
-  animation: beeswax-snare-bloom 320ms ease-out forwards;
+:root[data-theme='satisfaction'] .track-card[data-voice='snare'] .step.onset.current {
+  animation: satisfaction-snare-bloom 320ms ease-out forwards;
 }
-:root[data-theme='club-culture'] .track-card[data-voice='hat'] .step.onset.current {
-  animation: beeswax-hat-bloom 300ms ease-out forwards;
+:root[data-theme='satisfaction'] .track-card[data-voice='hat'] .step.onset.current {
+  animation: satisfaction-hat-bloom 300ms ease-out forwards;
 }
-:root[data-theme='club-culture'] .track-card[data-voice='bass'] .step.onset.current {
-  animation: beeswax-bass-bloom 340ms ease-out forwards;
+:root[data-theme='satisfaction'] .track-card[data-voice='bass'] .step.onset.current {
+  animation: satisfaction-bass-bloom 340ms ease-out forwards;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Playhead: bright white dot with warm halo ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] .step.current .step-indicator {
+/* ΓöÇΓöÇ Playhead: bright white dot with warm halo ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .step.current .step-indicator {
   fill: #FFFFFF;
   stroke: rgba(255, 255, 255, 0.40);
   stroke-width: 1.5px;
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.25)) drop-shadow(0 0 18px rgba(255, 154, 31, 0.10));
 }
-:root[data-theme='club-culture'] .step.current .visual {
+:root[data-theme='satisfaction'] .step.current .visual {
   fill: #FFFFFF;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ BUTTONS: glossy hardware ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â early 2000s Pioneer style ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
+/* ΓöÇΓöÇ BUTTONS: glossy hardware ΓÇö early 2000s Pioneer style ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
 /* Glossy top highlight, soft bevel, subtle inner shadow */
-:root[data-theme='club-culture'] button {
+:root[data-theme='satisfaction'] button {
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(42, 49, 69, 0.70);
@@ -7925,7 +7925,7 @@ header h1 {
   transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 /* Glossy highlight on buttons */
-:root[data-theme='club-culture'] button::before {
+:root[data-theme='satisfaction'] button::before {
   content: '';
   position: absolute;
   top: 0;
@@ -7935,7 +7935,7 @@ header h1 {
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
   pointer-events: none;
 }
-:root[data-theme='club-culture'] button:hover {
+:root[data-theme='satisfaction'] button:hover {
   background: rgba(56, 65, 88, 0.85);
   border-color: rgba(255, 255, 255, 0.10);
   box-shadow:
@@ -7944,8 +7944,8 @@ header h1 {
     0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* Play button ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â glossy orange accent, like a hot cue button */
-:root[data-theme='club-culture'] .play {
+/* Play button ΓÇö glossy orange accent, like a hot cue button */
+:root[data-theme='satisfaction'] .play {
   background: rgba(42, 49, 69, 0.80);
   border: 1px solid rgba(255, 154, 31, 0.15);
   color: var(--text);
@@ -7953,13 +7953,13 @@ header h1 {
     inset 0 0.5px 0 0 rgba(255, 255, 255, 0.12),
     0 2px 6px rgba(0, 0, 0, 0.25);
 }
-:root[data-theme='club-culture'] .play:hover {
+:root[data-theme='satisfaction'] .play:hover {
   border-color: rgba(255, 154, 31, 0.30);
   box-shadow:
     inset 0 0.5px 0 0 rgba(255, 255, 255, 0.15),
     0 0 12px rgba(255, 154, 31, 0.08);
 }
-:root[data-theme='club-culture'] .play.is-playing {
+:root[data-theme='satisfaction'] .play.is-playing {
   background: rgba(255, 154, 31, 0.10);
   border-color: var(--color-snare);
   color: var(--color-snare-light);
@@ -7969,8 +7969,8 @@ header h1 {
     0 0 14px rgba(255, 154, 31, 0.12);
 }
 
-:root[data-theme='club-culture'] .export,
-:root[data-theme='club-culture'] .reset-pattern {
+:root[data-theme='satisfaction'] .export,
+:root[data-theme='satisfaction'] .reset-pattern {
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: rgba(42, 49, 69, 0.70);
@@ -7979,29 +7979,29 @@ header h1 {
     inset 0 0.5px 0 0 rgba(255, 255, 255, 0.12),
     0 2px 4px rgba(0, 0, 0, 0.18);
 }
-:root[data-theme='club-culture'] .export:hover,
-:root[data-theme='club-culture'] .reset-pattern:hover {
+:root[data-theme='satisfaction'] .export:hover,
+:root[data-theme='satisfaction'] .reset-pattern:hover {
   background: rgba(56, 65, 88, 0.85);
   border-color: rgba(255, 255, 255, 0.10);
 }
 
-:root[data-theme='club-culture'] .pattern-slot {
+:root[data-theme='satisfaction'] .pattern-slot {
   border-radius: 14px;
   padding: 5px 0;
   font-size: 10px;
   background: rgba(255, 255, 255, 0.02);
   transition: background 0.15s ease;
 }
-:root[data-theme='club-culture'] .pattern-slot:hover {
+:root[data-theme='satisfaction'] .pattern-slot:hover {
   background: rgba(56, 65, 88, 0.60);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Mask controls: glowing LED cells ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] .mask-label {
+/* ΓöÇΓöÇ Mask controls: glowing LED cells ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .mask-label {
   color: var(--text-dim);
   font-weight: 600;
 }
-:root[data-theme='club-culture'] .mask-cell {
+:root[data-theme='satisfaction'] .mask-cell {
   border-radius: 14px;
   padding: 0;
   width: 15px;
@@ -8009,32 +8009,32 @@ header h1 {
   border: 1px solid rgba(255, 255, 255, 0.04);
   transition: box-shadow 0.15s ease, background 0.15s ease;
 }
-:root[data-theme='club-culture'] .mask-cell.rest {
+:root[data-theme='satisfaction'] .mask-cell.rest {
   background: rgba(255, 255, 255, 0.02);
   opacity: 0.50;
 }
-:root[data-theme='club-culture'] .mask-cell.onset {
+:root[data-theme='satisfaction'] .mask-cell.onset {
   background: var(--track-color);
   border-color: var(--track-color);
   opacity: 1;
   box-shadow: 0 0 6px var(--track-color), 0 0 12px color-mix(in srgb, var(--track-color) 40%, transparent);
 }
-:root[data-theme='club-culture'] .mask-cell.onset.muted {
+:root[data-theme='satisfaction'] .mask-cell.onset.muted {
   background: transparent;
   border: 1px solid var(--track-color);
   opacity: 0.55;
   box-shadow: none;
 }
-:root[data-theme='club-culture'] .mask-cell.onset:hover {
+:root[data-theme='satisfaction'] .mask-cell.onset:hover {
   filter: brightness(1.25);
   box-shadow: 0 0 10px var(--track-color), 0 0 20px color-mix(in srgb, var(--track-color) 50%, transparent);
 }
-:root[data-theme='club-culture'] .mask-cell.is-current {
+:root[data-theme='satisfaction'] .mask-cell.is-current {
   box-shadow: 0 0 0 2px #1E2230, 0 0 0 3px var(--track-color), 0 0 10px var(--track-color);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Toggles: small glossy capsules ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] .toggle {
+/* ΓöÇΓöÇ Toggles: small glossy capsules ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .toggle {
   border-radius: 14px;
   min-width: 32px;
   padding: 4px 14px;
@@ -8048,11 +8048,11 @@ header h1 {
     0 1px 2px rgba(0, 0, 0, 0.10);
   transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
-:root[data-theme='club-culture'] .toggle:hover {
+:root[data-theme='satisfaction'] .toggle:hover {
   background: rgba(56, 65, 88, 0.60);
   border-color: rgba(255, 255, 255, 0.08);
 }
-:root[data-theme='club-culture'] .toggle.is-on {
+:root[data-theme='satisfaction'] .toggle.is-on {
   background: rgba(255, 154, 31, 0.08);
   border-color: var(--color-snare);
   color: var(--text-hi);
@@ -8061,17 +8061,17 @@ header h1 {
     0 0 8px rgba(255, 154, 31, 0.06);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Sliders / knobs: hardware feel ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] input[type='range'] {
+/* ΓöÇΓöÇ Sliders / knobs: hardware feel ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] input[type='range'] {
   height: 4px;
   cursor: pointer;
 }
-:root[data-theme='club-culture'] input[type='range']::-webkit-slider-runnable-track {
+:root[data-theme='satisfaction'] input[type='range']::-webkit-slider-runnable-track {
   height: 4px;
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.04);
 }
-:root[data-theme='club-culture'] input[type='range']::-webkit-slider-thumb {
+:root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -8084,7 +8084,7 @@ header h1 {
   margin-top: -6px;
   transition: transform 0.10s ease, box-shadow 0.10s ease, border-color 0.10s ease;
 }
-:root[data-theme='club-culture'] input[type='range']::-webkit-slider-thumb:hover {
+:root[data-theme='satisfaction'] input[type='range']::-webkit-slider-thumb:hover {
   transform: scale(1.15);
   border-color: rgba(255, 154, 31, 0.50);
   box-shadow:
@@ -8092,13 +8092,13 @@ header h1 {
     0 0 0 1px rgba(0, 0, 0, 0.15),
     0 2px 6px rgba(0, 0, 0, 0.25);
 }
-:root[data-theme='club-culture'] input[type='range']::-moz-range-track {
+:root[data-theme='satisfaction'] input[type='range']::-moz-range-track {
   height: 4px;
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.04);
   border: none;
 }
-:root[data-theme='club-culture'] input[type='range']::-moz-range-thumb {
+:root[data-theme='satisfaction'] input[type='range']::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -8109,8 +8109,8 @@ header h1 {
     0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Select/dropdown ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] select {
+/* ΓöÇΓöÇ Select/dropdown ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] select {
   background: rgba(42, 49, 69, 0.80);
   border: 1px solid rgba(255, 255, 255, 0.05);
   color: var(--text);
@@ -8122,55 +8122,55 @@ header h1 {
     0 2px 4px rgba(0, 0, 0, 0.15);
   transition: border-color 0.15s ease;
 }
-:root[data-theme='club-culture'] select:focus {
+:root[data-theme='satisfaction'] select:focus {
   border-color: var(--color-snare);
   box-shadow:
     inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08),
     0 0 8px rgba(255, 154, 31, 0.06);
 }
-:root[data-theme='club-culture'] select option {
+:root[data-theme='satisfaction'] select option {
   background: #2A3145;
   color: var(--text);
 }
-:root[data-theme='club-culture'] select option:checked {
+:root[data-theme='satisfaction'] select option:checked {
   background: rgba(255, 154, 31, 0.10);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Typography: clean uppercase ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â club flyer energy ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] label {
+/* ΓöÇΓöÇ Typography: clean uppercase ΓÇö club flyer energy ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] label {
   color: var(--text-dim);
   font-weight: 500;
   letter-spacing: 0.5px;
   font-size: 10px;
 }
 
-:root[data-theme='club-culture'] .control-label {
+:root[data-theme='satisfaction'] .control-label {
   color: var(--text-dim);
   font-size: 10px;
   letter-spacing: 0.8px;
   text-transform: uppercase;
 }
-:root[data-theme='club-culture'] .control-label b {
+:root[data-theme='satisfaction'] .control-label b {
   color: var(--text-hi);
 }
 
-:root[data-theme='club-culture'] .bpm b,
-:root[data-theme='club-culture'] .swing b {
+:root[data-theme='satisfaction'] .bpm b,
+:root[data-theme='satisfaction'] .swing b {
   color: var(--color-snare);
 }
 
-:root[data-theme='club-culture'] h1 {
+:root[data-theme='satisfaction'] h1 {
   color: var(--text);
   letter-spacing: 4px;
   font-weight: 300;
   font-size: 22px;
 }
 
-:root[data-theme='club-culture'] .tagline {
+:root[data-theme='satisfaction'] .tagline {
   display: none;
 }
 
-:root[data-theme='club-culture'] .track-name {
+:root[data-theme='satisfaction'] .track-name {
   color: var(--text);
   font-weight: 500;
   letter-spacing: 1.5px;
@@ -8178,15 +8178,15 @@ header h1 {
   font-size: 11px;
 }
 
-:root[data-theme='club-culture'] .mini-metrics b {
+:root[data-theme='satisfaction'] .mini-metrics b {
   color: var(--text-hi);
 }
-:root[data-theme='club-culture'] .mini-metrics span {
+:root[data-theme='satisfaction'] .mini-metrics span {
   color: var(--text-dim);
   opacity: 0.75;
 }
 
-:root[data-theme='club-culture'] .playback-select select {
+:root[data-theme='satisfaction'] .playback-select select {
   background: rgba(42, 49, 69, 0.80);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 14px;
@@ -8197,17 +8197,17 @@ header h1 {
     inset 0 0.5px 0 0 rgba(255, 255, 255, 0.08),
     0 2px 4px rgba(0, 0, 0, 0.15);
 }
-:root[data-theme='club-culture'] .playback-select span {
+:root[data-theme='satisfaction'] .playback-select span {
   color: var(--text-dim);
   opacity: 0.75;
 }
 
-:root[data-theme='club-culture'] .module-lane {
+:root[data-theme='satisfaction'] .module-lane {
   border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Master scope: LED meter with classic green/yellow/red ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-:root[data-theme='club-culture'] .master-scope {
+/* ΓöÇΓöÇ Master scope: LED meter with classic green/yellow/red ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ */
+:root[data-theme='satisfaction'] .master-scope {
   background: rgba(30, 34, 48, 0.70);
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: var(--radius);
@@ -8215,19 +8215,19 @@ header h1 {
     inset 0 0.5px 0 0 rgba(255, 255, 255, 0.06),
     0 8px 32px rgba(0, 0, 0, 0.40);
 }
-:root[data-theme='club-culture'] .master-scope .oscilloscope-canvas {
+:root[data-theme='satisfaction'] .master-scope .oscilloscope-canvas {
   opacity: 0.90;
 }
 
-/* ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ Ambient animated reflection (very slow, barely perceptible) ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ÃƒÂ¢Ã¢â‚¬ÂÃ¢â€šÂ¬ */
-@keyframes beeswax-gloss-sweep {
+/* ΓöÇΓöÇ Ambient animated reflection (very slow, barely perceptible) ΓöÇΓöÇΓöÇ */
+@keyframes satisfaction-gloss-sweep {
   0%   { opacity: 0.40; transform: translateX(-10px) skewX(-10deg); }
   50%  { opacity: 0.50; transform: translateX(10px) skewX(-10deg); }
   100% { opacity: 0.40; transform: translateX(-10px) skewX(-10deg); }
 }
 
-:root[data-theme='club-culture'] .track-card::after {
-  animation: beeswax-gloss-sweep 8s ease-in-out infinite;
+:root[data-theme='satisfaction'] .track-card::after {
+  animation: satisfaction-gloss-sweep 8s ease-in-out infinite;
 }
 /* ===== Ashes (Cold Observatory / Weathered Silver / Lunar Parchment) ===== */
 /* Ancient astronomical manuscript discovered in a forgotten observatory.
@@ -8265,7 +8265,7 @@ header h1 {
   color-scheme: dark;
 }
 
-/* Cold parchment ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ grey, stone-dusted, moonlit radials with manuscript grain */
+/* Cold parchment ╬ô├ç├╢ grey, stone-dusted, moonlit radials with manuscript grain */
 :root[data-theme='revelation'] body {
   background:
     radial-gradient(ellipse 60% 40% at 25% 15%,   rgba(180, 183, 186, 0.02) 0%, transparent 50%),
@@ -8274,7 +8274,7 @@ header h1 {
     #17191c;
 }
 
-/* Manuscript grain ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ ash-dusted parchment texture (same SVG, reduced tint) */
+/* Manuscript grain ╬ô├ç├╢ ash-dusted parchment texture (same SVG, reduced tint) */
 :root[data-theme='revelation'] body::before {
   content: '';
   position: fixed;
@@ -8995,7 +8995,7 @@ header h1 {
 /* ===== Candyflip (Y2K / Translucent Plastic / Candy Boutique Groovebox) ===== */
 /* A luxury candy-colored instrument floating inside a dreamy pastel night.
    Translucent plastic, bokeh lights, soft party atmosphere.
-   Euphoric, playful, nostalgic ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ not RGB, not rave, not gaming. */
+   Euphoric, playful, nostalgic ╬ô├ç├╢ not RGB, not rave, not gaming. */
 :root[data-theme='candyflip'] {
   --bg: #e8a0b8;
   --panel: #fff0f5;
@@ -9085,7 +9085,7 @@ header h1 {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Candy glow overlay ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â each panel gets its own pastel candy colour.
+/* Candy glow overlay ΓÇö each panel gets its own pastel candy colour.
    The ::before layer sits UNDER the content (cards have position:relative;
    content has z-index context), creating translucent candy depth. */
 :root[data-theme='candyflip'] .track-card::before {
@@ -9097,7 +9097,7 @@ header h1 {
   border-radius: 16px;
 }
 
-/* ===== KICK ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Strawberry hard candy ===== */
+/* ===== KICK ΓÇö Strawberry hard candy ===== */
 :root[data-theme='candyflip'] .track-card[data-voice='kick'] {
   --track-color: #ff1a7a;
   border: 2px solid rgba(255, 26, 122, 0.35);
@@ -9129,7 +9129,7 @@ header h1 {
   border-color: rgba(255, 26, 122, 0.20);
 }
 
-/* ===== SNARE ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Peach / Apricot hard candy ===== */
+/* ===== SNARE ΓÇö Peach / Apricot hard candy ===== */
 :root[data-theme='candyflip'] .track-card[data-voice='snare'] {
   --track-color: #ff8c00;
   border: 2px solid rgba(255, 140, 0, 0.35);
@@ -9161,7 +9161,7 @@ header h1 {
   border-color: rgba(255, 140, 0, 0.20);
 }
 
-/* ===== HAT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Lavender / Violet hard candy ===== */
+/* ===== HAT ΓÇö Lavender / Violet hard candy ===== */
 :root[data-theme='candyflip'] .track-card[data-voice='hat'] {
   --track-color: #14b8f0;
   border: 2px solid rgba(20, 184, 240, 0.35);
@@ -9193,7 +9193,7 @@ header h1 {
   border-color: rgba(20, 184, 240, 0.20);
 }
 
-/* ===== BASS ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Mint / Pistachio hard candy ===== */
+/* ===== BASS ΓÇö Mint / Pistachio hard candy ===== */
 :root[data-theme='candyflip'] .track-card[data-voice='bass'] {
   --track-color: #1ac868;
   border: 2px solid rgba(26, 200, 104, 0.35);
@@ -9225,7 +9225,7 @@ header h1 {
   border-color: rgba(26, 200, 104, 0.20);
 }
 
-/* Gloss highlight ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â diagonal candy sheen across all panels */
+/* Gloss highlight ΓÇö diagonal candy sheen across all panels */
 :root[data-theme='candyflip'] .track-card::after {
   content: '';
   position: absolute;
@@ -9320,7 +9320,7 @@ header h1 {
   stroke-width: 0.8px;
 }
 
-/* Buttons: glossy hard candy ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ clear inactive/hover/active */
+/* Buttons: glossy hard candy ╬ô├ç├╢ clear inactive/hover/active */
 :root[data-theme='candyflip'] button {
   border-radius: 16px;
   border: 1px solid rgba(180, 60, 100, 0.08);
@@ -9391,7 +9391,7 @@ header h1 {
   font-weight: 600;
 }
 
-/* Mask controls ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ improved contrast */
+/* Mask controls ╬ô├ç├╢ improved contrast */
 :root[data-theme='candyflip'] .mask-label {
   color: #3a1e2c;
   font-weight: 600;
@@ -9602,7 +9602,7 @@ header h1 {
 }
 
 /* Background: bold Barbie Dreamhouse gradient.
-   F8B6D0 ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¥ÃƒÆ’Ã¢â‚¬Â  F58FC0 ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¥ÃƒÆ’Ã¢â‚¬Â  D85AA5 ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ immediately visible as strong pink. */
+   F8B6D0 ╬ô├Ñ├å F58FC0 ╬ô├Ñ├å D85AA5 ╬ô├ç├╢ immediately visible as strong pink. */
 :root[data-theme='barbie'] body {
   background:
     radial-gradient(ellipse 55% 40% at 20% 5%,   #f8b6d0 0%, transparent 55%),
@@ -9615,7 +9615,7 @@ header h1 {
   overflow-x: hidden;
 }
 
-/* Ambient drifting pink bokeh ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ stronger than before */
+/* Ambient drifting pink bokeh ╬ô├ç├╢ stronger than before */
 :root[data-theme='barbie'] body::before {
   content: '';
   position: fixed;
@@ -9644,7 +9644,7 @@ header h1 {
   z-index: 1;
 }
 
-/* Cards: brighter premium surface ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ luxury cosmetic packaging.
+/* Cards: brighter premium surface ╬ô├ç├╢ luxury cosmetic packaging.
    Stronger highlight, deeper shadow for elegant depth. */
 :root[data-theme='barbie'] .track-card {
   background: #fff5f9;
@@ -9776,7 +9776,7 @@ header h1 {
   stroke-width: 0.6px;
 }
 
-/* Buttons: clear hierarchy ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ inactive / hover / selected */
+/* Buttons: clear hierarchy ╬ô├ç├╢ inactive / hover / selected */
 :root[data-theme='barbie'] button {
   border-radius: 14px;
   border: 1px solid rgba(60, 10, 30, 0.10);
@@ -10010,10 +10010,10 @@ header h1 {
   border-top: 1px solid rgba(60, 10, 30, 0.04);
 }
 /* Four classical elements form a single modern instrument.
-   Earth ÃƒÂ¢Ã¢â‚¬ÂÃ‚Â¬ÃƒÂ¢Ã¢â‚¬Â¢Ã¢â‚¬â€œ Fire ÃƒÂ¢Ã¢â‚¬ÂÃ‚Â¬ÃƒÂ¢Ã¢â‚¬Â¢Ã¢â‚¬â€œ Air ÃƒÂ¢Ã¢â‚¬ÂÃ‚Â¬ÃƒÂ¢Ã¢â‚¬Â¢Ã¢â‚¬â€œ Water ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ merged into a premium vector UI.
+   Earth Γö¼Γòû Fire Γö¼Γòû Air Γö¼Γòû Water ╬ô├ç├╢ merged into a premium vector UI.
    Clean, dark, glass-like, color-coded elemental atmosphere. */
-/* An elemental reactor ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ four energy chambers radiating coloured light.
-   Earth (toxic green) ÃƒÂ¢Ã¢â‚¬ÂÃ‚Â¬ÃƒÂ¢Ã¢â‚¬Â¢Ã¢â‚¬â€œ Fire (molten orange) ÃƒÂ¢Ã¢â‚¬ÂÃ‚Â¬ÃƒÂ¢Ã¢â‚¬Â¢Ã¢â‚¬â€œ Air (silver-white) ÃƒÂ¢Ã¢â‚¬ÂÃ‚Â¬ÃƒÂ¢Ã¢â‚¬Â¢Ã¢â‚¬â€œ Water (deep cyan)
+/* An elemental reactor ╬ô├ç├╢ four energy chambers radiating coloured light.
+   Earth (toxic green) Γö¼Γòû Fire (molten orange) Γö¼Γòû Air (silver-white) Γö¼Γòû Water (deep cyan)
    Clean, sharp, geometric, luminous. No fantasy artwork. */
 :root[data-theme='alchemy'] {
   --bg: #080C10;
@@ -10049,7 +10049,7 @@ header h1 {
 }
 
 /* Background: elemental ambient fog bleeding from each panel position.
-   Green ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¥ÃƒÆ’Ã¢â‚¬Â  orange ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¥ÃƒÆ’Ã¢â‚¬Â  silver ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã‚Â¥ÃƒÆ’Ã¢â‚¬Â  cyan. No hard transitions. */
+   Green ╬ô├Ñ├å orange ╬ô├Ñ├å silver ╬ô├Ñ├å cyan. No hard transitions. */
 :root[data-theme='alchemy'] body {
   background:
     radial-gradient(ellipse 50% 45% at 12% 50%,   rgba(168, 255, 42, 0.12) 0%, transparent 55%),
@@ -10090,7 +10090,7 @@ header h1 {
   z-index: 1;
 }
 
-/* ===== TRACK CARDS ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ energy containment chambers with visible outer glow ===== */
+/* ===== TRACK CARDS ╬ô├ç├╢ energy containment chambers with visible outer glow ===== */
 :root[data-theme='alchemy'] .track-card {
   background: rgba(10, 15, 20, 0.75);
   backdrop-filter: blur(10px);
@@ -10103,7 +10103,7 @@ header h1 {
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* ===== EARTH ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ toxic green, radioactive moss energy ===== */
+/* ===== EARTH ╬ô├ç├╢ toxic green, radioactive moss energy ===== */
 :root[data-theme='alchemy'] .track-card[data-voice='kick'] {
   --track-color: var(--color-earth);
   border: 1px solid rgba(168, 255, 42, 0.55);
@@ -10130,7 +10130,7 @@ header h1 {
   filter: drop-shadow(0 0 4px rgba(168, 255, 42, 0.12));
 }
 
-/* ===== FIRE ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ molten plasma, strongest glow ===== */
+/* ===== FIRE ╬ô├ç├╢ molten plasma, strongest glow ===== */
 :root[data-theme='alchemy'] .track-card[data-voice='snare'] {
   --track-color: var(--color-fire);
   border: 1px solid rgba(255, 154, 0, 0.60);
@@ -10157,7 +10157,7 @@ header h1 {
   filter: drop-shadow(0 0 6px rgba(255, 154, 0, 0.15));
 }
 
-/* ===== AIR ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ silver-white, ionized atmosphere ===== */
+/* ===== AIR ╬ô├ç├╢ silver-white, ionized atmosphere ===== */
 :root[data-theme='alchemy'] .track-card[data-voice='hat'] {
   --track-color: var(--color-air);
   border: 1px solid rgba(255, 255, 255, 0.45);
@@ -10184,7 +10184,7 @@ header h1 {
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.10));
 }
 
-/* ===== WATER ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ deep cyan, liquid electricity ===== */
+/* ===== WATER ╬ô├ç├╢ deep cyan, liquid electricity ===== */
 :root[data-theme='alchemy'] .track-card[data-voice='bass'] {
   --track-color: var(--color-water);
   border: 1px solid rgba(28, 200, 255, 0.55);
@@ -10224,7 +10224,7 @@ header h1 {
   animation: alchemy-earth-pulse 350ms ease-out forwards;
 }
 
-/* Fire: molten bloom ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ strongest glow */
+/* Fire: molten bloom ╬ô├ç├╢ strongest glow */
 @keyframes alchemy-fire-bloom {
   0%   { r: 11px; fill: #FFB840; filter: drop-shadow(0 0 10px rgba(255, 154, 0, 0.40)); }
   12%  { r: 15px; fill: #FFD480; filter: drop-shadow(0 0 20px rgba(255, 154, 0, 0.60)); }
@@ -10257,7 +10257,7 @@ header h1 {
   animation: alchemy-water-luminous 350ms ease-out forwards;
 }
 
-/* ===== PLAYHEAD ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ bright white marker ===== */
+/* ===== PLAYHEAD ╬ô├ç├╢ bright white marker ===== */
 :root[data-theme='alchemy'] .step.current .step-indicator {
   fill: #FFFFFF;
   stroke: rgba(255, 255, 255, 0.50);
@@ -10272,7 +10272,7 @@ header h1 {
   fill: rgba(255, 255, 255, 0.08);
 }
 
-/* Orbit markers ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ lighter per-voice rest dots, visible against dark bg */
+/* Orbit markers ╬ô├ç├╢ lighter per-voice rest dots, visible against dark bg */
 :root[data-theme='alchemy'] .track-card[data-voice='kick'] .step.rest .step-indicator {
   fill: rgba(160, 230, 60, 0.35);
 }
@@ -10302,7 +10302,7 @@ header h1 {
   opacity: 1;
 }
 
-/* ===== CONTROLS ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ dark glass ===== */
+/* ===== CONTROLS ╬ô├ç├╢ dark glass ===== */
 :root[data-theme='alchemy'] button {
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -10356,7 +10356,7 @@ header h1 {
   background: rgba(24, 32, 40, 0.7);
 }
 
-/* Mask row ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ strongest coloured accent */
+/* Mask row ╬ô├ç├╢ strongest coloured accent */
 :root[data-theme='alchemy'] .mask-label {
   color: rgba(180, 190, 200, 0.75);
   font-weight: 600;
@@ -10402,7 +10402,7 @@ header h1 {
   border-color: #00B4FF;
 }
 
-/* Sliders ÃƒÅ½Ã¢â‚¬Å“ÃƒÆ’Ã¢â‚¬Â¡ÃƒÆ’Ã‚Â¶ energized knobs */
+/* Sliders ╬ô├ç├╢ energized knobs */
 :root[data-theme='alchemy'] input[type='range'] {
   height: 4px;
   cursor: pointer;
@@ -10524,7 +10524,7 @@ header h1 {
   border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
 /* ======================================================================== */
-/* BEEKEEPER ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â high-contrast rebuild
+/* BEEKEEPER ΓÇö high-contrast rebuild
    Vintage analogue instrument workshop.
    Layer 0: dark amber background.
    Layer 1: warm cream cards (explicit separation).
@@ -10566,7 +10566,7 @@ header h1 {
   color-scheme: light;
 }
 
-/* Layer 0: Dark amber ground ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â rich, warm, deep */
+/* Layer 0: Dark amber ground ΓÇö rich, warm, deep */
 :root[data-theme='beekeeper'] body {
   background:
     radial-gradient(ellipse 60% 55% at 20% 40%,   rgba(220, 170, 50, 0.40) 0%, transparent 60%),
@@ -10577,7 +10577,7 @@ header h1 {
   overflow-x: hidden;
 }
 
-/* Warm atmospheric light ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â very subtle */
+/* Warm atmospheric light ΓÇö very subtle */
 :root[data-theme='beekeeper'] body::before {
   content: '';
   position: fixed;
@@ -10601,7 +10601,7 @@ header h1 {
   z-index: 1;
 }
 
-/* Subtle beeswax grain ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â barely perceptible */
+/* Subtle beeswax grain ΓÇö barely perceptible */
 :root[data-theme='beekeeper'] body::after {
   content: '';
   position: fixed;
@@ -10614,7 +10614,7 @@ header h1 {
   background-size: 256px 256px;
 }
 
-/* ===== TRACK CARDS ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â warm cream panels, clearly lighter than bg ===== */
+/* ===== TRACK CARDS ΓÇö warm cream panels, clearly lighter than bg ===== */
 :root[data-theme='beekeeper'] .track-card {
   background: #f0da90;
   backdrop-filter: blur(6px);
@@ -10627,7 +10627,7 @@ header h1 {
     0 8px 20px rgba(50, 25, 0, 0.12);
 }
 
-/* ===== KICK ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Burnt amber. Dark, punchy, authoritative. ===== */
+/* ===== KICK ΓÇö Burnt amber. Dark, punchy, authoritative. ===== */
 :root[data-theme='beekeeper'] .track-card[data-voice='kick'] {
   --track-color: #c87800;
   border: 2px solid rgba(200, 120, 0, 0.55);
@@ -10652,7 +10652,7 @@ header h1 {
   filter: drop-shadow(0 0 6px rgba(200, 120, 0, 0.20));
 }
 
-/* ===== SNARE ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Golden pollen. Bright, warm, cutting. ===== */
+/* ===== SNARE ΓÇö Golden pollen. Bright, warm, cutting. ===== */
 :root[data-theme='beekeeper'] .track-card[data-voice='snare'] {
   --track-color: #d89400;
   border: 2px solid rgba(216, 148, 0, 0.55);
@@ -10677,7 +10677,7 @@ header h1 {
   filter: drop-shadow(0 0 6px rgba(216, 148, 0, 0.20));
 }
 
-/* ===== HAT ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Amber wax. Medium contrast, warm texture. ===== */
+/* ===== HAT ΓÇö Amber wax. Medium contrast, warm texture. ===== */
 :root[data-theme='beekeeper'] .track-card[data-voice='hat'] {
   --track-color: #d4a830;
   border: 2px solid rgba(212, 168, 48, 0.50);
@@ -10702,7 +10702,7 @@ header h1 {
   filter: drop-shadow(0 0 4px rgba(212, 168, 48, 0.15));
 }
 
-/* ===== BASS ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â Dark forest honey. Deep, rich, foundational. ===== */
+/* ===== BASS ΓÇö Dark forest honey. Deep, rich, foundational. ===== */
 :root[data-theme='beekeeper'] .track-card[data-voice='bass'] {
   --track-color: #8b4500;
   border: 2px solid rgba(139, 69, 0, 0.55);
@@ -10727,7 +10727,7 @@ header h1 {
   filter: drop-shadow(0 0 6px rgba(139, 69, 0, 0.20));
 }
 
-/* ===== HONEY NODE ANIMATIONS ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â bold bloom, strong glow ===== */
+/* ===== HONEY NODE ANIMATIONS ΓÇö bold bloom, strong glow ===== */
 
 @keyframes beekeeper-kick-bloom {
   0%   { r: 11px; fill: #e09400; filter: drop-shadow(0 0 10px rgba(200, 120, 0, 0.50)) drop-shadow(0 0 20px rgba(200, 120, 0, 0.25)); }
@@ -10769,7 +10769,7 @@ header h1 {
   animation: beekeeper-bass-bloom 380ms ease-out forwards;
 }
 
-/* ===== PLAYHEAD ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â bright golden flash, visible from across the room ===== */
+/* ===== PLAYHEAD ΓÇö bright golden flash, visible from across the room ===== */
 :root[data-theme='beekeeper'] .step.current .step-indicator {
   fill: #f0a800;
   stroke: rgba(240, 168, 0, 0.60);
@@ -10784,7 +10784,7 @@ header h1 {
   fill: rgba(60, 30, 0, 0.10);
 }
 
-/* Orbit dots ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â warm honey droplets, visible against cream panel */
+/* Orbit dots ΓÇö warm honey droplets, visible against cream panel */
 :root[data-theme='beekeeper'] .track-card[data-voice='kick'] .step.rest .step-indicator {
   fill: rgba(200, 120, 0, 0.35);
 }
@@ -10814,7 +10814,7 @@ header h1 {
   opacity: 1;
 }
 
-/* ===== CONTROLS ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â dark knobs, bright accents, clear hierarchy ===== */
+/* ===== CONTROLS ΓÇö dark knobs, bright accents, clear hierarchy ===== */
 :root[data-theme='beekeeper'] button {
   border-radius: 10px;
   border: 1px solid rgba(60, 30, 0, 0.15);
@@ -10887,7 +10887,7 @@ header h1 {
   color: #1f0e00;
 }
 
-/* Mask row ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â bigger, sharper, higher contrast */
+/* Mask row ΓÇö bigger, sharper, higher contrast */
 :root[data-theme='beekeeper'] .mask-label {
   color: #3a2208;
   font-weight: 700;
@@ -10936,7 +10936,7 @@ header h1 {
   box-shadow: 0 1px 4px rgba(216, 139, 0, 0.18);
 }
 
-/* Sliders ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â wooden knobs inspired */
+/* Sliders ΓÇö wooden knobs inspired */
 :root[data-theme='beekeeper'] input[type='range'] {
   height: 4px;
   cursor: pointer;
@@ -11073,7 +11073,7 @@ header h1 {
   border-top: 1px solid rgba(60, 30, 0, 0.06);
 }
 
-/* Knobs ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â dark track, bright pointer, readable at a glance */
+/* Knobs ΓÇö dark track, bright pointer, readable at a glance */
 :root[data-theme='beekeeper'] .knob-ring {
   fill: none;
   stroke: rgba(60, 30, 0, 0.18);
@@ -11494,7 +11494,7 @@ header h1 {
 }
 
 /* ===== Delivery Delay ===== */
-/* Premium stereo delay ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â clean, professional */
+/* Premium stereo delay ΓÇö clean, professional */
 
 .dd-overlay {
   position: fixed; inset: 0; z-index: 200;

@@ -1,0 +1,43 @@
+﻿:root {
+
+  --bg: #0f1014;
+  --panel: #181a21;
+  --panel-hi: #1f2129;
+  --text: #c7c9d1;
+  --text-dim: #7b7f8c;
+  --text-hi: #f3f4f6;
+  --accent: #c084fc;
+  --accent-dim: rgba(192, 132, 252, 0.22);
+  --rest: #3a3d48;
+  --current: #ffffff;
+  --danger: #f87171;
+  --warn: #fbbf24;
+  --radius: 14px;
+  --mono: ui-monospace, Consolas, monospace;
+
+  /* Playhead flash duration. Adapted by App from BPM so the dip stays
+     discrete at fast tempos (avoids a shimmer-ring on 240 BPM + 2x speed
+     + 16/16 hat where ticks arrive every ~31 ms). Default = slow-tempo
+     value; the inline JS-set rule clamps it to [80ms, 180ms]. */
+  --flash-duration: 180ms;
+
+  /* Per-voice track colours (themeable). Nocturne = the original values. */
+  --color-kick: #c084fc;
+  --color-kick-mid: #d8b4fe;
+  --color-kick-light: #e9d5ff;
+  --color-snare: #f472b6;
+  --color-snare-mid: #f9a8d4;
+  --color-snare-light: #fbcfe8;
+  --color-hat: #60a5fa;
+  --color-hat-mid: #93c5fd;
+  --color-hat-light: #bfdbfe;
+  --color-bass: #34d399;
+  --color-bass-mid: #6ee7b7;
+  --color-bass-light: #a7f3d0;
+
+  /* Card elevation: none in dark (flat neon), soft ink-on-paper in light. */
+  --card-shadow: none;
+
+  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: dark;
+}

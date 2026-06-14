@@ -23,7 +23,7 @@ import type { MidiOutputPort } from './midiOut';
 /** How many 4/4 bars the MIDI export renders. */
 const EXPORT_BARS = 4;
 
-type ThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'cherry' | 'nostradamus' | 'big-boss' | 'university' | 'neon-void' | 'dark-side' | 'bauhaus' | 'smoke-dub' | 'nautilus' | 'satisfaction' | 'revelation' | 'high-contrast' | 'candyflip' | 'barbie' | 'alchemy' | 'beekeeper';
+type ThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'cherry' | 'nostradamus' | 'big-boss' | 'university' | 'neon-void' | 'dark-side' | 'bauhaus' | 'smoke-dub' | 'nautilus' | 'beeswax' | 'club-culture' | 'revelation' | 'high-contrast' | 'candyflip' | 'barbie' | 'alchemy' | 'beekeeper';
 const THEME_KEY = 'groove-theme';
 const FX_KEY = 'groove-elements-fx';
 const RESTART_KEY = 'groove-restart-on-mode-change';
@@ -31,7 +31,7 @@ const RESTART_KEY = 'groove-restart-on-mode-change';
 function initialTheme(): ThemeId {
   try {
     const t = localStorage.getItem(THEME_KEY);
-    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' || t === 'cherry' || t === 'nostradamus' || t === 'big-boss' || t === 'university' || t === 'neon-void' || t === 'dark-side' || t === 'bauhaus' || t === 'smoke-dub' || t === 'nautilus' || t === 'satisfaction' || t === 'revelation' || t === 'high-contrast' || t === 'candyflip' || t === 'barbie' || t === 'alchemy' || t === 'beekeeper' ? t : 'elements';
+    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' || t === 'cherry' || t === 'nostradamus' || t === 'big-boss' || t === 'university' || t === 'neon-void' || t === 'dark-side' || t === 'bauhaus' || t === 'smoke-dub' || t === 'nautilus' || t === 'beeswax' || t === 'club-culture' || t === 'revelation' || t === 'high-contrast' || t === 'candyflip' || t === 'barbie' || t === 'alchemy' || t === 'beekeeper' ? t : 'elements';
   } catch {
     return 'elements';
   }
@@ -552,7 +552,8 @@ export default function App() {
             <option value="bauhaus">Bauhaus</option>
             <option value="smoke-dub">Smoke Dub</option>
             <option value="nautilus">Nautilus</option>
-            <option value="satisfaction">Satisfaction</option>
+            <option value="beeswax">Beeswax</option>
+            <option value="club-culture">Club Culture</option>
             <option value="revelation">Ashes</option>
             <option value="high-contrast">High Contrast</option>
             <option value="candyflip">Candyflip</option>
