@@ -3,18 +3,12 @@ import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
 import Knob from './components/Knob';
 import PresetBrowser from './components/PresetBrowser';
-import MixerPanel from './mixer/MixerPanel';
-import { defaultMixerConfig } from './mixer/mixerState';
-import type { MixerConfig } from './mixer/mixerState';
-import type { FxSlot } from './mixer/fxTypes';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import { setMasterScopeEnabled, clearChannelHistory } from './engine/oscilloscope';
-import { setChannelFxChain } from './audio';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import type { GrooveSnapshot } from './engine/preset';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
-  onKitLoading, resetClock, setMidiOut, setMasterFader, setChannelFader,
-  setChannelPan } from './audio';
+  onKitLoading, resetClock, setMidiOut } from './audio';
 import { downloadBytes } from './download';
 import type { DrumKitId } from './drumKits';
 import { init as initMidi, onPortsChange, selectPort } from './midiOut';
@@ -83,10 +77,7 @@ export default function App() {
     catch { return false; }
   });
 
-  // ── Mixer state ───────────────────────────────────────────
-  const [mixerConfig, setMixerConfig] = useState<MixerConfig>(() => defaultMixerConfig(false));
-
-  // ── Master oscilloscope ────────────────────────────────────
+  // â”€â”€ Master oscilloscope â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const [scopeMaster, setScopeMaster] = useState(false);
   const [scopeMasterMode, setScopeMasterMode] = useState<'waveform' | 'spectrum' | 'sonagram'>('waveform');
 
@@ -119,22 +110,13 @@ export default function App() {
     swing,
     tracks: tracks.map((t) => ({ ...t })),
     theme,
-    mixer: mixerConfig.map((ch) => ({ id: ch.id, pan: ch.pan, faderDb: ch.faderDb })),
-  }), [bpm, swing, tracks, theme, mixerConfig]);
+  }), [bpm, swing, tracks, theme]);
 
   const handleLoadGroove = useCallback((groove: GrooveSnapshot) => {
     setBpm(groove.bpm);
     setSwingState(groove.swing);
     setTracksState(groove.tracks);
     setTheme(groove.theme);
-    if (groove.mixer) {
-      setMixerConfig((prev) =>
-        prev.map((ch) => {
-          const saved = groove.mixer!.find((m) => m.id === ch.id);
-          return saved ? { ...ch, pan: saved.pan, faderDb: saved.faderDb } : ch;
-        })
-      );
-    }
   }, []);
 
   // Initialise Web MIDI on mount
@@ -170,7 +152,7 @@ export default function App() {
   useEffect(() => setSwing(swing / 100), [swing]);
 
   // Adapt the playhead flash duration to BPM. On fast tempos with a fast
-  // voice (e.g. 240 BPM × 2× × Hat 16/16 → `.current` switches every ~31 ms)
+  // voice (e.g. 240 BPM Ã— 2Ã— Ã— Hat 16/16 â†’ `.current` switches every ~31 ms)
   // a fixed 180 ms flash only plays ~17% before the class moves on, painting
   // the whole ring as a low-level shimmer. Scaling the flash to the 32n tick
   // interval keeps each entry visually discrete.
@@ -189,7 +171,7 @@ export default function App() {
   useEffect(() => onKitLoading(setKitLoading), []);
 
   // Theme: reflect on <html data-theme> (CSS variables do the rest) + persist.
-  // Theme is visual layer only — never modifies track state.
+  // Theme is visual layer only â€” never modifies track state.
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     try {
@@ -265,10 +247,10 @@ export default function App() {
   //    the new mode with phaseOffset = 0. Every track snaps to its own cycle
   //    origin so the new mode is heard from a predictable boundary.
   //  - OFF (power-user): preserve the current localStep across the change via
-  //    computePhaseOffsetForChange — the old behaviour, no audible jump.
+  //    computePhaseOffsetForChange â€” the old behaviour, no audible jump.
   //
-  // Speed change is ALWAYS smooth — it never auto-resets. We still preserve
-  // phase across speed changes (so 1× → 2× doesn't teleport), but the cycle
+  // Speed change is ALWAYS smooth â€” it never auto-resets. We still preserve
+  // phase across speed changes (so 1Ã— â†’ 2Ã— doesn't teleport), but the cycle
   // origin stays where it was.
   // Steps change also uses phase preservation (preserves position within the
   // pattern when N grows/shrinks).
@@ -279,7 +261,7 @@ export default function App() {
     if (doRestart) {
       // Reset clock and offsets BEFORE applying the patch so the new mode
       // starts from origin. Single-clock invariant intact: we only zero the
-      // counter and phaseOffsets — no new timing source.
+      // counter and phaseOffsets â€” no new timing source.
       resetClock();
       gRef.current = 0;
       setCurrentSteps({});
@@ -287,7 +269,7 @@ export default function App() {
 
     setTracksState((prev) =>
       prev.map((t) => {
-        // Reset all OTHER tracks' phaseOffset too when a restart fires — the
+        // Reset all OTHER tracks' phaseOffset too when a restart fires â€” the
         // whole rig must snap to a known phase, not just the changed track.
         if (t.id !== id) {
           return doRestart && (t.phaseOffset ?? 0) !== 0
@@ -310,7 +292,7 @@ export default function App() {
         }
 
         if (doRestart) {
-          // Clean cycle origin — no preserved offset.
+          // Clean cycle origin â€” no preserved offset.
           merged.phaseOffset = 0;
         } else {
           // Preserve musical position across speed/steps changes (and across
@@ -336,7 +318,7 @@ export default function App() {
 
   // Pattern-bank switch. The heavy lifting (snapshot current slot, load target,
   // clamp, preserve phase across a steps change) is the pure `switchTrackPattern`
-  // in the engine — App only routes it through state. Single-clock invariant is
+  // in the engine â€” App only routes it through state. Single-clock invariant is
   // untouched: no timing source is created, only `phaseOffset` is recomputed.
   const switchPattern = useCallback((id: string, slot: number) => {
     setTracksState((prev) =>
@@ -356,40 +338,7 @@ export default function App() {
     );
   }, []);
 
-  // ── Mixer handlers ──────────────────────────────────────────
-  const handleMixerFader = useCallback((channelId: string, db: number) => {
-    setMixerConfig((prev) =>
-      prev.map((ch) => (ch.id === channelId ? { ...ch, faderDb: db } : ch))
-    );
-    if (channelId === 'master') {
-      setMasterFader(db);
-    } else {
-      setChannelFader(channelId, db);
-    }
-  }, []);
-
-  const handleMixerPan = useCallback((channelId: string, pan: number) => {
-    setMixerConfig((prev) =>
-      prev.map((ch) => (ch.id === channelId ? { ...ch, pan } : ch))
-    );
-    if (channelId !== 'master') {
-      setChannelPan(channelId, pan);
-    }
-  }, []);
-
-  const handleMixerRec = useCallback((channelId: string) => {
-    setMixerConfig((prev) =>
-      prev.map((ch) => (ch.id === channelId ? { ...ch, rec: !ch.rec } : ch))
-    );
-  }, []);
-
-  /** Update a channel's FX chain: state + audio routing. */
-  const handleFxChainChange = useCallback((channelId: string, chain: FxSlot[]) => {
-    setMixerConfig((prev) =>
-      prev.map((ch) => (ch.id === channelId ? { ...ch, fxChain: chain } : ch))
-    );
-    setChannelFxChain(channelId, chain);
-  }, []);
+  // â”€â”€ (Mixer removed) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
   const togglePlay = async () => {
     if (playing) {
@@ -451,7 +400,7 @@ export default function App() {
           className={`play${playing ? ' is-playing' : ''}`}
           onClick={togglePlay}
         >
-          {playing ? '■ Stop' : '▶ Play'}
+          {playing ? 'â–  Stop' : 'â–¶ Play'}
         </button>
         <button
           type="button"
@@ -459,7 +408,7 @@ export default function App() {
           onClick={resetAllTracks}
           title="Reset all tracks to cycle origin (clock stays running)"
         >
-          ↺ Reset
+          â†º Reset
         </button>
         <button
           type="button"
@@ -467,7 +416,7 @@ export default function App() {
           onClick={resetPatterns}
           title="Restore all tracks to factory default patterns (steps, hits, rotation, velocity, pitch)"
         >
-          ⟳ Clear
+          âŸ³ Clear
         </button>
         <div className="transport-knobs">
           <Knob
@@ -521,7 +470,7 @@ export default function App() {
           onClick={handleExportMidi}
           title={`Export ${EXPORT_BARS} bars as a Standard MIDI File`}
         >
-          ⤓ MIDI
+          â¤“ MIDI
         </button>
         <button
           type="button"
@@ -529,7 +478,7 @@ export default function App() {
           onClick={handleExportStems}
           title={`Export per-track MIDI stems (Kick, Snare, Ghost, Hat, Bass)`}
         >
-          ⤓ Stems
+          â¤“ Stems
         </button>
         <label className="theme-select">
           Theme
@@ -611,21 +560,7 @@ export default function App() {
         </label>
       </section>
 
-      {/* Mixer Section — replaces the old standalone master-scope */}
-      <MixerPanel
-        tracks={tracks}
-        mixerConfig={mixerConfig}
-        onFaderChange={handleMixerFader}
-        onPanChange={handleMixerPan}
-        onMuteToggle={toggleMute}
-        onSoloToggle={toggleSolo}
-        onRecToggle={handleMixerRec}
-        onFxChainChange={handleFxChainChange}
-        scopeEnabled={scopeMaster}
-        scopeMode={scopeMasterMode}
-        onScopeModeChange={setScopeMasterMode}
-        scopePlaying={playing}
-      />
+      {/* Oscilloscope (mixer removed) */}
 
       <PresetBrowser
         open={presetBrowserOpen}
@@ -636,7 +571,7 @@ export default function App() {
       />
       <p className="note">
         Sample-based drums (CR-78, Kit-8, KPR-77) with a sawtooth pick-bass
-        synth. Swing shuffles the off-beat 8ths. Switch kits live — Transport
+        synth. Swing shuffles the off-beat 8ths. Switch kits live â€” Transport
         keeps running. Export {EXPORT_BARS} bars as MIDI (Format 1) for your DAW.
       </p>
     </main>
