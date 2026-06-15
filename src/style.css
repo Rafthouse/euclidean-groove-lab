@@ -7250,7 +7250,12 @@ header h1 {
 
 }
 
-.mask-cell {
+/* Scope-prefixed with :root .mask-row so specificity (0,3,0) beats any theme
+   rule like :root[data-theme='X'] button { padding/border-radius/... } which
+   is (0,2,1) — :root + [attr] + button. Otherwise themes that style generic
+   <button> override the cell size and clip the mask grid (e.g. big-boss,
+   university, cherry, nostradamus). */
+:root .mask-row .mask-cell {
 
   width: 15px;
 
