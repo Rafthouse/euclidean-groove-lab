@@ -281,12 +281,11 @@ describe('patternBank', () => {
       tracks[2].patterns![12] = makeSlot({ steps: 11, hits: 5, rotation: 2 });
       savePatternBank(tracks);
       const loaded = loadPatternBank();
-      expect(loaded!.tracks[2].patterns[5]).not.toBeNull();
-      expect(loaded!.tracks[2].patterns[5]!.steps).toBe(7);
-      expect(loaded!.tracks[2].patterns[12]).not.toBeNull();
-      expect(loaded!.tracks[2].patterns[12]!.hits).toBe(5);
-      // Unfilled slots stay null
-      expect(loaded!.tracks[2].patterns[0]).toBeNull();
+      expect(loaded!.tracks[2].patterns[5].steps).toBe(7);
+      expect(loaded!.tracks[2].patterns[12].hits).toBe(5);
+      // Unfilled slots get generated defaults
+      expect(loaded!.tracks[2].patterns[0].steps).toBe(16);
+      expect(loaded!.tracks[2].patterns[0].hits).toBe(0);
     });
   });
 

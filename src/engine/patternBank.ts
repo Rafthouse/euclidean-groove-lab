@@ -28,7 +28,7 @@ const EXPECTED_SLOTS = 22;
 /** Serializable per-track bank state. */
 export interface PatternBankTrackState {
   id: string;
-  patterns: (PatternSlot | null)[];
+  patterns: PatternSlot[];
   activePattern: number;
 }
 
@@ -58,8 +58,8 @@ export function savePatternBank(tracks: Track[]): void {
       tracks: tracks.map((t) => ({
         id: t.id,
         patterns: t.patterns && t.patterns.length === EXPECTED_SLOTS
-          ? t.patterns.map((s) => (s ? { ...s } : null))
-          : new Array(EXPECTED_SLOTS).fill(null),
+          ? t.patterns.map((s) => s ? { ...s } : { steps: t.steps, hits: 0, rotation: 0, phaseOffset: 0 })
+          : Array.from({ length: EXPECTED_SLOTS }, () => ({ steps: t.steps, hits: 0, rotation: 0, phaseOffset: 0 })),
         activePattern: t.activePattern ?? 0,
       })),
     };
@@ -120,7 +120,7 @@ export function restorePatternBank(tracks: Track[]): Track[] {
     if (!savedTrack) return track;
 
     // Only restore patterns & activePattern — NEVER touch live generator state
-    const hasPatterns = savedTrack.patterns.some((p) => p !== null);
+    const hasPatterns = savedTrack.patterns.some((p) => p.hits > 0 || p.steps !== track.steps);
     return {
       ...track,
       patterns: hasPatterns ? savedTrack.patterns : track.patterns,

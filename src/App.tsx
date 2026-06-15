@@ -7,7 +7,7 @@ import PatternBankControls from './components/PatternBankControls';
 import { restorePatternBank, savePatternBank } from './engine/patternBank';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
-import type { GrooveSnapshot, ThemeId } from './engine/preset';
+import type { GrooveSnapshot } from './engine/preset';
 import { start, stop, setTracks, setBpm, setSwing, onStep, switchDrumKit,
   onKitLoading, resetClock, setMidiOut } from './audio';
 import { downloadBytes } from './download';

@@ -66,7 +66,7 @@ export default function PatternBankControls({
               ...t,
               patterns: savedTrack.patterns,
               activePattern: savedTrack.activePattern,
-            };
+            } as Track;
           }),
         );
         onRestore(tracks);
@@ -95,7 +95,7 @@ export default function PatternBankControls({
         ...t,
         patterns: undefined,
         activePattern: 0,
-      })),
+      } as Track)),
     );
   };
 
