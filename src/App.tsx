@@ -3,6 +3,8 @@ import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
 import Knob from './components/Knob';
 import PresetBrowser from './components/PresetBrowser';
+import PatternBankControls from './components/PatternBankControls';
+import { restorePatternBank, savePatternBank } from './engine/patternBank';
 import { defaultTracks, renderMidi, serializeMidi, renderMidiStems, computePhaseOffsetForChange, switchTrackPattern } from './engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from './engine';
 import type { GrooveSnapshot, ThemeId } from './engine/preset';
@@ -68,6 +70,18 @@ export default function App() {
 
   // PresetBrowser state
   const [presetOpen, setPresetOpen] = useState(false);
+
+  // Restore saved pattern bank on mount
+  useEffect(() => {
+    setTracksState((prev) => restorePatternBank(prev));
+  }, []);
+
+  // Auto-save pattern bank whenever tracks change
+  const tracksRef = useRef(tracks);
+  tracksRef.current = tracks;
+  useEffect(() => {
+    savePatternBank(tracks);
+  }, [tracks]);
 
   const [midiPorts, setMidiPorts] = useState<MidiOutputPort[]>([]);
   const [midiSelected, setMidiSelected] = useState<string | null>(null);
@@ -278,6 +292,11 @@ export default function App() {
     );
   }, []);
 
+  // Handle restoring tracks after import/reset (reconciles state)
+  const handleBankRestore = useCallback((updated: Track[]) => {
+    setTracksState(updated);
+  }, []);
+
   // Pattern-bank switch. The heavy lifting (snapshot current slot, load target,
   // clamp, preserve phase across a steps change) is the pure `switchTrackPattern`
   // in the engine — App only routes it through state. Single-clock invariant is
@@ -415,6 +434,10 @@ export default function App() {
           />
         </div>
         <DrumKitSelect value={kitId} loading={kitLoading} onChange={handleKitChange} />
+        <PatternBankControls
+          tracks={tracks}
+          onRestore={handleBankRestore}
+        />
         <button
           type="button"
           className="presets-button"
