@@ -3,6 +3,7 @@ import PitchLane from './PitchLane';
 import VelocityLane from './VelocityLane';
 import GhostLane from './GhostLane';
 import DuckingLane from './DuckingLane';
+import RumbleLane from './RumbleLane';
 import Knob from './Knob';
 import { trackPattern, onsetCount, density, PATTERN_SLOT_COUNT } from '../engine';
 import type { Track, PlaybackMode, PlaybackSpeed } from '../engine';
@@ -16,6 +17,7 @@ const GHOST_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['snare'];
 // component preserved so the lane can be revived later by adding the voice
 // back to this list; for now no voice exposes it.
 const DUCKING_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = [];
+const RUMBLE_EDITOR_VOICES: ReadonlyArray<Track['voiceId']> = ['kick'];
 
 interface TrackCardProps {
   track: Track;
@@ -128,6 +130,10 @@ export default function TrackCard({
 
       {DUCKING_EDITOR_VOICES.includes(track.voiceId) && (
         <DuckingLane track={track} onChange={onChange} />
+      )}
+
+      {RUMBLE_EDITOR_VOICES.includes(track.voiceId) && (
+        <RumbleLane track={track} onChange={onChange} />
       )}
 
       <div className="knob-row" data-role="params">

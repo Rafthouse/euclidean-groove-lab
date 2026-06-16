@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import TrackCard from './components/TrackCard';
 import DrumKitSelect from './components/DrumKitSelect';
 import Knob from './components/Knob';
+import BpmControl, { DEFAULT_BPM } from './components/BpmControl';
 import PresetBrowser from './components/PresetBrowser';
 import PatternBankControls from './components/PatternBankControls';
 import { restorePatternBank, savePatternBank } from './engine/patternBank';
@@ -18,7 +19,7 @@ import type { MidiOutputPort } from './midiOut';
 /** How many 4/4 bars the MIDI export renders. */
 const EXPORT_BARS = 4;
 
-type AppThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'cherry' | 'nostradamus' | 'big-boss' | 'university' | 'neon-void' | 'dark-side' | 'bauhaus' | 'smoke-dub' | 'nautilus' | 'satisfaction' | 'revelation' | 'high-contrast' | 'candyflip' | 'barbie' | 'alchemy' | 'beekeeper';
+type AppThemeId = 'dark' | 'paper' | 'elements' | 'military' | 'old-school' | 'cherry' | 'nostradamus' | 'big-boss' | 'university' | 'neon-void' | 'dark-side' | 'bauhaus' | 'smoke-dub' | 'nautilus' | 'soft-beige' | 'satisfaction' | 'revelation' | 'high-contrast' | 'candyflip' | 'barbie' | 'alchemy' | 'beekeeper';
 const THEME_KEY = 'groove-theme';
 const FX_KEY = 'groove-elements-fx';
 const RESTART_KEY = 'groove-restart-on-mode-change';
@@ -26,7 +27,7 @@ const RESTART_KEY = 'groove-restart-on-mode-change';
 function initialTheme(): AppThemeId {
   try {
     const t = localStorage.getItem(THEME_KEY);
-    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' || t === 'cherry' || t === 'nostradamus' || t === 'big-boss' || t === 'university' || t === 'neon-void' || t === 'dark-side' || t === 'bauhaus' || t === 'smoke-dub' || t === 'nautilus' || t === 'satisfaction' || t === 'revelation' || t === 'high-contrast' || t === 'candyflip' || t === 'barbie' || t === 'alchemy' || t === 'beekeeper' ? t : 'elements';
+    return t === 'paper' || t === 'elements' || t === 'military' || t === 'old-school' || t === 'cherry' || t === 'nostradamus' || t === 'big-boss' || t === 'university' || t === 'neon-void' || t === 'dark-side' || t === 'bauhaus' || t === 'smoke-dub' || t === 'nautilus' || t === 'soft-beige' || t === 'satisfaction' || t === 'revelation' || t === 'high-contrast' || t === 'candyflip' || t === 'barbie' || t === 'alchemy' || t === 'beekeeper' ? t : 'elements';
   } catch {
     return 'elements';
   }
@@ -52,7 +53,7 @@ function initialRestartOnModeChange(): boolean {
 
 export default function App() {
   const [tracks, setTracksState] = useState<Track[]>(() => defaultTracks());
-  const [bpm, setTempo] = useState(120);
+  const [bpm, setTempo] = useState(DEFAULT_BPM);
   const [swing, setSwingState] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [currentSteps, setCurrentSteps] = useState<Record<string, number>>({});
@@ -410,17 +411,7 @@ export default function App() {
           ⟳ Clear
         </button>
         <div className="transport-knobs">
-          <Knob
-            label="Tempo"
-            value={bpm}
-            min={30}
-            max={300}
-            step={1}
-            sensitivity={100}
-            resetValue={120}
-            format={(v) => `${v} BPM`}
-            onChange={setTempo}
-          />
+          <BpmControl value={bpm} onChange={setTempo} />
           <Knob
             label="Swing"
             value={swing}
@@ -510,6 +501,7 @@ export default function App() {
             <option value="bauhaus">Bauhaus</option>
             <option value="smoke-dub">Smoke Dub</option>
             <option value="nautilus">Nautilus</option>
+            <option value="soft-beige">Soft Beige</option>
             <option value="satisfaction">Satisfaction</option>
             <option value="revelation">Ashes</option>
             <option value="high-contrast">High Contrast</option>

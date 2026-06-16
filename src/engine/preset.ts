@@ -20,7 +20,7 @@ export type ThemeId =
   | 'dark' | 'paper' | 'elements' | 'military' | 'old-school'
   | 'cherry' | 'nostradamus' | 'big-boss' | 'university'
   | 'neon-void' | 'dark-side' | 'bauhaus' | 'smoke-dub'
-  | 'nautilus' | 'satisfaction' | 'revelation' | 'high-contrast'
+  | 'nautilus' | 'soft-beige' | 'satisfaction' | 'revelation' | 'high-contrast'
   | 'candyflip' | 'barbie' | 'alchemy' | 'beekeeper';
 
 // ---------------------------------------------------------------------------
@@ -267,7 +267,7 @@ function hydrateHistoricalPresets(): void {
     { id: 'hist-shiko', name: 'Shiko Kit', category: 'Euclidean Studies', desc: 'Afro-Cuban hybrid from Shiko rhythm [4-2-4-2-4]', tags: ['afro-cuban', 'shiko', 'historical'], theme: 'dark', tracks: [{vi:0,s:16,h:3,r:0},{vi:1,s:16,h:1,r:5},{vi:2,s:16,h:8,r:0,v:[100,85,100,85,100,85,100,85]},{vi:3,s:16,h:1,r:3}] },
     { id: 'hist-clave-son', name: 'Clave Son Kit', category: 'Euclidean Studies', desc: 'Afro-Cuban foundation [3-3-4-2-4] - Bo Diddley beat', tags: ['afro-cuban', 'clave', 'son', 'historical'], theme: 'paper', tracks: [{vi:0,s:16,h:4,r:0},{vi:1,s:16,h:3,r:-4},{vi:2,s:16,h:8,r:0,v:[100,85,100,85,100,85,100,85]},{vi:3,s:16,h:3,r:1}] },
     { id: 'hist-tresillo', name: 'Tresillo Kit', category: 'Euclidean Studies', desc: 'Cuban Tresillo foundation [3-3-2] - reggaeton core', tags: ['cuban', 'tresillo', 'reggaeton', 'historical'], theme: 'elements', tracks: [{vi:0,s:8,h:3,r:0},{vi:1,s:8,h:3,r:1},{vi:2,s:8,h:4,r:0,v:[100,80,100,80]},{vi:3,s:8,h:2,r:0}] },
-    { id: 'hist-bossa-nova', name: 'Bossa Nova Kit', category: 'Euclidean Studies', desc: 'Brazilian groove [3-3-4-3-3]', tags: ['brazilian', 'bossa-nova', 'historical'], theme: 'satisfaction', tracks: [{vi:0,s:16,h:5,r:0},{vi:1,s:16,h:2,r:6},{vi:2,s:16,h:8,r:2,v:[100,90,100,85,100,90,100,85]},{vi:3,s:16,h:3,r:0}] },
+    { id: 'hist-bossa-nova', name: 'Bossa Nova Kit', category: 'Euclidean Studies', desc: 'Brazilian groove [3-3-4-3-3]', tags: ['brazilian', 'bossa-nova', 'historical'], theme: 'soft-beige', tracks: [{vi:0,s:16,h:5,r:0},{vi:1,s:16,h:2,r:6},{vi:2,s:16,h:8,r:2,v:[100,90,100,85,100,90,100,85]},{vi:3,s:16,h:3,r:0}] },
     { id: 'hist-west-african-bell', name: 'West African Bell Kit', category: 'Euclidean Studies', desc: '12-pulse bell pattern [2-1-2-2-1-2-2]', tags: ['west-african', 'bell', '12-pulse', 'historical'], theme: 'military', tracks: [{vi:0,s:12,h:5,r:0},{vi:1,s:12,h:5,r:1},{vi:2,s:12,h:6,r:0,v:[100,85,95,80,100,90]},{vi:3,s:12,h:4,r:0}] },
     { id: 'hist-gahu', name: 'Gahu Kit', category: 'Euclidean Studies', desc: 'Ewe people rhythm [3-3-4-4-2]', tags: ['ewe', 'west-african', 'gahu', 'historical'], theme: 'smoke-dub', tracks: [{vi:0,s:16,h:5,r:0},{vi:1,s:16,h:2,r:4},{vi:2,s:16,h:8,r:0,v:[100,80,85,95,100,85,90,100]},{vi:3,s:16,h:2,r:0}] },
     { id: 'hist-soukous', name: 'Soukous Kit', category: 'Euclidean Studies', desc: 'Congolese rhythm [3-3-4-1-5]', tags: ['congolese', 'soukous', 'historical'], theme: 'big-boss', tracks: [{vi:0,s:16,h:5,r:0},{vi:1,s:16,h:4,r:2},{vi:2,s:16,h:8,r:0},{vi:3,s:16,h:3,r:0}] },
