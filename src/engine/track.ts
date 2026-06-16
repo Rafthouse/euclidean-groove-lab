@@ -1,7 +1,6 @@
 import type { Pattern } from './types';
 import type { PitchSequence } from './pitch';
 import type { PlaybackMode, PlaybackSpeed } from './playback';
-import { computePhaseOffsetForChange } from './playback';
 import { euclid } from './euclidean';
 import { rotate } from './rotate';
 
@@ -375,7 +374,7 @@ export function snapshotPattern(track: Track): PatternSlot {
 export function switchTrackPattern(
   track: Track,
   slot: number,
-  globalStep: number,
+  _globalStep: number,
 ): Track {
   if (!Number.isInteger(slot) || slot < 0 || slot >= PATTERN_SLOT_COUNT) {
     return track;
@@ -411,16 +410,11 @@ export function switchTrackPattern(
     }
   }
 
-  const mode: PlaybackMode = track.playbackMode ?? 'forward';
-  const speed: PlaybackSpeed = track.playbackSpeed ?? 1;
-  let phaseOffset = track.phaseOffset ?? 0;
-  if (globalStep >= 0 && track.steps > 0 && steps > 0 && track.steps !== steps) {
-    phaseOffset = computePhaseOffsetForChange(
-      globalStep,
-      mode, speed, track.phaseOffset ?? 0, track.steps,
-      mode, speed, steps,
-    );
-  }
+  // Switching to a different slot re-syncs this track to the global clock
+  // (phaseOffset = 0). The next resolver tick computes localStep purely
+  // from g, so this track is back in lockstep with every other track that
+  // also runs at phaseOffset 0 — same downbeat, same musical position.
+  const phaseOffset = 0;
 
   return {
     ...track,

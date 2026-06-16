@@ -93,7 +93,7 @@ export function localStep(
  * For pendulum, returns the offset for the forward-going branch of the
  * pendulum at step S (the simplest single-valued choice).
  */
-function offsetForStep(
+export function offsetForStep(
   mode: PlaybackMode,
   N: number,
   targetStep: number,
